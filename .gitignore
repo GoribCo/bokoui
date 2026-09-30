@@ -48,3 +48,5 @@ next-env.d.ts
 dist
 node_modules
 .next
+.expo
+.nuxt
