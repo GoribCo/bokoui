@@ -146,7 +146,7 @@ export default function App() {
 
 `storage` is optional (any AsyncStorage-compatible object); without it the choice lasts for the session. `useTheme()` returns `{ style, mode, resolvedMode, tokens, setStyle, setMode }`, where `tokens` are the resolved numbers and colors for the active style, for your own components.
 
-Native limits: components are theme-aware but not pixel-identical to the web (no CSS `color-mix`, box shadows or hover states; pressed state is used instead). Fonts are not applied; pass `style={{ fontFamily }}` or load fonts with `expo-font`. Responsive props are web-only. Not yet run on a device.
+Native limits: components are theme-aware but not pixel-identical to the web (no CSS `color-mix`, box shadows or hover states; pressed state is used instead). Fonts are not applied; pass `style={{ fontFamily }}` or load fonts with `expo-font`. Responsive props are web-only. Verified by bundling for web and iOS and by running the web build in a browser (see `examples/expo-js`); not yet run on a device or simulator.
 
 ## Responsive
 

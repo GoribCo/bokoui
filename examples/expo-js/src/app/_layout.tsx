@@ -1,18 +1,25 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ThemeProvider, useTheme } from 'bokoui/expo';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { customThemes } from '@/styles/custom-themes';
 
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+function ThemedStack() {
+  const { tokens, resolvedMode } = useTheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
+    <>
+      <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: tokens.bg } }} />
+    </>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    // storage is optional: it persists the chosen style and mode across launches.
+    <ThemeProvider customThemes={customThemes} storage={AsyncStorage}>
+      <ThemedStack />
     </ThemeProvider>
   );
 }

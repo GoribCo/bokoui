@@ -17,8 +17,8 @@ Separate installs, no root `package.json` or workspaces. Each of the two project
   - `src/expo/`: React Native bindings. Styling comes from `tokens.generated.ts` (generated from the theme CSS by `scripts/build-tokens.mjs`; do not edit). Entry `bokoui/expo`.
   - `src/styles/`: `bokoui.css` (entry), `tokens.css`, `themes/*.css` (one file per style). Entry `bokoui/styles.css`; `bokoui/tokens.json` is generated into `dist`.
   - `scripts/`: `postbuild.mjs` (inlines CSS `@import`s, adds `@source "./"`, prepends `"use client"` to `dist/react/theme.js`), `build-tokens.mjs`, `audit-contrast.mjs`, `publish-local.sh`.
-- `examples/next-js/` is the Next.js demo (`bokoui/react`); `examples/nuxt-js/` is the Nuxt demo (`bokoui/vue`). Both import from the installed `bokoui` package, not relative paths.
-- `run.sh` (root): build + publish the library to Verdaccio, then run every example concurrently (ports 3000, 3001, ...).
+- `examples/next-js/` is the Next.js demo (`bokoui/react`); `examples/nuxt-js/` is the Nuxt demo (`bokoui/vue`); `examples/expo-js/` is the Expo demo (`bokoui/expo`, has its own AGENTS.md: read the Expo docs before touching Expo APIs). All import from the installed `bokoui` package, not relative paths.
+- `run.sh` (root): build + publish the library to Verdaccio, then run every example concurrently (ports 3000, 3001, ... in alphabetical order: expo-js, next-js, nuxt-js).
 
 `@/*` maps to `./src/*` within each project.
 
@@ -30,7 +30,7 @@ In `packages/bokoui/` (first run `npm install`):
 - `npm run audit`: contrast audit; run after changing any theme tokens
 - `npm run publish:local`: build and publish `bokoui` to Verdaccio at `http://127.0.0.1:4873/` (registry set in `.npmrc`). Bump the version first (`npm version patch`); the example's `bokoui` dependency must match a published version.
 
-In `examples/next-js/` (and `examples/nuxt-js/`: `npm run dev` / `build`):
+In `examples/next-js/` (`examples/nuxt-js/` and `examples/expo-js/`: `npm run dev`):
 - `npm run dev` / `build` / `start`: Next.js demo app
 - `npm run lint`, `npm run typecheck`: run both before finishing
 - `npm run build:pkg` / `publish:local`: shortcuts that run the library commands above

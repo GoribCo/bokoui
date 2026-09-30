@@ -11,6 +11,7 @@ This repo holds two separate projects, each with its own `package.json`, `node_m
 | [packages/bokoui](packages/bokoui) | The library, published to npm as `bokoui`. Components, themes and styles live here. |
 | [examples/next-js](examples/next-js) | Next.js demo using `bokoui/react`. |
 | [examples/nuxt-js](examples/nuxt-js) | Nuxt demo using `bokoui/vue`. |
+| [examples/expo-js](examples/expo-js) | Expo demo using `bokoui/expo`. |
 | [docs](docs) | [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-framework.md), [layout plan](docs/plan-layouts.md), [Tailwind plan](docs/plan-tailwindcss.md). |
 
 ## Quick start
@@ -21,7 +22,7 @@ cd packages/bokoui
 npm install
 npm run build
 
-# 2. Publish to local Verdaccio and run every example (Next on :3000, Nuxt on :3001)
+# 2. Publish to local Verdaccio and run every example (Expo web on :3000, Next on :3001, Nuxt on :3002)
 cd ../..
 ./run.sh
 ```
