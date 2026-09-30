@@ -14,16 +14,28 @@ export interface HeaderProps {
 }
 
 /** Top bar. Every slot is optional except branding, so a project can drop what it does not need (FR-7.1, FR-7.3). */
-export function Header({ menuButton, branding, breadcrumbs, search, notifications, actions }: HeaderProps) {
+export function Header({
+  menuButton,
+  branding,
+  breadcrumbs,
+  search,
+  notifications,
+  actions,
+}: HeaderProps) {
   return (
-    <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border bg-background px-3 sm:px-4">
-      {menuButton ? <div className="md:hidden">{menuButton}</div> : null}
-      <div className="shrink-0">{branding}</div>
-      <div className="hidden min-w-0 flex-1 md:block md:ps-4">{breadcrumbs}</div>
-      <div className="ms-auto flex shrink-0 items-center gap-1 sm:gap-2 md:ms-0">
-        {search}
-        {notifications}
-        {actions}
+    <header className="shrink-0 border-b border-border bg-background">
+      {/* Same max width and side padding as PageContainer, so header, page and footer line up. */}
+      <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-2 px-4 sm:px-6">
+        {menuButton ? <div className="md:hidden">{menuButton}</div> : null}
+        <div className="shrink-0">{branding}</div>
+        <div className="hidden min-w-0 flex-1 md:block md:ps-4">
+          {breadcrumbs}
+        </div>
+        <div className="ms-auto flex shrink-0 items-center gap-1 sm:gap-2 md:ms-0">
+          {search}
+          {notifications}
+          {actions}
+        </div>
       </div>
     </header>
   );
