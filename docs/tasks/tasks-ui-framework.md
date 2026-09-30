@@ -55,6 +55,7 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T4.12 Alert, Spinner, Tooltip
 - [ ] T4.13 Modal / Dialog, Tabs
 - [ ] T4.14 Barrel exports and per-component index
+  - Conventions and add-a-component checklist: `docs/component-conventions.md`
 
 ## Phase 5: Playground and docs (FR-5.x)
 - [x] T5.1 Root layout wired with ThemeProvider and ThemeSwitcher
@@ -65,7 +66,8 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
   - Partial: `packages/bokoui/README.md` exists; root README not yet updated
 
 ## Phase 6: Quality (NFR-2, NFR-8, NFR-9)
-- [ ] T6.1 Set up test runner (Vitest + Testing Library)
+- [x] T6.1 Set up test runner (Vitest + Testing Library)
+  - `npm test` in `packages/bokoui`; co-locate `*.test.tsx` next to each component (Button is the example)
 - [ ] T6.2 Unit tests for variants and states of each component
 - [ ] T6.3 Accessibility tests (axe) and keyboard navigation checks
 - [ ] T6.4 Optional visual regression (Playwright screenshots per style)

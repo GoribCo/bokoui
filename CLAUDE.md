@@ -4,7 +4,7 @@
 
 Themeable React components with 8 design styles (flat, material, swiss, brutalism, neo-brutalism, monochrome, oled, fluent) and light/dark modes. Style (`data-theme`) and mode (`data-mode`) are independent axes on `<html>`.
 
-Docs: [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-framework.md) (update checkboxes when finishing a task), [layout plan](docs/plan-layouts.md), [Tailwind plan](docs/plan-tailwindcss.md).
+Docs: [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-framework.md) (update checkboxes when finishing a task), [component conventions](docs/component-conventions.md), [layout plan](docs/plan-layouts.md), [Tailwind plan](docs/plan-tailwindcss.md).
 
 ## Repository layout
 
