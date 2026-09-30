@@ -1,4 +1,4 @@
-import type { Organization, Role } from "@/types";
+import type { Organization, Role } from "@/lib/types";
 import { permissionPolicy } from "./policy";
 import type { Permission } from "./policy";
 

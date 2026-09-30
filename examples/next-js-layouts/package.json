@@ -14,7 +14,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-query": "^5.104.0",
-    "bokoui": "^0.2.31",
+    "bokoui": "^0.2.32",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.49.0",

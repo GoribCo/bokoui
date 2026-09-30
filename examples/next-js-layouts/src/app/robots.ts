@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
-import { organizationSegments } from "@/lib/organization-types";
+import { siteConfig } from "@/lib/config/site";
+import { organizationSegments } from "@/lib/organization/organization-types";
 
 /** Only public organization profiles are crawlable; the signed-in area is not. */
 export default function robots(): MetadataRoute.Robots {

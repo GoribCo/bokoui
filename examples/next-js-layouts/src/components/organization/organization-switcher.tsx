@@ -4,7 +4,7 @@ import { Check, ChevronsUpDown, Search } from "lucide-react";
 import { useMemo, useState, type KeyboardEvent } from "react";
 import { Avatar, Input } from "bokoui/react";
 import { Popover, Tooltip } from "bokoui/react/client";
-import type { Organization } from "@/types";
+import type { Organization } from "@/lib/types";
 
 export interface OrganizationSwitcherLabels {
   /** Accessible name of the trigger and the list. */

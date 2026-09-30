@@ -1,4 +1,4 @@
-import type { MenuGroup, MenuItem } from "@/types";
+import type { MenuGroup, MenuItem } from "@/lib/types";
 
 /** Minimal translator shape; next-intl's `t` fits through a thin adapter. */
 export interface MenuTranslator {

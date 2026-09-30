@@ -4,11 +4,11 @@ import { Card, Text } from "bokoui/react";
 import { PageContainer } from "@/components/layout/page-container";
 import { PageHeader } from "@/components/layout/page-header";
 import { UserAvatar } from "@/components/account/user-avatar";
-import { formatDate } from "@/lib/format";
+import { formatDate } from "@/lib/i18n/format";
 import { buildMetadata } from "@/lib/seo";
-import { getSession } from "@/lib/session";
-import { services } from "@/services";
-import type { LocaleCode } from "@/types";
+import { getSession } from "@/lib/session/session";
+import { services } from "@/lib/services";
+import type { LocaleCode } from "@/lib/types";
 
 export const metadata = buildMetadata({ title: "Profile", path: "/profile" });
 

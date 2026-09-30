@@ -1,5 +1,5 @@
-import { PUBLIC_PATH_PREFIXES } from "@/config/auth";
-import { organizationSegments } from "@/lib/organization-types";
+import { PUBLIC_PATH_PREFIXES } from "@/lib/config/auth";
+import { organizationSegments } from "@/lib/organization/organization-types";
 
 const publicPrefixes = [...PUBLIC_PATH_PREFIXES, ...organizationSegments.map((segment) => `/${segment}`)];
 

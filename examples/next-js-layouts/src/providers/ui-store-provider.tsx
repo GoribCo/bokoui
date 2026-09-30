@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { useStore } from "zustand";
 import { useShallow } from "zustand/react/shallow";
-import { createUiStore, type UiState, type UiStore, type UiStoreApi } from "@/stores/ui-store";
+import { createUiStore, type UiState, type UiStore, type UiStoreApi } from "@/lib/stores/ui-store";
 
 const UiStoreContext = createContext<UiStoreApi | null>(null);
 

@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { filterMenuByRoles, localizeMenu } from "@/lib/menu";
-import type { MenuGroup } from "@/types";
+import type { MenuGroup } from "@/lib/types";
 import { useActiveOrganization } from "./use-active-organization";
 import { useMenuTranslator } from "./use-menu-translator";
 

@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { findActiveTrail } from "@/lib/menu";
-import type { MenuGroup } from "@/types";
+import type { MenuGroup } from "@/lib/types";
 import { MenuGroupSection } from "./menu-group-section";
 import { MenuTreeContext, type MenuTreeContextValue } from "./menu-tree-context";
 

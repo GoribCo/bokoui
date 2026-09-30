@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicProfile } from "@/components/organization/public-profile";
-import { publicOrganizationPath } from "@/lib/organization-types";
-import { getPublicOrganization } from "@/lib/public-organization";
+import { publicOrganizationPath } from "@/lib/organization/organization-types";
+import { getPublicOrganization } from "@/lib/organization/public-organization";
 import { buildMetadata } from "@/lib/seo";
-import type { OrganizationType } from "@/types";
+import type { OrganizationType } from "@/lib/types";
 
 interface RouteProps {
   params: Promise<{ slug: string }>;

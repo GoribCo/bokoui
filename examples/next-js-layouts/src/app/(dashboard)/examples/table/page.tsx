@@ -2,10 +2,10 @@ import { getLocale } from "next-intl/server";
 import { Badge, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "bokoui/react";
 import { PageContainer } from "@/components/layout/page-container";
 import { PageHeader } from "@/components/layout/page-header";
-import { formatDate } from "@/lib/format";
+import { formatDate } from "@/lib/i18n/format";
 import { sampleRecords } from "@/lib/sample-data";
 import { buildMetadata } from "@/lib/seo";
-import type { LocaleCode } from "@/types";
+import type { LocaleCode } from "@/lib/types";
 
 export const metadata = buildMetadata({
   title: "Table",

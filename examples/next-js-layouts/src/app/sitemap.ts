@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
-import { publicOrganizationPath } from "@/lib/organization-types";
-import { services } from "@/services";
+import { siteConfig } from "@/lib/config/site";
+import { publicOrganizationPath } from "@/lib/organization/organization-types";
+import { services } from "@/lib/services";
 
 /** Lists the public organization profiles; everything else is behind sign-in. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -2,8 +2,8 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { SESSION_COOKIE, SIGN_IN_PATH } from "@/config/auth";
-import { signInSchema, type SignInValues } from "@/schemas";
+import { SESSION_COOKIE, SIGN_IN_PATH } from "@/lib/config/auth";
+import { signInSchema, type SignInValues } from "@/lib/schemas";
 import { safeReturnPath } from "./paths";
 
 /** Ends the mock session and returns to the sign-in page. The real project replaces this with its auth provider. */

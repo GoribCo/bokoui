@@ -2,10 +2,10 @@ import { Card, CardHeader, Grid, Heading, Text } from "bokoui/react";
 import { ActiveOrganizationCard } from "@/components/examples/active-organization-card";
 import { PageContainer } from "@/components/layout/page-container";
 import { PageHeader } from "@/components/layout/page-header";
-import { formatNumber } from "@/lib/format";
+import { formatNumber } from "@/lib/i18n/format";
 import { buildMetadata } from "@/lib/seo";
 import { getLocale } from "next-intl/server";
-import type { LocaleCode } from "@/types";
+import type { LocaleCode } from "@/lib/types";
 
 export const metadata = buildMetadata({
   title: "Dashboard",

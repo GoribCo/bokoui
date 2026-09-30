@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { Breadcrumb, BreadcrumbItem } from "bokoui/react";
 import { findActiveTrail } from "@/lib/menu";
-import type { MenuGroup, MenuItem } from "@/types";
+import type { MenuGroup, MenuItem } from "@/lib/types";
 
 export interface MenuBreadcrumbsProps {
   /** Menu with labels already resolved (see `useMenu`). */

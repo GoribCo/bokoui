@@ -5,10 +5,10 @@ import { buttonClass } from "bokoui/core";
 import { AppearanceMenu } from "@/components/appearance/appearance-menu";
 import { Branding } from "@/components/layout/branding";
 import { Footer } from "@/components/layout/footer";
-import { features } from "@/config/features";
-import { SIGN_IN_PATH } from "@/config/auth";
-import { siteConfig } from "@/config/site";
-import { getMenuTranslator } from "@/lib/i18n-server";
+import { features } from "@/lib/config/features";
+import { SIGN_IN_PATH } from "@/lib/config/auth";
+import { siteConfig } from "@/lib/config/site";
+import { getMenuTranslator } from "@/lib/i18n/server";
 import { resolveLabel } from "@/lib/menu";
 
 /** Layout for pages anyone can open: a light header, the content, and the footer. No sidebar, no sign-in needed. */

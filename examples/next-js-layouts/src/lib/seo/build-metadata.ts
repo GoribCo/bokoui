@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/lib/config/site";
 
 export interface BuildMetadataProps {
   /** Page title; the root title template appends the site name. */

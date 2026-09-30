@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { SignInForm } from "@/components/auth/sign-in-form";
-import { RETURN_TO_PARAM } from "@/config/auth";
+import { RETURN_TO_PARAM } from "@/lib/config/auth";
 import { safeReturnPath } from "@/lib/auth/paths";
 import { buildMetadata } from "@/lib/seo";
 

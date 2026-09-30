@@ -1,4 +1,4 @@
-import type { Role } from "@/types";
+import type { Role } from "@/lib/types";
 
 /** Named permissions checked with `can`; add one per protected capability. */
 export type Permission = "admin.access" | "reports.view";

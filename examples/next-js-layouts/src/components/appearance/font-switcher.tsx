@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useSyncExternalStore } from "react";
-import { DEFAULT_FONT_ID, FONT_STORAGE_KEY, fontOptions } from "@/lib/font-options";
+import { DEFAULT_FONT_ID, FONT_STORAGE_KEY, fontOptions } from "@/lib/fonts/font-options";
 
 function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);

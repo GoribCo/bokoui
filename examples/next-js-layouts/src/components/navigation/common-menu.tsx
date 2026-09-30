@@ -1,7 +1,7 @@
 "use client";
 
 import { isPathActive } from "@/lib/menu";
-import type { MenuItem } from "@/types";
+import type { MenuItem } from "@/lib/types";
 import { MenuItemLink } from "./menu-item-link";
 
 export interface CommonMenuProps {

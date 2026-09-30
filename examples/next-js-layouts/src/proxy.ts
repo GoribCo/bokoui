@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { RETURN_TO_PARAM, SESSION_COOKIE, SIGN_IN_PATH } from "@/config/auth";
+import { RETURN_TO_PARAM, SESSION_COOKIE, SIGN_IN_PATH } from "@/lib/config/auth";
 import { isPublicPath } from "@/lib/auth/paths";
 
 /**

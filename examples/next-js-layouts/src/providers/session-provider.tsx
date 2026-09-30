@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { effectiveRoles } from "@/lib/access";
-import type { Role, Session } from "@/types";
+import type { Role, Session } from "@/lib/types";
 
 export interface SessionContextValue extends Session {
   /** Effective roles (union) per organization id. */

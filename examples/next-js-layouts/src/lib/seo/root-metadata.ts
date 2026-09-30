@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/lib/config/site";
 
 /** Site-wide defaults for the root layout: base URL and the title template. */
 export const rootMetadata: Metadata = {

@@ -1,4 +1,4 @@
-import type { MenuGroup, MenuItem } from "@/types";
+import type { MenuGroup, MenuItem } from "@/lib/types";
 
 /** Group and chain of items from the top level down to the active item. */
 export interface ActiveTrail {

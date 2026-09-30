@@ -1,8 +1,8 @@
 import { NextIntlClientProvider } from "next-intl";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider, type CustomThemes } from "bokoui/react/theme";
-import type { Session } from "@/types";
-import type { UiState } from "@/stores/ui-store";
+import type { Session } from "@/lib/types";
+import type { UiState } from "@/lib/stores/ui-store";
 import { OrganizationStoreProvider } from "./organization-store-provider";
 import { QueryProvider } from "./query-provider";
 import { SessionProvider } from "./session-provider";

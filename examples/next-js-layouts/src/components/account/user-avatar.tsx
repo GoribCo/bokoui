@@ -1,5 +1,5 @@
 import { Avatar } from "bokoui/react";
-import type { User } from "@/types";
+import type { User } from "@/lib/types";
 
 export interface UserAvatarProps {
   user: Pick<User, "name" | "avatarUrl">;

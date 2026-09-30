@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_ID, FONT_STORAGE_KEY, fontOptions } from "@/lib/font-options";
+import { DEFAULT_FONT_ID, FONT_STORAGE_KEY, fontOptions } from "@/lib/fonts/font-options";
 
 const validIds = fontOptions.map((option) => option.id).filter((id) => id !== DEFAULT_FONT_ID);
 

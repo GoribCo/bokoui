@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { AppearanceMenu } from "@/components/appearance/appearance-menu";
 import { Branding } from "@/components/layout/branding";
-import { features } from "@/config/features";
-import { siteConfig } from "@/config/site";
+import { features } from "@/lib/config/features";
+import { siteConfig } from "@/lib/config/site";
 
 // Sign-in pages stay out of search results (FR-11.5).
 export const metadata: Metadata = { robots: { index: false, follow: false } };

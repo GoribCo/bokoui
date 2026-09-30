@@ -1,9 +1,9 @@
 import { getLocale } from "next-intl/server";
 import { ThemeScript } from "bokoui/react/theme-script";
 import { FontScript } from "@/components/appearance/font-script";
-import { features } from "@/config/features";
-import { getInitialState } from "@/lib/initial-state";
-import { fontVariableClassName } from "@/lib/fonts";
+import { features } from "@/lib/config/features";
+import { getInitialState } from "@/lib/session/initial-state";
+import { fontVariableClassName } from "@/lib/fonts/fonts";
 import { rootMetadata, rootViewport } from "@/lib/seo";
 import { AppProviders } from "@/providers/app-providers";
 import { customThemes } from "@/styles/custom-themes";

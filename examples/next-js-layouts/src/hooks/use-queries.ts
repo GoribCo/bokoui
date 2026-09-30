@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/lib/query-keys";
-import { fetchMenu, fetchOrganizations } from "@/services/actions";
+import { queryKeys } from "@/lib/query/keys";
+import { fetchMenu, fetchOrganizations } from "@/lib/services/actions";
 
 /** Menu of one organization; instant when the server prefetched it, fetched on demand after a switch. */
 export function useMenuQuery(organizationId: string) {

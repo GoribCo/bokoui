@@ -21,7 +21,7 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
-import type { IconName } from "@/types";
+import type { IconName } from "@/lib/types";
 
 /** Icon registry: menu data refers to icons by name, so menus can live in JSON or an API. Add entries here. */
 export const menuIcons: Record<IconName, LucideIcon> = {

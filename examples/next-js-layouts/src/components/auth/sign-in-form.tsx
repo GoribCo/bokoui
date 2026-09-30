@@ -6,7 +6,7 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Card, CardHeader, FormField, Heading, Input, Text } from "bokoui/react";
 import { signIn } from "@/lib/auth/actions";
-import { signInSchema, type SignInValues } from "@/schemas";
+import { signInSchema, type SignInValues } from "@/lib/schemas";
 
 export interface SignInFormProps {
   /** Page to open after signing in; sanitized again on the server. */

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { MenuIcon } from "@/components/navigation/menu-icon";
 import { findActiveTrail } from "@/lib/menu";
-import type { MenuGroup, MenuItem } from "@/types";
+import type { MenuGroup, MenuItem } from "@/lib/types";
 import { SubMenuSheet } from "./sub-menu-sheet";
 
 export interface BottomNavLabels {

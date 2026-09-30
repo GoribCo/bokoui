@@ -2,7 +2,7 @@
 
 import { Drawer } from "bokoui/react/client";
 import { MenuTree } from "@/components/navigation/menu-tree";
-import type { MenuItem } from "@/types";
+import type { MenuItem } from "@/lib/types";
 
 export interface SubMenuSheetProps {
   open: boolean;

@@ -1,4 +1,4 @@
-import type { MenuGroup, MenuItem } from "@/types";
+import type { MenuGroup, MenuItem } from "@/lib/types";
 
 export interface FlatMenuEntry {
   item: MenuItem;

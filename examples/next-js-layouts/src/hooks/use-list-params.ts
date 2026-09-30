@@ -1,7 +1,7 @@
 "use client";
 
 import { useQueryStates } from "nuqs";
-import { listParamParsers } from "@/lib/search-params";
+import { listParamParsers } from "@/lib/query/search-params";
 
 /**
  * Tab, text filter and page in the URL (FR-9.4). Changing the tab or filter resets to page 1.

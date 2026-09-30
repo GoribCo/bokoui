@@ -3,8 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { setLocale } from "@/i18n/actions";
-import { locales } from "@/i18n/config";
+import { setLocale } from "@/lib/i18n/actions";
+import { locales } from "@/lib/i18n/config";
 
 export interface LanguageSwitcherProps {
   showLabel?: boolean;

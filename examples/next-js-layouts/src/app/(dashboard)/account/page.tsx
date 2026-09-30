@@ -1,6 +1,6 @@
 import { Text } from "bokoui/react";
 import { StaticPage } from "@/components/layout/static-page";
-import { getSession } from "@/lib/session";
+import { getSession } from "@/lib/session/session";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ title: "Manage account", path: "/account" });

@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { DashboardShell } from "@/components/layout/dashboard-shell";
-import { accountMenuItems } from "@/config/account-menu";
-import { SIGN_IN_PATH } from "@/config/auth";
-import { bottomNavSlots } from "@/config/navigation";
-import { features } from "@/config/features";
-import { siteConfig } from "@/config/site";
-import { getInitialState } from "@/lib/initial-state";
+import { accountMenuItems } from "@/lib/config/account-menu";
+import { SIGN_IN_PATH } from "@/lib/config/auth";
+import { bottomNavSlots } from "@/lib/config/navigation";
+import { features } from "@/lib/config/features";
+import { siteConfig } from "@/lib/config/site";
+import { getInitialState } from "@/lib/session/initial-state";
 import { signOut } from "@/lib/auth/actions";
-import { queryKeys } from "@/lib/query-keys";
-import { menuSchema } from "@/schemas";
-import { services } from "@/services";
+import { queryKeys } from "@/lib/query/keys";
+import { menuSchema } from "@/lib/schemas";
+import { services } from "@/lib/services";
 
 // The signed-in area stays out of search results (FR-11.5).
 export const metadata: Metadata = { robots: { index: false, follow: false } };

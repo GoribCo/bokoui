@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Button, Checkbox, FormField, Input, Textarea } from "bokoui/react";
-import { staffSchema, type StaffValues } from "@/schemas/staff";
+import { staffSchema, type StaffValues } from "@/lib/schemas/staff";
 
 /** Sample form: React Hook Form + Zod, no network. */
 export function StaffForm() {

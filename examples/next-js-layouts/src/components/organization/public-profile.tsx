@@ -2,8 +2,8 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Avatar, Badge, Card, CardHeader, Heading, Inline, Link, Text } from "bokoui/react";
 import { PageContainer } from "@/components/layout/page-container";
-import { organizationTypes } from "@/config/organization-types";
-import type { PublicOrganization } from "@/types";
+import { organizationTypes } from "@/lib/config/organization-types";
+import type { PublicOrganization } from "@/lib/types";
 
 function Facts({ title, children }: { title: string; children: ReactNode }) {
   return (

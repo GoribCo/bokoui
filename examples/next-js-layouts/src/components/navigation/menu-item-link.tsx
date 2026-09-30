@@ -6,7 +6,7 @@ import { Tooltip } from "bokoui/react/client";
 import { sidebarItemClass, sidebarItemEndClass, sidebarItemLabelClass } from "bokoui/core";
 import { MenuIcon } from "./menu-icon";
 import { useTruncatedLabel } from "./use-truncated-label";
-import type { IconName } from "@/types";
+import type { IconName } from "@/lib/types";
 
 export interface MenuItemLinkProps {
   label: string;

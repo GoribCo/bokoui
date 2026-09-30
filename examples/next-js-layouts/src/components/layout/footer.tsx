@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { FooterLink } from "@/types";
+import type { FooterLink } from "@/lib/types";
 
 export interface FooterProps {
   /** Links with labels already resolved (see `resolveLabel`). */

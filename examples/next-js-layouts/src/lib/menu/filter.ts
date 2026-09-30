@@ -1,5 +1,5 @@
 import { hasAnyRole } from "@/lib/access";
-import type { MenuGroup, MenuItem, Role } from "@/types";
+import type { MenuGroup, MenuItem, Role } from "@/lib/types";
 
 function filterItems(items: MenuItem[], roles: readonly Role[]): MenuItem[] {
   const allowed: MenuItem[] = [];

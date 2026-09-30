@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Badge, Input, Pagination } from "bokoui/react";
 import { Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
 import { useListParams } from "@/hooks/use-list-params";
-import { listTabs, type ListTab } from "@/lib/search-params";
+import { listTabs, type ListTab } from "@/lib/query/search-params";
 import { sampleRecords } from "@/lib/sample-data";
 
 const PAGE_SIZE = 8;

@@ -2,8 +2,8 @@
 
 import { useOrganizationStore } from "@/providers/organization-store-provider";
 import { useSession } from "@/providers/session-provider";
-import { organizationSelectors } from "@/stores/organization-store";
-import type { Organization, Role } from "@/types";
+import { organizationSelectors } from "@/lib/stores/organization-store";
+import type { Organization, Role } from "@/lib/types";
 
 export interface ActiveOrganization {
   organization: Organization;

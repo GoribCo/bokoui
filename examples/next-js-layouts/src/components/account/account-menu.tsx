@@ -4,7 +4,7 @@ import { ChevronsUpDown, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Menu, MenuItem, MenuLabel, MenuSeparator } from "bokoui/react/client";
 import { MenuIcon } from "@/components/navigation/menu-icon";
-import type { MenuItem as MenuEntry, User } from "@/types";
+import type { MenuItem as MenuEntry, User } from "@/lib/types";
 import { UserAvatar } from "./user-avatar";
 
 export interface AccountMenuProps {

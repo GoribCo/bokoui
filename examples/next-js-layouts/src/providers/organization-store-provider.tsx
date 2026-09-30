@@ -7,7 +7,7 @@ import {
   type OrganizationState,
   type OrganizationStore,
   type OrganizationStoreApi,
-} from "@/stores/organization-store";
+} from "@/lib/stores/organization-store";
 
 const OrganizationStoreContext = createContext<OrganizationStoreApi | null>(null);
 

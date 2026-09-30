@@ -2,7 +2,7 @@ import { forbidden } from "next/navigation";
 import { Text } from "bokoui/react";
 import { StaticPage } from "@/components/layout/static-page";
 import { can } from "@/lib/access";
-import { getActiveRoles } from "@/lib/active-roles";
+import { getActiveRoles } from "@/lib/access/active-roles";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ title: "Access control", path: "/admin" });

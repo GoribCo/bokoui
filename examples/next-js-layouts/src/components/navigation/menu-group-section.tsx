@@ -6,7 +6,7 @@ import { useId } from "react";
 import { SidebarSection } from "bokoui/react";
 import { Tooltip } from "bokoui/react/client";
 import { sidebarItemClass, sidebarItemLabelClass } from "bokoui/core";
-import type { MenuGroup, MenuItem } from "@/types";
+import type { MenuGroup, MenuItem } from "@/lib/types";
 import { MenuIcon } from "./menu-icon";
 import { MenuItemLink } from "./menu-item-link";
 import { useMenuTree } from "./menu-tree-context";
