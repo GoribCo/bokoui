@@ -16,7 +16,13 @@
   --bokoui-shadow-button-hover: none;
   --bokoui-shift-hover: 0 0;
   --bokoui-shift-active: 0 0;
-  --bokoui-font: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --bokoui-font: var(--font-geist-sans, ui-sans-serif), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bokoui-font-heading: var(--bokoui-font);
+  --bokoui-font-mono: var(--font-geist-mono, ui-monospace), "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --bokoui-heading-weight: 600;
+  --bokoui-heading-tracking: -0.02em;
+  --bokoui-heading-transform: none;
+  --bokoui-text-leading: 1.6;
   --bokoui-btn-weight: 500;
   --bokoui-btn-transform: none;
   --bokoui-btn-tracking: normal;

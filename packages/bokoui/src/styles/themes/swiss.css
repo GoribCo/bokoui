@@ -5,6 +5,9 @@
   --bokoui-border-width: 2px;
   --bokoui-border-strength: 0%;
   --bokoui-font: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --bokoui-heading-weight: 700;
+  --bokoui-heading-tracking: -0.035em;
+  --bokoui-text-leading: 1.5;
   --bokoui-btn-weight: 700;
   --bokoui-btn-tracking: 0.02em;
   --bokoui-ring-offset: 3px;

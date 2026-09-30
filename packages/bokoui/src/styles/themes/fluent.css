@@ -5,6 +5,9 @@
   --bokoui-shadow-button: 0 1px 2px rgb(0 0 0 / 0.14), 0 0 2px rgb(0 0 0 / 0.12);
   --bokoui-shadow-button-hover: 0 2px 4px rgb(0 0 0 / 0.14), 0 0 2px rgb(0 0 0 / 0.12);
   --bokoui-font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --bokoui-font-heading: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --bokoui-heading-weight: 600;
+  --bokoui-heading-tracking: -0.01em;
   --bokoui-btn-weight: 600;
   --bokoui-duration: 120ms;
   --bokoui-ease: cubic-bezier(0.33, 0, 0.67, 1);

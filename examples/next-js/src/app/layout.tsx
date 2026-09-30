@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import { ThemeProvider, ThemeSwitcher } from "bokoui/theme";
 import { ThemeScript } from "bokoui/theme-script";
 import { customThemes } from "@/styles/custom-themes";
@@ -15,6 +15,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Material style uses Roboto; bokoui does not ship fonts, so the app loads them.
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
 export const metadata: Metadata = {
   title: "UI Framework",
   description: "Themeable UI components built with Next.js and Tailwind CSS",
@@ -28,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="flat"
       data-mode="light"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} h-full antialiased`}
     >
       <head>
         <ThemeScript customThemes={customThemes} />

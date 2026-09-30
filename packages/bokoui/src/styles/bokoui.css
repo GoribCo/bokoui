@@ -42,7 +42,8 @@
   --shadow-button: var(--bokoui-shadow-button);
   --shadow-button-hover: var(--bokoui-shadow-button-hover);
   --font-ui: var(--bokoui-font);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--bokoui-font-heading);
+  --font-mono: var(--bokoui-font-mono);
   --ease-ui: var(--bokoui-ease);
 }
 

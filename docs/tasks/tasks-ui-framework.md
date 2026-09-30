@@ -50,7 +50,7 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T4.7 Checkbox, Radio, Switch
 - [ ] T4.8 Badge, Avatar, Divider
 - [ ] T4.9 Card
-- [ ] T4.10 Typography (Heading, Text, Link)
+- [x] T4.10 Typography (Heading, Text, Link)
 - [ ] T4.11 Icon
 - [ ] T4.12 Alert, Spinner, Tooltip
 - [ ] T4.13 Modal / Dialog, Tabs

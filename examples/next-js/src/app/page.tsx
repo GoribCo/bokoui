@@ -1,10 +1,10 @@
 import { Search } from "lucide-react";
-import { Button, Input, actions, colors, sizes, variants } from "bokoui";
+import { Button, Heading, Input, Link, Text, actions, colors, sizes, variants } from "bokoui";
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, id, children }: { title: string; id?: string; children: React.ReactNode }) {
   return (
-    <section className="flex flex-col gap-4">
-      <h2 className="text-lg font-semibold">{title}</h2>
+    <section id={id} className="flex flex-col gap-4">
+      <Heading as="h2" size="lg">{title}</Heading>
       {children}
     </section>
   );
@@ -15,7 +15,7 @@ const SearchIcon = <Search aria-hidden="true" />;
 export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-10 px-6 py-10">
-      <h1 className="text-3xl font-semibold tracking-tight">Button &amp; Input</h1>
+      <Heading as="h1">Button, Input &amp; Typography</Heading>
 
       <Section title="Button: variant x color">
         {variants.map((variant) => (
@@ -108,6 +108,34 @@ export default function Home() {
             sm on mobile, lg from md
           </Button>
           <Input id="resp-input" size={{ base: "sm", md: "lg" }} placeholder="sm on mobile, lg from md" aria-label="Responsive" />
+        </div>
+      </Section>
+
+      <Section title="Typography" id="typography">
+        <div className="flex flex-col gap-3">
+          <Heading as="h1">Heading 1</Heading>
+          <Heading as="h2">Heading 2</Heading>
+          <Heading as="h3">Heading 3</Heading>
+          <Heading as="h4">Heading 4</Heading>
+          <Heading as="h5">Heading 5</Heading>
+          <Heading as="h6">Heading 6</Heading>
+          <Text variant="lead" muted>
+            Lead paragraph: the font, weight, tracking and case all follow the active style.
+          </Text>
+          <Text>
+            Body text with a <Link href="#typography">regular link</Link>, an{" "}
+            <Link href="https://tailwindcss.com" external>
+              external link
+            </Link>{" "}
+            and <Text as="span" variant="code">inline code</Text>.
+          </Text>
+          <Text variant="small">Small text</Text>
+          <Text variant="caption" muted>Caption text</Text>
+          <div className="flex flex-wrap gap-4">
+            <Link href="#typography" underline="always">Always underlined</Link>
+            <Link href="#typography" color="accent">Accent</Link>
+            <Link href="#typography" action="danger" underline="none">Danger, no underline</Link>
+          </div>
         </div>
       </Section>
 
