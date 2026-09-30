@@ -5,3 +5,4 @@ export * from "./modal";
 export * from "./tooltip";
 export * from "./menu";
 export * from "./select";
+export * from "./navbar";

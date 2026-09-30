@@ -68,6 +68,7 @@ No headless UI dependency (no Radix, Base UI or similar). Overlay components use
 Consequences:
 
 - Shared behavior goes in `src/core/` as plain functions (no React/Vue imports), for example `getNextIndex()` for roving focus and typeahead matching. Bindings only connect them to events and refs.
+- Vue components must render on the server (Nuxt): never touch `window`/`document` during `setup` or in an immediate watcher. `src/vue/ssr.test.ts` renders each stateful component in a Node environment to catch this.
 - jsdom does not implement `showModal()` or the Popover API. Tests stub them in `vitest.setup.ts`; real behavior needs a browser check (T6.3/T6.4).
 - Verify browser support for `<dialog>`, Popover and anchor positioning against the project's target browsers (T6.6) before shipping each component.
 
@@ -78,7 +79,7 @@ Web (React, Vue) is the primary target. Expo gets a component only when it makes
 | Kind | React | Vue | Expo |
 | --- | --- | --- | --- |
 | Primitives (Button, Input, Textarea, Badge, Avatar, Divider, Card, Spinner, Alert, Label, FormField, Checkbox, Radio, Switch, Icon) | yes | yes | yes |
-| Overlays and composites (Modal, Tooltip, Select, Menu, Tabs, Popover) | yes | yes | Modal only at first. Others wait for a native design (Tooltip has no touch equivalent). |
+| Overlays and composites (Modal, Tooltip, Select, Menu, Tabs, Popover) | yes | yes | Modal only. Others wait for a native design (Tooltip has no touch equivalent). |
 | Web-only (Image wrapper over `next/image`, Navbar, Sidebar, Table, Breadcrumb, Pagination) | yes | yes where framework-neutral | no |
 
 Rules:

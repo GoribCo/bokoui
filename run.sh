@@ -58,6 +58,9 @@ for dir in "$ROOT"/examples/*/; do
     else
       [ -d node_modules ] || npm install --no-audit --no-fund
     fi
+    # A stale Next.js cache (from an earlier run, a `next build`, or a reinstalled bokoui) can
+    # remember "Can't resolve 'bokoui/styles.css'" and keep failing. Start from a clean one.
+    rm -rf .next
     exec npm run dev
   ) 2>&1 | sed -u "s/^/[$name] /" &
   PIDS+=($!)

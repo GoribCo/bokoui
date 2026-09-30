@@ -1,5 +1,6 @@
 export * from "./alert";
 export * from "./avatar";
+export * from "./breadcrumb";
 export * from "./badge";
 export * from "./button";
 export * from "./card";
@@ -7,7 +8,10 @@ export * from "./divider";
 export * from "./form-field";
 export * from "./image";
 export * from "./input";
+export * from "./pagination";
+export * from "./sidebar";
 export * from "./spinner";
+export * from "./table";
 export * from "./textarea";
 export * from "./toggle";
 export * from "./typography";

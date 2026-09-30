@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import { ThemeProvider, ThemeSwitcher } from "bokoui/react/theme";
 import { ThemeScript } from "bokoui/react/theme-script";
 import { customThemes } from "@/styles/custom-themes";
-import { SideNav } from "@/components/side-nav";
+import { MobileNav, SideNav } from "@/components/side-nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -46,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <header className="sticky top-0 z-10 border-b bg-background/90 px-6 py-3 backdrop-blur">
             <ThemeSwitcher />
           </header>
+          <MobileNav />
           <div className="flex flex-1 flex-col md:flex-row">
             <SideNav />
             <div className="min-w-0 flex-1">{children}</div>

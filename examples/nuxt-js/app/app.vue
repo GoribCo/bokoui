@@ -16,6 +16,11 @@ useHead({
     <header class="sticky top-0 z-10 border-b bg-background/90 px-6 py-3 backdrop-blur">
       <ThemeSwitcher />
     </header>
-    <NuxtPage />
+    <div class="flex min-h-[calc(100dvh-57px)] flex-col md:flex-row">
+      <SideNav />
+      <div class="min-w-0 flex-1">
+        <NuxtPage />
+      </div>
+    </div>
   </ThemeProvider>
 </template>

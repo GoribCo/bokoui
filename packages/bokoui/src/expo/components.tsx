@@ -2,6 +2,7 @@ import { cloneElement, useState, type ReactElement, type ReactNode } from "react
 import {
   ActivityIndicator,
   Image as RNImage,
+  Modal as RNModal,
   type ImageProps as RNImageProps,
   type ImageStyle,
   StyleSheet,
@@ -23,6 +24,7 @@ import {
 import type { Action, Color, Size, Variant } from "@/core";
 import { resolveTone } from "@/core";
 import type { HeadingLevel, HeadingSize, TextVariant } from "@/core";
+import type { ModalSize } from "@/core";
 import type { AlertVariant, ImageAspect, ImageFit, AvatarShape, CardPadding, CardVariant, BadgeVariant, DividerOrientation, InputVariant } from "@/core";
 import { getInitials } from "@/core";
 import { useTheme } from "./theme";
@@ -336,6 +338,89 @@ export function Alert({ variant = "soft", color = "neutral", action, title, chil
         </Pressable>
       ) : null}
     </View>
+  );
+}
+
+// --- Modal ---
+
+export interface ModalProps {
+  open: boolean;
+  /** Called when the user dismisses it (backdrop press, Android back, close button). Set `open` to false in it. */
+  onOpenChange: (open: boolean) => void;
+  title?: string;
+  description?: string;
+  footer?: ReactNode;
+  children?: ReactNode;
+  size?: ModalSize;
+  closeOnBackdrop?: boolean;
+  showClose?: boolean;
+  closeLabel?: string;
+}
+
+const modalMaxWidth: Record<ModalSize, number | "100%"> = { sm: 384, md: 512, lg: 768, full: "100%" };
+
+export function Modal({
+  open,
+  onOpenChange,
+  title,
+  description,
+  footer,
+  children,
+  size = "md",
+  closeOnBackdrop = true,
+  showClose = true,
+  closeLabel = "Close",
+}: ModalProps) {
+  const { tokens } = useTheme();
+  return (
+    <RNModal transparent animationType="fade" visible={open} onRequestClose={() => onOpenChange(false)} statusBarTranslucent>
+      <Pressable
+        accessible={false}
+        onPress={() => closeOnBackdrop && onOpenChange(false)}
+        style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16, backgroundColor: "rgba(0,0,0,0.5)" }}
+      >
+        {/* Swallow presses so taps inside the card do not reach the backdrop. */}
+        <Pressable
+          accessibilityViewIsModal
+          accessibilityLabel={title}
+          onPress={() => {}}
+          style={{
+            width: "100%",
+            maxWidth: modalMaxWidth[size],
+            maxHeight: "90%",
+            borderRadius: tokens.radiusCard,
+            borderWidth: tokens.borderWidth,
+            borderColor: tokens.border,
+            backgroundColor: tokens.surface,
+            overflow: "hidden",
+          }}
+        >
+          {title || showClose ? (
+            <View style={{ flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between", gap: 16, padding: 20, paddingBottom: 8 }}>
+              <View style={{ flex: 1, gap: 4 }}>
+                {title ? (
+                  <RNText accessibilityRole="header" style={{ color: tokens.fg, fontSize: 18, fontWeight: tokens.headingWeight }}>
+                    {title}
+                  </RNText>
+                ) : null}
+                {description ? <RNText style={{ color: tokens.mutedFg, fontSize: 14 }}>{description}</RNText> : null}
+              </View>
+              {showClose ? (
+                <Pressable accessibilityRole="button" accessibilityLabel={closeLabel} onPress={() => onOpenChange(false)} hitSlop={12}>
+                  <RNText style={{ color: tokens.mutedFg, fontSize: 22, lineHeight: 24 }}>×</RNText>
+                </Pressable>
+              ) : null}
+            </View>
+          ) : null}
+          <View style={{ padding: 20, paddingTop: 8 }}>{children}</View>
+          {footer ? (
+            <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-end", alignItems: "center", gap: 8, padding: 20, paddingTop: 0 }}>
+              {footer}
+            </View>
+          ) : null}
+        </Pressable>
+      </Pressable>
+    </RNModal>
   );
 }
 

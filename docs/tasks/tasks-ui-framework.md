@@ -49,7 +49,7 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
   - React, Vue (scoped slot `controlProps`), Expo; React tests only. Not yet checked visually in the examples
 - [x] T4.5 Image (framework-neutral; pass `next/image` or `NuxtImg` via `as`)
 - [x] T4.6 Select
-  - React only (`bokoui/react/client`): select-only combobox, options array, hidden input for forms. Vue and Expo pending
+  - React (`bokoui/react/client`) and Vue: select-only combobox, options array, hidden input for forms. No Expo version
 - [x] T4.7 Checkbox, Radio, Switch
   - Native inputs, CSS-only states, RadioGroup for layout. No `indeterminate` prop (needs the DOM property; set `ref.current.indeterminate`). React tested; Vue and Expo compile only
 - [x] T4.8 Badge, Avatar, Divider
@@ -60,11 +60,11 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [x] T4.11 Icon
   - React and Vue only; Expo has no Icon (no SVG runtime)
 - [x] T4.12 Alert, Spinner, Tooltip
-  - Alert, Spinner: React/Vue/Expo. Tooltip: React only (`bokoui/react/client`); Vue pending, no Expo equivalent
+  - Alert, Spinner: React/Vue/Expo. Tooltip: React (`bokoui/react/client`) and Vue; no Expo equivalent (no hover on touch)
 - [x] T4.13 Modal / Dialog, Tabs
-  - React only (`bokoui/react/client`); Vue pending. Expo: Modal to be done with React Native `Modal`, Tabs not planned
+  - Tabs, Modal: React (`bokoui/react/client`) and Vue. Expo: Modal (React Native `Modal`); Tabs not planned
 - [ ] T4.14 Barrel exports and per-component index
-  - Done for React (`ui/index.ts`, `client/index.ts`), Vue and Expo. Left: Vue ports of the client components
+  - Done for React (`ui/index.ts`, `client/index.ts`), Vue and Expo
   - Conventions and add-a-component checklist: `docs/component-conventions.md`
 
 ## Phase 5: Playground and docs (FR-5.x)
@@ -99,11 +99,14 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T7.12 Organic / Biomorphic
 
 ## Phase 8: Composite components (FR-1.5, future)
-- [ ] T8.1 Sidebar
+- [x] T8.1 Sidebar
+  - React only; Vue pending, no Expo. See `docs/component-status.md`
 - [x] T8.2 Menu / Dropdown menu
-  - React only (`bokoui/react/client`); Vue pending
-- [ ] T8.3 Navbar
-- [ ] T8.4 Breadcrumb, Pagination, Table
+  - React (`bokoui/react/client`) and Vue; no Expo version
+- [x] T8.3 Navbar
+  - React only (`bokoui/react/client`); Vue pending, no Expo
+- [x] T8.4 Breadcrumb, Pagination, Table
+  - React only; Vue pending. Pagination also planned for Expo. Table and Breadcrumb are web-only
 - [ ] T8.5 Form and layout patterns (see `docs/plan-layouts.md`)
 
 ## Phase 9: Open-source and portability (FR-6.x, future)
