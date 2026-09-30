@@ -62,6 +62,7 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T5.3 Per-component page with prop table and code sample
 - [ ] T5.4 Replace default Create Next App landing page
 - [ ] T5.5 README: setup, usage, adding a new style, adding a component
+  - Partial: `packages/bokoui/README.md` exists; root README not yet updated
 
 ## Phase 6: Quality (NFR-2, NFR-8, NFR-9)
 - [ ] T6.1 Set up test runner (Vitest + Testing Library)
@@ -94,9 +95,13 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 
 ## Phase 9: Open-source and portability (FR-6.x, future)
 - [ ] T9.1 Extract tokens/themes into a framework-agnostic package (CSS variables + JSON)
+  - Partial: tokens and theme CSS ship inside `packages/bokoui` (`bokoui/styles.css`), but not yet a separate framework-agnostic package and no JSON export
 - [ ] T9.2 Restructure into a monorepo (`tokens`, `react`, `docs`)
+  - Partial: single package `packages/bokoui` (components, themes, styles moved out of root `src/`); demo app at root consumes it. Not yet split into `tokens` / `react` / `docs`
 - [ ] T9.3 Choose license, add LICENSE, CONTRIBUTING, CHANGELOG
+  - Done: MIT LICENSE in `packages/bokoui`. Todo: CONTRIBUTING, CHANGELOG
 - [ ] T9.4 Publish to npm and/or provide a CLI for copy-paste installation
+  - Partial: `npm run publish:local` builds and publishes `bokoui` to a local Verdaccio registry (`scripts/publish-local.sh`); public npm publish not done
 - [ ] T9.5 Prototype Vue adapter using shared tokens
 - [ ] T9.6 Prototype mobile layer (Expo/NativeWind, Ionic)
 
