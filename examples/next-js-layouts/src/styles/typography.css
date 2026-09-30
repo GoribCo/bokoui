@@ -1,0 +1,41 @@
+/*
+ * Type scale and font mapping. To change fonts edit `lib/fonts.ts`; to change the scale edit this file.
+ * Utilities: text-title, text-section, text-nav, text-caption (Tailwind v4 generates them from @theme).
+ */
+@theme {
+  --text-title: 1.5rem;
+  --text-title--line-height: 2rem;
+  --text-section: 1.125rem;
+  --text-section--line-height: 1.75rem;
+  --text-nav: 0.875rem;
+  --text-nav--line-height: 1.25rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+}
+
+/* Optional font switcher: `data-font` on <html> overrides the style's font. */
+:root[data-font="geist"][data-theme] {
+  --bokoui-font: var(--font-geist-sans, ui-sans-serif), system-ui, sans-serif;
+}
+:root[data-font="roboto"][data-theme] {
+  --bokoui-font: var(--font-roboto, Roboto), system-ui, sans-serif;
+}
+:root[data-font="system"][data-theme] {
+  --bokoui-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/*
+ * Bangla: Noto Sans Bengali covers only the Bengali block (see lib/fonts.ts), so it comes first
+ * and Latin text falls through to the regular UI font.
+ */
+:root:lang(bn)[data-theme] {
+  --bokoui-font: var(--font-noto-bengali), var(--font-geist-sans, ui-sans-serif), system-ui, sans-serif;
+}
+:root:lang(bn)[data-font="roboto"][data-theme] {
+  --bokoui-font: var(--font-noto-bengali), var(--font-roboto, Roboto), system-ui, sans-serif;
+}
+
+/* Height reserved for the mobile bottom navigation (AppShell keeps content clear of it). */
+:root {
+  --bottom-nav-height: 3.5rem;
+}

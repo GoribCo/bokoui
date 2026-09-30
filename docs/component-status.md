@@ -58,9 +58,28 @@ Working order: build **React first**, show it in `examples/next-js`, then port t
 | `examples/expo-js` | Expo (web build) | 3000 | `/` (Button, Input, typography) |
 | `examples/next-js` | React / Next.js | 3001 | `/`, `/playground`, `/forms`, `/display`, `/table`, `/feedback`, `/overlays`, `/tabs`, `/accordion`, `/patterns`, `/navigation` |
 | `examples/nuxt-js` | Vue / Nuxt | 3002 | `/`, `/forms`, `/display`, `/feedback`, `/overlays`, `/tabs` |
-| `examples/next-js-layouts` | React (copy of the original demo) | 3003 | `/`; not part of the switcher |
+| `examples/next-js-layouts` | React, application shell (see below) | 3003 | `/`, `/examples/*`, `/admin`, `/sign-in`, public profiles `/hospital/[slug]`, `/pharmacy/[slug]`, `/company/[slug]`; not part of the switcher |
 
 The home page (`/`, "Button, Input & Typography") is the same content in all three demos and is deliberately left as it was first written (Expo omits "Responsive props", which is web-only). Each demo's header has a React / Vue / Expo switcher (see the root README); it keeps the current page where the target has it. The per-platform page lists live in each switcher and must be updated when a page is added.
+
+## Application shell (`examples/next-js-layouts`)
+
+Generic layout for large products, built on `bokoui/react`; specs in [SRS](srs/srs-layouts.md), work items in [tasks-layouts.md](tasks/tasks-layouts.md). Implemented in full (Phases 0 to 8); `npm run lint` and `npm run typecheck` pass. **Not yet run in a browser**: no `next build`, no unit tests, no accessibility sweep. Those are deferred until the owner has tested it by hand.
+
+| Part | Status | Notes |
+| --- | --- | --- |
+| Sidebar (org switcher, scrolling menu, common menu, account), collapsible rail | built, untested | collapsed state in a cookie, read on the server |
+| Menu tree (unbounded depth, role filtering, active trail, truncation tooltips) | built, untested | mock menu of about 700 items, five levels |
+| Header (branding, breadcrumbs, search, notifications, appearance) | built, untested | appearance inline from `lg`, popover below |
+| Mobile: bottom nav, sub-menu sheet, "More", drawer | built, untested | slot count in `config/navigation.ts` |
+| Footer | built, untested | links from `config/site.ts` |
+| Theme mode, design style, language (en, bn), optional font picker | built, untested | font picker off by default |
+| State: Zustand, TanStack Query, nuqs, React Hook Form + Zod | built, untested | per SRS section 3.9 |
+| Routing: `(auth)`, `(dashboard)`, `(public)`, proxy, 403 via `forbidden()` | built, untested | `forbidden()` needs `experimental.authInterrupts` |
+| SEO: `buildMetadata`, `robots`, `sitemap`, noindex for signed-in areas | built, untested | |
+| Public organization profiles | built, untested | cached with `unstable_cache` |
+
+Left for this example: unit tests (menu filtering, access helpers, stores), browser and accessibility checks at mobile, tablet and desktop widths in all 8 styles and both modes, the SRS section 6 acceptance walk-through, right-to-left support (FR-13.3, optional).
 
 ## What is left
 

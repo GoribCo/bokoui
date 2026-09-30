@@ -1,0 +1,40 @@
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import type { ReactNode } from "react";
+import { buttonClass } from "bokoui/core";
+import { AppearanceMenu } from "@/components/appearance/appearance-menu";
+import { Branding } from "@/components/layout/branding";
+import { Footer } from "@/components/layout/footer";
+import { features } from "@/config/features";
+import { SIGN_IN_PATH } from "@/config/auth";
+import { siteConfig } from "@/config/site";
+import { getMenuTranslator } from "@/lib/i18n-server";
+import { resolveLabel } from "@/lib/menu";
+
+/** Layout for pages anyone can open: a light header, the content, and the footer. No sidebar, no sign-in needed. */
+export default async function PublicLayout({ children }: { children: ReactNode }) {
+  const [t, translate] = await Promise.all([getTranslations(), getMenuTranslator()]);
+  const links = siteConfig.footerLinks.map((link) => ({ ...link, label: resolveLabel(link, translate) }));
+
+  return (
+    <div className="flex min-h-dvh flex-col bg-background text-foreground">
+      <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border px-4 sm:px-6">
+        <Branding name={siteConfig.name} />
+        <div className="flex items-center gap-2">
+          <AppearanceMenu fontSwitcher={features.fontSwitcher} />
+          <Link href={SIGN_IN_PATH} data-tone="primary" className={buttonClass({ variant: "outline", size: "sm" })}>
+            {t("auth.submit")}
+          </Link>
+        </div>
+      </header>
+      <main id="main-content" className="flex-1">
+        {children}
+      </main>
+      <Footer
+        links={links}
+        copyright={t("footer.copyright", { year: new Date().getFullYear(), name: siteConfig.name })}
+        navigationLabel={t("footer.navigation")}
+      />
+    </div>
+  );
+}

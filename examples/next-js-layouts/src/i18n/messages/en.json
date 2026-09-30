@@ -1,0 +1,114 @@
+{
+  "menu": {
+    "dashboard": "Dashboard",
+    "groups": { "overview": "Overview" }
+  },
+  "common": {
+    "help": "Help",
+    "terms": "Terms",
+    "privacySettings": "Privacy settings"
+  },
+  "footer": {
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "help": "Help",
+    "contact": "Contact",
+    "copyright": "© {year} {name}. All rights reserved.",
+    "navigation": "Footer"
+  },
+  "shell": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNavigation": "Main navigation",
+    "commonNavigation": "Common links",
+    "mobileNavigation": "Mobile navigation",
+    "collapseSidebar": "Collapse sidebar",
+    "expandSidebar": "Expand sidebar",
+    "more": "More",
+    "close": "Close",
+    "search": "Search",
+    "searchPlaceholder": "Search…",
+    "notifications": "Notifications",
+    "breadcrumb": "Breadcrumb",
+    "expandGroup": "Expand {label}",
+    "collapseGroup": "Collapse {label}",
+    "home": "Home"
+  },
+  "organization": {
+    "switch": "Switch organization",
+    "current": "Current organization",
+    "search": "Search organizations",
+    "noResults": "No organizations found",
+    "only": "Your organization",
+    "publicProfile": "Public profile"
+  },
+  "account": {
+    "menu": "Account menu",
+    "manage": "Manage account",
+    "profile": "View profile",
+    "logout": "Log out",
+    "signedInAs": "Signed in as"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "mode": "Theme mode",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "style": "Design style",
+    "language": "Language",
+    "font": "Font",
+    "fontDefault": "Style default"
+  },
+  "organizationType": {
+    "hospital": "Hospital",
+    "pharmacy": "Pharmacy",
+    "company": "Company"
+  },
+  "publicProfile": {
+    "about": "About",
+    "contact": "Contact",
+    "city": "City",
+    "phone": "Phone",
+    "website": "Website",
+    "yes": "Yes",
+    "no": "No",
+    "hospital": "Hospital facts",
+    "beds": "Beds",
+    "departments": "Departments",
+    "emergency": "24-hour emergency",
+    "pharmacy": "Pharmacy facts",
+    "licenseNo": "License number",
+    "open24h": "Open 24 hours",
+    "delivery": "Home delivery",
+    "company": "Company facts",
+    "industry": "Industry",
+    "employees": "Employees",
+    "founded": "Founded"
+  },
+  "locale": {
+    "en": "English",
+    "bn": "বাংলা"
+  },
+  "auth": {
+    "title": "Sign in",
+    "description": "Use any email and password to open the demo.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "invalidEmail": "Enter a valid email address",
+    "passwordRequired": "Enter your password"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The page you are looking for does not exist.",
+    "errorTitle": "Something went wrong",
+    "errorBody": "An unexpected error occurred. Try again.",
+    "retry": "Try again",
+    "backHome": "Back to home",
+    "forbiddenTitle": "Not authorized",
+    "forbiddenBody": "You do not have a role that can open this page.",
+    "loading": "Loading"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "next-js",
+  "name": "next-js-layouts",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,14 +12,21 @@
     "publish:local": "npm run publish:local --prefix ../../packages/bokoui"
   },
   "dependencies": {
-    "bokoui": "^0.2.24",
+    "@hookform/resolvers": "^5.9.1",
+    "@tanstack/react-query": "^5.104.0",
+    "bokoui": "^0.2.31",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.49.0",
     "next": "16.3.7",
+    "next-intl": "^4.14.8",
+    "nuqs": "^2.10.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "tailwind-merge": "^3.7.0"
+    "react-hook-form": "^7.89.0",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.5",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
