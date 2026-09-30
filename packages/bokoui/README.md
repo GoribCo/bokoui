@@ -54,6 +54,17 @@ import { Button, Input } from "bokoui";
 <Input placeholder="Email" invalid />
 ```
 
+## Responsive
+
+`size` on `Button` and `Input`, and `fullWidth` on `Button`, accept a mobile-first per-breakpoint map (`base`, `sm`, `md`, `lg`, `xl`, `2xl`) using Tailwind's breakpoints:
+
+```tsx
+<Button size={{ base: "sm", md: "lg" }} fullWidth={{ base: true, md: false }}>Save</Button>
+<Input size={{ base: "md", lg: "lg" }} />
+```
+
+On touch devices (`pointer: coarse`) controls have a 44px minimum height. Any Tailwind responsive class also works through `className`. Requires Tailwind 4.1+.
+
 ## Theming
 
 ```tsx

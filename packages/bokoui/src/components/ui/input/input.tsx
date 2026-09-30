@@ -1,6 +1,7 @@
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/cn";
+import { inputSizeClasses, isResponsive, responsiveClasses, type Responsive } from "../responsive";
 import { resolveTone, type Action, type Color, type Size } from "../types";
 
 export type InputVariant = "outline" | "filled" | "flushed";
@@ -11,6 +12,8 @@ export const inputVariants = cva(
     "rounded-control border-[length:var(--bokoui-border-width)] font-ui",
     "transition-[background-color,border-color,box-shadow] duration-(--bokoui-duration) ease-ui",
     "focus-ring",
+    // Touch devices get a 44px minimum target regardless of size.
+    "pointer-coarse:min-h-11",
     "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
     "read-only:bg-muted",
     "file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium",
@@ -48,7 +51,8 @@ export const inputVariants = cva(
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: InputVariant;
-  size?: Size;
+  /** A size, or a per-breakpoint map: `{ base: "sm", md: "lg" }` (mobile-first). */
+  size?: Responsive<Size>;
   /** Palette slot used for hover/focus emphasis. Default `primary`. */
   color?: Color;
   /** Semantic intent; overrides `color`. Ignored while `invalid` (danger wins). */
@@ -83,6 +87,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   const hasAdornment = Boolean(startAdornment || endAdornment);
+  const sizeMap = isResponsive(size) ? size : undefined;
   const flushed = variant === "flushed";
 
   const input = (
@@ -92,7 +97,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       data-tone={invalid ? "danger" : resolveTone(color, action)}
       aria-invalid={invalid || undefined}
       className={cn(
-        inputVariants({ variant, size }),
+        inputVariants({ variant, size: sizeMap ? null : (size as Size | undefined) }),
+        sizeMap && responsiveClasses(sizeMap, inputSizeClasses),
         startAdornment && (flushed ? "ps-7!" : "ps-9"),
         endAdornment && (flushed ? "pe-7!" : "pe-9"),
         className,

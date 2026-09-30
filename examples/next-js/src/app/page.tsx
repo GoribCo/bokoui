@@ -106,6 +106,15 @@ export default function Home() {
         </div>
       </Section>
 
+      <Section title="Responsive props (resize the window)">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center">
+          <Button id="resp-button" size={{ base: "sm", md: "lg" }} fullWidth={{ base: true, md: false }}>
+            sm on mobile, lg from md
+          </Button>
+          <Input id="resp-input" size={{ base: "sm", md: "lg" }} placeholder="sm on mobile, lg from md" aria-label="Responsive" />
+        </div>
+      </Section>
+
       <Section title="Form example">
         <form className="flex max-w-sm flex-col gap-3">
           <Input type="email" placeholder="you@example.com" aria-label="Email" />
