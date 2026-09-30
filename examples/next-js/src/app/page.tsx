@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { Button, Input, actions, colors, sizes, variants } from "bokoui";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -9,12 +10,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-const SearchIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-    <circle cx="11" cy="11" r="7" />
-    <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-  </svg>
-);
+const SearchIcon = <Search aria-hidden="true" />;
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 {
   "name": "bokoui",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "description": "Themeable React UI components for Tailwind CSS v4 with 8 design styles and light/dark modes",
   "keywords": [
     "react",
@@ -49,6 +49,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "lucide-react": "^1.49.0",
     "tailwind-merge": "^3.7.0"
   },
   "peerDependencies": {

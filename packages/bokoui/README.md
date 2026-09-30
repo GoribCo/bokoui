@@ -56,14 +56,26 @@ import { Button, Input } from "bokoui";
 
 ## Responsive
 
-`size` on `Button` and `Input`, and `fullWidth` on `Button`, accept a mobile-first per-breakpoint map (`base`, `sm`, `md`, `lg`, `xl`, `2xl`) using Tailwind's breakpoints:
+Mobile-first, using Tailwind's breakpoints (`sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem).
+
+**Responsive props.** `size` on `Button` and `Input`, and `fullWidth` on `Button`, accept a per-breakpoint map with the keys `base`, `sm`, `md`, `lg`, `xl`, `2xl`. Each key applies from that breakpoint up:
 
 ```tsx
 <Button size={{ base: "sm", md: "lg" }} fullWidth={{ base: true, md: false }}>Save</Button>
 <Input size={{ base: "md", lg: "lg" }} />
 ```
 
-On touch devices (`pointer: coarse`) controls have a 44px minimum height. Any Tailwind responsive class also works through `className`. Requires Tailwind 4.1+.
+Plain values still work (`size="lg"`). The types are exported as `Responsive<T>` and `Breakpoint`.
+
+**Any other property.** Use Tailwind's responsive variants through `className`; it is merged with `cn`, so it overrides the defaults:
+
+```tsx
+<Button className="w-full md:w-auto">Save</Button>
+```
+
+**Touch targets.** On touch devices (`pointer: coarse`) buttons and inputs have a 44px minimum height, and icon-only buttons a 44px minimum width.
+
+Requires Tailwind 4.1+ (for the `pointer-coarse` variant).
 
 ## Theming
 

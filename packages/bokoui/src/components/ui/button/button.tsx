@@ -1,5 +1,6 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cva } from "class-variance-authority";
+import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
   fullWidthClasses,
@@ -22,7 +23,7 @@ export const buttonVariants = cva(
     "rounded-button border-[length:var(--bokoui-border-width)]",
     "font-ui [font-weight:var(--bokoui-btn-weight)] [text-transform:var(--bokoui-btn-transform)] [letter-spacing:var(--bokoui-btn-tracking)]",
     "transition-[background-color,border-color,color,box-shadow,translate] duration-(--bokoui-duration) ease-ui",
-    "focus-ring",
+    "focus-ring [&_svg]:size-4 [&_svg]:shrink-0",
     "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
     "enabled:hover:[translate:var(--bokoui-shift-hover)] enabled:active:[translate:var(--bokoui-shift-active)]",
     // Touch devices get a 44px minimum target regardless of size.
@@ -109,20 +110,6 @@ function toKeys(map: Partial<Record<Breakpoint, boolean>>) {
   >;
 }
 
-function Spinner() {
-  return (
-    <svg
-      className="size-4 animate-spin motion-reduce:animate-pulse"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" opacity="0.25" />
-      <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     className,
@@ -167,7 +154,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       )}
       {...props}
     >
-      {loading ? <Spinner /> : leftIcon}
+      {loading ? (
+        <LoaderCircle className="size-4 animate-spin motion-reduce:animate-pulse" aria-hidden="true" />
+      ) : (
+        leftIcon
+      )}
       {children}
       {!loading && rightIcon}
     </button>
