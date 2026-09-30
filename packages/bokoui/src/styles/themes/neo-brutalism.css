@@ -9,7 +9,9 @@
   --bokoui-shadow-button-hover: 2px 2px 0 0 var(--bokoui-shadow-color);
   --bokoui-shift-hover: 2px 2px;
   --bokoui-shift-active: 4px 4px;
-  --bokoui-font: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --bokoui-font: var(--font-geist-sans, ui-sans-serif), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bokoui-heading-weight: 800;
+  --bokoui-heading-tracking: -0.03em;
   --bokoui-btn-weight: 700;
   --bokoui-ring-width: 3px;
   --bokoui-duration: 100ms;

@@ -37,7 +37,7 @@ Each style: token file in `src/styles/themes/`, registered in the theme registry
 - [x] T3.6 Monochrome
 - [x] T3.7 Dark / OLED-first
 - [x] T3.8 Fluent (Microsoft)
-- [x] T3.9 Contrast audit for every style/mode pair (NFR-2) (`node scripts/audit-contrast.mjs`)
+- [x] T3.9 Contrast audit for every style/mode pair (NFR-2) (`npm run audit` in `packages/bokoui`)
 
 ## Phase 4: Primitive components (FR-1.x, FR-2.x)
 Each component: typed variants (color, variant, action, size), states (hover/focus/active/disabled/loading/error), forwardRef, `className` merge, a11y, `"use client"` only when needed.
@@ -50,7 +50,7 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T4.7 Checkbox, Radio, Switch
 - [ ] T4.8 Badge, Avatar, Divider
 - [ ] T4.9 Card
-- [ ] T4.10 Typography (Heading, Text, Link)
+- [x] T4.10 Typography (Heading, Text, Link)
 - [ ] T4.11 Icon
 - [ ] T4.12 Alert, Spinner, Tooltip
 - [ ] T4.13 Modal / Dialog, Tabs
@@ -94,14 +94,14 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T8.5 Form and layout patterns (see `docs/plan-layouts.md`)
 
 ## Phase 9: Open-source and portability (FR-6.x, future)
-- [ ] T9.1 Extract tokens/themes into a framework-agnostic package (CSS variables + JSON)
-  - Partial: tokens and theme CSS ship inside `packages/bokoui` (`bokoui/styles.css`), but not yet a separate framework-agnostic package and no JSON export
+- [x] T9.1 Extract tokens/themes into a framework-agnostic package (CSS variables + JSON)
+  - Done as subpath entries of one package: `bokoui/styles.css` (CSS variables), `bokoui/tokens.json` (every style x mode), `bokoui/core` (recipes, theme engine)
 - [ ] T9.2 Restructure into a monorepo (`tokens`, `react`, `docs`)
-  - Partial: single package `packages/bokoui` (components, themes, styles moved out of root `src/`); demo app at root consumes it. Not yet split into `tokens` / `react` / `docs`
+  - Partial: one package `packages/bokoui` with `core` / `react` / `vue` / `expo` entries instead of separate packages; demos in `examples/next-js` and `examples/nuxt-js`. No monorepo tooling or docs site yet
 - [ ] T9.3 Choose license, add LICENSE, CONTRIBUTING, CHANGELOG
   - Done: MIT LICENSE in `packages/bokoui`. Todo: CONTRIBUTING, CHANGELOG
 - [ ] T9.4 Publish to npm and/or provide a CLI for copy-paste installation
-  - Partial: `npm run publish:local` builds and publishes `bokoui` to a local Verdaccio registry (`scripts/publish-local.sh`); public npm publish not done
+  - Partial: `npm run publish:local` builds and publishes `bokoui` to a local Verdaccio registry (`packages/bokoui/scripts/publish-local.sh`); public npm publish not done
 - [ ] T9.5 Prototype Vue adapter using shared tokens
 - [ ] T9.6 Prototype mobile layer (Expo/NativeWind, Ionic)
 

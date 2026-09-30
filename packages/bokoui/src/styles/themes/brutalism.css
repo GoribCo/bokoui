@@ -5,6 +5,10 @@
   --bokoui-border-width: 3px;
   --bokoui-border-strength: 100%;
   --bokoui-font: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --bokoui-heading-weight: 800;
+  --bokoui-heading-tracking: 0.02em;
+  --bokoui-heading-transform: uppercase;
+  --bokoui-text-leading: 1.5;
   --bokoui-btn-weight: 700;
   --bokoui-btn-transform: uppercase;
   --bokoui-btn-tracking: 0.04em;

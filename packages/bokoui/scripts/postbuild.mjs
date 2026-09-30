@@ -1,5 +1,5 @@
 // 1. Inlines the relative @imports of src/styles/bokoui.css into dist/styles.css.
-// 2. Marks dist/theme.js as a client module (bundlers strip the directive if set at build time).
+// 2. Marks dist/react/theme.js as a client module (bundlers strip the directive if set at build time).
 import fs from "node:fs";
 import path from "node:path";
 
@@ -20,7 +20,7 @@ const css = inline(entry) + '\n/* Scan the components in this package for Tailwi
 fs.writeFileSync(out, css);
 console.log("wrote", path.relative(process.cwd(), out));
 
-const themeJs = path.resolve(import.meta.dirname, "../dist/theme.js");
+const themeJs = path.resolve(import.meta.dirname, "../dist/react/theme.js");
 const code = fs.readFileSync(themeJs, "utf8");
 if (!code.startsWith('"use client"')) fs.writeFileSync(themeJs, `"use client";\n${code}`);
-console.log('marked dist/theme.js with "use client"');
+console.log('marked dist/react/theme.js with "use client"');

@@ -8,29 +8,34 @@ Docs: [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-frame
 
 ## Repository layout
 
-This is a two-part repo: a Next.js demo app at the root that consumes the `bokoui` library in `packages/bokoui`.
+Separate installs, no root `package.json` or workspaces. Each of the two projects has its own `package.json`, `node_modules` and lockfile. Run npm commands from inside the project directory.
 
-- `packages/bokoui/` is the library (published to npm as `bokoui`). **All component, theme and style source lives here**, not in the root `src/`.
-  - `src/components/ui/`: primitives (Button, Input), shared variant types in `types.ts`
-  - `src/components/theme/`: `ThemeProvider`, `ThemeSwitcher`, `ThemeScript`, `apply-theme`, `themes` registry
-  - `src/styles/`: `bokoui.css` (entry), `tokens.css`, `themes/*.css` (one file per style)
-  - `src/lib/cn.ts`: `clsx` + `tailwind-merge` helper
-  - `src/index.ts`, `theme.ts`, `theme-script.ts`: package entry points (`bokoui`, `bokoui/theme`, `bokoui/theme-script`, `bokoui/styles.css`)
-  - `scripts/postbuild.mjs`: inlines CSS `@import`s into `dist/styles.css`, adds `@source "./"`, and prepends `"use client"` to `dist/theme.js`
-- Root `src/app/` is the demo app. It imports from the built package (`bokoui/theme`, `bokoui/theme-script`, `bokoui/styles.css`), not from relative paths. `src/styles/custom-themes.ts` holds app-defined custom themes.
-- `scripts/audit-contrast.mjs`: contrast audit for every style/mode pair. `scripts/publish-local.sh`: publish to local Verdaccio.
+- `packages/bokoui/` is the library (published to npm as `bokoui`): one package, one entry per platform. **All component, theme and style source lives here.**
+  - `src/core/`: framework-neutral. cva class recipes (`recipes/`), `responsive.ts`, shared types, theme registry/engine (`themes.ts`, `apply-theme.ts`, `theme-storage.ts`, `theme-script.ts`), `cn`, icon data. No React or Vue imports. Entry `bokoui/core`.
+  - `src/react/`: thin React bindings over core (`ui/`, `theme/`). Entries `bokoui/react`, `bokoui/react/theme` (client), `bokoui/react/theme-script`.
+  - `src/vue/`: Vue 3 bindings (render functions, no SFCs). Entry `bokoui/vue`.
+  - `src/expo/`: React Native bindings. Styling comes from `tokens.generated.ts` (generated from the theme CSS by `scripts/build-tokens.mjs`; do not edit). Entry `bokoui/expo`.
+  - `src/styles/`: `bokoui.css` (entry), `tokens.css`, `themes/*.css` (one file per style). Entry `bokoui/styles.css`; `bokoui/tokens.json` is generated into `dist`.
+  - `scripts/`: `postbuild.mjs` (inlines CSS `@import`s, adds `@source "./"`, prepends `"use client"` to `dist/react/theme.js`), `build-tokens.mjs`, `audit-contrast.mjs`, `publish-local.sh`.
+- `examples/next-js/` is the Next.js demo (`bokoui/react`); `examples/nuxt-js/` is the Nuxt demo (`bokoui/vue`); `examples/expo-js/` is the Expo demo (`bokoui/expo`, has its own AGENTS.md: read the Expo docs before touching Expo APIs). All import from the installed `bokoui` package, not relative paths.
+- `run.sh` (root): build + publish the library to Verdaccio, then run every example concurrently (ports 3000, 3001, ... in alphabetical order: expo-js, next-js, nuxt-js).
 
-The root `tsconfig.json` excludes `packages`; the package has its own `tsconfig.json`. `@/*` maps to root `./src/*` only.
+`@/*` maps to `./src/*` within each project.
 
 ## Commands
 
-- `npm run dev` / `build` / `start`: Next.js demo app
-- `npm run lint`, `npm run typecheck`: root app checks (run both before finishing)
-- `npm run build:pkg`: build the library with tsup (+ postbuild) into `packages/bokoui/dist` (gitignored)
-- `npm run publish:local`: build and publish `bokoui` to Verdaccio at `http://127.0.0.1:4873/` (registry set in `.npmrc`). Bump the version in `packages/bokoui/package.json` first (`npm version patch`); the root `package.json` dependency `bokoui` must match a published version.
-- `node scripts/audit-contrast.mjs`: run after changing any theme tokens
+In `packages/bokoui/` (first run `npm install`):
+- `npm run build`: tokens + tsup + postbuild into `dist` (gitignored)
+- `npm run typecheck`
+- `npm run audit`: contrast audit; run after changing any theme tokens
+- `npm run publish:local`: build and publish `bokoui` to Verdaccio at `http://127.0.0.1:4873/` (registry set in `.npmrc`). Bump the version first (`npm version patch`); the example's `bokoui` dependency must match a published version.
 
-Because the demo app consumes the built package, rebuild (`npm run build:pkg`) after editing anything under `packages/bokoui/src` before checking it in the app.
+In `examples/next-js/` (`examples/nuxt-js/` and `examples/expo-js/`: `npm run dev`):
+- `npm run dev` / `build` / `start`: Next.js demo app
+- `npm run lint`, `npm run typecheck`: run both before finishing
+- `npm run build:pkg` / `publish:local`: shortcuts that run the library commands above
+
+The demo app consumes the published package from `node_modules`, so after editing `packages/bokoui/src`, publish a new version locally and update it in the example before checking it there.
 
 ## Conventions
 
@@ -39,8 +44,8 @@ Because the demo app consumes the built package, rebuild (`npm run build:pkg`) a
 - Components: typed variants via `class-variance-authority` (color, variant, action, size), `forwardRef`, merge `className` with `cn()`, accessible states (hover/focus/active/disabled/loading/error). Use `"use client"` only when a component needs it. Button is the reference implementation.
 - Styling goes through design tokens (CSS variables in `tokens.css`, mapped to Tailwind v4 `@theme`); never hard-code colors in components. A new style is a new file in `styles/themes/`, imported from `themes/index.css` and registered in `themes.ts`.
 - Respect `prefers-reduced-motion`. Avoid theme flash: `ThemeScript` must stay in `<head>`.
-- Export new components through the per-folder `index.ts` and `packages/bokoui/src/index.ts`.
+- A new component is a class recipe in `src/core/recipes/` plus a thin binding in each of `src/react`, `src/vue`, `src/expo`; export it from that folder's `index.ts`. Keep React/Vue/RN imports out of `core`.
 
 ## Status
 
-Done: foundation, theming engine, 8 core styles, Button, Input, package extraction into `packages/bokoui`, local Verdaccio publishing. Next up: remaining primitives (T4.3 onward), playground, tests. See the task list for the current state.
+Done: foundation, theming engine, 8 core styles, Button, Input, Heading/Text/Link, one package with `core`/`react`/`vue`/`expo` entries (Expo untested on a device), Next and Nuxt examples, local Verdaccio publishing. Next up: remaining primitives (T4.3 onward), playground, tests. See the task list for the current state.

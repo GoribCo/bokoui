@@ -8,7 +8,8 @@
  *          hover-mix active-mix shadow-color
  * Shape:   ink-tone radius-control radius-button border-width border-strength
  * Effects: shadow-button shadow-button-hover shift-hover shift-active
- * Type:    font btn-weight btn-transform btn-tracking
+ * Type:    font font-heading font-mono heading-weight heading-tracking heading-transform
+ *          text-leading btn-weight btn-transform btn-tracking
  * Focus:   ring-width ring-offset
  * Motion:  duration ease
  * State:   disabled-opacity
