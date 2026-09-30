@@ -1,4 +1,4 @@
-import { ExternalLink, LoaderCircle } from "lucide";
+import { Check, ChevronDown, CircleAlert, CircleCheck, ExternalLink, Info, LoaderCircle, Minus, TriangleAlert, X } from "lucide";
 
 /** Lucide icon data (framework-neutral). React and Vue render it as <svg>. */
 export type IconNode = [tag: string, attrs: Record<string, string | number>][];
@@ -6,6 +6,14 @@ export type IconNode = [tag: string, attrs: Record<string, string | number>][];
 export const icons = {
   loader: LoaderCircle as IconNode,
   externalLink: ExternalLink as IconNode,
+  info: Info as IconNode,
+  success: CircleCheck as IconNode,
+  warning: TriangleAlert as IconNode,
+  danger: CircleAlert as IconNode,
+  close: X as IconNode,
+  check: Check as IconNode,
+  chevronDown: ChevronDown as IconNode,
+  minus: Minus as IconNode,
 };
 
 /** Attributes shared by every Lucide `<svg>` (24px grid, stroke icons). */

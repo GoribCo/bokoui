@@ -2,6 +2,7 @@
 :root[data-theme="neo-brutalism"] {
   --bokoui-radius-control: 0.5rem;
   --bokoui-radius-button: 0.5rem;
+  --bokoui-radius-card: 0.5rem;
   --bokoui-border-width: 2px;
   --bokoui-border-strength: 100%;
   --bokoui-ink-tone: 25%;

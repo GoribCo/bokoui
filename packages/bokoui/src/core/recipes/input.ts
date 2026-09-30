@@ -14,7 +14,8 @@ export const inputVariants = cva(
     // Touch devices get a 44px minimum target regardless of size.
     "pointer-coarse:min-h-11",
     "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
-    "read-only:bg-muted",
+    // Buttons also match :read-only, so limit this to real text fields (Select is a button).
+    "[&:is(input,textarea):read-only]:bg-muted",
     "file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium",
     // Chrome top-aligns file inputs; line-height = inner height centers them.
     "[&[type=file]]:leading-[calc(var(--h)-2*var(--bokoui-border-width))]",

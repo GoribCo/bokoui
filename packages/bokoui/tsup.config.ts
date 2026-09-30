@@ -14,6 +14,8 @@ export default defineConfig({
     "react/index": "src/react/index.ts",
     // Provider and switcher use hooks/state; scripts/postbuild.mjs adds "use client".
     "react/theme": "src/react/theme/index.ts",
+    // Stateful components (Tabs, Modal, ...); scripts/postbuild.mjs adds "use client".
+    "react/client": "src/react/client/index.ts",
     "react/theme-script": "src/react/theme/theme-script.tsx",
     "vue/index": "src/vue/index.ts",
     "expo/index": "src/expo/index.ts",

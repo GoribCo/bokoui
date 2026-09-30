@@ -6,7 +6,7 @@
  * Colors:  bg fg surface muted muted-fg border field field-border ring
  *          <tone> and <tone>-fg for: primary secondary accent neutral success warning danger info
  *          hover-mix active-mix shadow-color
- * Shape:   ink-tone radius-control radius-button border-width border-strength
+ * Shape:   ink-tone radius-control radius-button radius-card border-width border-strength
  * Effects: shadow-button shadow-button-hover shift-hover shift-active
  * Type:    font font-heading font-mono heading-weight heading-tracking heading-transform
  *          text-leading btn-weight btn-transform btn-tracking

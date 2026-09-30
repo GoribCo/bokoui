@@ -39,6 +39,7 @@
 
   --radius-control: var(--bokoui-radius-control);
   --radius-button: var(--bokoui-radius-button);
+  --radius-card: var(--bokoui-radius-card);
   --shadow-button: var(--bokoui-shadow-button);
   --shadow-button-hover: var(--bokoui-shadow-button-hover);
   --font-ui: var(--bokoui-font);

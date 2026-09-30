@@ -43,18 +43,28 @@ Each style: token file in `src/styles/themes/`, registered in the theme registry
 Each component: typed variants (color, variant, action, size), states (hover/focus/active/disabled/loading/error), forwardRef, `className` merge, a11y, `"use client"` only when needed.
 - [x] T4.1 Button (reference implementation, establishes the pattern)
 - [x] T4.2 Input
-- [ ] T4.3 Textarea
-- [ ] T4.4 Label and form field wrapper (label, hint, error)
-- [ ] T4.5 Image (wrapper over `next/image`)
-- [ ] T4.6 Select
-- [ ] T4.7 Checkbox, Radio, Switch
-- [ ] T4.8 Badge, Avatar, Divider
-- [ ] T4.9 Card
+- [x] T4.3 Textarea
+  - Reuses the Input recipe (variants, tones, states); React tested, Vue and Expo compile only
+- [x] T4.4 Label and form field wrapper (label, hint, error)
+  - React, Vue (scoped slot `controlProps`), Expo; React tests only. Not yet checked visually in the examples
+- [x] T4.5 Image (framework-neutral; pass `next/image` or `NuxtImg` via `as`)
+- [x] T4.6 Select
+  - React only (`bokoui/react/client`): select-only combobox, options array, hidden input for forms. Vue and Expo pending
+- [x] T4.7 Checkbox, Radio, Switch
+  - Native inputs, CSS-only states, RadioGroup for layout. No `indeterminate` prop (needs the DOM property; set `ref.current.indeterminate`). React tested; Vue and Expo compile only
+- [x] T4.8 Badge, Avatar, Divider
+  - React tested; Vue and Expo compile only. Avatar is stateless (fallback behind image; pass `imgProps.onError` to hide a broken one)
+- [x] T4.9 Card
+  - New `radius-card` token (flat.css default, overridden per theme). Card, CardHeader, CardFooter
 - [x] T4.10 Typography (Heading, Text, Link)
-- [ ] T4.11 Icon
-- [ ] T4.12 Alert, Spinner, Tooltip
-- [ ] T4.13 Modal / Dialog, Tabs
+- [x] T4.11 Icon
+  - React and Vue only; Expo has no Icon (no SVG runtime)
+- [x] T4.12 Alert, Spinner, Tooltip
+  - Alert, Spinner: React/Vue/Expo. Tooltip: React only (`bokoui/react/client`); Vue pending, no Expo equivalent
+- [x] T4.13 Modal / Dialog, Tabs
+  - React only (`bokoui/react/client`); Vue pending. Expo: Modal to be done with React Native `Modal`, Tabs not planned
 - [ ] T4.14 Barrel exports and per-component index
+  - Done for React (`ui/index.ts`, `client/index.ts`), Vue and Expo. Left: Vue ports of the client components
   - Conventions and add-a-component checklist: `docs/component-conventions.md`
 
 ## Phase 5: Playground and docs (FR-5.x)
@@ -90,7 +100,8 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 
 ## Phase 8: Composite components (FR-1.5, future)
 - [ ] T8.1 Sidebar
-- [ ] T8.2 Menu / Dropdown menu
+- [x] T8.2 Menu / Dropdown menu
+  - React only (`bokoui/react/client`); Vue pending
 - [ ] T8.3 Navbar
 - [ ] T8.4 Breadcrumb, Pagination, Table
 - [ ] T8.5 Form and layout patterns (see `docs/plan-layouts.md`)

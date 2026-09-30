@@ -87,10 +87,18 @@ Rules:
 - When a component skips a platform, record it in the task list next to the task so the gap is visible.
 - `Image` wraps `next/image`, which ties it to Next. Ship it from the example or an adapter entry, not from `bokoui/core`.
 
+## Server-safe vs client components (React)
+
+`bokoui/react` holds components with no state or effects (Button, Input, Card, ...). They work in Next.js Server Components.
+
+Components that need state, effects or browser APIs (Tabs, Modal, Tooltip, Menu, Select) live in `src/react/client/` and are exported from `bokoui/react/client`, which `scripts/postbuild.mjs` marks `"use client"`. Do not put hooks in `src/react/ui/`. Stateless helpers that only need a few ids can use `useId` (allowed on the server) instead.
+
+Shared hooks for overlays are in `src/react/client/floating.ts` (`useFloating`, `useTopLayer`); the pure positioning and keyboard logic they use is in `src/core/position.ts` and `src/core/keyboard.ts` and is tested without React.
+
 ## Adding a component: checklist
 
 1. **Recipe.** `src/core/recipes/<name>.ts`: `cva` with base classes, variants, `defaultVariants`; export `<name>Variants`, `<Name>StyleProps`, `<name>Class()`. Add `export * from "./recipes/<name>";` to `src/core/index.ts`.
-2. **React.** `src/react/ui/<name>/<name>.tsx` and `index.ts`; add `export * from "./<name>";` to `src/react/ui/index.ts`.
+2. **React.** Server-safe: `src/react/ui/<name>/<name>.tsx` and `index.ts`; add `export * from "./<name>";` to `src/react/ui/index.ts`. Stateful: `src/react/client/<name>.tsx`, exported from `src/react/client/index.ts`.
 3. **Vue.** `src/vue/<name>.ts`; export from `src/vue/index.ts`. Vue models use `modelValue` + `update:modelValue`.
 4. **Expo.** Add to `src/expo/components.tsx` and export from `src/expo/index.ts`. If the component is not ready for native, say so in the task list rather than silently skipping.
 5. **Tokens.** Reuse existing tokens. If a new one is required, add it to `tokens.css` and every file in `styles/themes/`, then run `npm run tokens` and `npm run audit`.

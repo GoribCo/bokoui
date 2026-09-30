@@ -2,6 +2,7 @@
 :root[data-theme="swiss"] {
   --bokoui-radius-control: 0;
   --bokoui-radius-button: 0;
+  --bokoui-radius-card: 0;
   --bokoui-border-width: 2px;
   --bokoui-border-strength: 0%;
   --bokoui-font: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;

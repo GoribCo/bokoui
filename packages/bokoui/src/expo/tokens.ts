@@ -14,6 +14,7 @@ export interface NativeTokens {
   ring: string;
   radiusControl: number;
   radiusButton: number;
+  radiusCard: number;
   borderWidth: number;
   /** 0..1: how much of the tone stays in `toneInk` (rest mixes toward fg). */
   inkTone: number;
@@ -85,6 +86,7 @@ export function resolveTokens(
     ring: raw.ring,
     radiusControl: num(raw["radius-control"]),
     radiusButton: num(raw["radius-button"]),
+    radiusCard: num(raw["radius-card"]),
     borderWidth: num(raw["border-width"], 1),
     inkTone: pct(raw["ink-tone"], 0.6),
     borderStrength: pct(raw["border-strength"], 0),

@@ -4,6 +4,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0",
       "radius-button": "0",
+      "radius-card": "0",
       "border-width": "3px",
       "border-strength": "100%",
       "ink-tone": "60%",
@@ -58,6 +59,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0",
       "radius-button": "0",
+      "radius-card": "0",
       "border-width": "3px",
       "border-strength": "100%",
       "ink-tone": "60%",
@@ -114,6 +116,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0.5rem",
       "radius-button": "0.5rem",
+      "radius-card": "0.75rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -168,6 +171,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0.5rem",
       "radius-button": "0.5rem",
+      "radius-card": "0.75rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -224,6 +228,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0.25rem",
       "radius-button": "0.25rem",
+      "radius-card": "0.5rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -278,6 +283,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0.25rem",
       "radius-button": "0.25rem",
+      "radius-card": "0.5rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -334,6 +340,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0.25rem",
       "radius-button": "9999px",
+      "radius-card": "0.75rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -388,6 +395,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0.25rem",
       "radius-button": "9999px",
+      "radius-card": "0.75rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -444,6 +452,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0.25rem",
       "radius-button": "0.25rem",
+      "radius-card": "0.25rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -498,6 +507,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0.25rem",
       "radius-button": "0.25rem",
+      "radius-card": "0.25rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -554,6 +564,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0.5rem",
       "radius-button": "0.5rem",
+      "radius-card": "0.5rem",
       "border-width": "2px",
       "border-strength": "100%",
       "ink-tone": "25%",
@@ -608,6 +619,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0.5rem",
       "radius-button": "0.5rem",
+      "radius-card": "0.5rem",
       "border-width": "2px",
       "border-strength": "100%",
       "ink-tone": "25%",
@@ -664,6 +676,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0.75rem",
       "radius-button": "0.75rem",
+      "radius-card": "1rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -718,6 +731,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0.75rem",
       "radius-button": "0.75rem",
+      "radius-card": "1rem",
       "border-width": "1px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -774,6 +788,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "light": {
       "radius-control": "0",
       "radius-button": "0",
+      "radius-card": "0",
       "border-width": "2px",
       "border-strength": "0%",
       "ink-tone": "60%",
@@ -828,6 +843,7 @@ export const generatedTokens: Record<string, Record<"light" | "dark", Record<str
     "dark": {
       "radius-control": "0",
       "radius-button": "0",
+      "radius-card": "0",
       "border-width": "2px",
       "border-strength": "0%",
       "ink-tone": "60%",

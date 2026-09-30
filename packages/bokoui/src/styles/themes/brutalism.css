@@ -2,6 +2,7 @@
 :root[data-theme="brutalism"] {
   --bokoui-radius-control: 0;
   --bokoui-radius-button: 0;
+  --bokoui-radius-card: 0;
   --bokoui-border-width: 3px;
   --bokoui-border-strength: 100%;
   --bokoui-font: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;

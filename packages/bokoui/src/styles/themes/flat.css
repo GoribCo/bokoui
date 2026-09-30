@@ -9,6 +9,7 @@
 :root {
   --bokoui-radius-control: 0.5rem;
   --bokoui-radius-button: 0.5rem;
+  --bokoui-radius-card: 0.75rem;
   --bokoui-border-width: 1px;
   --bokoui-border-strength: 0%;
   --bokoui-ink-tone: 60%;
