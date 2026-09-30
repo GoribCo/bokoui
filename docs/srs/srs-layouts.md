@@ -158,8 +158,8 @@ Each kind of state uses its designated tool. The project adopts the following ta
 | FR-10.2 | A user can belong to multiple organizations, with different roles in each | M |
 | FR-10.3 | The session model exposes user, organizations, roles per organization and active organization as typed data | M |
 | FR-10.4 | Menu visibility is role-aware on the client; route protection is enforced on the server (proxy/layout checks), not only by hiding menu items | M |
-| FR-10.6 | Route protection follows the standard Next.js approach: the proxy does optimistic checks (redirect unauthenticated users to sign-in using the session cookie), and the layout/page and data layer do the authoritative session and role checks close to the data; public organization profile routes are excluded | M |
 | FR-10.5 | The access-check helper (e.g. `hasRole`, `can`) is a single replaceable module | S |
+| FR-10.6 | Route protection follows the standard Next.js approach: the proxy does optimistic checks (redirect unauthenticated users to sign-in using the session cookie), and the layout/page and data layer do the authoritative session and role checks close to the data; public organization profile routes are excluded | M |
 
 ### 3.11 SEO
 | ID | Requirement | Pri |
@@ -269,6 +269,7 @@ Data flow: Server Component layout fetches session and menus through `services/`
 | Route protection | Standard Next.js: proxy for optimistic redirects, layouts and data layer for authoritative checks |
 | Bottom-nav slots | Configurable value; the rest go to "More" |
 | Package source | Local Verdaccio, like the other examples |
+| Public profile rendering | On demand with caching, since organization data comes from the API |
 
 ### 8.2 Open
-1. Should the public profile pages be statically generated or rendered on demand? (Assumed: on demand with caching, since organizations come from an API.)
+None.
