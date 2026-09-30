@@ -13,7 +13,7 @@ export interface StaticPageProps {
 /** Simple reading page (legal, help, settings placeholders): title, description and text. */
 export function StaticPage({ title, description, children }: StaticPageProps) {
   return (
-    <PageContainer>
+    <PageContainer size="md">
       <PageHeader title={title} description={description} />
       {typeof children === "string" ? <Text>{children}</Text> : children}
     </PageContainer>
