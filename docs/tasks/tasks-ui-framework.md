@@ -94,10 +94,10 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T8.5 Form and layout patterns (see `docs/plan-layouts.md`)
 
 ## Phase 9: Open-source and portability (FR-6.x, future)
-- [ ] T9.1 Extract tokens/themes into a framework-agnostic package (CSS variables + JSON)
-  - Partial: tokens and theme CSS ship inside `packages/bokoui` (`bokoui/styles.css`), but not yet a separate framework-agnostic package and no JSON export
+- [x] T9.1 Extract tokens/themes into a framework-agnostic package (CSS variables + JSON)
+  - Done as subpath entries of one package: `bokoui/styles.css` (CSS variables), `bokoui/tokens.json` (every style x mode), `bokoui/core` (recipes, theme engine)
 - [ ] T9.2 Restructure into a monorepo (`tokens`, `react`, `docs`)
-  - Partial: single package `packages/bokoui` (components, themes, styles moved out of the old root `src/`); demo app in `examples/next-js` consumes it. Not yet split into `tokens` / `react` / `docs`
+  - Partial: one package `packages/bokoui` with `core` / `react` / `vue` / `expo` entries instead of separate packages; demos in `examples/next-js` and `examples/nuxt-js`. No monorepo tooling or docs site yet
 - [ ] T9.3 Choose license, add LICENSE, CONTRIBUTING, CHANGELOG
   - Done: MIT LICENSE in `packages/bokoui`. Todo: CONTRIBUTING, CHANGELOG
 - [ ] T9.4 Publish to npm and/or provide a CLI for copy-paste installation

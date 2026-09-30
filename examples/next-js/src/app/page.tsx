@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import { Button, Heading, Input, Link, Text, actions, colors, sizes, variants } from "bokoui";
+import { Button, Heading, Input, Link, Text, actions, colors, sizes, variants } from "bokoui/react";
 
 function Section({ title, id, children }: { title: string; id?: string; children: React.ReactNode }) {
   return (

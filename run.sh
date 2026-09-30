@@ -4,7 +4,7 @@
 #   ./run.sh              publish (auto-bumping the patch version if already published), then run examples
 #   ./run.sh --no-publish skip build/publish, just install and run examples
 #
-# Ctrl+C stops all examples.
+# Each example gets its own port (3000, 3001, ...) via PORT. Ctrl+C stops all examples.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
@@ -34,6 +34,8 @@ fi
 
 # Install each example (pointing it at the latest published version) and start it.
 PIDS=()
+PORT_BASE=3000
+index=0
 cleanup() {
   echo; echo "Stopping examples..."
   for pid in "${PIDS[@]:-}"; do [ -n "$pid" ] && kill "$pid" 2>/dev/null || true; done
@@ -44,7 +46,11 @@ trap cleanup INT TERM EXIT
 for dir in "$ROOT"/examples/*/; do
   [ -f "$dir/package.json" ] || continue
   name="$(basename "$dir")"
+  port=$((PORT_BASE + index))
+  index=$((index + 1))
+  echo "[$name] will listen on http://localhost:$port"
   (
+    export PORT="$port"
     cd "$dir"
     if [ "$publish" = 1 ]; then
       npm pkg set "dependencies.bokoui=^$VERSION" >/dev/null

@@ -1,6 +1,6 @@
 # bokoui Next.js example
 
-Demo app for [bokoui](../../packages/bokoui), built with Next.js (App Router) and Tailwind CSS v4. It shows the theme switcher, every Button variant and Input state, and a custom theme.
+Demo app for [bokoui](../../packages/bokoui) using `bokoui/react`, built with Next.js (App Router) and Tailwind CSS v4. It shows the theme switcher, every Button variant and Input state, and a custom theme.
 
 ## Run
 

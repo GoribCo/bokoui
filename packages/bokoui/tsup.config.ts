@@ -1,24 +1,21 @@
 import { defineConfig } from "tsup";
 
-const shared = {
-  format: ["esm" as const],
+export default defineConfig({
+  format: ["esm"],
   dts: true,
   outDir: "dist",
   treeshake: true,
-  external: ["react", "react-dom", "react/jsx-runtime"],
+  clean: true,
   tsconfig: "tsconfig.json",
-};
-
-export default defineConfig([
-  {
-    ...shared,
-    entry: { index: "src/index.ts", "theme-script": "src/theme-script.ts" },
-    clean: true,
-  },
-  {
-    ...shared,
+  // Framework runtimes are peers of the matching entry point, never bundled.
+  external: ["react", "react-dom", "react/jsx-runtime", "vue", "react-native"],
+  entry: {
+    core: "src/core/index.ts",
+    "react/index": "src/react/index.ts",
     // Provider and switcher use hooks/state; scripts/postbuild.mjs adds "use client".
-    entry: { theme: "src/theme.ts" },
-    clean: false,
+    "react/theme": "src/react/theme/index.ts",
+    "react/theme-script": "src/react/theme/theme-script.tsx",
+    "vue/index": "src/vue/index.ts",
+    "expo/index": "src/expo/index.ts",
   },
-]);
+});

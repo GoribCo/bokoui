@@ -1,75 +1,20 @@
-# Nuxt Minimal Starter
+# bokoui Nuxt example
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Demo app for [bokoui](../../packages/bokoui) using `bokoui/vue`, built with Nuxt 4 and Tailwind CSS v4. It shows the same page as [the Next.js example](../next-js): theme switcher, every Button variant and Input state, responsive props, typography and a custom theme.
 
-## Setup
-
-Make sure to install dependencies:
+## Run
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm run dev     # http://localhost:3000
 ```
 
-## Development Server
+`bokoui` is installed from the registry in `.npmrc` (local Verdaccio, `http://127.0.0.1:4873/`). From the repo root, `./run.sh` publishes the library there and runs every example on its own port.
 
-Start the development server on `http://localhost:3000`:
+## Structure
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- `nuxt.config.ts`: Tailwind via `@tailwindcss/vite`.
+- `app/assets/css/main.css`: imports Tailwind, `bokoui/styles.css` and the fonts (bokoui ships none).
+- `app/app.vue`: theme script in `<head>` (no flash), `ThemeProvider`, `ThemeSwitcher`.
+- `app/pages/index.vue`: component showcase.
+- `app/utils/custom-themes.ts`: example app-defined theme.
