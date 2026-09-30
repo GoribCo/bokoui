@@ -1,4 +1,4 @@
-import type { CustomThemes } from "@/components/theme";
+import type { CustomThemes } from "bokoui/theme";
 
 /** Example of a user-defined theme: only the tokens that differ from the base style. */
 export const customThemes: CustomThemes = {

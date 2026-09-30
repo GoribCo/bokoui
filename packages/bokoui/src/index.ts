@@ -1,2 +1,2 @@
-export * from "../../../src/components/ui";
-export { cn } from "../../../src/lib/cn";
+export * from "@/components/ui";
+export { cn } from "@/lib/cn";

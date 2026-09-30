@@ -1,4 +1,4 @@
-import { Button, Input, actions, colors, sizes, variants } from "@/components/ui";
+import { Button, Input, actions, colors, sizes, variants } from "bokoui";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const entry = path.resolve(import.meta.dirname, "../../../src/styles/bokoui.css");
+const entry = path.resolve(import.meta.dirname, "../src/styles/bokoui.css");
 
 function inline(file) {
   const dir = path.dirname(file);

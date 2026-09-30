@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider, ThemeScript, ThemeSwitcher } from "@/components/theme";
+import { ThemeProvider, ThemeSwitcher } from "bokoui/theme";
+import { ThemeScript } from "bokoui/theme-script";
 import { customThemes } from "@/styles/custom-themes";
 import "./globals.css";
 
