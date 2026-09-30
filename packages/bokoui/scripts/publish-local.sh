@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 # Publish packages/bokoui to the local Verdaccio registry.
 #
-#   npm run publish:local
+#   npm run publish:local   (from packages/bokoui, or examples/next-js)
 #
 # Steps: start Verdaccio if it is down, log in (registering the dev user on first
 # run), build, publish. Override credentials with VERDACCIO_USER / VERDACCIO_PASS /
 # VERDACCIO_EMAIL. Bump the version first (npm version patch) to publish again.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-PKG="$ROOT/packages/bokoui"
+PKG="$(cd "$(dirname "$0")/.." && pwd)"
 REGISTRY="$(sed -n 's/^registry=//p' "$PKG/.npmrc")"
 REGISTRY="${REGISTRY%/}"
 HOST="${REGISTRY#http://}"

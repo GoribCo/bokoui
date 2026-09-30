@@ -41,6 +41,9 @@
   },
   "scripts": {
     "build": "tsup && node scripts/postbuild.mjs",
+    "typecheck": "tsc --noEmit",
+    "audit": "node scripts/audit-contrast.mjs",
+    "publish:local": "bash scripts/publish-local.sh",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -55,5 +58,15 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwindcss": "^4",
+    "tsup": "^8.5.1",
+    "typescript": "^5"
   }
 }

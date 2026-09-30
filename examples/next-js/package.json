@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "build:pkg": "npm run build --prefix packages/bokoui",
-    "publish:local": "bash scripts/publish-local.sh"
+    "build:pkg": "npm run build --prefix ../../packages/bokoui",
+    "publish:local": "npm run publish:local --prefix ../../packages/bokoui"
   },
   "dependencies": {
     "bokoui": "^0.1.2",
@@ -28,7 +28,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.7",
     "tailwindcss": "^4",
-    "tsup": "^8.5.1",
     "typescript": "^5"
   }
 }

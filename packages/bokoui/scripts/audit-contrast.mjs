@@ -1,5 +1,5 @@
 import fs from "fs";
-const dir = "src/styles/themes/";
+const dir = new URL("../src/styles/themes/", import.meta.url).pathname;
 const files = fs.readdirSync(dir).filter(f => f.endsWith(".css") && f !== "index.css");
 const parse = (css, sel) => { css = css.replace(/\/\*[\s\S]*?\*\//g, ""); // collect var maps per block selector containing sel
   const out = {};

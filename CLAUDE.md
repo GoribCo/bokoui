@@ -8,29 +8,35 @@ Docs: [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-frame
 
 ## Repository layout
 
-This is a two-part repo: a Next.js demo app at the root that consumes the `bokoui` library in `packages/bokoui`.
+Separate installs, no root `package.json` or workspaces. Each of the two projects has its own `package.json`, `node_modules` and lockfile. Run npm commands from inside the project directory.
 
-- `packages/bokoui/` is the library (published to npm as `bokoui`). **All component, theme and style source lives here**, not in the root `src/`.
+- `packages/bokoui/` is the library (published to npm as `bokoui`). **All component, theme and style source lives here.**
   - `src/components/ui/`: primitives (Button, Input), shared variant types in `types.ts`
   - `src/components/theme/`: `ThemeProvider`, `ThemeSwitcher`, `ThemeScript`, `apply-theme`, `themes` registry
   - `src/styles/`: `bokoui.css` (entry), `tokens.css`, `themes/*.css` (one file per style)
   - `src/lib/cn.ts`: `clsx` + `tailwind-merge` helper
   - `src/index.ts`, `theme.ts`, `theme-script.ts`: package entry points (`bokoui`, `bokoui/theme`, `bokoui/theme-script`, `bokoui/styles.css`)
   - `scripts/postbuild.mjs`: inlines CSS `@import`s into `dist/styles.css`, adds `@source "./"`, and prepends `"use client"` to `dist/theme.js`
-- Root `src/app/` is the demo app. It imports from the built package (`bokoui/theme`, `bokoui/theme-script`, `bokoui/styles.css`), not from relative paths. `src/styles/custom-themes.ts` holds app-defined custom themes.
-- `scripts/audit-contrast.mjs`: contrast audit for every style/mode pair. `scripts/publish-local.sh`: publish to local Verdaccio.
+  - `scripts/audit-contrast.mjs`: contrast audit for every style/mode pair. `scripts/publish-local.sh`: publish to local Verdaccio.
+- `examples/next-js/` is the Next.js demo app. Its `src/app/` imports from the installed `bokoui` package (`bokoui/theme`, `bokoui/theme-script`, `bokoui/styles.css`), not from relative paths. `src/styles/custom-themes.ts` holds app-defined custom themes.
+- `examples/nuxt-js/` is not started.
 
-The root `tsconfig.json` excludes `packages`; the package has its own `tsconfig.json`. `@/*` maps to root `./src/*` only.
+`@/*` maps to `./src/*` within each project.
 
 ## Commands
 
-- `npm run dev` / `build` / `start`: Next.js demo app
-- `npm run lint`, `npm run typecheck`: root app checks (run both before finishing)
-- `npm run build:pkg`: build the library with tsup (+ postbuild) into `packages/bokoui/dist` (gitignored)
-- `npm run publish:local`: build and publish `bokoui` to Verdaccio at `http://127.0.0.1:4873/` (registry set in `.npmrc`). Bump the version in `packages/bokoui/package.json` first (`npm version patch`); the root `package.json` dependency `bokoui` must match a published version.
-- `node scripts/audit-contrast.mjs`: run after changing any theme tokens
+In `packages/bokoui/` (first run `npm install`):
+- `npm run build`: build with tsup (+ postbuild) into `dist` (gitignored)
+- `npm run typecheck`
+- `npm run audit`: contrast audit; run after changing any theme tokens
+- `npm run publish:local`: build and publish `bokoui` to Verdaccio at `http://127.0.0.1:4873/` (registry set in `.npmrc`). Bump the version first (`npm version patch`); the example's `bokoui` dependency must match a published version.
 
-Because the demo app consumes the built package, rebuild (`npm run build:pkg`) after editing anything under `packages/bokoui/src` before checking it in the app.
+In `examples/next-js/`:
+- `npm run dev` / `build` / `start`: Next.js demo app
+- `npm run lint`, `npm run typecheck`: run both before finishing
+- `npm run build:pkg` / `publish:local`: shortcuts that run the library commands above
+
+The demo app consumes the published package from `node_modules`, so after editing `packages/bokoui/src`, publish a new version locally and update it in the example before checking it there.
 
 ## Conventions
 
