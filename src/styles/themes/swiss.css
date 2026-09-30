@@ -1,0 +1,52 @@
+/* Swiss / International Typographic: grid discipline, square corners, red + black, tight type. */
+:root[data-theme="swiss"] {
+  --ui-radius-control: 0;
+  --ui-radius-button: 0;
+  --ui-border-width: 2px;
+  --ui-border-strength: 0%;
+  --ui-font: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --ui-btn-weight: 700;
+  --ui-btn-tracking: 0.02em;
+  --ui-ring-offset: 3px;
+  --ui-duration: 100ms;
+}
+
+:root[data-theme="swiss"]:not([data-mode="dark"]) {
+  --ui-bg: #ffffff;
+  --ui-fg: #000000;
+  --ui-surface: #f2f2f2;
+  --ui-muted: #ececec;
+  --ui-muted-fg: #4d4d4d;
+  --ui-border: #000000;
+  --ui-field: #ffffff;
+  --ui-field-border: #000000;
+  --ui-ring: #000000;
+  --ui-primary: #d10012;
+  --ui-secondary: #000000;
+  --ui-accent: #0b3d91;
+  --ui-neutral: #4d4d4d;
+  --ui-neutral-fg: #ffffff;
+  --ui-success: #0a6b2d;
+  --ui-danger: #b00010;
+  --ui-info: #0b3d91;
+}
+
+:root[data-theme="swiss"][data-mode="dark"] {
+  --ui-bg: #000000;
+  --ui-fg: #ffffff;
+  --ui-surface: #141414;
+  --ui-muted: #1f1f1f;
+  --ui-muted-fg: #b3b3b3;
+  --ui-border: #ffffff;
+  --ui-field: #000000;
+  --ui-field-border: #ffffff;
+  --ui-ring: #ffffff;
+  --ui-primary: #ff4d5a;
+  --ui-secondary: #ffffff;
+  --ui-accent: #6ea0ff;
+  --ui-neutral: #d9d9d9;
+  --ui-neutral-fg: #000000;
+  --ui-success: #4ade80;
+  --ui-danger: #ff6b76;
+  --ui-info: #6ea0ff;
+}

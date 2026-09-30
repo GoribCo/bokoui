@@ -1,0 +1,72 @@
+/* Neo-Brutalism: bright flat colors, thick black outlines, hard offset shadows, press-in hover. */
+:root[data-theme="neo-brutalism"] {
+  --ui-radius-control: 0.5rem;
+  --ui-radius-button: 0.5rem;
+  --ui-border-width: 2px;
+  --ui-border-strength: 100%;
+  --ui-ink-tone: 25%;
+  --ui-shadow-button: 4px 4px 0 0 var(--ui-shadow-color);
+  --ui-shadow-button-hover: 2px 2px 0 0 var(--ui-shadow-color);
+  --ui-shift-hover: 2px 2px;
+  --ui-shift-active: 4px 4px;
+  --ui-font: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --ui-btn-weight: 700;
+  --ui-ring-width: 3px;
+  --ui-duration: 100ms;
+}
+
+:root[data-theme="neo-brutalism"]:not([data-mode="dark"]) {
+  --ui-bg: #fff4e0;
+  --ui-fg: #000000;
+  --ui-surface: #ffffff;
+  --ui-muted: #ffe8c2;
+  --ui-muted-fg: #3d3d3d;
+  --ui-border: #000000;
+  --ui-field: #ffffff;
+  --ui-field-border: #000000;
+  --ui-ring: #7c3aed;
+  --ui-primary: #ffd23f;
+  --ui-primary-fg: #000000;
+  --ui-secondary: #4ecdc4;
+  --ui-secondary-fg: #000000;
+  --ui-accent: #ff6bcb;
+  --ui-accent-fg: #000000;
+  --ui-neutral: #000000;
+  --ui-neutral-fg: #ffffff;
+  --ui-success: #06d6a0;
+  --ui-success-fg: #000000;
+  --ui-warning: #ffb703;
+  --ui-warning-fg: #000000;
+  --ui-danger: #ff5c5c;
+  --ui-danger-fg: #000000;
+  --ui-info: #4cc9f0;
+  --ui-info-fg: #000000;
+  --ui-hover-mix: black 0%;
+  --ui-active-mix: black 0%;
+  --ui-shadow-color: #000000;
+}
+
+:root[data-theme="neo-brutalism"][data-mode="dark"] {
+  --ui-bg: #1a1a1a;
+  --ui-fg: #ffffff;
+  --ui-surface: #262626;
+  --ui-muted: #333333;
+  --ui-muted-fg: #d4d4d4;
+  --ui-border: #ffffff;
+  --ui-field: #1a1a1a;
+  --ui-field-border: #ffffff;
+  --ui-ring: #ffd23f;
+  --ui-primary: #ffd23f;
+  --ui-secondary: #4ecdc4;
+  --ui-accent: #ff6bcb;
+  --ui-neutral: #ffffff;
+  --ui-neutral-fg: #000000;
+  --ui-success: #06d6a0;
+  --ui-warning: #ffb703;
+  --ui-danger: #ff5c5c;
+  --ui-info: #4cc9f0;
+  --ui-primary-fg: #000000;
+  --ui-hover-mix: white 0%;
+  --ui-active-mix: white 0%;
+  --ui-shadow-color: #ffffff;
+}

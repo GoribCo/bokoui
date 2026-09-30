@@ -4,44 +4,45 @@ Based on: [SRS](../srs/srs-ui-framework.md)
 Legend: `[ ]` todo, `[x]` done. Requirement IDs refer to the SRS.
 
 ## Phase 0: Preparation
-- [ ] T0.1 Read the Next.js 16 docs in `node_modules/next/dist/docs/` for breaking changes (App Router, `"use client"`, layout/head handling)
-- [ ] T0.2 Resolve open questions in SRS section 9 (distribution model, Radix/Base UI, icon set)
-- [ ] T0.3 Enable TypeScript `strict` and confirm `tsc --noEmit` + `eslint` pass on the baseline
-- [ ] T0.4 Add dependencies: `class-variance-authority`, `clsx`, `tailwind-merge`, chosen icon library
+- [x] T0.1 Read the Next.js 16 docs in `node_modules/next/dist/docs/` for breaking changes (App Router, `"use client"`, layout/head handling)
+- [x] T0.2 Resolve open questions in SRS section 9 (distribution model, Radix/Base UI, icon set)
+  - Decided for now: source-owned copy-paste model; build from scratch (Radix/Base UI only when a component needs it, e.g. Modal/Select); icon set deferred to T4.11 (inline SVG until then); style and mode are independent axes
+- [x] T0.3 Enable TypeScript `strict` and confirm `tsc --noEmit` + `eslint` pass on the baseline
+- [x] T0.4 Add dependencies: `class-variance-authority`, `clsx`, `tailwind-merge` (icon library deferred to T4.11)
 
 ## Phase 1: Foundation (FR-2.3, FR-4.1, NFR-1, NFR-7)
-- [ ] T1.1 Create folder structure: `src/components/ui`, `src/components/theme`, `src/lib`, `src/styles/themes`
-- [ ] T1.2 Add `cn()` helper in `src/lib/cn.ts` (clsx + tailwind-merge)
-- [ ] T1.3 Define token schema (color, radius, border, shadow, spacing, font, motion) in `src/styles/tokens.css`
-- [ ] T1.4 Map tokens to Tailwind v4 `@theme` in `globals.css`
-- [ ] T1.5 Define shared variant types (`Color`, `Size`, `Action`, `Variant`) in `src/components/ui/types.ts`
-- [ ] T1.6 Set up path alias and import conventions (`@/components/ui/...`)
+- [x] T1.1 Create folder structure: `src/components/ui`, `src/components/theme`, `src/lib`, `src/styles/themes`
+- [x] T1.2 Add `cn()` helper in `src/lib/cn.ts` (clsx + tailwind-merge)
+- [x] T1.3 Define token schema (color, radius, border, shadow, spacing, font, motion) in `src/styles/tokens.css`
+- [x] T1.4 Map tokens to Tailwind v4 `@theme` in `globals.css`
+- [x] T1.5 Define shared variant types (`Color`, `Size`, `Action`, `Variant`) in `src/components/ui/types.ts`
+- [x] T1.6 Set up path alias and import conventions (`@/components/ui/...`)
 
 ## Phase 2: Theming engine (FR-4.x)
-- [ ] T2.1 Implement `data-theme` (style) and `data-mode` (light/dark) attributes on `<html>`
-- [ ] T2.2 Build `ThemeProvider` and `useTheme` hook (state, setStyle, setMode)
-- [ ] T2.3 Persist choice (localStorage/cookie) and detect system preference
-- [ ] T2.4 Add pre-hydration script/cookie read to prevent flash of wrong theme (FR-4.5)
-- [ ] T2.5 Build `ThemeSwitcher` UI (style picker + light/dark toggle)
-- [ ] T2.6 Support user-defined custom themes via token object (FR-4.7)
-- [ ] T2.7 Respect `prefers-reduced-motion` for theme transitions
+- [x] T2.1 Implement `data-theme` (style) and `data-mode` (light/dark) attributes on `<html>`
+- [x] T2.2 Build `ThemeProvider` and `useTheme` hook (state, setStyle, setMode)
+- [x] T2.3 Persist choice (localStorage/cookie) and detect system preference
+- [x] T2.4 Add pre-hydration script/cookie read to prevent flash of wrong theme (FR-4.5)
+- [x] T2.5 Build `ThemeSwitcher` UI (style picker + light/dark toggle)
+- [x] T2.6 Support user-defined custom themes via token object (FR-4.7)
+- [x] T2.7 Respect `prefers-reduced-motion` for theme transitions
 
 ## Phase 3: Core design styles (FR-3.1)
 Each style: token file in `src/styles/themes/`, registered in the theme registry, checked in light and dark.
-- [ ] T3.1 Flat
-- [ ] T3.2 Material (Google)
-- [ ] T3.3 Swiss / International Typographic
-- [ ] T3.4 Brutalism
-- [ ] T3.5 Neo-Brutalism
-- [ ] T3.6 Monochrome
-- [ ] T3.7 Dark / OLED-first
-- [ ] T3.8 Fluent (Microsoft)
-- [ ] T3.9 Contrast audit for every style/mode pair (NFR-2)
+- [x] T3.1 Flat
+- [x] T3.2 Material (Google)
+- [x] T3.3 Swiss / International Typographic
+- [x] T3.4 Brutalism
+- [x] T3.5 Neo-Brutalism
+- [x] T3.6 Monochrome
+- [x] T3.7 Dark / OLED-first
+- [x] T3.8 Fluent (Microsoft)
+- [x] T3.9 Contrast audit for every style/mode pair (NFR-2) (`node scripts/audit-contrast.mjs`)
 
 ## Phase 4: Primitive components (FR-1.x, FR-2.x)
 Each component: typed variants (color, variant, action, size), states (hover/focus/active/disabled/loading/error), forwardRef, `className` merge, a11y, `"use client"` only when needed.
-- [ ] T4.1 Button (reference implementation, establishes the pattern)
-- [ ] T4.2 Input
+- [x] T4.1 Button (reference implementation, establishes the pattern)
+- [x] T4.2 Input
 - [ ] T4.3 Textarea
 - [ ] T4.4 Label and form field wrapper (label, hint, error)
 - [ ] T4.5 Image (wrapper over `next/image`)
@@ -56,7 +57,7 @@ Each component: typed variants (color, variant, action, size), states (hover/foc
 - [ ] T4.14 Barrel exports and per-component index
 
 ## Phase 5: Playground and docs (FR-5.x)
-- [ ] T5.1 Root layout wired with ThemeProvider and ThemeSwitcher
+- [x] T5.1 Root layout wired with ThemeProvider and ThemeSwitcher
 - [ ] T5.2 `/playground` route listing every component with all variants
 - [ ] T5.3 Per-component page with prop table and code sample
 - [ ] T5.4 Replace default Create Next App landing page

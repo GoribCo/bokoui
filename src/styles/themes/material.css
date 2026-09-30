@@ -1,0 +1,55 @@
+/* Material (Google, M3-inspired): pill buttons, tonal palette, elevation shadows. */
+:root[data-theme="material"] {
+  --ui-radius-control: 0.25rem;
+  --ui-radius-button: 9999px;
+  --ui-shadow-button: 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+  --ui-shadow-button-hover: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+  --ui-font: Roboto, var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --ui-btn-weight: 500;
+  --ui-btn-tracking: 0.01em;
+  --ui-ease: cubic-bezier(0.2, 0, 0, 1);
+  --ui-duration: 200ms;
+}
+
+:root[data-theme="material"]:not([data-mode="dark"]) {
+  --ui-bg: #fffbfe;
+  --ui-fg: #1c1b1f;
+  --ui-surface: #f7f2fa;
+  --ui-muted: #e7e0ec;
+  --ui-muted-fg: #49454f;
+  --ui-border: #cac4d0;
+  --ui-field: #fffbfe;
+  --ui-field-border: #79747e;
+  --ui-ring: #6750a4;
+  --ui-primary: #6750a4;
+  --ui-secondary: #625b71;
+  --ui-accent: #7d5260;
+  --ui-neutral: #49454f;
+  --ui-neutral-fg: #ffffff;
+  --ui-success: #386a20;
+  --ui-danger: #b3261e;
+  --ui-info: #00639b;
+}
+
+:root[data-theme="material"][data-mode="dark"] {
+  --ui-bg: #141218;
+  --ui-fg: #e6e0e9;
+  --ui-surface: #1d1b20;
+  --ui-muted: #2b2930;
+  --ui-muted-fg: #cac4d0;
+  --ui-border: #49454f;
+  --ui-field: #141218;
+  --ui-field-border: #938f99;
+  --ui-ring: #d0bcff;
+  --ui-primary: #d0bcff;
+  --ui-primary-fg: #381e72;
+  --ui-secondary: #ccc2dc;
+  --ui-secondary-fg: #332d41;
+  --ui-accent: #efb8c8;
+  --ui-accent-fg: #492532;
+  --ui-neutral: #e6e0e9;
+  --ui-neutral-fg: #1c1b1f;
+  --ui-success: #a3d78a;
+  --ui-danger: #f2b8b5;
+  --ui-info: #99cbff;
+}
