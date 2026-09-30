@@ -1,0 +1,59 @@
+{
+  "name": "bokoui",
+  "version": "0.1.1",
+  "description": "Themeable React UI components for Tailwind CSS v4 with 8 design styles and light/dark modes",
+  "keywords": [
+    "react",
+    "tailwindcss",
+    "tailwind",
+    "ui",
+    "components",
+    "design-system",
+    "theming",
+    "dark-mode",
+    "nextjs"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    },
+    "./theme-script": {
+      "types": "./dist/theme-script.d.ts",
+      "import": "./dist/theme-script.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup && node scripts/postbuild.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.7.0"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

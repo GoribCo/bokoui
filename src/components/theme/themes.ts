@@ -21,8 +21,8 @@ export type ThemeMode = "light" | "dark" | "system";
 export type ResolvedMode = "light" | "dark";
 export const modes: readonly ThemeMode[] = ["light", "dark", "system"];
 
-export const STYLE_KEY = "ui-theme-style";
-export const MODE_KEY = "ui-theme-mode";
+export const STYLE_KEY = "bokoui-theme-style";
+export const MODE_KEY = "bokoui-theme-mode";
 
 type ToneName =
   | "primary"
@@ -34,7 +34,7 @@ type ToneName =
   | "danger"
   | "info";
 
-/** Token names (without the `--ui-` prefix) a custom theme may set. */
+/** Token names (without the `--bokoui-` prefix) a custom theme may set. */
 export type TokenName =
   | "bg"
   | "fg"

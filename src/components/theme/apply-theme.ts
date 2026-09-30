@@ -40,8 +40,8 @@ export function applyTheme(
   const tokens = custom ? { ...custom.tokens, ...custom[mode] } : {};
   const applied: string[] = [];
   for (const [name, value] of Object.entries(tokens)) {
-    root.style.setProperty(`--ui-${name}`, value);
-    applied.push(`--ui-${name}`);
+    root.style.setProperty(`--bokoui-${name}`, value);
+    applied.push(`--bokoui-${name}`);
   }
   root.dataset.customVars = applied.join(",");
 }

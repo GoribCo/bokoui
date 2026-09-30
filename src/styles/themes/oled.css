@@ -1,48 +1,48 @@
 /* Dark / OLED-first: true black canvas, thin low-contrast separators, vivid accents. */
 :root[data-theme="oled"] {
-  --ui-radius-control: 0.75rem;
-  --ui-radius-button: 0.75rem;
-  --ui-font: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --ui-btn-weight: 600;
+  --bokoui-radius-control: 0.75rem;
+  --bokoui-radius-button: 0.75rem;
+  --bokoui-font: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --bokoui-btn-weight: 600;
 }
 
 :root[data-theme="oled"]:not([data-mode="dark"]) {
-  --ui-bg: #ffffff;
-  --ui-fg: #0a0a0a;
-  --ui-surface: #f5f5f5;
-  --ui-muted: #ececec;
-  --ui-muted-fg: #525252;
-  --ui-border: #e0e0e0;
-  --ui-field: #ffffff;
-  --ui-field-border: #8a8a8a;
-  --ui-ring: #0a84ff;
-  --ui-primary: #0060df;
-  --ui-secondary: #3f3f46;
-  --ui-accent: #a21caf;
-  --ui-neutral: #0a0a0a;
-  --ui-neutral-fg: #ffffff;
+  --bokoui-bg: #ffffff;
+  --bokoui-fg: #0a0a0a;
+  --bokoui-surface: #f5f5f5;
+  --bokoui-muted: #ececec;
+  --bokoui-muted-fg: #525252;
+  --bokoui-border: #e0e0e0;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #8a8a8a;
+  --bokoui-ring: #0a84ff;
+  --bokoui-primary: #0060df;
+  --bokoui-secondary: #3f3f46;
+  --bokoui-accent: #a21caf;
+  --bokoui-neutral: #0a0a0a;
+  --bokoui-neutral-fg: #ffffff;
 }
 
 :root[data-theme="oled"][data-mode="dark"] {
-  --ui-bg: #000000;
-  --ui-fg: #f2f2f2;
-  --ui-surface: #0a0a0a;
-  --ui-muted: #161616;
-  --ui-muted-fg: #a0a0a0;
-  --ui-border: #232323;
-  --ui-field: #000000;
-  --ui-field-border: #6b6b6b;
-  --ui-ring: #4da3ff;
-  --ui-primary: #4da3ff;
-  --ui-secondary: #a1a1aa;
-  --ui-accent: #d58cff;
-  --ui-neutral: #f2f2f2;
-  --ui-neutral-fg: #000000;
-  --ui-success: #30d158;
-  --ui-warning: #ffd60a;
-  --ui-danger: #ff6961;
-  --ui-info: #64d2ff;
-  --ui-hover-mix: white 16%;
-  --ui-active-mix: white 26%;
-  --ui-shadow-color: rgb(0 0 0 / 1);
+  --bokoui-bg: #000000;
+  --bokoui-fg: #f2f2f2;
+  --bokoui-surface: #0a0a0a;
+  --bokoui-muted: #161616;
+  --bokoui-muted-fg: #a0a0a0;
+  --bokoui-border: #232323;
+  --bokoui-field: #000000;
+  --bokoui-field-border: #6b6b6b;
+  --bokoui-ring: #4da3ff;
+  --bokoui-primary: #4da3ff;
+  --bokoui-secondary: #a1a1aa;
+  --bokoui-accent: #d58cff;
+  --bokoui-neutral: #f2f2f2;
+  --bokoui-neutral-fg: #000000;
+  --bokoui-success: #30d158;
+  --bokoui-warning: #ffd60a;
+  --bokoui-danger: #ff6961;
+  --bokoui-info: #64d2ff;
+  --bokoui-hover-mix: white 16%;
+  --bokoui-active-mix: white 26%;
+  --bokoui-shadow-color: rgb(0 0 0 / 1);
 }

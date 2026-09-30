@@ -17,7 +17,7 @@ export function ThemeSwitcher({ className }: { className?: string }) {
         <select
           value={style}
           onChange={(event) => setStyle(event.target.value)}
-          className="focus-ring h-8 rounded-control border-[length:var(--ui-border-width)] border-field-border bg-field px-2 text-sm text-foreground"
+          className="focus-ring h-8 rounded-control border-[length:var(--bokoui-border-width)] border-field-border bg-field px-2 text-sm text-foreground"
         >
           {themes.map((theme) => (
             <option key={theme.id} value={theme.id}>

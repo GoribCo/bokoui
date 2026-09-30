@@ -8,14 +8,14 @@ export type InputVariant = "outline" | "filled" | "flushed";
 export const inputVariants = cva(
   [
     "flex w-full min-w-0 items-center text-foreground placeholder:text-muted-foreground",
-    "rounded-control border-[length:var(--ui-border-width)] font-ui",
-    "transition-[background-color,border-color,box-shadow] duration-(--ui-duration) ease-ui",
+    "rounded-control border-[length:var(--bokoui-border-width)] font-ui",
+    "transition-[background-color,border-color,box-shadow] duration-(--bokoui-duration) ease-ui",
     "focus-ring",
-    "disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity)",
+    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
     "read-only:bg-muted",
     "file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium",
     // Chrome top-aligns file inputs; line-height = inner height centers them.
-    "[&[type=file]]:leading-[calc(var(--h)-2*var(--ui-border-width))]",
+    "[&[type=file]]:leading-[calc(var(--h)-2*var(--bokoui-border-width))]",
   ],
   {
     variants: {
@@ -27,11 +27,11 @@ export const inputVariants = cva(
         ],
         filled: [
           "border-transparent bg-muted",
-          "enabled:hover:bg-[color-mix(in_srgb,var(--ui-muted),var(--ui-fg)_6%)] focus-visible:border-(--tone-ink) focus-visible:bg-field",
+          "enabled:hover:bg-[color-mix(in_srgb,var(--bokoui-muted),var(--bokoui-fg)_6%)] focus-visible:border-(--tone-ink) focus-visible:bg-field",
           "aria-invalid:border-(--tone)",
         ],
         flushed: [
-          "rounded-none border-0 border-b-[length:var(--ui-border-width)] border-field-border bg-transparent px-0!",
+          "rounded-none border-0 border-b-[length:var(--bokoui-border-width)] border-field-border bg-transparent px-0!",
           "focus-visible:border-(--tone-ink)",
           "aria-invalid:border-(--tone)",
         ],

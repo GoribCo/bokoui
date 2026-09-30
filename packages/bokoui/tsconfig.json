@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "incremental": false,
+    "plugins": [],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "../../src/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "../../src/components",
+    "../../src/lib"
+  ]
+}

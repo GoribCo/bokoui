@@ -10,20 +10,20 @@ import { resolveTone, type Action, type Color, type Size, type Variant } from ".
 export const buttonVariants = cva(
   [
     "relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap select-none",
-    "rounded-button border-[length:var(--ui-border-width)]",
-    "font-ui [font-weight:var(--ui-btn-weight)] [text-transform:var(--ui-btn-transform)] [letter-spacing:var(--ui-btn-tracking)]",
-    "transition-[background-color,border-color,color,box-shadow,translate] duration-(--ui-duration) ease-ui",
+    "rounded-button border-[length:var(--bokoui-border-width)]",
+    "font-ui [font-weight:var(--bokoui-btn-weight)] [text-transform:var(--bokoui-btn-transform)] [letter-spacing:var(--bokoui-btn-tracking)]",
+    "transition-[background-color,border-color,color,box-shadow,translate] duration-(--bokoui-duration) ease-ui",
     "focus-ring",
-    "disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity)",
-    "enabled:hover:[translate:var(--ui-shift-hover)] enabled:active:[translate:var(--ui-shift-active)]",
+    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+    "enabled:hover:[translate:var(--bokoui-shift-hover)] enabled:active:[translate:var(--bokoui-shift-active)]",
   ],
   {
     variants: {
       variant: {
         solid: [
           "border-(--tone-border) bg-(--tone) text-(--tone-fg) shadow-button",
-          "enabled:hover:bg-[color-mix(in_srgb,var(--tone),var(--ui-hover-mix))] enabled:hover:shadow-button-hover",
-          "enabled:active:bg-[color-mix(in_srgb,var(--tone),var(--ui-active-mix))]",
+          "enabled:hover:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-hover-mix))] enabled:hover:shadow-button-hover",
+          "enabled:active:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-active-mix))]",
         ],
         outline: [
           "border-(--tone-ink) bg-transparent text-(--tone-ink) shadow-button",

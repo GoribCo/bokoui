@@ -1,5 +1,5 @@
 /*
- * Token schema. All tokens are CSS variables prefixed `--ui-`.
+ * Token schema. All tokens are CSS variables prefixed `--bokoui-`.
  * Values live in themes/*.css (flat.css holds the defaults every theme inherits).
  * Tailwind utilities are mapped to these in globals.css (`@theme inline`).
  *
@@ -15,32 +15,32 @@
  */
 
 /* Tone resolution: components set data-tone="<color|action>" and paint with --tone*. */
-[data-tone="primary"] { --tone: var(--ui-primary); --tone-fg: var(--ui-primary-fg); }
-[data-tone="secondary"] { --tone: var(--ui-secondary); --tone-fg: var(--ui-secondary-fg); }
-[data-tone="accent"] { --tone: var(--ui-accent); --tone-fg: var(--ui-accent-fg); }
-[data-tone="neutral"] { --tone: var(--ui-neutral); --tone-fg: var(--ui-neutral-fg); }
-[data-tone="success"] { --tone: var(--ui-success); --tone-fg: var(--ui-success-fg); }
-[data-tone="warning"] { --tone: var(--ui-warning); --tone-fg: var(--ui-warning-fg); }
-[data-tone="danger"] { --tone: var(--ui-danger); --tone-fg: var(--ui-danger-fg); }
-[data-tone="info"] { --tone: var(--ui-info); --tone-fg: var(--ui-info-fg); }
+[data-tone="primary"] { --tone: var(--bokoui-primary); --tone-fg: var(--bokoui-primary-fg); }
+[data-tone="secondary"] { --tone: var(--bokoui-secondary); --tone-fg: var(--bokoui-secondary-fg); }
+[data-tone="accent"] { --tone: var(--bokoui-accent); --tone-fg: var(--bokoui-accent-fg); }
+[data-tone="neutral"] { --tone: var(--bokoui-neutral); --tone-fg: var(--bokoui-neutral-fg); }
+[data-tone="success"] { --tone: var(--bokoui-success); --tone-fg: var(--bokoui-success-fg); }
+[data-tone="warning"] { --tone: var(--bokoui-warning); --tone-fg: var(--bokoui-warning-fg); }
+[data-tone="danger"] { --tone: var(--bokoui-danger); --tone-fg: var(--bokoui-danger-fg); }
+[data-tone="info"] { --tone: var(--bokoui-info); --tone-fg: var(--bokoui-info-fg); }
 
 [data-tone] {
   --tone-soft: color-mix(in srgb, var(--tone) 16%, transparent);
   --tone-soft-hover: color-mix(in srgb, var(--tone) 26%, transparent);
   /* Readable tone-colored text on the page background (tone pulled toward fg by ink-tone). */
-  --tone-ink: color-mix(in srgb, var(--tone) var(--ui-ink-tone), var(--ui-fg));
+  --tone-ink: color-mix(in srgb, var(--tone) var(--bokoui-ink-tone), var(--bokoui-fg));
   /* Solid border: tone by default, fg when a theme sets border-strength to 100%. */
-  --tone-border: color-mix(in srgb, var(--tone), var(--ui-fg) var(--ui-border-strength));
+  --tone-border: color-mix(in srgb, var(--tone), var(--bokoui-fg) var(--bokoui-border-strength));
 }
 
 /* Focus ring shared by all interactive components. */
 @utility focus-ring {
   &:focus-visible {
-    outline: var(--ui-ring-width) solid var(--ui-ring);
-    outline-offset: var(--ui-ring-offset);
+    outline: var(--bokoui-ring-width) solid var(--bokoui-ring);
+    outline-offset: var(--bokoui-ring-offset);
   }
   &[aria-invalid="true"]:focus-visible {
-    outline-color: var(--tone-ink, var(--ui-ring));
+    outline-color: var(--tone-ink, var(--bokoui-ring));
   }
 }
 
@@ -61,6 +61,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --ui-duration: 0.01ms !important;
+    --bokoui-duration: 0.01ms !important;
   }
 }

@@ -5,7 +5,7 @@ const parse = (css, sel) => { css = css.replace(/\/\*[\s\S]*?\*\//g, ""); // col
   const out = {};
   for (const m of css.matchAll(/([^{}]+)\{([^}]*)\}/g)) {
     const s = m[1].trim(); if (!sel(s)) continue;
-    for (const d of m[2].matchAll(/--ui-([\w-]+):\s*([^;]+);/g)) out[d[1]] = d[2].trim();
+    for (const d of m[2].matchAll(/--bokoui-([\w-]+):\s*([^;]+);/g)) out[d[1]] = d[2].trim();
   }
   return out;
 };

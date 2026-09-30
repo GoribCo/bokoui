@@ -27,7 +27,7 @@ var r=m==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"l
 if(r!=="dark")r="light";
 var c=C[s];
 d.dataset.theme=c?(c.base||${json(defaultTheme)}):s;d.dataset.mode=r;d.style.colorScheme=r;
-if(c){var t=Object.assign({},c.tokens,c[r]),k=[];for(var n in t){d.style.setProperty("--ui-"+n,t[n]);k.push("--ui-"+n)}d.dataset.customVars=k.join(",")}
+if(c){var t=Object.assign({},c.tokens,c[r]),k=[];for(var n in t){d.style.setProperty("--bokoui-"+n,t[n]);k.push("--bokoui-"+n)}d.dataset.customVars=k.join(",")}
 }catch(e){}})()`;
 
   return <script dangerouslySetInnerHTML={{ __html: script }} />;
