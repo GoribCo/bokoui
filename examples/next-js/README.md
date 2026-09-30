@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# bokoui Next.js example
 
-## Getting Started
+Demo app for [bokoui](../../packages/bokoui), built with Next.js (App Router) and Tailwind CSS v4. It shows the theme switcher, every Button variant and Input state, and a custom theme.
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`bokoui` is installed from the registry in `.npmrc` (local Verdaccio, `http://127.0.0.1:4873/`), so start Verdaccio and publish the library first if the version in `package.json` isn't available (see [Working on the library](#working-on-the-library)).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | Does |
+|---|---|
+| `npm run dev` / `build` / `start` | Next.js dev server, production build, production server |
+| `npm run lint` / `typecheck` | ESLint, `tsc --noEmit` |
+| `npm run build:pkg` | Build the library in `../../packages/bokoui` |
+| `npm run publish:local` | Build and publish the library to local Verdaccio |
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/layout.tsx`: `ThemeScript` in `<head>`, `ThemeProvider` and `ThemeSwitcher` around the app.
+- `src/app/page.tsx`: component showcase.
+- `src/app/globals.css`: imports Tailwind and `bokoui/styles.css`.
+- `src/styles/custom-themes.ts`: example app-defined theme.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Working on the library
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Edit `packages/bokoui/src`.
+2. Bump the version (`npm version patch` in `packages/bokoui`) and run `npm run publish:local` here.
+3. Set the new `bokoui` version in this `package.json` and run `npm install`.

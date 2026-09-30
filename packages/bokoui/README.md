@@ -72,3 +72,20 @@ Custom themes: pass `customThemes` to both `<ThemeScript>` and `<ThemeProvider>`
 | `bokoui/theme` | `ThemeProvider`, `useTheme`, `ThemeSwitcher`, theme registry | client |
 | `bokoui/theme-script` | `ThemeScript` | server |
 | `bokoui/styles.css` | tokens, themes, Tailwind mapping | build time |
+
+## Development
+
+Run from this directory after `npm install`:
+
+| Script | Does |
+|---|---|
+| `npm run build` | Build with tsup into `dist/`, then inline CSS and mark `theme.js` as a client module |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run audit` | Contrast audit for every style/mode pair (run after changing theme tokens) |
+| `npm run publish:local` | Build and publish to local Verdaccio (`.npmrc`); bump the version first with `npm version patch` |
+
+Source layout: `src/components/ui` (primitives), `src/components/theme` (provider, switcher, registry), `src/styles` (`tokens.css` and one file per style in `themes/`), `src/lib/cn.ts`. A new style is a new file in `src/styles/themes/`, imported from `themes/index.css` and registered in `themes.ts`.
+
+## License
+
+MIT
