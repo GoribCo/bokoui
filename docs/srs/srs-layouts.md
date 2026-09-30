@@ -27,6 +27,8 @@ A Next.js project at `examples/next-js-layouts/` that implements the shell: left
 - UI components from `bokoui/react`; Tailwind CSS v4 through bokoui tokens.
 - Note: this Next.js version has breaking changes; consult `node_modules/next/dist/docs/` before writing Next-specific code.
 - State management per section 3.9.
+- Internationalization with next-intl (free, open source, App Router and Server Components support, type-safe messages).
+- The project consumes `bokoui` from the local Verdaccio registry, like the other examples (registry in `.npmrc`).
 
 ## 2. Overall Description
 
@@ -78,6 +80,10 @@ Priority: **M** = Must, **S** = Should, **C** = Could.
 | FR-3.3 | The switcher handles many organizations (scrollable list, search) and a single organization (switching disabled or hidden) | S |
 | FR-3.4 | The last active organization is remembered and restored | S |
 | FR-3.5 | Organization context is available to pages and components through one typed hook/provider | M |
+| FR-3.6 | In the signed-in area the active organization is held in state only; it does not appear in the URL | M |
+| FR-3.7 | Each organization has a public profile page at its own public URL whose first segment is the organization type: `/hospital/[slug]`, `/pharmacy/[slug]`, `/company/[slug]`. Pages are viewable without login, live in a separate route group with their own layout and SEO metadata | M |
+| FR-3.8 | Organization types are a typed registry (type key, URL segment, label, icon); adding a type adds one registry entry and one route segment, and the shell does not change. Each type may have its own profile sections | M |
+| FR-3.9 | An unknown slug returns a 404 page; slugs are unique within a type | M |
 
 ### 3.4 Menus and extensibility
 | ID | Requirement | Pri |
@@ -102,10 +108,10 @@ Priority: **M** = Must, **S** = Should, **C** = Could.
 |---|---|---|
 | FR-6.1 | Below the mobile breakpoint the sidebar is replaced by a bottom navigation bar | M |
 | FR-6.2 | Bottom navigation shows the top-level items; items with children open their sub menu in a sheet/popover above the bar | M |
+| FR-6.7 | The number of visible bottom-nav slots is a configurable value; items beyond it go into a "More" entry that opens them in a sheet | M |
 | FR-6.3 | On mobile, a hamburger button at the left of the header opens a drawer with the full navigation, organization switcher, common menu and account area | M |
 | FR-6.4 | The layout adapts continuously between mobile, tablet and desktop with no horizontal page scroll | M |
 | FR-6.5 | Bottom navigation respects device safe areas and does not cover content (content area reserves space) | M |
-| FR-6.6 | Bottom navigation with many top-level items remains usable (limited visible slots plus a "More" entry) | S |
 
 ### 3.7 Header
 | ID | Requirement | Pri |
@@ -152,6 +158,7 @@ Each kind of state uses its designated tool. The project adopts the following ta
 | FR-10.2 | A user can belong to multiple organizations, with different roles in each | M |
 | FR-10.3 | The session model exposes user, organizations, roles per organization and active organization as typed data | M |
 | FR-10.4 | Menu visibility is role-aware on the client; route protection is enforced on the server (proxy/layout checks), not only by hiding menu items | M |
+| FR-10.6 | Route protection follows the standard Next.js approach: the proxy does optimistic checks (redirect unauthenticated users to sign-in using the session cookie), and the layout/page and data layer do the authoritative session and role checks close to the data; public organization profile routes are excluded | M |
 | FR-10.5 | The access-check helper (e.g. `hasRole`, `can`) is a single replaceable module | S |
 
 ### 3.11 SEO
@@ -175,6 +182,10 @@ Each kind of state uses its designated tool. The project adopts the following ta
 | ID | Requirement | Pri |
 |---|---|---|
 | FR-13.1 | The language switcher changes the active locale and persists the choice | M |
+| FR-13.4 | i18n uses next-intl; supported locales and the default locale are a single config list, so adding a language means adding a message file and one config entry | M |
+| FR-13.5 | Locale is stored in a cookie, not the URL, so signed-in URLs stay locale-free; public organization profile pages use the same cookie | M |
+| FR-13.6 | Initial locales are English (`en`, default) and Bangla (`bn`); the list is configurable | M |
+| FR-13.7 | The Bangla locale loads a Bangla-capable font (e.g. Noto Sans Bengali via `next/font`) registered in the font registry, and dates, numbers and plurals use locale formatting | M |
 | FR-13.2 | All shell text comes from message catalogs, not inline strings | S |
 | FR-13.3 | Layout supports right-to-left languages | C |
 
@@ -243,11 +254,21 @@ Data flow: Server Component layout fetches session and menus through `services/`
 - Real page content, business features and data.
 - Frameworks other than Next.js (Vue, Expo).
 - Jotai and Redux Toolkit adoption.
+- Organization in the URL for signed-in pages (only public org profiles have URLs).
 - Font selector UI (optional, may follow).
 
-## 8. Open Questions
-1. Which i18n library (e.g. next-intl) and which initial languages?
-2. Should the layout route-protect with the Next.js proxy, per-layout checks, or both?
-3. Should organization be part of the URL (`/[org]/...`) or only in state? URL-based is more shareable; state-based is simpler.
-4. Bottom navigation: how many visible slots before "More"?
-5. Should the examples project consume bokoui from local Verdaccio like the other examples?
+## 8. Decisions and Open Questions
+
+### 8.1 Decided
+| Topic | Decision |
+|---|---|
+| i18n library | next-intl (best free fit for Next.js App Router); cookie-based locale, no URL prefix |
+| Languages | English (default) and Bangla |
+| Organization in URL | No, in signed-in area (state only). Public org profile pages have their own URL |
+| Public profile URLs | `/hospital/[slug]`, `/pharmacy/[slug]`, `/company/[slug]`; types come from a registry |
+| Route protection | Standard Next.js: proxy for optimistic redirects, layouts and data layer for authoritative checks |
+| Bottom-nav slots | Configurable value; the rest go to "More" |
+| Package source | Local Verdaccio, like the other examples |
+
+### 8.2 Open
+1. Should the public profile pages be statically generated or rendered on demand? (Assumed: on demand with caching, since organizations come from an API.)
