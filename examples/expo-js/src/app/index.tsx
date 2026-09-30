@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { PlatformSwitcher } from '@/components/platform-switcher';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -28,6 +29,7 @@ export default function Home() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: tokens.bg }}>
       <ScrollView contentContainerStyle={{ padding: 24, gap: 40, maxWidth: 896, width: '100%', alignSelf: 'center' }}>
+        <PlatformSwitcher />
         <ThemeSwitcher />
         <Heading as="h1">Button, Input &amp; Typography</Heading>
 

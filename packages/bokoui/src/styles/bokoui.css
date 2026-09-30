@@ -48,6 +48,32 @@
   --ease-ui: var(--bokoui-ease);
 }
 
+/* Keyframes used by Progress (indeterminate) and Toast. Utilities: animate-bokoui-indeterminate, animate-bokoui-toast-in. */
+@theme {
+  --animate-bokoui-indeterminate: bokoui-indeterminate 1.4s ease-in-out infinite;
+  --animate-bokoui-toast-in: bokoui-toast-in var(--bokoui-duration, 150ms) ease-out;
+
+  @keyframes bokoui-indeterminate {
+    0% {
+      translate: -100% 0;
+    }
+    100% {
+      translate: 300% 0;
+    }
+  }
+
+  @keyframes bokoui-toast-in {
+    from {
+      opacity: 0;
+      translate: 0 0.5rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+
 @layer base {
   *,
   ::before,

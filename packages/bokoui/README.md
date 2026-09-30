@@ -2,18 +2,19 @@
 
 Themeable UI components for Tailwind CSS v4 with eight design styles (Flat, Material, Swiss, Brutalism, Neo-Brutalism, Monochrome, Dark/OLED, Fluent), each in light and dark, switchable at runtime. One package, one entry point per platform.
 
-Components: `Button`, `Input`, `Heading`, `Text`, `Link` (more coming).
+**about 50 components** for React, growing across Vue and Expo: forms (Input, Textarea, Select, Combobox, DatePicker, Checkbox, Radio, Switch, Slider, Rating, FileUpload), display (Badge, Avatar, Tag, Card, Table, Stepper, EmptyState), feedback (Alert, Toast, Progress, Skeleton, Spinner), overlays (Modal, Drawer, Popover, Tooltip, Menu, CommandPalette), navigation (Navbar, Sidebar, Tabs, Breadcrumb, Pagination, Accordion) and layout primitives (Stack, Inline, Grid, Container). See [Components](#components) for the list and per-platform status.
 
 ## Which entry point
 
 | Platform | Import | Notes |
 |---|---|---|
-| React / Next.js | `bokoui/react` | components; `bokoui/react/theme` (client provider, switcher) and `bokoui/react/theme-script` (server) |
+| React / Next.js | `bokoui/react` | server-safe components (no state); `bokoui/react/client` stateful components (Tabs, Modal, Select, ...); `bokoui/react/theme` (client provider, switcher) and `bokoui/react/theme-script` (server) |
 | Vue / Nuxt | `bokoui/vue` | same components as Vue 3 components, plus `ThemeProvider`, `ThemeSwitcher`, `useTheme`, `buildThemeScript` |
 | React Native / Expo | `bokoui/expo` | native components + `ThemeProvider`; no CSS or Tailwind needed |
 | Any (framework-neutral) | `bokoui/core` | class recipes (`buttonClass`, ...), theme engine, types |
 | Web build | `bokoui/styles.css` | tokens, themes, Tailwind mapping (React and Vue) |
 | Any | `bokoui/tokens.json` | every style x mode as plain token values |
+| Docs tooling | `bokoui/props.json` | every React component's own props (name, type, default, description), generated from the types |
 
 React, Vue and React Native are optional peer dependencies: install only the one you use. Web (React, Vue) also needs Tailwind CSS 4.1+.
 
@@ -148,6 +149,60 @@ export default function App() {
 
 Native limits: components are theme-aware but not pixel-identical to the web (no CSS `color-mix`, box shadows or hover states; pressed state is used instead). Fonts are not applied; pass `style={{ fontFamily }}` or load fonts with `expo-font`. Responsive props are web-only. Verified by bundling for web and iOS and by running the web build in a browser (see `examples/expo-js`); not yet run on a device or simulator.
 
+## Components
+
+React is the reference platform; Vue and Expo follow. The full, current matrix (with tests and browser-verification status, and what is left to do) is in [docs/component-status.md](../../docs/component-status.md).
+
+| Group | Components | Import from |
+|---|---|---|
+| Basics | Button, Input, Heading, Text, Link, Icon | `bokoui/react` |
+| Forms | FormField, Label, Textarea, Checkbox, Radio, RadioGroup, Switch, Slider | `bokoui/react` |
+| | Select, Combobox, DatePicker, Calendar, Rating, FileUpload | `bokoui/react/client` |
+| Data display | Badge, Avatar, Tag, Card, Divider, Image, Table, Stepper, EmptyState, Skeleton, Progress | `bokoui/react` |
+| Feedback | Alert, Spinner | `bokoui/react` |
+| | ToastProvider + `useToast` | `bokoui/react/client` |
+| Overlays | Modal, Drawer, Tooltip, Popover, Menu, CommandPalette | `bokoui/react/client` |
+| Navigation | Breadcrumb, Pagination, Sidebar | `bokoui/react` |
+| | Navbar, Tabs, Accordion | `bokoui/react/client` |
+| Layout | Stack, Inline, Grid, Container | `bokoui/react` |
+
+### Server and client components
+
+`bokoui/react` has no state or effects, so it works in Next.js Server Components. Anything that needs state, effects or browser APIs lives in `bokoui/react/client`, which is marked `"use client"`. Components in `bokoui/react` that take event handlers (`Tag onRemove`, `Pagination onPageChange`, `Button onClick`) must be rendered from a Client Component when you pass a function.
+
+### Forms
+
+`FormField` gives any control an id, a linked label, a hint, and an error that is announced and marks the control invalid:
+
+```tsx
+import { FormField, Input } from "bokoui/react";
+import { Select } from "bokoui/react/client";
+
+<FormField label="Email" hint="We never share it" error={errors.email} required>
+  <Input type="email" />
+</FormField>
+<FormField label="Country"><Select options={countries} /></FormField>
+```
+
+In Vue the field uses a scoped slot: `<FormField label="Email" v-slot="{ controlProps }"><Input v-bind="controlProps" /></FormField>`.
+
+### Overlays
+
+`Modal` and `Drawer` use the native `<dialog>` (focus trap, Escape, inert background from the browser). `Tooltip`, `Popover`, `Menu` and `Select` use the Popover API in the top layer and position themselves with a small flip-and-clamp routine. No headless-UI dependency is used.
+
+### Accessibility
+
+Targets WCAG 2.1 AA. Every style/mode pair is contrast-checked (`npm run audit`, including tinted "soft" backgrounds). Components are keyboard-operable with visible focus, use native elements where they exist, respect `prefers-reduced-motion`, and keep touch targets at 44px on coarse pointers. The test suite runs axe-core over every React component, including open overlays, and a browser sweep covers real color contrast across all styles and modes.
+
+### API tables
+
+`bokoui/props.json` lists each React component's own props. The demo site renders its API tables from it:
+
+```ts
+import props from "bokoui/props.json";
+props.Modal.props; // [{ name, type, required, description, default }, ...]
+```
+
 ## Responsive
 
 Mobile-first, using Tailwind's breakpoints (`sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem).
@@ -230,15 +285,16 @@ Run from this directory after `npm install`:
 
 | Script | Does |
 |---|---|
-| `npm run build` | Generate tokens, build every entry with tsup into `dist/`, inline the CSS, mark `react/theme.js` as a client module, write `dist/tokens.json` |
+| `npm run build` | Generate tokens, build every entry with tsup into `dist/`, inline the CSS, mark the client entries (`react/theme.js`, `react/client.js`), write `dist/tokens.json` and `dist/props.json` |
+| `npm test` | Vitest: unit tests, axe accessibility tests, Vue server-rendering tests (`npm run test:watch` while developing) |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run audit` | Contrast audit for every style/mode pair (run after changing theme tokens) |
+| `npm run audit` | Contrast audit for every style/mode pair, including tinted backgrounds (run after changing theme tokens) |
 | `npm run tokens` | Regenerate `src/expo/tokens.generated.ts` from the theme CSS |
 | `npm run publish:local` | Build and publish to local Verdaccio (`.npmrc`); bump the version first with `npm version patch` |
 
 Source layout: `src/core` (framework-neutral: class recipes, theme engine, types), `src/react`, `src/vue`, `src/expo` (thin bindings), `src/styles` (`tokens.css` and one file per style in `themes/`). `src/expo/tokens.generated.ts` is generated from the theme CSS by `npm run tokens` (also run by `build`).
 
-A new style is a new file in `src/styles/themes/`, imported from `themes/index.css` and registered in `src/core/themes.ts`. A new component is a class recipe in `src/core/recipes/` plus one thin binding per platform.
+A new style is a new file in `src/styles/themes/`, imported from `themes/index.css` and registered in `src/core/themes.ts`. A new component is a class recipe in `src/core/recipes/` plus one thin binding per platform; the rules and checklist are in [docs/component-conventions.md](../../docs/component-conventions.md).
 
 ## License
 

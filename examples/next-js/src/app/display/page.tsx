@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Avatar, Badge, Button, Card, CardFooter, CardHeader, Divider, Heading, Image, Text, actions, colors, sizes } from "bokoui/react";
+import { Avatar, Badge, Button, Card, CardFooter, CardHeader, Divider, EmptyState, Heading, Image, Stepper, Tag, Text, actions, colors, sizes } from "bokoui/react";
+import { Inbox, SearchX } from "lucide-react";
 import { Page, PageHeader, Section } from "@/components/section";
+import { PropTables } from "@/components/prop-table";
 
 export const metadata: Metadata = { title: "Data display · UI Framework" };
 
@@ -137,6 +139,85 @@ export default function DisplayPage() {
             </div>
           ))}
         </div>
+      </Section>
+
+      <Section title="Tag" note="Chips for user-managed values. Badge is for static status. Removable and filter tags take handlers, so use them from client components (see Forms).">
+        <div className="flex flex-col gap-3">
+          {(["soft", "outline", "solid"] as const).map((variant) => (
+            <div key={variant} className="flex flex-wrap items-center gap-2">
+              <span className="w-16 text-sm text-muted-foreground">{variant}</span>
+              {colors.map((color) => (
+                <Tag key={color} variant={variant} color={color}>
+                  {color}
+                </Tag>
+              ))}
+              <Tag variant={variant} action="danger">
+                danger
+              </Tag>
+            </div>
+          ))}
+          <div className="flex flex-wrap items-center gap-2">
+            {sizes.map((size) => (
+              <Tag key={size} size={size}>
+                Size {size}
+              </Tag>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Stepper" note="Presentational: you own the current step. Completed steps are announced to screen readers.">
+        <div className="flex flex-col gap-10">
+          <Stepper
+            aria-label="Checkout"
+            current={1}
+            steps={[
+              { label: "Account", description: "Your details" },
+              { label: "Plan", description: "Choose a tier" },
+              { label: "Payment", description: "Card or invoice" },
+              { label: "Done" },
+            ]}
+          />
+          <div className="grid gap-8 sm:grid-cols-2">
+            <Stepper
+              aria-label="Vertical steps"
+              orientation="vertical"
+              current={2}
+              action="success"
+              steps={[{ label: "Ordered", description: "Sep 30" }, { label: "Packed", description: "Oct 1" }, { label: "Shipped", description: "In transit" }, { label: "Delivered" }]}
+            />
+            <Stepper aria-label="Finished" current={3} color="accent" steps={[{ label: "One" }, { label: "Two" }, { label: "Three" }]} />
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Empty state">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Card padding="none">
+            <EmptyState
+              icon={<Inbox aria-hidden="true" />}
+              title="No messages yet"
+              description="When someone writes to you, it shows up here."
+              actions={<Button size="sm">Compose message</Button>}
+            />
+          </Card>
+          <Card padding="none">
+            <EmptyState
+              icon={<SearchX aria-hidden="true" />}
+              title="No results for “xyzzy”"
+              description="Check the spelling or try a broader search."
+              actions={
+                <Button size="sm" variant="outline">
+                  Clear filters
+                </Button>
+              }
+            />
+          </Card>
+        </div>
+      </Section>
+
+      <Section title="API" note="Generated from the package's TypeScript types. Every component also accepts standard HTML attributes and className.">
+        <PropTables names={["Badge", "Avatar", "Card", "CardHeader", "Divider", "Image", "Tag", "Stepper", "EmptyState"]} />
       </Section>
     </Page>
   );

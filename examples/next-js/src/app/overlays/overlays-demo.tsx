@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Copy, Pencil, Trash2 } from "lucide-react";
-import { Button, Input, FormField, Text } from "bokoui/react";
-import { Menu, MenuItem, MenuLabel, MenuSeparator, Modal, Tooltip } from "bokoui/react/client";
+import { Button, Checkbox, Input, FormField, Text } from "bokoui/react";
+import { Drawer, Menu, MenuItem, MenuLabel, MenuSeparator, Modal, Popover, Tooltip } from "bokoui/react/client";
 
 export function ModalDemo() {
   const [open, setOpen] = useState(false);
@@ -125,6 +125,68 @@ export function MenuDemo() {
       <Text variant="small" muted>
         Last selected: {last}
       </Text>
+    </div>
+  );
+}
+
+export function PopoverDemo() {
+  const [n, setN] = useState(0);
+  return (
+    <div className="flex flex-wrap items-center gap-4 py-2">
+      <Popover trigger={<Button variant="outline">Share</Button>} aria-label="Share this page" placement="bottom-start">
+        <div className="flex flex-col gap-3">
+          <Text className="font-medium">Share this page</Text>
+          <Input aria-label="Link" readOnly defaultValue="https://example.com/p/42" />
+          <Button size="sm" onClick={() => setN((v) => v + 1)}>
+            Copy link {n > 0 && `(${n})`}
+          </Button>
+        </div>
+      </Popover>
+      <Popover trigger={<Button variant="soft">Filters</Button>} aria-label="Filters" placement="bottom">
+        <div className="flex flex-col gap-2">
+          <Checkbox label="In stock" defaultChecked />
+          <Checkbox label="On sale" />
+          <Checkbox label="Free shipping" />
+        </div>
+      </Popover>
+      <Popover trigger={<Button variant="ghost">What is this?</Button>} aria-label="Explanation" placement="right">
+        <Text variant="small">A popover holds anything, unlike a menu. It is not modal: Tab out or press Escape to close it.</Text>
+      </Popover>
+    </div>
+  );
+}
+
+export function DrawerDemo() {
+  const [side, setSide] = useState<"right" | "left" | "bottom" | null>(null);
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      {(["right", "left", "bottom"] as const).map((s) => (
+        <Button key={s} variant="outline" onClick={() => setSide(s)}>
+          {s === "bottom" ? "Bottom sheet" : `${s[0].toUpperCase()}${s.slice(1)} drawer`}
+        </Button>
+      ))}
+      <Drawer
+        open={side !== null}
+        onOpenChange={(o) => !o && setSide(null)}
+        side={side ?? "right"}
+        size="sm"
+        title="Filters"
+        description="A modal anchored to an edge: same focus trap, Escape and backdrop behavior."
+        footer={
+          <>
+            <Button variant="ghost" color="neutral" onClick={() => setSide(null)}>
+              Reset
+            </Button>
+            <Button onClick={() => setSide(null)}>Apply</Button>
+          </>
+        }
+      >
+        <div className="flex flex-col gap-3">
+          <Checkbox label="In stock" defaultChecked />
+          <Checkbox label="On sale" />
+          <Checkbox label="Free shipping" />
+        </div>
+      </Drawer>
     </div>
   );
 }

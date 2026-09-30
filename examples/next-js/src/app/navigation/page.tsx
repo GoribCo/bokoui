@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Page, PageHeader, Section } from "@/components/section";
+import { PropTables } from "@/components/prop-table";
 import { BreadcrumbDemo, NavbarDemo, PaginationDemo, SidebarDemo } from "./navigation-demo";
 
 export const metadata: Metadata = { title: "Navigation · UI Framework" };
@@ -22,6 +23,10 @@ export default function NavigationPage() {
       </Section>
       <Section title="Sidebar" note="Collapsed state is controlled by you and drawn in CSS, so the parts render on the server.">
         <SidebarDemo />
+      </Section>
+
+      <Section title="API" note="Generated from the package's TypeScript types. Every component also accepts standard HTML attributes and className.">
+        <PropTables names={["Navbar", "NavbarLink", "Breadcrumb", "BreadcrumbItem", "Pagination", "Sidebar", "SidebarItem"]} />
       </Section>
     </Page>
   );

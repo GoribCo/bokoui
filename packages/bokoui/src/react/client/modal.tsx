@@ -46,6 +46,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(function Modal(
     description,
     footer,
     size,
+    placement,
     closeOnBackdrop = true,
     showClose = true,
     closeLabel = "Close",
@@ -92,7 +93,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(function Modal(
       ref={dialogRef}
       aria-labelledby={title ? titleId : undefined}
       aria-describedby={description ? descriptionId : undefined}
-      className={modalClass({ size }, className)}
+      className={modalClass({ size, placement }, className)}
       onClick={handleClick}
       onCancel={(event) => {
         onCancel?.(event);
@@ -130,4 +131,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(function Modal(
       {footer && <div className={modalFooterClass}>{footer}</div>}
     </dialog>
   );
+});
+
+export type DrawerProps = Omit<ModalProps, "placement"> & {
+  /** Edge the drawer slides from. Default `right`. */
+  side?: Exclude<ModalProps["placement"], "center">;
+};
+
+/** A `Modal` anchored to an edge (a side sheet, or a bottom sheet on phones). Same behavior and props. */
+export const Drawer = forwardRef<HTMLDialogElement, DrawerProps>(function Drawer({ side = "right", ...props }, ref) {
+  return <Modal ref={ref} placement={side} {...props} />;
 });

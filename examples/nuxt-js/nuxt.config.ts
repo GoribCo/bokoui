@@ -8,6 +8,14 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  // Where each platform's demo runs (fixed ports, see run.sh). Overridable with NUXT_PUBLIC_URL_REACT etc.
+  runtimeConfig: {
+    public: {
+      urlReact: 'http://localhost:3001',
+      urlVue: 'http://localhost:3002',
+      urlExpo: 'http://localhost:3000',
+    },
+  },
   app: {
     head: {
       title: 'UI Framework (Nuxt)',

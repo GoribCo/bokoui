@@ -3,19 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, Layers, LayoutGrid, MessageSquare, MousePointerClick, PanelLeftClose, PanelLeftOpen, Table2, TextCursorInput, Compass, Home } from "lucide-react";
+import { Bell, ChevronsDownUp, Layers, LayoutGrid, MessageSquare, MousePointerClick, PanelLeftClose, PanelLeftOpen, Table2, TextCursorInput, Compass, Home, LayoutTemplate, Sparkles } from "lucide-react";
 import { Button, Sidebar, SidebarItem, SidebarSection } from "bokoui/react";
 import { Navbar, NavbarBrand, NavbarLink, Tooltip } from "bokoui/react/client";
 import { navItems } from "./nav-items";
 
 const icons: Record<string, React.ReactNode> = {
   "/": <Home aria-hidden="true" />,
+  "/playground": <Sparkles aria-hidden="true" />,
   "/forms": <TextCursorInput aria-hidden="true" />,
   "/display": <LayoutGrid aria-hidden="true" />,
   "/table": <Table2 aria-hidden="true" />,
   "/feedback": <Bell aria-hidden="true" />,
   "/overlays": <MessageSquare aria-hidden="true" />,
   "/tabs": <Layers aria-hidden="true" />,
+  "/accordion": <ChevronsDownUp aria-hidden="true" />,
+  "/patterns": <LayoutTemplate aria-hidden="true" />,
   "/navigation": <Compass aria-hidden="true" />,
 };
 

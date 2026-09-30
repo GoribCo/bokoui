@@ -18,6 +18,8 @@ export interface NativeTokens {
   borderWidth: number;
   /** 0..1: how much of the tone stays in `toneInk` (rest mixes toward fg). */
   inkTone: number;
+  /** Warning is a light hue: in light mode its ink uses 45% tone to stay readable (see styles/tokens.css). */
+  inkToneWarning: number;
   /** 0..1: how far a solid border mixes from the tone toward fg. */
   borderStrength: number;
   disabledOpacity: number;
@@ -89,6 +91,7 @@ export function resolveTokens(
     radiusCard: num(raw["radius-card"]),
     borderWidth: num(raw["border-width"], 1),
     inkTone: pct(raw["ink-tone"], 0.6),
+    inkToneWarning: mode === "light" ? 0.45 : pct(raw["ink-tone"], 0.6),
     borderStrength: pct(raw["border-strength"], 0),
     disabledOpacity: num(raw["disabled-opacity"], 0.5),
     headingWeight: weight(raw["heading-weight"], "600"),

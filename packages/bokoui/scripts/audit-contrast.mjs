@@ -26,7 +26,17 @@ for (const f of files) {
     chk("field-border/bg (3:1)",T["field-border"],T.bg,3); chk("ring/bg (3:1)",T.ring,T.bg,3);
     for (const t of ["primary","secondary","accent","neutral","success","warning","danger","info"]) {
       chk(`${t}-fg/${t}`,T[t+"-fg"],T[t],4.5);
-      const ink = mix(T[t],T.fg,(parseInt(T["ink-tone"])||60)/100); chk(`${t} ink/bg`,ink,T.bg,4.5);
+      // Mirrors tokens.css: warning ink uses 45% tone in light mode.
+      const inkPct = t === "warning" && mode === "light" ? 45 : (parseInt(T["ink-tone"]) || 60);
+      const ink = mix(T[t],T.fg,inkPct/100); chk(`${t} ink/bg`,ink,T.bg,4.5);
+      // Soft variants tint the surface behind the text: --tone-soft is 16% tone (26% on hover).
+      // Components put tone ink on the page bg and on card surfaces, so check both.
+      for (const [name, bg] of [["bg", T.bg], ["surface", T.surface]]) {
+        chk(`${t} ink/soft on ${name}`, ink, mix(T[t], bg, 0.16), 4.5);
+        chk(`${t} ink/soft-hover on ${name}`, ink, mix(T[t], bg, 0.26), 4.5);
+      }
+      chk(`${t} ink/surface`, ink, T.surface, 4.5);
+      chk(`fg/soft ${t} (alerts)`, T.fg, mix(T[t], T.bg, 0.16), 4.5);
     }
   }
 }

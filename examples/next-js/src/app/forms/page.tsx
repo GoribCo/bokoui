@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Button, Checkbox, FormField, Input, Radio, RadioGroup, Switch, Textarea, sizes } from "bokoui/react";
 import { Page, PageHeader, Section } from "@/components/section";
+import { PropTables } from "@/components/prop-table";
 import { SelectDemo } from "./select-demo";
+import { ComboboxDemo, DateDemo, RatingDemo, SliderDemo, TagsDemo, UploadDemo } from "./form-extras";
 
 export const metadata: Metadata = { title: "Forms · UI Framework" };
 
@@ -50,6 +52,30 @@ export default function FormsPage() {
 
       <Section title="Select" note="Custom listbox: arrows, Home/End, typeahead, Enter/Space, Escape.">
         <SelectDemo />
+      </Section>
+
+      <Section title="Combobox" note="Type to filter. Arrows move, Enter chooses, Escape restores the chosen text.">
+        <ComboboxDemo />
+      </Section>
+
+      <Section title="Date picker" note="Calendar in a popover. Locale and week start are props; min, max and a predicate disable days.">
+        <DateDemo />
+      </Section>
+
+      <Section title="Slider" note="A native range input: keyboard and touch work with no extra code.">
+        <SliderDemo />
+      </Section>
+
+      <Section title="Rating">
+        <RatingDemo />
+      </Section>
+
+      <Section title="Tags" note="Removable chips, and toggle chips for filters.">
+        <TagsDemo />
+      </Section>
+
+      <Section title="File upload" note="Drag files in or click. Wrong type, size or count is rejected with a message.">
+        <UploadDemo />
       </Section>
 
       <Section title="Checkbox">
@@ -115,6 +141,10 @@ export default function FormsPage() {
             </Button>
           </div>
         </form>
+      </Section>
+
+      <Section title="API" note="Generated from the package's TypeScript types. Every component also accepts standard HTML attributes and className.">
+        <PropTables names={["FormField", "Label", "Input", "Textarea", "Select", "Combobox", "DatePicker", "Calendar", "Slider", "Checkbox", "Radio", "RadioGroup", "Switch", "Rating", "FileUpload"]} />
       </Section>
     </Page>
   );

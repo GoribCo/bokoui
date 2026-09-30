@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "bokoui/react";
 import { Page, PageHeader, Section } from "@/components/section";
+import { PropTables } from "@/components/prop-table";
 import { TableDemo } from "./table-demo";
 
 export const metadata: Metadata = { title: "Table · UI Framework" };
@@ -41,6 +42,10 @@ export default function TablePage() {
       </Section>
       <Section title="Sorting, paging and density" note="Click a header to sort. Toggle the switches to change the look.">
         <TableDemo />
+      </Section>
+
+      <Section title="API" note="Generated from the package's TypeScript types. Every component also accepts standard HTML attributes and className.">
+        <PropTables names={["Table", "TableHead", "TableCell"]} />
       </Section>
     </Page>
   );

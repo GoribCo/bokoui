@@ -38,7 +38,7 @@ function tone(t: ResolvedTokens, name: Color | Action) {
     fg: t[`${name}Fg`],
     soft: withAlpha(base, 0.16),
     softHover: withAlpha(base, 0.26),
-    ink: mix(base, t.fg, t.inkTone),
+    ink: mix(base, t.fg, name === "warning" ? t.inkToneWarning : t.inkTone),
     border: mix(t.fg, base, t.borderStrength),
   };
 }

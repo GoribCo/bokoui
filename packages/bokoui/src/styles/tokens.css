@@ -34,6 +34,14 @@
   --tone-border: color-mix(in srgb, var(--tone), var(--bokoui-fg) var(--bokoui-border-strength));
 }
 
+/*
+ * Warning is a light hue. In light mode its ink needs more of the text color to reach 4.5:1 on the
+ * tinted (soft) backgrounds it is used on. scripts/audit-contrast.mjs applies the same 45%.
+ */
+:root:not([data-mode="dark"]) [data-tone="warning"] {
+  --tone-ink: color-mix(in srgb, var(--tone) 45%, var(--bokoui-fg));
+}
+
 /* Focus ring shared by all interactive components. */
 @utility focus-ring {
   &:focus-visible {
