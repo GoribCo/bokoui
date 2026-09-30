@@ -16,7 +16,7 @@ export const metadata = buildMetadata({
 export default async function TablePage() {
   const locale = (await getLocale()) as LocaleCode;
   return (
-    <PageContainer size="full">
+    <PageContainer>
       <PageHeader title="Table" description="The table scrolls sideways inside its wrapper; the page never does." />
       <Table striped hoverable aria-label="Records">
         <TableHeader>

@@ -75,7 +75,7 @@ export async function PublicProfile({ organization }: { organization: PublicOrga
   const typeLabel = typeT.has(organization.type) ? typeT(organization.type) : organizationTypes[organization.type].label;
 
   return (
-    <PageContainer size="md">
+    <PageContainer>
       <header className="flex items-center gap-4">
         <Avatar size="lg" shape="square" src={organization.logoUrl} name={organization.name} />
         <div className="flex min-w-0 flex-col gap-1">

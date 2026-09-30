@@ -12,7 +12,7 @@ export const metadata = buildMetadata({
 
 export default function FiltersPage() {
   return (
-    <PageContainer size="lg">
+    <PageContainer>
       <PageHeader title="Filters" description="Tab, filter and page are URL state (nuqs): copy the address to share the view." />
       <Suspense>
         <FilterableList />

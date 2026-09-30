@@ -11,7 +11,7 @@ export const metadata = buildMetadata({
 
 export default function FormPage() {
   return (
-    <PageContainer size="md">
+    <PageContainer>
       <PageHeader title="Form" description="React Hook Form with a Zod schema." />
       <StaffForm />
     </PageContainer>

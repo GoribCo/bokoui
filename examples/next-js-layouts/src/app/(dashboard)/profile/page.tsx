@@ -19,7 +19,7 @@ export default async function ProfilePage() {
   const locale = (await getLocale()) as LocaleCode;
 
   return (
-    <PageContainer size="md">
+    <PageContainer>
       <PageHeader title="Profile" />
       <Card className="flex items-center gap-4">
         <UserAvatar user={profile} size="lg" />

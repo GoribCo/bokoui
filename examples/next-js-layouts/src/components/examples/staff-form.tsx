@@ -22,7 +22,7 @@ export function StaffForm() {
   return (
     <form
       noValidate
-      className="flex max-w-xl flex-col gap-4"
+      className="flex flex-col gap-4"
       onSubmit={handleSubmit(async (values) => {
         await new Promise((resolve) => setTimeout(resolve, 400));
         setSaved(values);

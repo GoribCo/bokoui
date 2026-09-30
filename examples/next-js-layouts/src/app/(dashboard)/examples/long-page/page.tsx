@@ -13,7 +13,7 @@ const sections = Array.from({ length: 14 }, (_, index) => index + 1);
 
 export default function LongPage() {
   return (
-    <PageContainer size="md">
+    <PageContainer>
       <PageHeader title="Long page" description="Scroll: the header and sidebar stay in place, the footer arrives at the end." />
       {sections.map((number) => (
         <section key={number} className="flex flex-col gap-2">
