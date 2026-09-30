@@ -44,3 +44,7 @@ next-env.d.ts
 /packages/*/dist
 /packages/*/*.tgz
 .idea
+
+dist
+node_modules
+.next
