@@ -133,6 +133,7 @@
     "all": "All settings",
     "style": "Design style",
     "close": "Close",
-    "font": "Font"
+    "font": "Font",
+    "quick": "Quick display settings"
   }
 }

@@ -46,6 +46,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         bottomNavSlots={bottomNavSlots}
         fontSwitcher={features.fontSwitcher}
         styleSwitcher={features.styleSwitcher}
+        displaySettingsMenu={features.displaySettingsMenu}
         manageOrganizationsHref="/organizations"
         allSettingsHref="/account"
         year={new Date().getFullYear()}

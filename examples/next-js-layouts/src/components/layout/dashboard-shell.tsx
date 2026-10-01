@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useMemo, type ReactNode } from "react";
 import { Skeleton } from "bokoui/react";
 import { AccountMenu } from "@/components/account/account-menu";
+import { DisplaySettingsMenu } from "@/components/appearance/display-settings-menu";
 import { DisplaySettingsDrawer } from "@/components/appearance/display-settings-drawer";
 import { CommonMenu } from "@/components/navigation/common-menu";
 import { MenuBreadcrumbs } from "@/components/navigation/menu-breadcrumbs";
@@ -43,6 +44,8 @@ export interface DashboardShellProps {
   bottomNavSlots: number;
   fontSwitcher?: boolean;
   styleSwitcher?: boolean;
+  /** Adds the dropdown variant of the display settings beside the drawer button. */
+  displaySettingsMenu?: boolean;
   /** Target of "Manage workspaces" and "All settings"; each link is hidden when unset. */
   manageOrganizationsHref?: string;
   allSettingsHref?: string;
@@ -65,6 +68,7 @@ export function DashboardShell({
   bottomNavSlots,
   fontSwitcher = false,
   styleSwitcher = true,
+  displaySettingsMenu = false,
   manageOrganizationsHref,
   allSettingsHref,
   year,
@@ -239,11 +243,16 @@ export function DashboardShell({
             />
           }
           actions={
-            <DisplaySettingsDrawer
+            <>
+              {displaySettingsMenu ? (
+                <DisplaySettingsMenu styleSwitcher={styleSwitcher} fontSwitcher={fontSwitcher} />
+              ) : null}
+              <DisplaySettingsDrawer
               styleSwitcher={styleSwitcher}
               fontSwitcher={fontSwitcher}
               allSettingsHref={allSettingsHref}
             />
+            </>
           }
         />
       }
