@@ -1,6 +1,6 @@
 "use client";
 
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@/lib/query/react-query";
 import { queryKeys } from "@/lib/query/keys";
 import { services } from "@/lib/services";
 import type { RecordListParams } from "@/lib/services/record.service";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@/lib/query/react-query";
 import { queryKeys } from "@/lib/query/keys";
 import { services } from "@/lib/services";
 import type { Notification } from "@/lib/types";

@@ -1,6 +1,7 @@
-import type { ApiClient, PagedResult } from "@/lib/api/client";
+import type { PagedResult } from "@/lib/api/client";
 import { recordSchema } from "@/lib/schemas";
 import type { RecordStatus, SampleRecord } from "@/lib/types";
+import { BaseService } from "./base.service";
 
 export interface RecordListParams {
   status?: RecordStatus | "all";
@@ -9,11 +10,9 @@ export interface RecordListParams {
   pageSize?: number;
 }
 
-export function createRecordService(client: ApiClient) {
-  return {
-    async list(params: RecordListParams = {}): Promise<PagedResult<SampleRecord>> {
-      const page = await client.getPage<unknown>("/records", { ...params });
-      return { ...page, items: page.items.map((item) => recordSchema.parse(item)) };
-    },
-  };
+export class RecordService extends BaseService {
+  async list(params: RecordListParams = {}): Promise<PagedResult<SampleRecord>> {
+    const page = await this.client.getPage<unknown>("/records", { ...params });
+    return { ...page, items: page.items.map((item) => recordSchema.parse(item)) };
+  }
 }

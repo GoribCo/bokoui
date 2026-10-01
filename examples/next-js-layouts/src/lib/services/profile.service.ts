@@ -1,11 +1,9 @@
-import type { ApiClient } from "@/lib/api/client";
 import { profileSchema } from "@/lib/schemas";
 import type { UserProfile } from "@/lib/types";
+import { BaseService } from "./base.service";
 
-export function createProfileService(client: ApiClient) {
-  return {
-    async getMyProfile(): Promise<UserProfile> {
-      return profileSchema.parse(await client.get("/profiles/me"));
-    },
-  };
+export class ProfileService extends BaseService {
+  async getMyProfile(): Promise<UserProfile> {
+    return profileSchema.parse(await this.client.get("/profiles/me"));
+  }
 }
