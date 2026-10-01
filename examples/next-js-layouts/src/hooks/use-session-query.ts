@@ -2,17 +2,15 @@
 
 import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { SessionService } from "@/lib/services/session.service";
+import { sessionService } from "@/lib/services";
 import type { Session } from "@/lib/types";
 
 class SessionQuery extends BaseQuery {
-  private readonly service = new SessionService();
-
   /** `null` (signed out) never triggers a request. */
   get(initialSession: Session | null) {
     return this.useQuery({
       queryKey: queryKeys.session,
-      queryFn: () => this.service.getSession(),
+      queryFn: () => sessionService.getSession(),
       initialData: initialSession,
       enabled: initialSession !== null,
       staleTime: 5 * 60 * 1000,

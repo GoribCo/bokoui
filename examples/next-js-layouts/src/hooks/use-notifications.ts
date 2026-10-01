@@ -2,16 +2,14 @@
 
 import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { NotificationService } from "@/lib/services/notification.service";
+import { notificationService } from "@/lib/services";
 import type { Notification } from "@/lib/types";
 
 class NotificationsQuery extends BaseQuery {
-  private readonly service = new NotificationService();
-
   list() {
     return this.useQuery({
       queryKey: queryKeys.notifications,
-      queryFn: () => this.service.list(),
+      queryFn: () => notificationService.list(),
       refetchInterval: 60 * 1000,
       staleTime: 30 * 1000,
     });
@@ -20,7 +18,7 @@ class NotificationsQuery extends BaseQuery {
   markRead() {
     const queryClient = this.useQueryClient();
     return this.useMutation({
-      mutationFn: (ids?: string[]) => this.service.markRead(ids),
+      mutationFn: (ids?: string[]) => notificationService.markRead(ids),
       onMutate: async (ids) => {
         await queryClient.cancelQueries({ queryKey: queryKeys.notifications });
         const previous = queryClient.getQueryData<Notification[]>(queryKeys.notifications);

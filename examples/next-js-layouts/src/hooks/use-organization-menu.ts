@@ -2,15 +2,13 @@
 
 import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { MenuService } from "@/lib/services/menu.service";
+import { menuService } from "@/lib/services";
 
 class OrganizationMenuQuery extends BaseQuery {
-  private readonly service = new MenuService();
-
   get(organizationId: string) {
     return this.useQuery({
       queryKey: queryKeys.menu(organizationId),
-      queryFn: () => this.service.getMenu(organizationId),
+      queryFn: () => menuService.getMenu(organizationId),
     });
   }
 }

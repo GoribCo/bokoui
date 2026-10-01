@@ -1,14 +1,12 @@
 "use client";
 
 import { BaseQuery } from "@/lib/query/base-query";
-import { StaffService } from "@/lib/services/staff.service";
+import { staffService } from "@/lib/services";
 import type { StaffValues } from "@/lib/schemas/staff";
 
 class StaffMutation extends BaseQuery {
-  private readonly service = new StaffService();
-
   create() {
-    return this.useMutation({ mutationFn: (values: StaffValues) => this.service.create(values) });
+    return this.useMutation({ mutationFn: (values: StaffValues) => staffService.create(values) });
   }
 }
 

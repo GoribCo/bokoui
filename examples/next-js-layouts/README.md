@@ -38,7 +38,7 @@ src/
   providers/              context providers (session, stores, query client)
   styles/                 typography tokens and custom themes
   lib/                    all non-React TypeScript
-    api/                  ApiClient (browser) and getServerApi (server), ApiError
+    api/                  ApiClient (browser and server), ApiError
     services/             <Name>Service classes: typed, validated calls to the API
     schemas/ types/       Zod schemas and types
     query/                BaseQuery (hook base class), query key factory, URL search-param parsers
@@ -48,7 +48,7 @@ src/
 
 Data flows one way: **component, then hook, then service, then `apiClient`, then the API**. Components never call `fetch` or a service; they call a hook (`useNotifications`, `useRecords`, `useOrganizations`, ...).
 
-- **Services** (`src/lib/services/*.service.ts`) are classes that extend `BaseService`, take an `ApiClient` (the browser one by default) and validate every answer with a Zod schema. Server code passes the server client: `new MenuService(await getServerApi())`.
+- **Services** (`src/lib/services/*.service.ts`) are classes that extend `BaseService` and validate every answer with a Zod schema. `src/lib/services/index.ts` exports one instance of each (`menuService`, `notificationService`, ...); hooks, Server Components and layouts import those and never write `new XService()`. The same instance works in the browser and on the server: `ApiClient` adds the absolute URL and the visitor's cookies when it runs on the server, and a call with `cache` options (public profiles) uses the Next.js data cache and sends no cookies.
 - **Hooks** (`src/hooks/use-*.ts`) each define a class that extends `BaseQuery` and calls `this.useQuery`, `this.useMutation` or `this.useQueryClient`, then export a plain hook that calls it. `BaseQuery` (`src/lib/query/base-query.ts`) is the only place hooks get TanStack Query from; ESLint rejects a direct import in a hook.
 
 The API is served by this app at `/api/v1/*` from `src/api` and returns `{ success, results, meta }` (errors: `{ success: false, message, code }`). Endpoints: `GET /session`, `/organizations`, `/organizations/:id/menu`, `/menu/common`, `/profiles/me`, `/public/organizations[/:type/:slug]`, `/notifications`, `/records`; `POST /notifications/read`, `/staff`.

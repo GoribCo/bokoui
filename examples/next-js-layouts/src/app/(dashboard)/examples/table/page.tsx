@@ -3,8 +3,7 @@ import { Badge, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } 
 import { PageContainer } from "@/components/layout/page-container";
 import { PageHeader } from "@/components/layout/page-header";
 import { formatDate } from "@/lib/i18n/format";
-import { getServerApi } from "@/lib/api/server";
-import { RecordService } from "@/lib/services/record.service";
+import { recordService } from "@/lib/services";
 import { buildMetadata } from "@/lib/seo";
 import type { LocaleCode } from "@/lib/types";
 
@@ -16,7 +15,7 @@ export const metadata = buildMetadata({
 
 export default async function TablePage() {
   const locale = (await getLocale()) as LocaleCode;
-  const { items: records } = await new RecordService(await getServerApi()).list({ pageSize: 100 });
+  const { items: records } = await recordService.list({ pageSize: 100 });
   return (
     <PageContainer>
       <PageHeader title="Table" description="The table scrolls sideways inside its wrapper; the page never does." />

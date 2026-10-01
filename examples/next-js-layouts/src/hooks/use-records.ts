@@ -2,15 +2,14 @@
 
 import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { RecordService, type RecordListParams } from "@/lib/services/record.service";
+import { recordService } from "@/lib/services";
+import type { RecordListParams } from "@/lib/services/record.service";
 
 class RecordsQuery extends BaseQuery {
-  private readonly service = new RecordService();
-
   list(params: RecordListParams) {
     return this.useQuery({
       queryKey: queryKeys.records(params),
-      queryFn: () => this.service.list(params),
+      queryFn: () => recordService.list(params),
       placeholderData: this.keepPreviousData,
     });
   }

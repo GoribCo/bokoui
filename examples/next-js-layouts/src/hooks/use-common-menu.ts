@@ -2,15 +2,13 @@
 
 import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { MenuService } from "@/lib/services/menu.service";
+import { menuService } from "@/lib/services";
 
 class CommonMenuQuery extends BaseQuery {
-  private readonly service = new MenuService();
-
   get() {
     return this.useQuery({
       queryKey: queryKeys.commonMenu,
-      queryFn: () => this.service.getCommonMenu(),
+      queryFn: () => menuService.getCommonMenu(),
       staleTime: Infinity,
     });
   }

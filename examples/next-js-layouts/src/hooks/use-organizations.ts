@@ -2,13 +2,11 @@
 
 import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { OrganizationService } from "@/lib/services/organization.service";
+import { organizationService } from "@/lib/services";
 
 class OrganizationsQuery extends BaseQuery {
-  private readonly service = new OrganizationService();
-
   list() {
-    return this.useQuery({ queryKey: queryKeys.organizations, queryFn: () => this.service.getOrganizations() });
+    return this.useQuery({ queryKey: queryKeys.organizations, queryFn: () => organizationService.getOrganizations() });
   }
 }
 
