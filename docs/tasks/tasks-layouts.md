@@ -95,6 +95,8 @@ Working rules for this stage:
 - [x] T9.5 -DONE Library fix (bokoui 0.2.33): popovers, menus, tooltips, select and combobox are shown before they are measured, so `top-*` and `*-end` placements no longer land off-position
 - [x] T9.6 -DONE Verified in a real browser (1280 and 390 px, axe: no violations); lint and typecheck clean. Not yet checked: all 8 styles, dark mode, Bangla
 
+- [x] T9.7 -DONE Landing page at `/` for visitors (hero, features, public organization profiles, call to action; English and Bangla). The signed-in home moved to `/dashboard` (`DASHBOARD_PATH` in `config/auth.ts`); signed-in users who open `/` or `/sign-in` are redirected there; `/` is in the sitemap and allowed in robots
+
 ## Deferred (after manual testing)
 - Unit tests for menu filtering, access helpers, stores
 - Browser and accessibility verification at mobile, tablet and desktop widths with all styles and modes
