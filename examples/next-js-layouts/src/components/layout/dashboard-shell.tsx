@@ -14,6 +14,7 @@ import { useActiveOrganization } from "@/hooks/use-active-organization";
 import { useMenu } from "@/hooks/use-menu";
 import { useMenuTranslator } from "@/hooks/use-menu-translator";
 import { useMenuQuery } from "@/hooks/use-queries";
+import { sampleNotifications } from "@/lib/sample-data";
 import { findActiveTrail, localizeMenu } from "@/lib/menu";
 import { useSession } from "@/providers/session-provider";
 import { uiSelectors } from "@/lib/stores/ui-store";
@@ -199,6 +200,7 @@ export function DashboardShell({
       }
       header={
         <Header
+          collapsed={collapsed}
           toggle={
             <SidebarToggle
               collapsed={collapsed}
@@ -230,7 +232,11 @@ export function DashboardShell({
             />
           }
           notifications={
-            <NotificationsButton label={t("shell.notifications")} />
+            <NotificationsButton
+              label={t("shell.notifications")}
+              emptyLabel={t("shell.noNotifications")}
+              items={sampleNotifications}
+            />
           }
           actions={
             <DisplaySettingsDrawer

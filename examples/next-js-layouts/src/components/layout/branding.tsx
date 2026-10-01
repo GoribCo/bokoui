@@ -24,7 +24,7 @@ export function Branding({ name, href = "/" }: BrandingProps) {
           fill="var(--color-primary-foreground)"
         />
       </svg>
-      <span className="hidden truncate text-section font-semibold sm:inline">
+      <span className="hidden truncate text-section font-semibold sm:inline md:group-data-[collapsed]/brand:hidden">
         {name}
       </span>
     </Link>

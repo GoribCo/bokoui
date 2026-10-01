@@ -37,7 +37,8 @@
     "expandGroup": "Expand {label}",
     "collapseGroup": "Collapse {label}",
     "home": "Home",
-    "pageTitleFallback": "Dashboard"
+    "pageTitleFallback": "Dashboard",
+    "noNotifications": "You're all caught up"
   },
   "organization": {
     "switch": "Switch organization",

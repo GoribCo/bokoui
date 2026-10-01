@@ -37,7 +37,8 @@
     "expandGroup": "{label} খুলুন",
     "collapseGroup": "{label} বন্ধ করুন",
     "home": "হোম",
-    "pageTitleFallback": "ড্যাশবোর্ড"
+    "pageTitleFallback": "ড্যাশবোর্ড",
+    "noNotifications": "কোনো নতুন বিজ্ঞপ্তি নেই"
   },
   "organization": {
     "switch": "প্রতিষ্ঠান পরিবর্তন করুন",
