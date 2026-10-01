@@ -1,20 +1,13 @@
-import { StaticPage } from "@/components/layout/static-page";
+import { LegalDocument } from "@/components/layout/legal-document";
+import { privacyContent } from "@/lib/content/legal";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Privacy",
-  description: "How personal data is handled.",
+  title: privacyContent.title,
+  description: privacyContent.description,
   path: "/legal/privacy",
 });
 
 export default function Page() {
-  return (
-    <StaticPage
-      size="md"
-      title="Privacy"
-      description="How personal data is handled."
-    >
-      Placeholder privacy policy.
-    </StaticPage>
-  );
+  return <LegalDocument content={privacyContent} />;
 }

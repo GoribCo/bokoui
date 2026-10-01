@@ -1,16 +1,13 @@
-import { StaticPage } from "@/components/layout/static-page";
+import { LegalDocument } from "@/components/layout/legal-document";
+import { termsContent } from "@/lib/content/legal";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Terms",
-  description: "Terms of use.",
+  title: termsContent.title,
+  description: termsContent.description,
   path: "/legal/terms",
 });
 
 export default function Page() {
-  return (
-    <StaticPage size="md" title="Terms" description="Terms of use.">
-      Placeholder terms of use.
-    </StaticPage>
-  );
+  return <LegalDocument content={termsContent} />;
 }
