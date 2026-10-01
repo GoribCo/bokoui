@@ -1,8 +1,7 @@
 import { forbidden } from "next/navigation";
 import { Text } from "bokoui/react";
 import { StaticPage } from "@/components/layout/static-page";
-import { can } from "@/lib/access";
-import { getActiveRoles } from "@/lib/access/active-roles";
+import { getActivePermissions, getActiveRoles } from "@/lib/access/active-roles";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ title: "Access control", path: "/admin" });
@@ -12,8 +11,8 @@ export const metadata = buildMetadata({ title: "Access control", path: "/admin" 
  * opening the URL without the role returns the 403 view (FR-10.4).
  */
 export default async function AdminPage() {
-  const roles = await getActiveRoles();
-  if (!can(roles, "admin.access")) forbidden();
+  const [roles, permissions] = await Promise.all([getActiveRoles(), getActivePermissions()]);
+  if (!permissions.includes("organization.access.view")) forbidden();
 
   return (
     <StaticPage title="Access control" description="Visible to the admin and auditor roles in the active organization.">

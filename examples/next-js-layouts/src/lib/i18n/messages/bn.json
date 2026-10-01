@@ -39,7 +39,7 @@
     "home": "হোম",
     "pageTitleFallback": "ড্যাশবোর্ড",
     "noNotifications": "কোনো নতুন বিজ্ঞপ্তি নেই",
-    "notificationsUnread": "{count}টি অপঠিত",
+    "notificationsUnread": "{count, number}টি অপঠিত",
     "markAllRead": "সব পঠিত হিসেবে চিহ্নিত করুন",
     "viewAllNotifications": "সব বিজ্ঞপ্তি দেখুন",
     "notificationTabs": {
@@ -49,6 +49,19 @@
       "invitations": "আমন্ত্রণ"
     }
   },
+  "search": {
+    "scopeLabel": "যেখানে খুঁজবেন",
+    "scope": {
+      "menu": "মেনু",
+      "people": "মানুষ",
+      "organizations": "প্রতিষ্ঠান",
+      "hospitals": "হাসপাতাল",
+      "pharmacies": "ফার্মেসি"
+    },
+    "noResults": "কোনো ফল নেই",
+    "minChars": "কমপক্ষে ২টি অক্ষর লিখুন",
+    "loading": "খোঁজা হচ্ছে…"
+  },
   "organization": {
     "switch": "প্রতিষ্ঠান পরিবর্তন করুন",
     "current": "বর্তমান প্রতিষ্ঠান",
@@ -57,7 +70,11 @@
     "only": "আপনার প্রতিষ্ঠান",
     "publicProfile": "পাবলিক প্রোফাইল",
     "workspaces": "ওয়ার্কস্পেস",
-    "manage": "ওয়ার্কস্পেস পরিচালনা"
+    "manage": "ওয়ার্কস্পেস পরিচালনা",
+    "role": "ভূমিকা",
+    "allRoles": "আমার সব ভূমিকা",
+    "noneTitle": "আপনি এখনও কোনো প্রতিষ্ঠানের সদস্য নন",
+    "noneBody": "কোনো অ্যাডমিনিস্ট্রেটরকে আপনাকে আমন্ত্রণ জানাতে বলুন, অথবা ভুল মনে হলে আমাদের সাথে যোগাযোগ করুন।"
   },
   "account": {
     "menu": "অ্যাকাউন্ট মেনু",
@@ -114,7 +131,8 @@
     "password": "পাসওয়ার্ড",
     "submit": "সাইন ইন",
     "invalidEmail": "সঠিক ইমেইল ঠিকানা দিন",
-    "passwordRequired": "পাসওয়ার্ড দিন"
+    "passwordRequired": "পাসওয়ার্ড দিন",
+    "failed": "সাইন ইন করা যায়নি। তথ্য যাচাই করে আবার চেষ্টা করুন।"
   },
   "errors": {
     "notFoundTitle": "পৃষ্ঠা পাওয়া যায়নি",
@@ -125,7 +143,8 @@
     "backHome": "হোমে ফিরে যান",
     "forbiddenTitle": "অনুমতি নেই",
     "forbiddenBody": "এই পৃষ্ঠা খোলার মতো ভূমিকা আপনার নেই।",
-    "loading": "লোড হচ্ছে"
+    "loading": "লোড হচ্ছে",
+    "loadFailed": "এটি লোড করা যায়নি।"
   },
   "displaySettings": {
     "theme": "থিম",

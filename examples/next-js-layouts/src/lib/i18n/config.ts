@@ -3,10 +3,10 @@ export const locales = ["en", "bn"] as const;
 
 export type LocaleCode = (typeof locales)[number];
 
-/** Flag and native name shown on the language chips; one entry per locale. */
-export const localeMeta: Record<LocaleCode, { flag: string; name: string }> = {
-  en: { flag: "🇬🇧", name: "English" },
-  bn: { flag: "🇧🇩", name: "বাংলা" },
+/** Flag, native name and text direction of each locale; one entry per locale. */
+export const localeMeta: Record<LocaleCode, { flag: string; name: string; dir: "ltr" | "rtl" }> = {
+  en: { flag: "🇬🇧", name: "English", dir: "ltr" },
+  bn: { flag: "🇧🇩", name: "বাংলা", dir: "ltr" },
 };
 
 export const defaultLocale: LocaleCode = "en";

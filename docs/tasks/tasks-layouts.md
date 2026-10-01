@@ -97,7 +97,15 @@ Working rules for this stage:
 
 - [x] T9.7 -DONE Landing page at `/` for visitors (hero, features, public organization profiles, call to action; English and Bangla). The signed-in home moved to `/dashboard` (`DASHBOARD_PATH` in `config/auth.ts`); signed-in users who open `/` or `/sign-in` are redirected there; `/` is in the sitemap and allowed in robots
 
-## Deferred (after manual testing)
-- Unit tests for menu filtering, access helpers, stores
-- Browser and accessibility verification at mobile, tablet and desktop widths with all styles and modes
-- Acceptance criteria walk-through (SRS section 6)
+## Acceptance walk-through (SRS section 6), done 2026-10-01 under `tasks-layouts-hardening.md` T1.10
+Evidence is automated: `npm test` (unit), `npm run check:browser` (suites `sweep`, `interactions`, `controls`, `site`).
+- [x] 1 The shell renders at `examples/next-js-layouts/` with sidebar, header, footer and content (sweep: `/dashboard` at 1280 px, all styles and modes)
+- [x] 2 Switching organization changes the menu (interactions: workspace switcher); two roles give the union (unit: `effectiveRoles`)
+- [x] 3 Sidebar collapses and expands; state survives a reload without layout shift (interactions: cookie, server-rendered collapsed state at DOMContentLoaded)
+- [x] 4 On mobile: bottom navigation, sub menus open above it, hamburger opens the full drawer (interactions: sub menu sheet ends above the bar, More sheet, drawer focus trap)
+- [x] 5 A menu of several hundred items and five levels renders without breaking the layout (interactions: five-level page expands its parents, no horizontal scroll; sweep on the departments route)
+- [x] 6 Theme mode, design style and language change from the header and persist without a flash (interactions: display settings, reload checked at DOMContentLoaded)
+- [x] 7 Every page has metadata; `robots` and `sitemap` respond (site suite: title, description, lang, one h1 on 23 routes; `/robots.txt`, `/sitemap.xml`)
+- [x] 8 Each state type uses the tool of SRS section 3.9 (code review: Zustand only in `lib/stores` and its providers, TanStack Query only through `BaseQuery`, nuqs for URL state, React Hook Form for forms)
+- [x] 9 Replacing mock services needs no change to layout components (no component imports `lib/services`, `lib/api` or `fetch`; `src/api` is served over HTTP)
+- [x] 10 Lint and typecheck pass; verified in a real browser at three widths with an accessibility check (`npm run check`, sweep at 390, 768 and 1280 px with axe, 8 styles, 2 modes)

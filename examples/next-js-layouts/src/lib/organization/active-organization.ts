@@ -7,7 +7,7 @@ import type { Organization } from "@/lib/types";
 export function resolveActiveOrganizationId(
   organizations: readonly Organization[],
   remembered: string | undefined,
-  defaultId: string,
+  defaultId: string | null,
 ): string | null {
   const candidates = [remembered, defaultId, organizations[0]?.id];
   return candidates.find((id) => id && organizations.some((org) => org.id === id)) ?? null;

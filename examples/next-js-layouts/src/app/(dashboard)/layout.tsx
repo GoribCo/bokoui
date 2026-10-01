@@ -1,7 +1,10 @@
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
+import { ShellSkeleton } from "@/components/layout/shell-skeleton";
+import { NoOrganizations } from "@/components/layout/no-organizations";
 import { DashboardShell } from "@/components/layout/dashboard-shell";
 import { accountMenuItems } from "@/lib/config/account-menu";
 import { SIGN_IN_PATH } from "@/lib/config/auth";
@@ -9,7 +12,6 @@ import { bottomNavSlots } from "@/lib/config/navigation";
 import { features } from "@/lib/config/features";
 import { siteConfig } from "@/lib/config/site";
 import { getInitialState } from "@/lib/session/initial-state";
-import { signOut } from "@/lib/auth/actions";
 import { queryKeys } from "@/lib/query/keys";
 import { menuService } from "@/lib/services";
 
@@ -17,12 +19,32 @@ import { menuService } from "@/lib/services";
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 /**
- * Pages that share the application shell. The session is checked here, close to the data (FR-10.6);
- * the active organization's menu is fetched on the server and handed to the client query cache.
+ * Pages that share the application shell. The layout returns at once and shows a skeleton of the shell
+ * while `DashboardContent` reads the session and the first menus, so first load never shows a blank page.
  */
-export default async function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={<ShellFallback />}>
+      <DashboardContent>{children}</DashboardContent>
+    </Suspense>
+  );
+}
+
+/** Synchronous on purpose: a fallback that itself waits would show the root spinner instead. */
+function ShellFallback() {
+  const t = useTranslations("errors");
+  return <ShellSkeleton label={t("loading")} />;
+}
+
+/**
+ * The session is checked here, close to the data (FR-10.6); the active organization's menu is fetched on
+ * the server and handed to the client query cache.
+ */
+async function DashboardContent({ children }: { children: ReactNode }) {
   const { session, initialOrganizationId } = await getInitialState();
   if (!session) redirect(SIGN_IN_PATH);
+  // Signed in, but not part of any organization: there is no menu or role to build a shell from.
+  if (!initialOrganizationId) return <NoOrganizations />;
 
   // Data the shell needs on first paint is fetched here and handed to the client query cache, so the
   // hooks in the shell (`useCommonMenu`, `useOrganizationMenu`) find it ready.
@@ -48,7 +70,6 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         styleSwitcher={features.styleSwitcher}
         manageOrganizationsHref="/organizations"
         year={new Date().getFullYear()}
-        onLogout={signOut}
       >
         {children}
       </DashboardShell>

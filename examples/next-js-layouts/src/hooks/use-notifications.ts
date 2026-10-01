@@ -11,6 +11,7 @@ class NotificationsQuery extends BaseQuery {
       queryKey: queryKeys.notifications,
       queryFn: () => notificationService.list(),
       refetchInterval: 60 * 1000,
+      refetchOnWindowFocus: true, // changes without the user doing anything
       staleTime: 30 * 1000,
     });
   }

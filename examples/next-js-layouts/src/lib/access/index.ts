@@ -1,8 +1,7 @@
+import { permissionsForRoles, type PermissionId } from "@/lib/authorization";
 import type { Organization, Role } from "@/lib/types";
-import { permissionPolicy } from "./policy";
-import type { Permission } from "./policy";
 
-export type { Permission } from "./policy";
+export type { PermissionId as Permission } from "@/lib/authorization";
 
 export function hasRole(roles: readonly Role[], role: Role): boolean {
   return roles.includes(role);
@@ -14,13 +13,9 @@ export function hasAnyRole(roles: readonly Role[], required?: readonly Role[]): 
   return required.some((role) => roles.includes(role));
 }
 
-/** True when any of the user's roles grants the permission. */
-export function can(
-  roles: readonly Role[],
-  permission: Permission,
-  policy: Record<Permission, readonly Role[]> = permissionPolicy,
-): boolean {
-  return hasAnyRole(roles, policy[permission]);
+/** True when the roles grant the permission, decided by the evaluator in `lib/authorization`. */
+export function can(roles: readonly Role[], permission: PermissionId): boolean {
+  return permissionsForRoles(roles).includes(permission);
 }
 
 /** Union of the user's roles within one organization (FR-10.1); empty when not a member. */
@@ -29,4 +24,12 @@ export function effectiveRoles(organizations: readonly Organization[], organizat
     .filter((org) => org.id === organizationId)
     .flatMap((org) => org.roles);
   return [...new Set(roles)];
+}
+
+/**
+ * The roles to act with: just the chosen one when the user holds it in this organization, otherwise all
+ * of them. A stale choice (a role from another organization, or one that was revoked) is ignored.
+ */
+export function applyActiveRole(roles: readonly Role[], activeRole: string | null | undefined): Role[] {
+  return activeRole && roles.includes(activeRole) ? [activeRole] : [...roles];
 }

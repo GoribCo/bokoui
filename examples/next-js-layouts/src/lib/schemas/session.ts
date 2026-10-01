@@ -12,9 +12,9 @@ export const sessionSchema = z
   .object({
     user: userSchema,
     organizations: z.array(organizationSchema),
-    defaultOrganizationId: z.string().min(1),
+    defaultOrganizationId: z.string().min(1).nullable(),
   })
-  .refine((s) => s.organizations.some((o) => o.id === s.defaultOrganizationId), {
-    message: "defaultOrganizationId must match an organization",
+  .refine((s) => s.defaultOrganizationId === null ? s.organizations.length === 0 : s.organizations.some((o) => o.id === s.defaultOrganizationId), {
+    message: "defaultOrganizationId must match an organization (null only without organizations)",
     path: ["defaultOrganizationId"],
   });

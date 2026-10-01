@@ -1,12 +1,9 @@
-import { organizations, publicOrganizations } from "../data/organizations";
+import { organizationsFor, publicOrganizations } from "../data/organizations";
 import { requireSession } from "../auth";
 import { HttpError, type ApiHandler } from "../types";
 
 /** GET /organizations: organizations of the signed-in user, with their roles. */
-export const listOrganizations: ApiHandler = (context) => {
-  requireSession(context);
-  return { results: organizations };
-};
+export const listOrganizations: ApiHandler = (context) => ({ results: organizationsFor(requireSession(context)) });
 
 /** GET /public/organizations: every organization with a public profile. */
 export const listPublicOrganizations: ApiHandler = () => ({ results: publicOrganizations });

@@ -3,8 +3,11 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider, type CustomThemes } from "bokoui/react/theme";
 import type { Session } from "@/lib/types";
 import type { UiState } from "@/lib/stores/ui-store";
+import { GlobalErrorReporting } from "./global-error-reporting";
 import { OrganizationStoreProvider } from "./organization-store-provider";
 import { QueryProvider } from "./query-provider";
+import { RoleStoreProvider } from "./role-store-provider";
+import { SessionExpiry } from "./session-expiry";
 import { SessionProvider } from "./session-provider";
 import { UiStoreProvider } from "./ui-store-provider";
 
@@ -15,6 +18,8 @@ interface AppProvidersProps {
   initialOrganizationId: string | null;
   /** Server-read UI state (collapsed sidebar), so the first render matches what the user left. */
   initialUi: Partial<UiState>;
+  /** Role the user chose to act as; `null` means all roles. */
+  initialActiveRole?: string | null;
   customThemes?: CustomThemes;
   children: React.ReactNode;
 }
@@ -24,6 +29,7 @@ export function AppProviders({
   session,
   initialOrganizationId,
   initialUi,
+  initialActiveRole = null,
   customThemes,
   children,
 }: AppProvidersProps) {
@@ -38,9 +44,11 @@ export function AppProviders({
       <ThemeProvider customThemes={customThemes}>
         <NuqsAdapter>
           <QueryProvider>
+            <GlobalErrorReporting />
+            <SessionExpiry />
             {initialOrganizationId ? (
               <OrganizationStoreProvider initial={{ activeOrganizationId: initialOrganizationId }}>
-                {tree}
+                <RoleStoreProvider initial={{ activeRole: initialActiveRole }}>{tree}</RoleStoreProvider>
               </OrganizationStoreProvider>
             ) : (
               tree

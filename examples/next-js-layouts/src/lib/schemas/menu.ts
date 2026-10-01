@@ -12,6 +12,7 @@ export const menuItemSchema: z.ZodType<MenuItem> = z.lazy(() =>
     children: z.array(menuItemSchema).optional(),
     badge: z.union([z.string(), z.number()]).optional(),
     requiredRoles: z.array(roleSchema).optional(),
+    requiredPermissions: z.array(z.string()).optional(),
   }),
 );
 
@@ -21,6 +22,7 @@ export const menuGroupSchema: z.ZodType<MenuGroup> = z.object({
   labelKey: z.string().optional(),
   items: z.array(menuItemSchema),
   requiredRoles: z.array(roleSchema).optional(),
+  requiredPermissions: z.array(z.string()).optional(),
 });
 
 export const menuSchema = z.array(menuGroupSchema);

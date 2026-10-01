@@ -4,4 +4,6 @@ export const features = {
   fontSwitcher: false,
   /** Design-style picker in the display settings drawer. */
   styleSwitcher: true,
+  /** Keyboard shortcuts (search, sidebar, notifications); see `shortcuts.ts`. Set to false to turn them all off. */
+  keyboardShortcuts: true,
 } as const;

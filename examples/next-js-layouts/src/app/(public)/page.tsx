@@ -40,7 +40,7 @@ export default async function HomePage() {
       <section className="border-b border-border bg-surface">
         <PageContainer size="lg">
           <div className="flex max-w-2xl flex-col gap-5 py-10 md:py-16">
-            <p className="text-nav font-medium text-primary">{t("eyebrow")}</p>
+            <p data-tone="primary" className="text-nav font-medium text-(--tone-ink)">{t("eyebrow")}</p>
             <Heading as="h1" size="3xl">
               {t("title")}
             </Heading>

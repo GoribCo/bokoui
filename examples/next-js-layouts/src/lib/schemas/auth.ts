@@ -10,3 +10,10 @@ export const signInSchema = z.object({
 });
 
 export type SignInValues = z.infer<typeof signInSchema>;
+
+/** The user an API answers with after signing in. */
+export const signedInUserSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  email: z.email(),
+});

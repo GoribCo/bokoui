@@ -2,10 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Card, CardHeader, FormField, Heading, Input, Text } from "bokoui/react";
-import { signIn } from "@/lib/auth/actions";
+import { useLogin } from "@/hooks/use-auth";
+import { isApiError } from "@/lib/api/errors";
 import { signInSchema, type SignInValues } from "@/lib/schemas";
 
 export interface SignInFormProps {
@@ -13,10 +14,11 @@ export interface SignInFormProps {
   returnTo?: string;
 }
 
-/** Sign-in form: React Hook Form with the Zod schema shared with the server action (FR-9.5). */
+/** Sign-in form: React Hook Form with the Zod schema shared with the API (FR-9.5). */
 export function SignInForm({ returnTo }: SignInFormProps) {
   const t = useTranslations("auth");
-  const [pending, startTransition] = useTransition();
+  const router = useRouter();
+  const login = useLogin();
   const {
     register,
     handleSubmit,
@@ -25,15 +27,23 @@ export function SignInForm({ returnTo }: SignInFormProps) {
   } = useForm<SignInValues>({ resolver: zodResolver(signInSchema), defaultValues: { email: "", password: "" } });
 
   // Schema messages are catalog keys ("invalidEmail", "passwordRequired").
-  const message = (key: string | undefined) => (key === "invalidEmail" || key === "passwordRequired" ? t(key) : undefined);
+  const message = (key: string | undefined) =>
+    key === "invalidEmail" || key === "passwordRequired" ? t(key) : undefined;
 
   const onSubmit = (values: SignInValues) =>
-    startTransition(async () => {
-      const result = await signIn(values, returnTo);
-      // Only reached when the server rejected the values; success redirects.
-      for (const [field, key] of Object.entries(result.fieldErrors)) {
-        if (field === "email" || field === "password") setError(field, { message: key });
-      }
+    login.mutate(values, {
+      onSuccess: () => {
+        router.replace(returnTo ?? "/");
+        router.refresh();
+      },
+      onError: (error) => {
+        // The server rejected a field: show its message under that field; anything else under the form.
+        if (isApiError(error, 422) && (error.field === "email" || error.field === "password")) {
+          setError(error.field, { message: error.message });
+        } else {
+          setError("root", { message: "failed" });
+        }
+      },
     });
 
   return (
@@ -51,7 +61,12 @@ export function SignInForm({ returnTo }: SignInFormProps) {
         <FormField label={t("password")} required error={message(errors.password?.message)}>
           <Input type="password" autoComplete="current-password" {...register("password")} />
         </FormField>
-        <Button type="submit" loading={pending} fullWidth>
+        {errors.root ? (
+          <Text role="alert" className="text-danger">
+            {t("failed")}
+          </Text>
+        ) : null}
+        <Button type="submit" loading={login.isPending} fullWidth>
           {t("submit")}
         </Button>
       </form>

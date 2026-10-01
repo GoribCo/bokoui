@@ -11,8 +11,8 @@ export interface User {
 export interface Session {
   user: User;
   organizations: Organization[];
-  /** Organization to open when nothing was remembered. */
-  defaultOrganizationId: string;
+  /** Organization to open when nothing was remembered; `null` for a user who belongs to none. */
+  defaultOrganizationId: string | null;
 }
 
 /** Extended account data for the profile page. */

@@ -12,7 +12,8 @@ export interface SidebarToggleProps {
   /** Mobile drawer state. */
   drawerOpen: boolean;
   onOpenDrawer: () => void;
-  labels: { collapse: string; expand: string; openMenu: string };
+  /** `shortcut` adds the key combination to the tooltip and `aria-keyshortcuts`. */
+  labels: { collapse: string; expand: string; openMenu: string; shortcut?: { hint: string; keyshortcuts: string } };
 }
 
 /**
@@ -26,7 +27,7 @@ export function SidebarToggle({ collapsed, onToggleCollapsed, drawerOpen, onOpen
   return (
     <>
       <div className="hidden md:block">
-        <Tooltip content={label} placement="bottom">
+        <Tooltip content={labels.shortcut ? `${label} (${labels.shortcut.hint})` : label} placement="bottom">
           <Button
             variant="ghost"
             color="neutral"
@@ -34,6 +35,7 @@ export function SidebarToggle({ collapsed, onToggleCollapsed, drawerOpen, onOpen
             aria-label={label}
             aria-expanded={!collapsed}
             aria-controls={SIDEBAR_ID}
+            aria-keyshortcuts={labels.shortcut?.keyshortcuts}
             onClick={onToggleCollapsed}
           >
             <Icon aria-hidden="true" />

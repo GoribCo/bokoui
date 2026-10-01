@@ -24,7 +24,7 @@ export function Footer({ links, copyright, navigationLabel }: FooterProps) {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-control hover:text-foreground hover:underline focus-ring"
+                    className="inline-flex items-center rounded-control hover:text-foreground hover:underline focus-ring pointer-coarse:min-h-11 pointer-coarse:min-w-11 pointer-coarse:justify-center"
                   >
                     {link.label}
                   </a>
@@ -32,7 +32,7 @@ export function Footer({ links, copyright, navigationLabel }: FooterProps) {
                   <Link
                     href={link.href}
                     prefetch={false}
-                    className="rounded-control hover:text-foreground hover:underline focus-ring"
+                    className="inline-flex items-center rounded-control hover:text-foreground hover:underline focus-ring pointer-coarse:min-h-11 pointer-coarse:min-w-11 pointer-coarse:justify-center"
                   >
                     {link.label}
                   </Link>

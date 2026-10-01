@@ -4,6 +4,8 @@ export class ApiError extends Error {
     readonly status: number,
     message: string,
     readonly code?: string,
+    /** Name of the invalid field when the server rejected one (`VALIDATION`). */
+    readonly field?: string,
   ) {
     super(message);
     this.name = "ApiError";

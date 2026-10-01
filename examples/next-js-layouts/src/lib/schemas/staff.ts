@@ -9,3 +9,6 @@ export const staffSchema = z.object({
 });
 
 export type StaffValues = z.infer<typeof staffSchema>;
+
+/** A staff member as the API returns it. */
+export const staffMemberSchema = staffSchema.extend({ id: z.number() });

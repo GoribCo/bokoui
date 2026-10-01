@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { Button } from "bokoui/react";
+import { reportError } from "@/lib/monitoring/report-error";
 import { StatusView } from "./status-view";
 
 export interface ErrorViewProps {
@@ -10,12 +11,12 @@ export interface ErrorViewProps {
   reset: () => void;
 }
 
-/** Content of error boundaries: a message and a retry button. The error is logged for the host's monitoring. */
+/** Content of error boundaries: a message and a retry button. The error goes to `reportError`. */
 export function ErrorView({ error, reset }: ErrorViewProps) {
   const t = useTranslations("errors");
 
   useEffect(() => {
-    console.error(error);
+    reportError(error, { source: "error-boundary", digest: error.digest });
   }, [error]);
 
   return (

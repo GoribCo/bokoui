@@ -32,7 +32,7 @@ export function FilterableList() {
         className="max-w-sm"
       />
       <Tabs value={tab} onValueChange={(value) => setTab(value as ListTab)}>
-        <TabList aria-label="Status">
+        <TabList aria-label="Status" className="[&_button]:pointer-coarse:min-w-11">
           {listTabs.map((value) => (
             <Tab key={value} value={value}>
               {tabLabels[value]}

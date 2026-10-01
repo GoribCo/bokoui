@@ -1,14 +1,26 @@
 "use client";
 
+import { useRoleStore } from "@/providers/role-store-provider";
+import { useMemo } from "react";
+import { permissionsInOrganization, type PermissionId } from "@/lib/authorization";
 import { useOrganizationStore } from "@/providers/organization-store-provider";
 import { useSession } from "@/providers/session-provider";
+import { applyActiveRole } from "@/lib/access";
+import { roleSelectors } from "@/lib/stores/role-store";
 import { organizationSelectors } from "@/lib/stores/organization-store";
 import type { Organization, Role } from "@/lib/types";
 
 export interface ActiveOrganization {
   organization: Organization;
-  /** Effective roles (union) in the active organization. */
+  /** Roles the user acts with: the chosen role, or all of theirs in the active organization. */
   roles: Role[];
+  /** Every role the user holds in the active organization. */
+  allRoles: Role[];
+  /** What the roles above grant in the active organization (see `lib/authorization`). */
+  permissions: PermissionId[];
+  /** The role chosen to act as, or `null` for all roles. Only set when the user holds it here. */
+  activeRole: Role | null;
+  setActiveRole: (role: Role | null) => void;
   organizations: Organization[];
   setActiveOrganization: (organizationId: string) => void;
 }
@@ -17,7 +29,9 @@ export interface ActiveOrganization {
 export function useActiveOrganization(): ActiveOrganization {
   const session = useSession();
   const activeId = useOrganizationStore(organizationSelectors.activeOrganizationId);
-  const setActiveOrganization = useOrganizationStore(organizationSelectors.setActiveOrganization);
+  const setOrganization = useOrganizationStore(organizationSelectors.setActiveOrganization);
+  const chosenRole = useRoleStore(roleSelectors.activeRole);
+  const setActiveRole = useRoleStore(roleSelectors.setActiveRole);
 
   const organization =
     session.organizations.find((org) => org.id === activeId) ??
@@ -25,10 +39,25 @@ export function useActiveOrganization(): ActiveOrganization {
     session.organizations[0];
   if (!organization) throw new Error("The session has no organizations");
 
+  const allRoles = session.rolesByOrganization[organization.id] ?? [];
+  const roles = applyActiveRole(allRoles, chosenRole);
+  const permissions = useMemo(
+    () => permissionsInOrganization(session, organization.id, { activeRole: chosenRole }),
+    [session, organization.id, chosenRole],
+  );
+
   return {
     organization,
-    roles: session.rolesByOrganization[organization.id] ?? [],
+    roles,
+    allRoles,
+    permissions,
+    activeRole: roles.length === 1 && allRoles.length > 1 ? roles[0] : null,
+    setActiveRole,
     organizations: session.organizations,
-    setActiveOrganization,
+    // A role chosen in one organization says nothing about another: switching starts from all roles again.
+    setActiveOrganization: (organizationId) => {
+      setOrganization(organizationId);
+      setActiveRole(null);
+    },
   };
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { Alert, Badge, Button, Card, Skeleton, Text } from "bokoui/react";
+import { Badge, Button, Card, Skeleton, Text } from "bokoui/react";
+import { QueryError } from "./query-error";
 import { useMarkNotificationsRead, useNotifications } from "@/hooks/use-notifications";
 
 /** Full list for the notifications page, with the same read state as the header panel (one query cache). */
@@ -9,7 +10,7 @@ export function NotificationList() {
   const markRead = useMarkNotificationsRead();
 
   if (notifications.isPending) return <Skeleton className="h-40 w-full" aria-busy="true" />;
-  if (notifications.isError) return <Alert action="danger">{notifications.error.message}</Alert>;
+  if (notifications.isError) return <QueryError error={notifications.error} onRetry={() => void notifications.refetch()} />;
 
   const unread = notifications.data.filter((item) => item.unread).length;
 

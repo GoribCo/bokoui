@@ -1,17 +1,14 @@
-import { z } from "zod";
-import { notificationSchema } from "@/lib/schemas";
+import { endpoints } from "@/lib/contract";
 import type { Notification } from "@/lib/types";
 import { BaseService } from "./base.service";
 
-const listSchema = z.array(notificationSchema);
-
 export class NotificationService extends BaseService {
-  async list(): Promise<Notification[]> {
-    return listSchema.parse(await this.client.get("/notifications"));
+  list(): Promise<Notification[]> {
+    return this.request(endpoints.listNotifications);
   }
 
   /** Marks the given notifications read (all of them when `ids` is omitted) and returns the new list. */
-  async markRead(ids?: string[]): Promise<Notification[]> {
-    return listSchema.parse(await this.client.post("/notifications/read", ids ? { ids } : {}));
+  markRead(ids?: string[]): Promise<Notification[]> {
+    return this.request(endpoints.markNotificationsRead, { body: ids ? { ids } : {} });
   }
 }

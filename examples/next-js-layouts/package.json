@@ -7,13 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "node --experimental-transform-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./tests/register.mjs --test \"src/**/*.test.ts\"",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "check:browser": "node tests/browser/run.mjs",
+    "remove-demo": "node scripts/remove-demo.mjs",
+    "measure:bundles": "node scripts/measure-bundles.mjs",
     "build:pkg": "npm run build --prefix ../../packages/bokoui",
     "publish:local": "npm run publish:local --prefix ../../packages/bokoui"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-query": "^5.104.0",
+    "@tanstack/react-query-devtools": "^5.104.0",
     "bokoui": "^0.2.33",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -33,8 +39,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axe-core": "^4.13.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.7",
+    "puppeteer-core": "^25.12.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -34,6 +34,37 @@ export const organizations: Organization[] = [
   },
 ];
 
+/** Sample sign-ins for stress cases: `empty@…` has no organization, `many@…` has sixty with long names. */
+export const EMPTY_USER_ID = "user-empty";
+export const MANY_USER_ID = "user-many";
+
+const types = ["hospital", "pharmacy", "company"] as const;
+const manyOrganizations: Organization[] = Array.from({ length: 60 }, (_, index) => ({
+  id: `org-bulk-${index + 1}`,
+  slug: `bulk-organization-${index + 1}`,
+  name: `Regional Health Network Partner ${index + 1} of the Metropolitan Cooperative`,
+  type: types[index % types.length],
+  roles: index % 4 === 0 ? ["admin", "doctor"] : ["doctor"],
+}));
+
+/** User id for a sign-in email. */
+export const userIdForEmail = (email: string) =>
+  email.startsWith("empty@") ? EMPTY_USER_ID : email.startsWith("many@") ? MANY_USER_ID : profile.id;
+
+/** Organizations a user belongs to. */
+export function organizationsFor(userId: string): Organization[] {
+  if (userId === EMPTY_USER_ID) return [];
+  if (userId === MANY_USER_ID) return [...organizations, ...manyOrganizations];
+  return organizations;
+}
+
+/** Account data for a user id; the stress users get a generated one. */
+export function profileFor(userId: string): UserProfile {
+  return userId === profile.id
+    ? profile
+    : { id: userId, name: userId === EMPTY_USER_ID ? "Sam Newcomer" : "Rina Multi-Org", email: `${userId}@placeholder.invalid`, joinedAt: "2026-01-01" };
+}
+
 /** Public profiles: the user's organizations plus a few others, slugs unique within a type. */
 export const publicOrganizations: PublicOrganization[] = [
   {

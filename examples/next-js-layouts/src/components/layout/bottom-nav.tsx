@@ -30,8 +30,8 @@ export interface BottomNavProps {
 
 const entryClass =
   "flex h-full w-full min-w-0 flex-col items-center justify-center gap-0.5 px-1 text-caption text-muted-foreground " +
-  "focus-ring hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-primary " +
-  "data-[active]:font-medium data-[active]:text-primary [&_svg]:size-5";
+  "focus-ring hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-(--tone-ink) " +
+  "data-[active]:font-medium data-[active]:text-(--tone-ink) [&_svg]:size-5";
 
 /**
  * Mobile navigation bar (below `md`): top-level items, sub menus in a sheet above the bar, overflow

@@ -3,6 +3,7 @@ import { cache } from "react";
 import { resolveActiveOrganizationId } from "@/lib/organization/active-organization";
 import { getSession } from "@/lib/session/session";
 import { ACTIVE_ORGANIZATION_COOKIE } from "@/lib/stores/organization-store";
+import { ACTIVE_ROLE_COOKIE, parseRoleCookie } from "@/lib/stores/role-store";
 import { SIDEBAR_COOKIE, parseSidebarCookie, type UiState } from "@/lib/stores/ui-store";
 import type { Session } from "@/lib/types";
 
@@ -10,6 +11,8 @@ export interface InitialState {
   session: Session | null;
   initialOrganizationId: string | null;
   initialUi: Partial<UiState>;
+  /** Role the user chose to act as, or `null` for all roles. */
+  initialActiveRole: string | null;
 }
 
 /**
@@ -28,6 +31,7 @@ export const getInitialState = cache(async (): Promise<InitialState> => {
           session.defaultOrganizationId,
         )
       : null,
+    initialActiveRole: parseRoleCookie(cookieStore.get(ACTIVE_ROLE_COOKIE)?.value),
     initialUi: { sidebarCollapsed: parseSidebarCookie(cookieStore.get(SIDEBAR_COOKIE)?.value) },
   };
 });

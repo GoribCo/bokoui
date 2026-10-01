@@ -1,6 +1,7 @@
 "use client";
 
-import { Alert, Badge, Card, CardHeader, Grid, Heading, Inline, Skeleton, Text } from "bokoui/react";
+import { Badge, Card, CardHeader, Grid, Heading, Inline, Skeleton, Text } from "bokoui/react";
+import { QueryError } from "@/components/layout/query-error";
 import { useOrganizations } from "@/hooks/use-organizations";
 
 /** The signed-in user's organizations with their roles, read through `useOrganizations`. */
@@ -16,7 +17,7 @@ export function OrganizationList() {
       </Grid>
     );
   }
-  if (organizations.isError) return <Alert action="danger">{organizations.error.message}</Alert>;
+  if (organizations.isError) return <QueryError error={organizations.error} onRetry={() => void organizations.refetch()} />;
 
   return (
     <Grid>

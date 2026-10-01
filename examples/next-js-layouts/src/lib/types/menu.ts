@@ -16,6 +16,8 @@ export interface MenuItem {
   badge?: string | number;
   /** Item is visible when the user holds any of these roles; no value means everyone. */
   requiredRoles?: Role[];
+  /** Item is visible when the user holds at least one of these permissions in the active organization (`lib/authorization`). */
+  requiredPermissions?: string[];
 }
 
 /** Labeled section of the main navigation. */
@@ -25,4 +27,5 @@ export interface MenuGroup {
   labelKey?: string;
   items: MenuItem[];
   requiredRoles?: Role[];
+  requiredPermissions?: string[];
 }

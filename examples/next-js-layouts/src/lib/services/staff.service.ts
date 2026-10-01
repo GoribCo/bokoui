@@ -1,3 +1,4 @@
+import { endpoints } from "@/lib/contract";
 import type { StaffValues } from "@/lib/schemas/staff";
 import { BaseService } from "./base.service";
 
@@ -6,7 +7,7 @@ export interface StaffMember extends StaffValues {
 }
 
 export class StaffService extends BaseService {
-  async create(values: StaffValues): Promise<StaffMember> {
-    return this.client.post<StaffMember>("/staff", values);
+  create(values: StaffValues): Promise<StaffMember> {
+    return this.request(endpoints.createStaff, { body: values });
   }
 }

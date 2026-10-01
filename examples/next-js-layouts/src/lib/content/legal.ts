@@ -1,3 +1,5 @@
+import { siteConfig } from "@/lib/config/site";
+
 export interface LegalSection {
   /** Anchor id, also used by the table of contents. */
   id: string;
@@ -19,8 +21,8 @@ export interface LegalDocumentContent {
  * Template text for the terms of use and the privacy policy. It is written for the demo product and has
  * not been reviewed by a lawyer; the host project replaces it (or loads it from a CMS) before launch.
  */
-const company = "Bokoui Layout";
-const contact = "privacy@example.com";
+const company = siteConfig.legalName;
+const contact = siteConfig.contact.privacy;
 
 export const termsContent: LegalDocumentContent = {
   title: "Terms of use",

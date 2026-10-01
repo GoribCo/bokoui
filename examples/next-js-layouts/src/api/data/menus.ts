@@ -39,7 +39,7 @@ function departmentsTree(): MenuItem[] {
   return tree.map((item) => (item.label === "Oncology" ? { ...item, requiredRoles: ["doctor"] } : item));
 }
 
-const hospitalMenu: MenuGroup[] = [
+export const hospitalMenu: MenuGroup[] = [
   {
     id: "overview",
     label: "Overview",
@@ -68,8 +68,8 @@ const hospitalMenu: MenuGroup[] = [
     requiredRoles: ["admin"],
     items: [
       { id: "staff", label: "Staff directory", icon: "users", href: "/examples/form" },
-      { id: "admin-area", label: "Access control", icon: "shield", href: "/admin" },
-      { id: "reports", label: "Reports", icon: "bar-chart", href: "/examples/long-page" },
+      { id: "admin-area", label: "Access control", icon: "shield", href: "/admin", requiredPermissions: ["organization.access.view"] },
+      { id: "reports", label: "Reports", icon: "bar-chart", href: "/examples/long-page", requiredPermissions: ["organization.reports.view"] },
     ],
   },
 ];

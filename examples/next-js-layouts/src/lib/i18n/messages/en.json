@@ -39,7 +39,7 @@
     "home": "Home",
     "pageTitleFallback": "Dashboard",
     "noNotifications": "You're all caught up",
-    "notificationsUnread": "{count} unread",
+    "notificationsUnread": "{count, number} unread",
     "markAllRead": "Mark all as read",
     "viewAllNotifications": "View all notifications",
     "notificationTabs": {
@@ -49,6 +49,19 @@
       "invitations": "Invitations"
     }
   },
+  "search": {
+    "scopeLabel": "Search in",
+    "scope": {
+      "menu": "Menu",
+      "people": "People",
+      "organizations": "Organizations",
+      "hospitals": "Hospitals",
+      "pharmacies": "Pharmacies"
+    },
+    "noResults": "No results",
+    "minChars": "Type at least 2 characters",
+    "loading": "Searching…"
+  },
   "organization": {
     "switch": "Switch organization",
     "current": "Current organization",
@@ -57,7 +70,11 @@
     "only": "Your organization",
     "publicProfile": "Public profile",
     "workspaces": "Workspaces",
-    "manage": "Manage workspaces"
+    "manage": "Manage workspaces",
+    "role": "Acting as",
+    "allRoles": "All my roles",
+    "noneTitle": "You are not part of an organization yet",
+    "noneBody": "Ask an administrator to invite you, or contact us if you think this is a mistake."
   },
   "account": {
     "menu": "Account menu",
@@ -114,7 +131,8 @@
     "password": "Password",
     "submit": "Sign in",
     "invalidEmail": "Enter a valid email address",
-    "passwordRequired": "Enter your password"
+    "passwordRequired": "Enter your password",
+    "failed": "Could not sign in. Check your details and try again."
   },
   "errors": {
     "notFoundTitle": "Page not found",
@@ -125,7 +143,8 @@
     "backHome": "Back to home",
     "forbiddenTitle": "Not authorized",
     "forbiddenBody": "You do not have a role that can open this page.",
-    "loading": "Loading"
+    "loading": "Loading",
+    "loadFailed": "This could not be loaded."
   },
   "displaySettings": {
     "theme": "Theme",

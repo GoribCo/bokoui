@@ -5,6 +5,8 @@
  * backend means changing `NEXT_PUBLIC_API_BASE_URL` and deleting this folder.
  */
 
+import type { ErrorCode } from "@/lib/contract";
+
 export interface ApiContext {
   method: string;
   /** Values of `:name` segments in the matched path. */
@@ -15,8 +17,16 @@ export interface ApiContext {
   cookies: Record<string, string>;
 }
 
+/** A cookie a handler asks the router to set; `maxAge: 0` clears it. Always httpOnly, sameSite lax. */
+export interface ApiCookie {
+  name: string;
+  value: string;
+  maxAge: number;
+}
+
 export interface ApiResult<T = unknown> {
   results: T;
+  cookies?: ApiCookie[];
   /** Paging block for lists. */
   meta?: ApiPageMeta;
   status?: number;
@@ -36,7 +46,9 @@ export class HttpError extends Error {
   constructor(
     readonly status: number,
     message: string,
-    readonly code?: string,
+    readonly code?: ErrorCode,
+    /** Name of the offending field for validation errors. */
+    readonly field?: string,
   ) {
     super(message);
   }

@@ -14,6 +14,7 @@ class SessionQuery extends BaseQuery {
       initialData: initialSession,
       enabled: initialSession !== null,
       staleTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: true, // another tab may have signed out or changed roles
     });
   }
 }

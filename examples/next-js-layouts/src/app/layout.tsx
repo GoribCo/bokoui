@@ -1,8 +1,10 @@
 import { getLocale } from "next-intl/server";
 import { ThemeScript } from "bokoui/react/theme-script";
+import { ThemeDefaultsScript } from "@/components/appearance/theme-defaults-script";
 import { FontScript } from "@/components/appearance/font-script";
 import { FontSizeScript } from "@/components/appearance/font-size-script";
 import { features } from "@/lib/config/features";
+import { localeMeta, type LocaleCode } from "@/lib/i18n/config";
 import { getInitialState } from "@/lib/session/initial-state";
 import { fontVariableClassName } from "@/lib/fonts/fonts";
 import { rootMetadata, rootViewport } from "@/lib/seo";
@@ -19,12 +21,14 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     // suppressHydrationWarning: ThemeScript sets data-theme/data-mode before React hydrates.
     <html
       lang={locale}
+      dir={localeMeta[locale as LocaleCode]?.dir ?? "ltr"}
       data-theme="flat"
       data-mode="light"
       suppressHydrationWarning
       className={`${fontVariableClassName} h-full antialiased`}
     >
       <head>
+        <ThemeDefaultsScript />
         <ThemeScript customThemes={customThemes} />
         <FontSizeScript />
         {features.fontSwitcher ? <FontScript /> : null}

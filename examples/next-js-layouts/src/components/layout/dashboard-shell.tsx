@@ -9,15 +9,20 @@ import { DisplaySettingsMenu } from "@/components/appearance/display-settings-me
 import { CommonMenu } from "@/components/navigation/common-menu";
 import { MenuBreadcrumbs } from "@/components/navigation/menu-breadcrumbs";
 import { MenuTree } from "@/components/navigation/menu-tree";
+import { RoleSwitcher } from "@/components/organization/role-switcher";
 import { OrganizationSwitcher } from "@/components/organization/organization-switcher";
 import { useActiveOrganization } from "@/hooks/use-active-organization";
 import { useMenu } from "@/hooks/use-menu";
 import { useMenuTranslator } from "@/hooks/use-menu-translator";
 import { useCommonMenu } from "@/hooks/use-common-menu";
+import { useLogout } from "@/hooks/use-auth";
+import { useShortcuts } from "@/hooks/use-shortcuts";
 import { useMarkNotificationsRead, useNotifications } from "@/hooks/use-notifications";
 import { useOrganizationMenu } from "@/hooks/use-organization-menu";
 import { DASHBOARD_PATH } from "@/lib/config/auth";
-import { findActiveTrail, localizeMenu } from "@/lib/menu";
+import { features } from "@/lib/config/features";
+import { shortcuts } from "@/lib/config/shortcuts";
+import { findActiveTrail, flattenMenu, localizeMenu } from "@/lib/menu";
 import { useSession } from "@/providers/session-provider";
 import { uiSelectors } from "@/lib/stores/ui-store";
 import { useUiStore } from "@/providers/ui-store-provider";
@@ -26,6 +31,7 @@ import { AppShell } from "./app-shell";
 import { BottomNav } from "./bottom-nav";
 import { Branding } from "./branding";
 import { Footer } from "./footer";
+import { QueryError } from "./query-error";
 import { Header } from "./header";
 import { HeaderSearch } from "./header-search";
 import { MobileDrawer } from "./mobile-drawer";
@@ -49,7 +55,6 @@ export interface DashboardShellProps {
   /** Current year for the copyright line, passed from the server so both renders agree. */
   year: number;
   /** Injected sign-out handler (a Server Action in this demo). */
-  onLogout: () => void | Promise<void>;
   children: ReactNode;
 }
 
@@ -66,13 +71,12 @@ export function DashboardShell({
   styleSwitcher = true,
   manageOrganizationsHref,
   year,
-  onLogout,
   children,
 }: DashboardShellProps) {
   const t = useTranslations();
   const pathname = usePathname();
   const { user } = useSession();
-  const { organization, organizations, setActiveOrganization } =
+  const { organization, organizations, setActiveOrganization, allRoles, activeRole, setActiveRole } =
     useActiveOrganization();
   const translate = useMenuTranslator();
 
@@ -80,6 +84,7 @@ export function DashboardShell({
   const commonMenuQuery = useCommonMenu();
   const notificationsQuery = useNotifications();
   const markRead = useMarkNotificationsRead();
+  const logout = useLogout();
   const menu = useMenu(menuQuery.data ?? NO_GROUPS);
   const common = useMemo(
     () =>
@@ -119,6 +124,8 @@ export function DashboardShell({
     setBottomNavMoreOpen,
   } = useUiStore(uiSelectors.actions);
 
+  useShortcuts({ toggleSidebar });
+
   const switcherLabels = {
     switch: t("organization.switch"),
     search: t("organization.search"),
@@ -132,6 +139,7 @@ export function DashboardShell({
   };
 
   const switcher = (railCollapsed: boolean, inDrawer = false) => (
+    <div className="flex flex-col gap-2">
     <OrganizationSwitcher
       organizations={organizations}
       activeOrganizationId={organization.id}
@@ -141,6 +149,15 @@ export function DashboardShell({
       manageHref={manageOrganizationsHref}
       labels={switcherLabels}
     />
+    {railCollapsed ? null : (
+      <RoleSwitcher
+        roles={allRoles}
+        activeRole={activeRole}
+        onChange={setActiveRole}
+        labels={{ role: t("organization.role"), allRoles: t("organization.allRoles") }}
+      />
+    )}
+    </div>
   );
   const navigation = (railCollapsed: boolean, onNavigate?: () => void) =>
     menuQuery.isPending ? (
@@ -148,6 +165,10 @@ export function DashboardShell({
         {Array.from({ length: 6 }, (_, index) => (
           <Skeleton key={index} className="h-9 w-full" />
         ))}
+      </div>
+    ) : menuQuery.isError ? (
+      <div className="p-1">
+        <QueryError error={menuQuery.error} onRetry={() => void menuQuery.refetch()} compact />
       </div>
     ) : (
       <MenuTree
@@ -169,13 +190,21 @@ export function DashboardShell({
       heading={t("common.resources")}
     />
   );
+  // The menu scope of the header search: every linked item of the menu the user can see.
+  const menuSearchEntries = useMemo(
+    () =>
+      flattenMenu(menu)
+        .filter(({ item }) => item.href)
+        .map(({ item, group }) => ({ id: item.id, title: item.label, subtitle: group.label || undefined, href: item.href })),
+    [menu],
+  );
   const pageTitle =
     findActiveTrail(menu, pathname)?.items.at(-1)?.label ?? t("shell.pageTitleFallback");
   const account = (railCollapsed: boolean, inDrawer = false) => (
     <AccountMenu
       user={user}
       items={accountItems}
-      onLogout={onLogout}
+      onLogout={() => logout.mutate()}
       collapsed={railCollapsed}
       placement={inDrawer ? "top-start" : "right-end"}
       labels={accountLabels}
@@ -211,6 +240,7 @@ export function DashboardShell({
               labels={{
                 collapse: t("shell.collapseSidebar"),
                 expand: t("shell.expandSidebar"),
+                shortcut: features.keyboardShortcuts ? shortcuts.toggleSidebar : undefined,
                 openMenu: t("shell.openMenu"),
               }}
             />
@@ -228,8 +258,22 @@ export function DashboardShell({
           }
           search={
             <HeaderSearch
-              label={t("shell.search")}
-              placeholder={t("shell.searchPlaceholder")}
+              menuEntries={menuSearchEntries}
+              labels={{
+                search: t("shell.search"),
+                placeholder: t("shell.searchPlaceholder"),
+                scope: t("search.scopeLabel"),
+                scopeNames: {
+                  menu: t("search.scope.menu"),
+                  people: t("search.scope.people"),
+                  organizations: t("search.scope.organizations"),
+                  hospitals: t("search.scope.hospitals"),
+                  pharmacies: t("search.scope.pharmacies"),
+                },
+                noResults: t("search.noResults"),
+                minChars: t("search.minChars"),
+                loading: t("search.loading"),
+              }}
             />
           }
           notifications={

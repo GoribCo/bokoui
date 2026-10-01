@@ -2,9 +2,11 @@
 
 import { Bell, CalendarClock, CircleCheck, ClipboardCheck, MailPlus, type LucideIcon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "bokoui/react";
 import { Popover, Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
+import { features } from "@/lib/config/features";
+import { shortcuts } from "@/lib/config/shortcuts";
 import type { Notification } from "@/lib/types";
 
 export type NotificationTab = "all" | "unread" | "urgent" | "invitations";
@@ -73,6 +75,7 @@ export function NotificationsButton({ labels, items = [], onMarkRead, viewAllHre
   const isUnread = (item: Notification) => item.unread;
   const count = items.filter(isUnread).length;
   const [tab, setTab] = useState<NotificationTab>("all");
+  const panelRef = useRef<HTMLDivElement>(null);
   const matches: Record<NotificationTab, (item: Notification) => boolean> = {
     all: () => true,
     unread: isUnread,
@@ -94,6 +97,9 @@ export function NotificationsButton({ labels, items = [], onMarkRead, viewAllHre
           className="relative"
           aria-label={count > 0 ? `${labels.title}, ${labels.unread(count)}` : labels.title}
           aria-haspopup="dialog"
+          data-shortcut="notifications"
+          aria-keyshortcuts={features.keyboardShortcuts ? shortcuts.notifications.keyshortcuts : undefined}
+          title={features.keyboardShortcuts ? `${labels.title} (${shortcuts.notifications.hint})` : undefined}
         >
           <Bell aria-hidden="true" />
           {count > 0 ? (
@@ -102,20 +108,28 @@ export function NotificationsButton({ labels, items = [], onMarkRead, viewAllHre
         </Button>
       }
     >
-      <div className="flex flex-col">
+      <div ref={panelRef} className="flex flex-col">
         <div className="flex items-center justify-between gap-3 border-b border-border px-3 py-2.5">
           <div className="flex min-w-0 flex-col">
             <h2 className="text-nav font-semibold">{labels.title}</h2>
             {count > 0 ? <span className="text-caption text-muted-foreground">{labels.unread(count)}</span> : null}
           </div>
           {count > 0 ? (
-            <Button size="sm" variant="ghost" onClick={() => onMarkRead()}>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => {
+                // The button disappears once nothing is unread; keep focus in the panel so Escape still works.
+                panelRef.current?.querySelector<HTMLElement>('[role="tab"][aria-selected="true"]')?.focus();
+                onMarkRead();
+              }}
+            >
               {labels.markAllRead}
             </Button>
           ) : null}
         </div>
         <Tabs value={tab} onValueChange={(value) => setTab(value as NotificationTab)}>
-          <TabList aria-label={labels.title} className="overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_button]:px-2 [&_button]:text-[0.8125rem]">
+          <TabList aria-label={labels.title} className="overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_button]:px-2 [&_button]:text-[0.8125rem] [&_button]:pointer-coarse:min-w-11">
             {tabs.map((value) => {
               const total = items.filter(matches[value]).length;
               return (

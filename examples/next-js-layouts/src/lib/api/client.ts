@@ -1,4 +1,5 @@
 import { ApiError } from "./errors";
+import { notifySessionExpired } from "./session-expiry";
 
 export interface PageMeta {
   total: number;
@@ -31,7 +32,13 @@ interface Envelope<T> {
   meta?: PageMeta;
   message?: string;
   code?: string;
+  field?: string;
 }
+
+let refreshing: Promise<boolean> | undefined;
+
+/** Paths that never trigger a refresh: they are how a session starts or ends. */
+const AUTH_PATH = /^\/auth\//;
 
 function withQuery(path: string, params?: QueryParams): string {
   if (!params) return path;
@@ -71,10 +78,11 @@ export class ApiClient {
     return { baseUrl, cookie: shared ? "" : (await cookies()).toString() };
   }
 
-  private async execute<T>(path: string, init: RequestInit = {}, cache?: CacheOptions): Promise<Envelope<T>> {
+  private async send<T>(path: string, init: RequestInit, cache?: CacheOptions) {
     const { baseUrl, cookie } = await this.target(Boolean(cache));
     const response = await fetch(`${baseUrl}${path}`, {
       ...init,
+      credentials: "include",
       ...(cache ? { next: { revalidate: cache.revalidate, tags: cache.tags } } : { cache: "no-store" as const }),
       headers: {
         ...(init.body ? { "Content-Type": "application/json" } : {}),
@@ -82,9 +90,31 @@ export class ApiClient {
       },
     });
     const text = await response.text();
-    const body = (text ? JSON.parse(text) : {}) as Envelope<T>;
+    return { response, body: (text ? JSON.parse(text) : {}) as Envelope<T> };
+  }
+
+  /** Browser only: asks the API for a new token pair (cookies are set by the answer). One refresh at a time. */
+  private refreshSession(): Promise<boolean> {
+    refreshing ??= this.send("/auth/refresh", { method: "POST" })
+      .then(({ response }) => response.ok)
+      .catch(() => false)
+      .finally(() => {
+        refreshing = undefined;
+      });
+    return refreshing;
+  }
+
+  private async execute<T>(path: string, init: RequestInit = {}, cache?: CacheOptions): Promise<Envelope<T>> {
+    let { response, body } = await this.send<T>(path, init, cache);
+
+    // Expired access token: refresh once and retry. On the server the proxy has already refreshed.
+    if (response.status === 401 && typeof window !== "undefined" && !AUTH_PATH.test(path)) {
+      if (await this.refreshSession()) ({ response, body } = await this.send<T>(path, init, cache));
+      if (response.status === 401) notifySessionExpired();
+    }
+
     if (!response.ok || body.success === false) {
-      throw new ApiError(response.status, body.message ?? response.statusText, body.code);
+      throw new ApiError(response.status, body.message ?? response.statusText, body.code, body.field);
     }
     return body;
   }
