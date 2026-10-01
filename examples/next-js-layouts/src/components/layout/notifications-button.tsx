@@ -128,7 +128,7 @@ export function NotificationsButton({ labels, items = [], viewAllHref }: Notific
           ) : null}
         </div>
         <Tabs value={tab} onValueChange={(value) => setTab(value as NotificationTab)}>
-          <TabList aria-label={labels.title} className="overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_button]:px-2.5">
+          <TabList aria-label={labels.title} className="overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_button]:px-2 [&_button]:text-[0.8125rem]">
             {tabs.map((value) => {
               const total = items.filter(matches[value]).length;
               return (
