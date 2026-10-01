@@ -1,7 +1,7 @@
 # Software Requirements Specification: Layout Hardening Before Real Data
 
 Extends: [srs-layouts.md](srs-layouts.md) (the shell itself) and [plan-layouts-reference-ui.md](../plan-layouts-reference-ui.md) (the reference UI alignment).
-Version: 0.3 (draft) | Date: 2026-10-01
+Version: 0.4 (draft) | Date: 2026-10-01
 Host project reviewed: `/Users/wl/Workspace/projects/goribco/rxprofile/apps/web` (read-only review; see section 2.6 and appendix A)
 
 ## 1. Introduction
@@ -57,7 +57,7 @@ M = must do before copying, S = should do, C = could do. Items marked **First** 
 |---|---|---|
 | HD-3.1 | The shell is checked with: a menu of 300+ items, 5 levels of nesting, 50+ organizations, very long organization, user and menu names, and a user with zero organizations (a clear empty state, no crash) | M |
 | HD-3.2 | When the menu fails to load, the sidebar shows an error with retry, and the rest of the shell stays usable | M |
-| HD-3.3 | Header search either opens a command palette (`Ctrl+K`, using the menu as its first source) or is removed; it must not stay as an inactive box | S |
+| HD-3.3 | Header search has a scope dropdown for the content area (people, organizations, hospitals, the menu, ...) and returns results for the chosen scope; it opens with `Ctrl+K`; it must not stay as an inactive box (D9) | S |
 | HD-3.4 | Every route group has `loading.tsx`, `error.tsx` and `not-found.tsx` that use the shell; a skeleton exists for the whole shell on first load | S |
 | HD-3.5 | Keyboard shortcuts for the common actions (toggle sidebar, open search, open notifications) with a visible hint in the tooltip, and a way to turn them off | C |
 | HD-3.6 | Stub pages (`/organizations`, `/notifications`, `/account`, `/settings/privacy`, `/help`, `/contact`) are listed in the README as "replace before launch" | M |
@@ -84,6 +84,23 @@ M = must do before copying, S = should do, C = could do. Items marked **First** 
 | HD-5.7 | Error reporting hook: a single place to send client and server errors to a monitoring service | C |
 
 ### 2.6 Alignment with the host project (rxprofile/apps/web) (Decide first)
+**Decisions recorded (owner, 2026-10-01).** They override the "recommended" text in the rows below where they differ.
+
+| Decision | Outcome | Affects |
+|---|---|---|
+| D1 Direction | This example is the future application. bokoui replaces the host's UI (the owner dislikes the shadcn look); functionality stays the same. The host is **not** adapted to the example. Only the good parts of rxprofile are imported into the example; the owner will move the rest later. The host stays read-only | HD-6.1, all of 2.6 |
+| D2 Auth | The host's model: client-side JWT access and refresh tokens, `RouteGuard`, `AuthProvider`. The example's cookie session, `proxy.ts` and server redirects are replaced by it | HD-6.4, HD-7.5, HD-2.5, HD-5.2 |
+| D3 Authorization and workspace | The host's: scoped permission evaluator (`evaluate`, `<Can>`, `useAuth().can`) and URL-scoped workspaces (`/workplaces/{slug}/...`). The example's `lib/access` and organization store are removed once ported | HD-6.2, HD-6.3, HD-8.6 |
+| D4 i18n | `next-intl` with typed messages (English defines the type, other languages are checked against it); from `@rxprofile/i18n` import only the typing rule, the separate content language and existing translations. The deploy target is a server runtime, so cookie locale and server rendering stay | HD-6.5, HD-1.5, HD-5.4 |
+| D5 zod | Latest zod; no downgrade to the host's 3.25 | HD-6.17 |
+| D6 Mobile navigation | Bottom navigation with a drawer (the example's pattern); no section tabs | HD-6.15 |
+| D7 State | Zustand stays for interface state (sidebar collapsed, "More" sheet) | HD-8.6 |
+| D8 Deploy target | Server runtime; the app makes many server API calls. Server fetching and cookies stay allowed | HD-7.3, HD-6.4 |
+| D9 Search | Header search stays and gets a scope dropdown to pick the content area (people, organizations, hospitals, ...); the menu is one more scope. Not a command palette only | HD-3.3 |
+| D10 Languages, RTL, monitoring | Languages are not a concern; RTL and monitoring service not decided (low priority) | HD-5.4, HD-5.7 |
+
+Because of D1, the items in this section describe what to **import into the example**, not how to adapt the example to the host.
+
 The host app already contains a working shell of its own (`DashboardLayout`, `AppSidebar`, `WorkspaceSwitcher`, `AccountMenu`, `FeatureTabs`, `MobileSectionTabs`) built on shadcn/ui, and the workspace switcher labels ("Workspaces", "Manage workspaces", "Personal Healthcare") match the reference screenshots. So this example is not a first shell for that project. Its value is the patterns and fixes it adds to an existing one. Details are in appendix A.
 
 | ID | Requirement | P |
@@ -192,8 +209,8 @@ The rule is that each kind of state has one owner, and no state is copied from o
 7. A failed menu request, an expired session and a user with no organizations each show a defined screen, not a blank page or a crash.
 
 ## 5. Open questions
-0. How does bokoui enter the host (HD-6.1): replace shadcn in one go, or screen by screen behind the host's own `components/ui` re-exports? Almost every other answer depends on it.
-1. Does the host stay on client-side JWT auth (HD-6.4), or will it move to cookie sessions? That decides whether the proxy and server redirects are copied.
+0. ~~How does bokoui enter the host?~~ Decided (D1): the example is the future app, bokoui replaces the host UI.
+1. ~~Client JWT or cookies?~~ Decided (D2): client JWT. Deploy target decided (D8): server runtime.
 2. Will the host project run a command palette (HD-3.3), or should search be removed?
 3. The host already has English, Bangla and Hindi; are any more planned, and does any need right-to-left (HD-5.4)?
 4. Is a monitoring service already chosen (HD-5.7)?

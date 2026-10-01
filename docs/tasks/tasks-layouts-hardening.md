@@ -9,16 +9,16 @@ Working rules:
 - Tick the checkbox when a task is finished. When a phase 0 decision changes the scope of a later task, note the decision next to that task.
 
 ## Phase 0: Decisions before any work (SRS 2.6, section 5)
-Record each answer in the host's docs (HD-6.19) and in the README of the example.
-- [ ] T0.1 [M] HD-6.1 Choose how bokoui enters the host: replace shadcn in one go, or screen by screen behind the host's `components/ui` re-exports. The owner already rejected shadcn (shadcn copy rejected); the open part is the migration path
-- [ ] T0.2 [M] HD-6.4 Choose the auth model: keep the host's client JWT (drop `proxy.ts` and the server session from the copy) or move to httpOnly cookies. Confirm how the host is deployed today (GitHub Pages static export vs server runtime). Do not mix both
-- [ ] T0.3 [M] HD-6.2 Decide authorization: re-express menu filtering and guards on the host's `evaluate`, `<Can>`, `useAuth().can`; plan removal of `lib/access`
-- [ ] T0.4 [M] HD-6.3 Decide workspace model: URL-scoped (`/workplaces/{slug}/...`) as in the host; keep this switcher only as a visual pattern
-- [ ] T0.5 [M] HD-6.5 Decide i18n: move messages into `@rxprofile/i18n` (`en`, `bn`, `hi`) and drop `next-intl` in the copy
-- [ ] T0.6 [M] HD-6.17 Decide dependency alignment: rewrite schemas for `zod` ^3.25 or upgrade the host first; add `zustand` and `nuqs` only if needed (ties to T0.7)
-- [ ] T0.7 [M] HD-8.6 Decide state libraries: keep host providers or add Zustand; query hooks and nuqs stay either way
-- [ ] T0.8 [M] HD-6.15 Choose one mobile navigation pattern: bottom nav and drawer, or `MobileSectionTabs` and `FeatureTabs`
-- [ ] T0.9 [S] Answer open questions 2 to 4: command palette or remove search (HD-3.3), extra languages and RTL (HD-5.4), monitoring service (HD-5.7)
+Decisions are logged in SRS 2.6 (D1 to D7).
+- [x] T0.1 [M] HD-6.1 D1: the example is the future app; bokoui replaces the host UI; import only the good parts of rxprofile; host stays read-only
+- [x] T0.2 [M] HD-6.4 D2: host client JWT (access and refresh tokens, `RouteGuard`, `AuthProvider`); replace the example's cookie session and `proxy.ts`
+- [x] T0.3 [M] HD-6.2 D3: host scoped authorization (`evaluate`, `<Can>`, `useAuth().can`); remove `lib/access` after porting
+- [x] T0.4 [M] HD-6.3 D3: URL-scoped workspace (`/workplaces/{slug}/...`); remove the organization store after porting
+- [x] T0.5 [M] HD-6.5 D4: `next-intl` with typed messages; import only the typing rule, content language idea and translations from rxprofile
+- [x] T0.6 [M] HD-6.17 D5: latest zod
+- [x] T0.7 [M] HD-8.6 D7: Zustand stays for interface state
+- [x] T0.8 [M] HD-6.15 D6: bottom navigation with a drawer
+- [x] T0.9 [S] D8 server runtime; D9 search with content-area scope dropdown; D10 RTL and monitoring undecided (low priority)
 
 ## Phase 1: Verification and tests (SRS 2.1, 2.8, 2.7)
 - [ ] T1.1 [M] HD-1.1 Unit tests: menu filtering by role, flattening, active-trail lookup, `can()` and active-roles helpers, `safeReturnPath`, `isPublicPath`
@@ -53,12 +53,12 @@ Already done: sample backend over HTTP, services with Zod validation, hooks, not
 - [ ] T3.6 [M] HD-7.1 Enforce layering with ESLint or an import-boundary check: components must not import `lib/api`, `lib/services` or `fetch`; services must not import hooks or components; only `lib/api/server.ts` imports `next/headers` for data
 - [ ] T3.7 [M] HD-7.2 Enforce naming with `no-restricted-imports`: `use-*.ts` never imports `@tanstack/react-query` (extends `BaseQuery`); query keys only in `lib/query/keys.ts`; services are `<Resource>Service` classes extending `BaseService`
 - [ ] T3.8 [M] HD-7.4 One contract for every endpoint (OpenAPI or shared Zod schemas) used by `src/api` and the services; list error codes and the paging `meta` shape
-- [ ] T3.9 [M] HD-7.5 Auth endpoints `POST /auth/login`, `/auth/refresh`, `/auth/logout`; move 401, refresh, retry into `ApiClient` (skip if T0.2 chooses the cookie model)
+- [ ] T3.9 [M] HD-7.5 Auth endpoints `POST /auth/login`, `/auth/refresh`, `/auth/logout`; move 401, refresh, retry into `ApiClient` (D2: client JWT; replaces the cookie session and server actions)
 - [ ] T3.10 [M] HD-7.11 Global `QueryClient` defaults plus error boundary: failed query shows a defined message with retry; 401 signs out with return path; 403 shows the forbidden view
 - [ ] T3.11 [M] HD-2.4 Central handler for 401 (clear state, redirect to sign-in with return path) and 403 (forbidden view); share with T3.10
 - [ ] T3.12 [M] HD-2.5 Document the session seam (`getSession`, the proxy, sign-in and sign-out actions) with one provider example; refuse the mock cookie when `NODE_ENV` is production
 - [ ] T3.13 [S] HD-2.8 Active role switching for users with several roles in an organization; menus and checks follow it
-- [ ] T3.14 [S] HD-7.3 Check one instance per service and one client for both environments; cacheable requests carry no cookies (delete the server branch if the host stays client-only)
+- [ ] T3.14 [S] HD-7.3 Check one instance per service and one client for both environments; cacheable requests carry no cookies (D2 is client-only auth: delete the server branch unless the deploy target needs it)
 - [ ] T3.15 [S] HD-7.6 Every mutation hook declares its cache effect (optimistic with rollback, or invalidate)
 - [ ] T3.16 [S] HD-7.7 One query-string convention (`page`, `pageSize`, `q`, `status`, `sort`) and one `meta`; list hooks keep previous page and debounce text
 - [ ] T3.17 [S] HD-7.8 Prefetch only first-paint data in layouts (`commonMenu`, active organization menu) with the same key and service call as the hook
@@ -74,7 +74,7 @@ Already done: sample backend over HTTP, services with Zod validation, hooks, not
 ## Phase 5: Shell edge cases (SRS 2.3)
 - [ ] T5.1 [M] HD-3.1 Stress data: 300+ menu items, 5 levels, 50+ organizations, very long names, user with zero organizations (empty state, no crash)
 - [ ] T5.2 [M] HD-3.2 Menu load failure: sidebar error with retry, rest of shell usable (with T3.5)
-- [ ] T5.3 [S] HD-3.3 Header search: command palette (`Ctrl+K`, menu as first source) or remove it (per T0.9)
+- [ ] T5.3 [S] HD-3.3 Header search with a scope dropdown (people, organizations, hospitals, menu), `Ctrl+K`, results per scope via a search service (D9)
 - [ ] T5.4 [S] HD-3.4 `loading.tsx`, `error.tsx`, `not-found.tsx` in every route group using the shell; whole-shell first-load skeleton
 - [ ] T5.5 [C] HD-3.5 Keyboard shortcuts (toggle sidebar, search, notifications) with tooltip hints and an off switch
 - [ ] T5.6 [M] HD-6.14 Keep shell-less routes (`/print/*`, public display screens) free of shell, sidebar and header
@@ -87,7 +87,8 @@ Already done: sample backend over HTTP, services with Zod validation, hooks, not
 - [ ] T6.5 [S] HD-5.5 SEO: Open Graph image, structured data on organization profiles, custom 404, canonical URL on public pages
 - [ ] T6.6 [C] HD-5.7 Single error-reporting hook for client and server errors
 
-## Phase 7: Alignment with the host (SRS 2.6, 2.7), after Phase 0 decisions
+## Phase 7: Import the good parts of the host (SRS 2.6, 2.7), after Phase 0 decisions
+Per D1 these tasks port selected rxprofile pieces into the example (read-only on rxprofile). Tasks that name "the host" mean rxprofile as the source.
 - [ ] T7.1 [M] HD-6.6, HD-7.10 Map `lib/services` and hooks onto the host's layering; keep service and method names; decide classes vs the host's function style
 - [ ] T7.2 [M] HD-6.7 Reuse the host `apiClient`; add only the global 401-to-sign-out handler and a typed 403
 - [ ] T7.3 [M] HD-6.8 Map menu schema to `@rxprofile/types`; public UUIDv7 IDs and slugs in URLs
