@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { RETURN_TO_PARAM, SESSION_COOKIE, SIGN_IN_PATH } from "@/lib/config/auth";
+import { DASHBOARD_PATH, RETURN_TO_PARAM, SESSION_COOKIE, SIGN_IN_PATH } from "@/lib/config/auth";
 import { isPublicPath } from "@/lib/auth/paths";
 
 /**
@@ -11,8 +11,10 @@ export function proxy(request: NextRequest) {
   const signedIn = request.cookies.has(SESSION_COOKIE);
 
   if (isPublicPath(pathname)) {
-    // A signed-in user has no reason to see the sign-in form.
-    if (signedIn && pathname === SIGN_IN_PATH) return NextResponse.redirect(new URL("/", request.url));
+    // A signed-in user has no reason to see the landing page or the sign-in form.
+    if (signedIn && (pathname === "/" || pathname === SIGN_IN_PATH)) {
+      return NextResponse.redirect(new URL(DASHBOARD_PATH, request.url));
+    }
     return NextResponse.next();
   }
 

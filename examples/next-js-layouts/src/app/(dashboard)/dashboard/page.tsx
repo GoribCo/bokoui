@@ -10,7 +10,7 @@ import type { LocaleCode } from "@/lib/types";
 export const metadata = buildMetadata({
   title: "Dashboard",
   description: "Overview of the active organization.",
-  path: "/",
+  path: "/dashboard",
 });
 
 const stats = [
