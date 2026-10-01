@@ -102,10 +102,10 @@ Per D1 these tasks port selected rxprofile pieces into the example (read-only on
 - [-] T7.10 [S] HD-6.19 Document the shell in the host's `apps/web/CLAUDE.md` and `src/app/README.md`; fix stale README sections (skipped: the owner chose to import only the permission evaluator, 2026-10-01; revisit when the code moves into the host)
 
 ## Acceptance (SRS section 4)
-- [ ] A1 `npm run check` passes; browser script clean across all routes, 3 widths, 8 styles, 2 modes
-- [ ] A2 App runs against the mock and a stub HTTP server with no component changes
-- [ ] A3 Fresh copy plus README checklist plus demo deletion builds and signs in with another data source
-- [ ] A4 No file outside the config module contains the product name or demo emails
-- [ ] A5 Any new component, hook or service traces through the section 2.7 layers; `src/api` removable by changing `NEXT_PUBLIC_API_BASE_URL` and service bodies
-- [ ] A6 Section 2.6 decisions written in the host docs; no copied file uses a second i18n system, authorization model, API client or router convention
-- [ ] A7 Failed menu request, expired session and zero organizations each show a defined screen
+- [x] A1 `npm run check` passes; browser script clean across all routes, 3 widths, 8 styles, 2 modes (final run 2026-10-01: 1,104 sweep checks, 0 problems)
+- [ ] A2 (not verified: never run against a separate stub HTTP server) App runs against the mock and a stub HTTP server with no component changes
+- [ ] A3 (demo deletion and build verified on a clone; sign-in against a different data source not verified) Fresh copy plus README checklist plus demo deletion builds and signs in with another data source
+- [x] A4 No file outside the config module contains the product name or demo emails (enforced by `src/lib/config/branding.test.ts`; the sample backend in `src/api` is exempt)
+- [x] A5 (nothing outside `src/api` and `src/app/api` imports `@/api`; layering enforced by ESLint) Any new component, hook or service traces through the section 2.7 layers; `src/api` removable by changing `NEXT_PUBLIC_API_BASE_URL` and service bodies
+- [-] A6 (skipped: D1 says the host is not modified; the second half holds in the example: one i18n system, one authorization model, one API client) Section 2.6 decisions written in the host docs; no copied file uses a second i18n system, authorization model, API client or router convention
+- [ ] A7 (zero organizations verified; the failed-menu retry state and the expired-session redirect are built but not exercised in a browser) Failed menu request, expired session and zero organizations each show a defined screen
