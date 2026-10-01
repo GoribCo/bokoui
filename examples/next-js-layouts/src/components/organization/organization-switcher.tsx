@@ -148,7 +148,7 @@ export function OrganizationSwitcher({
         if (!next) setQuery("");
       }}
       aria-label={labels.switch}
-      className="w-72"
+      className="w-72 p-1"
     >
       <div data-org-panel className="flex flex-col gap-1">
         <p className="px-2 pt-1 text-caption text-muted-foreground">{labels.workspaces}</p>
@@ -191,14 +191,17 @@ export function OrganizationSwitcher({
           </ul>
         )}
         {manageHref ? (
-          <Link
-            href={manageHref}
-            prefetch={false}
-            onClick={() => setOpen(false)}
-            className="mt-1 border-t border-border px-2 pt-2 pb-1 text-nav hover:underline focus-ring"
-          >
-            {labels.manage}
-          </Link>
+          <>
+            <hr aria-hidden="true" className="mx-2 my-1 border-border" />
+            <Link
+              href={manageHref}
+              prefetch={false}
+              onClick={() => setOpen(false)}
+              className={`${rowClass} hover:bg-muted`}
+            >
+              {labels.manage}
+            </Link>
+          </>
         ) : null}
       </div>
     </Popover>
