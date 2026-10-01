@@ -39,7 +39,14 @@ export function MobileDrawer({
   }, [pathname]);
 
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} side="left" size="sm" title={title} closeLabel={closeLabel}>
+    <Drawer
+      open={open}
+      onOpenChange={onOpenChange}
+      side="left"
+      size="sm"
+      title={title}
+      closeLabel={closeLabel}
+    >
       {open ? (
         <div data-tone="primary" className="group/sidebar flex flex-col gap-4">
           {organizationSwitcher}

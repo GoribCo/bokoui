@@ -24,8 +24,7 @@ export function Header({
 }: HeaderProps) {
   return (
     <header className="shrink-0 border-b border-border bg-background">
-      {/* Same max width and side padding as PageContainer, so header, page and footer line up. */}
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-2 px-4 sm:px-6">
+      <div className="flex h-14 w-full items-center gap-2 px-4 sm:px-6">
         {menuButton ? <div className="md:hidden">{menuButton}</div> : null}
         <div className="shrink-0">{branding}</div>
         <div className="hidden min-w-0 flex-1 md:block md:ps-4">

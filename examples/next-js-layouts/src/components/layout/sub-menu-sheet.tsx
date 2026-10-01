@@ -19,7 +19,14 @@ export interface SubMenuSheetProps {
  * Bottom sheet above the bottom navigation, for an item with children and for the "More" overflow
  * (FR-6.2). It is a native dialog, so focus is trapped and Escape closes it.
  */
-export function SubMenuSheet({ open, onOpenChange, title, items, pathname, closeLabel }: SubMenuSheetProps) {
+export function SubMenuSheet({
+  open,
+  onOpenChange,
+  title,
+  items,
+  pathname,
+  closeLabel,
+}: SubMenuSheetProps) {
   return (
     <Drawer
       side="bottom"

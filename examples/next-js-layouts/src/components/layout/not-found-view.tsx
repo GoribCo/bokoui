@@ -12,7 +12,11 @@ export async function NotFoundView() {
       title={t("notFoundTitle")}
       description={t("notFoundBody")}
       actions={
-        <Link href="/" data-tone="primary" className={buttonClass({ variant: "outline" })}>
+        <Link
+          href="/"
+          data-tone="primary"
+          className={buttonClass({ variant: "outline" })}
+        >
           {t("backHome")}
         </Link>
       }

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { buttonClass } from "bokoui/core";
 import { AppearanceMenu } from "@/components/appearance/appearance-menu";
+import { AppFrame } from "@/components/layout/app-frame";
 import { Branding } from "@/components/layout/branding";
 import { Footer } from "@/components/layout/footer";
 import { features } from "@/lib/config/features";
@@ -27,9 +28,9 @@ export default async function PublicLayout({
   }));
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background text-foreground">
+    <AppFrame>
       <header className="shrink-0 border-b border-border">
-        <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="flex h-14 w-full items-center justify-between gap-3 px-4 sm:px-6">
           <Branding name={siteConfig.name} />
           <div className="flex items-center gap-2">
             <AppearanceMenu fontSwitcher={features.fontSwitcher} />
@@ -54,6 +55,6 @@ export default async function PublicLayout({
         })}
         navigationLabel={t("footer.navigation")}
       />
-    </div>
+    </AppFrame>
   );
 }

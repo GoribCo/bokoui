@@ -12,7 +12,12 @@ export interface HeaderSearchProps {
   onSearch?: (query: string) => void;
 }
 
-function SearchForm({ label, placeholder, onSearch, autoFocus }: HeaderSearchProps & { autoFocus?: boolean }) {
+function SearchForm({
+  label,
+  placeholder,
+  onSearch,
+  autoFocus,
+}: HeaderSearchProps & { autoFocus?: boolean }) {
   const [query, setQuery] = useState("");
   return (
     <form
@@ -50,7 +55,12 @@ export function HeaderSearch(props: HeaderSearchProps) {
           aria-label={props.label}
           className="w-[min(20rem,calc(100vw-1.5rem))]"
           trigger={
-            <Button variant="ghost" color="neutral" iconOnly aria-label={props.label}>
+            <Button
+              variant="ghost"
+              color="neutral"
+              iconOnly
+              aria-label={props.label}
+            >
               <Search aria-hidden="true" />
             </Button>
           }

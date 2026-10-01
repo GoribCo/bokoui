@@ -37,7 +37,14 @@ const entryClass =
  * Mobile navigation bar (below `md`): top-level items, sub menus in a sheet above the bar, overflow
  * in "More". Respects the device safe area (FR-6.1, FR-6.2, FR-6.5, FR-6.7).
  */
-export function BottomNav({ groups, pathname, slots, moreOpen, onMoreOpenChange, labels }: BottomNavProps) {
+export function BottomNav({
+  groups,
+  pathname,
+  slots,
+  moreOpen,
+  onMoreOpenChange,
+  labels,
+}: BottomNavProps) {
   const [sheetItem, setSheetItem] = useState<MenuItem | null>(null);
 
   const items = groups.flatMap((group) => group.items);
@@ -48,7 +55,10 @@ export function BottomNav({ groups, pathname, slots, moreOpen, onMoreOpenChange,
   const activeTopId = findActiveTrail(groups, pathname)?.items[0]?.id;
   // A parent that is also a link keeps its own page reachable as the first entry of its sheet.
   const sheetItems = sheetItem
-    ? [...(sheetItem.href ? [{ ...sheetItem, children: undefined }] : []), ...(sheetItem.children ?? [])]
+    ? [
+        ...(sheetItem.href ? [{ ...sheetItem, children: undefined }] : []),
+        ...(sheetItem.children ?? []),
+      ]
     : [];
   const moreActive = hidden.some((item) => item.id === activeTopId);
 

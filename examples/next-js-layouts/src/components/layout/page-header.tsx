@@ -22,7 +22,9 @@ export function PageHeader({ title, description, actions }: PageHeaderProps) {
           </Text>
         ) : null}
       </div>
-      {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+      {actions ? (
+        <div className="flex flex-wrap items-center gap-2">{actions}</div>
+      ) : null}
     </header>
   );
 }

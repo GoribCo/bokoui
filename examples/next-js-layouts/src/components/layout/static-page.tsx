@@ -8,12 +8,19 @@ export interface StaticPageProps {
   description?: string;
   /** Paragraphs or any content; plain strings become body text. */
   children?: ReactNode;
+  /** `md` narrows long reading text (legal, help); the default fills the frame like every other page. */
+  size?: "md" | "full";
 }
 
 /** Simple reading page (legal, help, settings placeholders): title, description and text. */
-export function StaticPage({ title, description, children }: StaticPageProps) {
+export function StaticPage({
+  title,
+  description,
+  children,
+  size = "full",
+}: StaticPageProps) {
   return (
-    <PageContainer size="md">
+    <PageContainer size={size}>
       <PageHeader title={title} description={description} />
       {typeof children === "string" ? <Text>{children}</Text> : children}
     </PageContainer>

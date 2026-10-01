@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Container } from "bokoui/react";
 
 export interface PageContainerProps {
-  /** Max content width, centered. `xl` matches the header and footer; `md` suits reading pages. */
+  /** Max content width. `full` fills the frame (the default); `md` suits long reading text. */
   size?: "sm" | "md" | "lg" | "xl" | "full";
   className?: string;
   children: ReactNode;
@@ -10,7 +10,7 @@ export interface PageContainerProps {
 
 /** Centers page content with a max width and vertical rhythm. */
 export function PageContainer({
-  size = "xl",
+  size = "full",
   className,
   children,
 }: PageContainerProps) {

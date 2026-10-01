@@ -10,7 +10,11 @@ export interface MobileMenuButtonProps {
 }
 
 /** Hamburger at the left of the mobile header; opens the drawer (FR-6.3). */
-export function MobileMenuButton({ label, expanded, onClick }: MobileMenuButtonProps) {
+export function MobileMenuButton({
+  label,
+  expanded,
+  onClick,
+}: MobileMenuButtonProps) {
   return (
     <Button
       variant="ghost"

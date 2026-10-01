@@ -66,31 +66,60 @@ export function DashboardShell({
   const t = useTranslations();
   const pathname = usePathname();
   const { user } = useSession();
-  const { organization, organizations, setActiveOrganization } = useActiveOrganization();
+  const { organization, organizations, setActiveOrganization } =
+    useActiveOrganization();
   const translate = useMenuTranslator();
 
   const menuQuery = useMenuQuery(organization.id);
   const menu = useMenu(menuQuery.data ?? NO_GROUPS);
   const common = useMemo(
-    () => localizeMenu([{ id: "common", label: "", items: commonMenu }], translate)[0]?.items ?? [],
+    () =>
+      localizeMenu(
+        [{ id: "common", label: "", items: commonMenu }],
+        translate,
+      )[0]?.items ?? [],
     [commonMenu, translate],
   );
   const accountItems = useMemo(
-    () => localizeMenu([{ id: "account", label: "", items: accountMenuItems }], translate)[0]?.items ?? [],
+    () =>
+      localizeMenu(
+        [{ id: "account", label: "", items: accountMenuItems }],
+        translate,
+      )[0]?.items ?? [],
     [accountMenuItems, translate],
   );
   const footer = useMemo(
-    () => footerLinks.map((link) => ({ ...link, label: link.labelKey && translate.has(link.labelKey) ? translate(link.labelKey) : link.label })),
+    () =>
+      footerLinks.map((link) => ({
+        ...link,
+        label:
+          link.labelKey && translate.has(link.labelKey)
+            ? translate(link.labelKey)
+            : link.label,
+      })),
     [footerLinks, translate],
   );
 
   const collapsed = useUiStore(uiSelectors.sidebarCollapsed);
   const drawerOpen = useUiStore(uiSelectors.mobileDrawerOpen);
   const moreOpen = useUiStore(uiSelectors.bottomNavMoreOpen);
-  const { setSidebarCollapsed, toggleSidebar, setMobileDrawerOpen, setBottomNavMoreOpen } = useUiStore(uiSelectors.actions);
+  const {
+    setSidebarCollapsed,
+    toggleSidebar,
+    setMobileDrawerOpen,
+    setBottomNavMoreOpen,
+  } = useUiStore(uiSelectors.actions);
 
-  const switcherLabels = { switch: t("organization.switch"), search: t("organization.search"), noResults: t("organization.noResults") };
-  const accountLabels = { menu: t("account.menu"), logout: t("account.logout"), signedInAs: t("account.signedInAs") };
+  const switcherLabels = {
+    switch: t("organization.switch"),
+    search: t("organization.search"),
+    noResults: t("organization.noResults"),
+  };
+  const accountLabels = {
+    menu: t("account.menu"),
+    logout: t("account.logout"),
+    signedInAs: t("account.signedInAs"),
+  };
 
   const switcher = (railCollapsed: boolean) => (
     <OrganizationSwitcher
@@ -120,10 +149,21 @@ export function DashboardShell({
       />
     );
   const commonLinks = (railCollapsed: boolean, onNavigate?: () => void) => (
-    <CommonMenu items={common} pathname={pathname} collapsed={railCollapsed} onNavigate={onNavigate} />
+    <CommonMenu
+      items={common}
+      pathname={pathname}
+      collapsed={railCollapsed}
+      onNavigate={onNavigate}
+    />
   );
   const account = (railCollapsed: boolean) => (
-    <AccountMenu user={user} items={accountItems} onLogout={onLogout} collapsed={railCollapsed} labels={accountLabels} />
+    <AccountMenu
+      user={user}
+      items={accountItems}
+      onLogout={onLogout}
+      collapsed={railCollapsed}
+      labels={accountLabels}
+    />
   );
   const closeDrawer = () => setMobileDrawerOpen(false);
 
@@ -148,15 +188,41 @@ export function DashboardShell({
       }
       header={
         <Header
-          menuButton={<MobileMenuButton label={t("shell.openMenu")} expanded={drawerOpen} onClick={() => setMobileDrawerOpen(true)} />}
+          menuButton={
+            <MobileMenuButton
+              label={t("shell.openMenu")}
+              expanded={drawerOpen}
+              onClick={() => setMobileDrawerOpen(true)}
+            />
+          }
           branding={<Branding name={siteName} />}
-          breadcrumbs={<MenuBreadcrumbs groups={menu} pathname={pathname} homeLabel={t("shell.home")} label={t("shell.breadcrumb")} />}
-          search={<HeaderSearch label={t("shell.search")} placeholder={t("shell.searchPlaceholder")} />}
-          notifications={<NotificationsButton label={t("shell.notifications")} />}
+          breadcrumbs={
+            <MenuBreadcrumbs
+              groups={menu}
+              pathname={pathname}
+              homeLabel={t("shell.home")}
+              label={t("shell.breadcrumb")}
+            />
+          }
+          search={
+            <HeaderSearch
+              label={t("shell.search")}
+              placeholder={t("shell.searchPlaceholder")}
+            />
+          }
+          notifications={
+            <NotificationsButton label={t("shell.notifications")} />
+          }
           actions={<AppearanceMenu fontSwitcher={fontSwitcher} />}
         />
       }
-      footer={<Footer links={footer} copyright={t("footer.copyright", { year, name: siteName })} navigationLabel={t("footer.navigation")} />}
+      footer={
+        <Footer
+          links={footer}
+          copyright={t("footer.copyright", { year, name: siteName })}
+          navigationLabel={t("footer.navigation")}
+        />
+      }
       overlays={
         <MobileDrawer
           open={drawerOpen}
@@ -177,7 +243,11 @@ export function DashboardShell({
           slots={bottomNavSlots}
           moreOpen={moreOpen}
           onMoreOpenChange={setBottomNavMoreOpen}
-          labels={{ navigation: t("shell.mobileNavigation"), more: t("shell.more"), close: t("shell.close") }}
+          labels={{
+            navigation: t("shell.mobileNavigation"),
+            more: t("shell.more"),
+            close: t("shell.close"),
+          }}
         />
       }
     >

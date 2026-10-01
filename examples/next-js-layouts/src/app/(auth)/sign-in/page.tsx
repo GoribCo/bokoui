@@ -9,8 +9,14 @@ export async function generateMetadata() {
   return buildMetadata({ title: t("title"), path: "/sign-in", noindex: true });
 }
 
-export default async function SignInPage({ searchParams }: PageProps<"/sign-in">) {
+export default async function SignInPage({
+  searchParams,
+}: PageProps<"/sign-in">) {
   const params = await searchParams;
   const next = params[RETURN_TO_PARAM];
-  return <SignInForm returnTo={safeReturnPath(typeof next === "string" ? next : undefined)} />;
+  return (
+    <SignInForm
+      returnTo={safeReturnPath(typeof next === "string" ? next : undefined)}
+    />
+  );
 }

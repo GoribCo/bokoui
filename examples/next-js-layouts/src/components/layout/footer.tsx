@@ -14,7 +14,7 @@ export interface FooterProps {
 export function Footer({ links, copyright, navigationLabel }: FooterProps) {
   return (
     <footer className="border-t border-border bg-surface text-caption text-muted-foreground">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="flex w-full flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <nav aria-label={navigationLabel}>
           <ul className="flex flex-wrap gap-x-4 gap-y-1">
             {links.map((link) => (
