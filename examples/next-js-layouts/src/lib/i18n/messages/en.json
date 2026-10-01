@@ -119,21 +119,14 @@
     "loading": "Loading"
   },
   "displaySettings": {
-    "title": "Display settings",
-    "description": "Make this site comfortable to read.",
-    "open": "Display settings",
-    "appearance": "Appearance",
     "theme": "Theme",
     "fontSize": "Font Size",
     "small": "Small",
     "medium": "Medium",
     "large": "Large",
     "language": "Language",
-    "languageHint": "Language for the whole site",
-    "all": "All settings",
     "style": "Design style",
-    "close": "Close",
     "font": "Font",
-    "quick": "Quick display settings"
+    "title": "Display settings"
   }
 }

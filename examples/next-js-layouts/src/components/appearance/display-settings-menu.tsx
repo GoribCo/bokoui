@@ -27,8 +27,9 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 }
 
 /**
- * Alternative to `DisplaySettingsDrawer`: the same controls in a compact dropdown under the header
- * button, like the workspace switcher. Both exist so the two patterns can be compared.
+ * Header button opening a compact dropdown with the display choices: theme mode, optional style,
+ * text size, optional font, language (FR-7.2, FR-7.5). Each control persists itself and applies
+ * without a reload.
  */
 export function DisplaySettingsMenu({ styleSwitcher = false, fontSwitcher = false }: DisplaySettingsMenuProps) {
   const t = useTranslations("displaySettings");
@@ -36,10 +37,10 @@ export function DisplaySettingsMenu({ styleSwitcher = false, fontSwitcher = fals
   return (
     <Popover
       placement="bottom-end"
-      aria-label={t("quick")}
+      aria-label={t("title")}
       className="w-[min(20rem,calc(100vw-1.5rem))] p-2"
       trigger={
-        <Button variant="outline" color="neutral" iconOnly className="rounded-full" aria-label={t("quick")} aria-haspopup="dialog">
+        <Button variant="outline" color="neutral" iconOnly className="rounded-full" aria-label={t("title")} aria-haspopup="dialog">
           <Palette aria-hidden="true" />
         </Button>
       }

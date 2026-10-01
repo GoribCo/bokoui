@@ -4,6 +4,4 @@ export const features = {
   fontSwitcher: false,
   /** Design-style picker in the display settings drawer. */
   styleSwitcher: true,
-  /** Extra header button with the same controls in a dropdown, to compare with the drawer. */
-  displaySettingsMenu: true,
 } as const;

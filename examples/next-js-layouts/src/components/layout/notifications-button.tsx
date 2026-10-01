@@ -32,22 +32,21 @@ export function NotificationsButton({ label, title, emptyLabel, items = [] }: No
       aria-label={title ?? label}
       className="w-[min(22rem,calc(100vw-1.5rem))]"
       trigger={
-        <span className="relative inline-flex">
-          <Button
-            variant="ghost"
-            color="neutral"
-            iconOnly
-            aria-label={count > 0 ? `${label} (${count})` : label}
-            aria-haspopup="dialog"
-          >
-            <Bell aria-hidden="true" />
-          </Button>
+        <Button
+          variant="ghost"
+          color="neutral"
+          iconOnly
+          className="relative overflow-visible"
+          aria-label={count > 0 ? `${label} (${count})` : label}
+          aria-haspopup="dialog"
+        >
+          <Bell aria-hidden="true" />
           {count > 0 ? (
             <Badge size="sm" action="danger" aria-hidden="true" className="pointer-events-none absolute -end-1 -top-1">
               {count > 99 ? "99+" : count}
             </Badge>
           ) : null}
-        </span>
+        </Button>
       }
     >
       <div className="flex flex-col gap-1">
