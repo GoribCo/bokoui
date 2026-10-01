@@ -21,16 +21,50 @@ export const sampleRecords: SampleRecord[] = Array.from({ length: 47 }, (_, inde
 
 export interface SampleNotification {
   id: string;
+  /** Drives the icon: `action` needs a decision, `info` is for awareness, `success` confirms something done. */
+  kind: "action" | "info" | "success";
   title: string;
   body: string;
   /** Relative time, already formatted. */
   time: string;
   unread: boolean;
+  href?: string;
 }
 
 /** Demo notifications; a real project loads them from its API. */
 export const sampleNotifications: SampleNotification[] = [
-  { id: "n1", title: "New appointment", body: "Karim Hossain booked 10:30 tomorrow.", time: "5 min ago", unread: true },
-  { id: "n2", title: "Lab result ready", body: "Blood panel for Nusrat Jahan is available.", time: "1 hour ago", unread: true },
-  { id: "n3", title: "Schedule updated", body: "Your Thursday shift moved to 14:00.", time: "Yesterday", unread: false },
+  {
+    id: "n1",
+    kind: "action",
+    title: "Lab result awaiting review",
+    body: "Blood panel for Nusrat Jahan was released by Pathology.",
+    time: "10:42",
+    unread: true,
+    href: "/examples/table",
+  },
+  {
+    id: "n2",
+    kind: "action",
+    title: "Schedule change needs confirmation",
+    body: "Thursday shift moved from 09:00 to 14:00.",
+    time: "09:15",
+    unread: true,
+    href: "/examples/form",
+  },
+  {
+    id: "n3",
+    kind: "info",
+    title: "Credential renewal due in 14 days",
+    body: "Medical license renewal closes on 15 Oct 2026.",
+    time: "Yesterday",
+    unread: false,
+  },
+  {
+    id: "n4",
+    kind: "success",
+    title: "Appointment confirmed",
+    body: "Karim Hossain, 10:30 tomorrow, Room 4.",
+    time: "Yesterday",
+    unread: false,
+  },
 ];

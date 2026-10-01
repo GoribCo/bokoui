@@ -2,7 +2,7 @@
 
 Target: `examples/next-js-layouts/`. Reference images: `docs/images/Screenshot 2026-10-01 at 11.46.18 AM.png` (shell), `11.46.54` (workspace switcher open), `11.47.15` (display settings drawer), `11.47.35` (account menu open).
 
-Status: **implemented** (tasks T9.1 to T9.6). Decisions: search and notifications kept; style switcher kept in the drawer behind `features.styleSwitcher`; "Settings" and "All settings" both go to `/account`; "Manage workspaces" is a stub page at `/organizations`.
+Status: **implemented; the display settings ended as a dropdown (`DisplaySettingsMenu`), not the drawer described in decision 4 and Phase C** (tasks T9.1 to T9.6). Decisions: search and notifications kept; style switcher kept in the drawer behind `features.styleSwitcher`; "Settings" and "All settings" both go to `/account`; "Manage workspaces" is a stub page at `/organizations`.
 
 ## What the red marks ask for
 

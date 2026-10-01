@@ -38,7 +38,10 @@
     "collapseGroup": "Collapse {label}",
     "home": "Home",
     "pageTitleFallback": "Dashboard",
-    "noNotifications": "You're all caught up"
+    "noNotifications": "You're all caught up",
+    "notificationsUnread": "{count} unread",
+    "markAllRead": "Mark all as read",
+    "viewAllNotifications": "View all notifications"
   },
   "organization": {
     "switch": "Switch organization",

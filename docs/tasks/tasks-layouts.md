@@ -90,7 +90,7 @@ Working rules for this stage:
 ## Phase 9: Reference UI alignment (docs/plan-layouts-reference-ui.md)
 - [x] T9.1 -DONE Header moved into the content column beside a full-height sidebar: sidebar toggle (collapse on desktop, drawer on mobile), page title and subtitle, optional search and notifications
 - [x] T9.2 -DONE Workspace switcher restyled: heading, type subtitle, icon tile, "Manage workspaces" link (`/organizations` stub), search only above 6 organizations
-- [x] T9.3 -DONE `DisplaySettingsDrawer` replaces `AppearanceMenu`: theme, font size (new, `data-font-size`), optional style and font, language chips with flags, "All settings" link
+- [x] T9.3 -DONE `DisplaySettingsMenu` replaces `AppearanceMenu`: header button with a dropdown for theme, optional style, font size (new, `data-font-size`), optional font, language chips with flags. A right-hand drawer variant was built and removed after comparison
 - [x] T9.4 -DONE Account menu header card, Profile / Settings / Sign out; "Resources" heading above the common links
 - [x] T9.5 -DONE Library fix (bokoui 0.2.33): popovers, menus, tooltips, select and combobox are shown before they are measured, so `top-*` and `*-end` placements no longer land off-position
 - [x] T9.6 -DONE Verified in a real browser (1280 and 390 px, axe: no violations); lint and typecheck clean. Not yet checked: all 8 styles, dark mode, Bangla

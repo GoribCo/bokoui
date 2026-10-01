@@ -38,7 +38,10 @@
     "collapseGroup": "{label} বন্ধ করুন",
     "home": "হোম",
     "pageTitleFallback": "ড্যাশবোর্ড",
-    "noNotifications": "কোনো নতুন বিজ্ঞপ্তি নেই"
+    "noNotifications": "কোনো নতুন বিজ্ঞপ্তি নেই",
+    "notificationsUnread": "{count}টি অপঠিত",
+    "markAllRead": "সব পঠিত হিসেবে চিহ্নিত করুন",
+    "viewAllNotifications": "সব বিজ্ঞপ্তি দেখুন"
   },
   "organization": {
     "switch": "প্রতিষ্ঠান পরিবর্তন করুন",
