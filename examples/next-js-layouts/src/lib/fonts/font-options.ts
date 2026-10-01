@@ -15,3 +15,9 @@ export const fontOptions: FontOption[] = [
   { id: "roboto", label: "Roboto" },
   { id: "system", label: "System UI" },
 ];
+
+/** Root text size steps of the display settings (value of `data-font-size` on `<html>`). */
+export const fontSizes = ["sm", "md", "lg"] as const;
+export type FontSize = (typeof fontSizes)[number];
+export const DEFAULT_FONT_SIZE: FontSize = "md";
+export const FONT_SIZE_STORAGE_KEY = "layout-font-size";

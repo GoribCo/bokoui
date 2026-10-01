@@ -20,7 +20,8 @@ const MAX_CRUMBS = 4;
 /** Breadcrumbs from the menu's parent chain of the active item (FR-7.3). Renders nothing off-menu. */
 export function MenuBreadcrumbs({ groups, pathname, homeLabel, label, homeHref = "/" }: MenuBreadcrumbsProps) {
   const trail = findActiveTrail(groups, pathname)?.items;
-  if (!trail) return null;
+  // A single crumb would only repeat the page title in the header.
+  if (!trail || trail.length < 2) return null;
 
   const current = trail[trail.length - 1];
   // A menu item that is the home page already is the first crumb.

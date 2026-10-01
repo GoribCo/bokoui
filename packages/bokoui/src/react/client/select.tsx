@@ -82,8 +82,8 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
   const panel = useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => trigger.current as HTMLButtonElement);
   const query = useRef({ text: "", timer: undefined as ReturnType<typeof setTimeout> | undefined });
-  const pos = useFloating(trigger, panel, open, "bottom-start", 4);
   useTopLayer(panel, open);
+  const pos = useFloating(trigger, panel, open, "bottom-start", 4);
 
   const enabled = options.map((o, i) => (o.disabled ? -1 : i)).filter((i) => i >= 0);
 

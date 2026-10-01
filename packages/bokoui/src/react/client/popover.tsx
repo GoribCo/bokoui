@@ -42,8 +42,9 @@ export function Popover({ trigger, children, placement = "bottom", open, default
   const isOpen = open ?? inner;
   const anchor = useRef<HTMLElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const pos = useFloating(anchor, panel, isOpen, placement, 8);
+  // Top layer first: a hidden popover has no size, so it must be shown before it is measured.
   useTopLayer(panel, isOpen);
+  const pos = useFloating(anchor, panel, isOpen, placement, 8);
 
   const setOpen = useCallback(
     (next: boolean, returnFocus = false) => {

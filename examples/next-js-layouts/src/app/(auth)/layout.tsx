@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { AppearanceMenu } from "@/components/appearance/appearance-menu";
+import { DisplaySettingsDrawer } from "@/components/appearance/display-settings-drawer";
 import { AppFrame } from "@/components/layout/app-frame";
 import { Branding } from "@/components/layout/branding";
 import { features } from "@/lib/config/features";
@@ -16,7 +16,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <header className="shrink-0 border-b border-border">
         <div className="flex h-14 w-full items-center justify-between px-4 sm:px-6">
           <Branding name={siteConfig.name} />
-          <AppearanceMenu fontSwitcher={features.fontSwitcher} />
+          <DisplaySettingsDrawer styleSwitcher={features.styleSwitcher} fontSwitcher={features.fontSwitcher} />
         </div>
       </header>
       <main

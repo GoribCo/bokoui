@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server";
 import { ThemeScript } from "bokoui/react/theme-script";
 import { FontScript } from "@/components/appearance/font-script";
+import { FontSizeScript } from "@/components/appearance/font-size-script";
 import { features } from "@/lib/config/features";
 import { getInitialState } from "@/lib/session/initial-state";
 import { fontVariableClassName } from "@/lib/fonts/fonts";
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <ThemeScript customThemes={customThemes} />
+        <FontSizeScript />
         {features.fontSwitcher ? <FontScript /> : null}
       </head>
       <body className="min-h-full">

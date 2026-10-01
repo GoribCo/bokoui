@@ -1,16 +1,28 @@
 "use client";
 
 import { Check, ChevronsUpDown, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { useMemo, useState, type KeyboardEvent } from "react";
 import { Avatar, Input } from "bokoui/react";
 import { Popover, Tooltip } from "bokoui/react/client";
+import { MenuIcon } from "@/components/navigation/menu-icon";
+import { organizationTypes } from "@/lib/config/organization-types";
 import type { Organization } from "@/lib/types";
+import type { ComponentProps } from "react";
+
+/** Lists longer than this get a search box. */
+const SEARCH_THRESHOLD = 6;
 
 export interface OrganizationSwitcherLabels {
   /** Accessible name of the trigger and the list. */
   switch: string;
   search: string;
   noResults: string;
+  /** Heading of the dropdown ("Workspaces"). */
+  workspaces: string;
+  /** Footer link text ("Manage workspaces"). */
+  manage: string;
 }
 
 export interface OrganizationSwitcherProps {
@@ -19,6 +31,10 @@ export interface OrganizationSwitcherProps {
   onSelect: (organizationId: string) => void;
   /** Icon-only rail: only the logo shows, the name moves into a tooltip. */
   collapsed?: boolean;
+  /** Target of the footer link; the link is hidden when unset. */
+  manageHref?: string;
+  /** Where the list opens: beside the sidebar on desktop, below the trigger in the drawer. */
+  placement?: ComponentProps<typeof Popover>["placement"];
   labels: OrganizationSwitcherLabels;
 }
 
@@ -26,13 +42,24 @@ const rowClass =
   "flex w-full min-w-0 items-center gap-3 rounded-control px-2 py-2 text-start text-nav focus-ring pointer-coarse:min-h-11";
 
 function OrganizationSummary({ organization, hideText }: { organization: Organization; hideText?: boolean }) {
+  const t = useTranslations("organizationType");
+  const type = organizationTypes[organization.type];
   return (
     <>
-      <Avatar size="sm" shape="square" src={organization.logoUrl} name={organization.name} />
+      <Avatar
+        size="sm"
+        shape="square"
+        src={organization.logoUrl}
+        name={organization.name}
+        fallback={<MenuIcon name={type.icon} />}
+        color="primary"
+      />
       {hideText ? null : (
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="truncate font-medium">{organization.name}</span>
-          <span className="truncate text-caption text-muted-foreground capitalize">{organization.roles.join(", ")}</span>
+          <span className="truncate text-caption text-muted-foreground">
+            {t.has(organization.type) ? t(organization.type) : type.label}
+          </span>
         </span>
       )}
     </>
@@ -48,6 +75,8 @@ export function OrganizationSwitcher({
   activeOrganizationId,
   onSelect,
   collapsed = false,
+  manageHref,
+  placement = "right-start",
   labels,
 }: OrganizationSwitcherProps) {
   const [open, setOpen] = useState(false);
@@ -112,7 +141,7 @@ export function OrganizationSwitcher({
   return (
     <Popover
       trigger={trigger}
-      placement={collapsed ? "right-start" : "bottom-start"}
+      placement={placement}
       open={open}
       onOpenChange={(next) => {
         setOpen(next);
@@ -122,6 +151,8 @@ export function OrganizationSwitcher({
       className="w-72"
     >
       <div data-org-panel className="flex flex-col gap-1">
+        <p className="px-2 pt-1 text-caption text-muted-foreground">{labels.workspaces}</p>
+        {organizations.length > SEARCH_THRESHOLD ? (
         <Input
           size="sm"
           value={query}
@@ -136,6 +167,7 @@ export function OrganizationSwitcher({
             }
           }}
         />
+        ) : null}
         {visible.length === 0 ? (
           <p className="px-2 py-3 text-center text-nav text-muted-foreground">{labels.noResults}</p>
         ) : (
@@ -145,6 +177,7 @@ export function OrganizationSwitcher({
                 <button
                   type="button"
                   data-org-item
+                  title={org.roles.join(", ")}
                   aria-current={org.id === active.id ? "true" : undefined}
                   className={`${rowClass} hover:bg-muted aria-[current=true]:bg-muted`}
                   onClick={() => choose(org.id)}
@@ -157,6 +190,16 @@ export function OrganizationSwitcher({
             ))}
           </ul>
         )}
+        {manageHref ? (
+          <Link
+            href={manageHref}
+            prefetch={false}
+            onClick={() => setOpen(false)}
+            className="mt-1 border-t border-border px-2 pt-2 pb-1 text-nav hover:underline focus-ring"
+          >
+            {labels.manage}
+          </Link>
+        ) : null}
       </div>
     </Popover>
   );

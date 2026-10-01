@@ -19,7 +19,7 @@ export interface AppShellProps {
 export const MAIN_CONTENT_ID = "main-content";
 
 /**
- * Application shell: header on top, then sidebar and content below it, plus footer, main content and footer. The page itself never scrolls:
+ * Application shell: header on top, then sidebar and content below it, plus footer. The page itself never scrolls:
  * the sidebar navigation and the content column each scroll on their own (FR-1.2).
  */
 export function AppShell({

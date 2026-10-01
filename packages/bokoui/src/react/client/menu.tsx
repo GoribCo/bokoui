@@ -71,8 +71,9 @@ export function Menu({ trigger, children, placement = "bottom-start", className,
   const panel = useRef<HTMLDivElement>(null);
   const initialFocus = useRef<"first" | "last">("first");
   const query = useRef({ text: "", timer: undefined as ReturnType<typeof setTimeout> | undefined });
-  const pos = useFloating(anchor, panel, open, placement, 4);
+  // Top layer first: a hidden popover has no size, so it must be shown before it is measured.
   useTopLayer(panel, open);
+  const pos = useFloating(anchor, panel, open, placement, 4);
 
   const close = useCallback((returnFocus = true) => {
     setOpen(false);

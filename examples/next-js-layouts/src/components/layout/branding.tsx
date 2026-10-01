@@ -10,6 +10,7 @@ export function Branding({ name, href = "/" }: BrandingProps) {
   return (
     <Link
       href={href}
+      aria-label={name}
       className="flex items-center gap-2 rounded-control focus-ring"
     >
       <svg

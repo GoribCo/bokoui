@@ -1,12 +1,15 @@
 {
   "menu": {
     "dashboard": "ড্যাশবোর্ড",
-    "groups": { "overview": "সংক্ষিপ্ত বিবরণ" }
+    "groups": {
+      "overview": "সংক্ষিপ্ত বিবরণ"
+    }
   },
   "common": {
     "help": "সহায়তা",
     "terms": "শর্তাবলি",
-    "privacySettings": "গোপনীয়তা সেটিংস"
+    "privacySettings": "গোপনীয়তা সেটিংস",
+    "resources": "রিসোর্স"
   },
   "footer": {
     "terms": "শর্তাবলি",
@@ -33,7 +36,8 @@
     "breadcrumb": "ব্রেডক্রাম্ব",
     "expandGroup": "{label} খুলুন",
     "collapseGroup": "{label} বন্ধ করুন",
-    "home": "হোম"
+    "home": "হোম",
+    "pageTitleFallback": "ড্যাশবোর্ড"
   },
   "organization": {
     "switch": "প্রতিষ্ঠান পরিবর্তন করুন",
@@ -41,13 +45,15 @@
     "search": "প্রতিষ্ঠান খুঁজুন",
     "noResults": "কোনো প্রতিষ্ঠান পাওয়া যায়নি",
     "only": "আপনার প্রতিষ্ঠান",
-    "publicProfile": "পাবলিক প্রোফাইল"
+    "publicProfile": "পাবলিক প্রোফাইল",
+    "workspaces": "ওয়ার্কস্পেস",
+    "manage": "ওয়ার্কস্পেস পরিচালনা"
   },
   "account": {
     "menu": "অ্যাকাউন্ট মেনু",
-    "manage": "অ্যাকাউন্ট পরিচালনা",
-    "profile": "প্রোফাইল দেখুন",
-    "logout": "লগ আউট",
+    "manage": "সেটিংস",
+    "profile": "প্রোফাইল",
+    "logout": "সাইন আউট",
     "signedInAs": "সাইন ইন করা আছে"
   },
   "appearance": {
@@ -110,5 +116,22 @@
     "forbiddenTitle": "অনুমতি নেই",
     "forbiddenBody": "এই পৃষ্ঠা খোলার মতো ভূমিকা আপনার নেই।",
     "loading": "লোড হচ্ছে"
+  },
+  "displaySettings": {
+    "title": "প্রদর্শন সেটিংস",
+    "description": "সাইটটি পড়ার জন্য আরামদায়ক করুন।",
+    "open": "প্রদর্শন সেটিংস",
+    "appearance": "চেহারা",
+    "theme": "থিম",
+    "fontSize": "ফন্টের আকার",
+    "small": "ছোট",
+    "medium": "মাঝারি",
+    "large": "বড়",
+    "language": "ভাষা",
+    "languageHint": "পুরো সাইটের ভাষা",
+    "all": "সব সেটিংস",
+    "style": "ডিজাইন স্টাইল",
+    "close": "বন্ধ করুন",
+    "font": "ফন্ট"
   }
 }

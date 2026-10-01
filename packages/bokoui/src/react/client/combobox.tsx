@@ -48,8 +48,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Com
   const input = useRef<HTMLInputElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => input.current as HTMLInputElement);
-  const pos = useFloating(input, panel, open, "bottom-start", 4);
   useTopLayer(panel, open);
+  const pos = useFloating(input, panel, open, "bottom-start", 4);
 
   // When the text still equals the chosen label, show everything (like a select), else filter.
   const filtering = text !== (selected?.label ?? "");

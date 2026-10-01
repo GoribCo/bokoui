@@ -87,6 +87,14 @@ Working rules for this stage:
 - [x] T8.3 -DONE Run `npm run lint` and `npm run typecheck` once and fix errors (no other verification at this stage)
 - [x] T8.4 -DONE Update this task list and add a layout entry to `docs/component-status.md`
 
+## Phase 9: Reference UI alignment (docs/plan-layouts-reference-ui.md)
+- [x] T9.1 -DONE Header moved into the content column beside a full-height sidebar: sidebar toggle (collapse on desktop, drawer on mobile), page title and subtitle, optional search and notifications
+- [x] T9.2 -DONE Workspace switcher restyled: heading, type subtitle, icon tile, "Manage workspaces" link (`/organizations` stub), search only above 6 organizations
+- [x] T9.3 -DONE `DisplaySettingsDrawer` replaces `AppearanceMenu`: theme, font size (new, `data-font-size`), optional style and font, language chips with flags, "All settings" link
+- [x] T9.4 -DONE Account menu header card, Profile / Settings / Sign out; "Resources" heading above the common links
+- [x] T9.5 -DONE Library fix (bokoui 0.2.33): popovers, menus, tooltips, select and combobox are shown before they are measured, so `top-*` and `*-end` placements no longer land off-position
+- [x] T9.6 -DONE Verified in a real browser (1280 and 390 px, axe: no violations); lint and typecheck clean. Not yet checked: all 8 styles, dark mode, Bangla
+
 ## Deferred (after manual testing)
 - Unit tests for menu filtering, access helpers, stores
 - Browser and accessibility verification at mobile, tablet and desktop widths with all styles and modes

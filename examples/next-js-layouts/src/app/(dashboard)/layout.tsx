@@ -45,6 +45,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         footerLinks={siteConfig.footerLinks}
         bottomNavSlots={bottomNavSlots}
         fontSwitcher={features.fontSwitcher}
+        styleSwitcher={features.styleSwitcher}
+        manageOrganizationsHref="/organizations"
+        allSettingsHref="/account"
         year={new Date().getFullYear()}
         onLogout={signOut}
       >

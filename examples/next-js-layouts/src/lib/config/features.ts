@@ -2,4 +2,6 @@
 export const features = {
   /** Header font picker (FR-12.3). Off by default: fonts normally follow the design style. */
   fontSwitcher: false,
+  /** Design-style picker in the display settings drawer. */
+  styleSwitcher: true,
 } as const;

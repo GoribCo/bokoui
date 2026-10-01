@@ -50,8 +50,8 @@ export function Tooltip({ content, children, placement = "top", delay = 300, dis
   const floating = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const visible = open && !disabled;
-  const pos = useFloating(anchor, floating, visible, placement);
   useTopLayer(floating, visible);
+  const pos = useFloating(anchor, floating, visible, placement);
 
   useEffect(() => () => clearTimeout(timer.current), []);
 

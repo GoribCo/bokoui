@@ -1,12 +1,15 @@
 {
   "menu": {
     "dashboard": "Dashboard",
-    "groups": { "overview": "Overview" }
+    "groups": {
+      "overview": "Overview"
+    }
   },
   "common": {
     "help": "Help",
     "terms": "Terms",
-    "privacySettings": "Privacy settings"
+    "privacySettings": "Privacy settings",
+    "resources": "Resources"
   },
   "footer": {
     "terms": "Terms",
@@ -33,7 +36,8 @@
     "breadcrumb": "Breadcrumb",
     "expandGroup": "Expand {label}",
     "collapseGroup": "Collapse {label}",
-    "home": "Home"
+    "home": "Home",
+    "pageTitleFallback": "Dashboard"
   },
   "organization": {
     "switch": "Switch organization",
@@ -41,13 +45,15 @@
     "search": "Search organizations",
     "noResults": "No organizations found",
     "only": "Your organization",
-    "publicProfile": "Public profile"
+    "publicProfile": "Public profile",
+    "workspaces": "Workspaces",
+    "manage": "Manage workspaces"
   },
   "account": {
     "menu": "Account menu",
-    "manage": "Manage account",
-    "profile": "View profile",
-    "logout": "Log out",
+    "manage": "Settings",
+    "profile": "Profile",
+    "logout": "Sign out",
     "signedInAs": "Signed in as"
   },
   "appearance": {
@@ -110,5 +116,22 @@
     "forbiddenTitle": "Not authorized",
     "forbiddenBody": "You do not have a role that can open this page.",
     "loading": "Loading"
+  },
+  "displaySettings": {
+    "title": "Display settings",
+    "description": "Make this site comfortable to read.",
+    "open": "Display settings",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "fontSize": "Font Size",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "language": "Language",
+    "languageHint": "Language for the whole site",
+    "all": "All settings",
+    "style": "Design style",
+    "close": "Close",
+    "font": "Font"
   }
 }

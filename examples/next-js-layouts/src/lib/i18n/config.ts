@@ -3,6 +3,12 @@ export const locales = ["en", "bn"] as const;
 
 export type LocaleCode = (typeof locales)[number];
 
+/** Flag and native name shown on the language chips; one entry per locale. */
+export const localeMeta: Record<LocaleCode, { flag: string; name: string }> = {
+  en: { flag: "🇬🇧", name: "English" },
+  bn: { flag: "🇧🇩", name: "বাংলা" },
+};
+
 export const defaultLocale: LocaleCode = "en";
 
 /** Cookie that stores the chosen locale (no locale in the URL). */

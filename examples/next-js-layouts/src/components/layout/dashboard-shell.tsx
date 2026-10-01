@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useMemo, type ReactNode } from "react";
 import { Skeleton } from "bokoui/react";
 import { AccountMenu } from "@/components/account/account-menu";
-import { AppearanceMenu } from "@/components/appearance/appearance-menu";
+import { DisplaySettingsDrawer } from "@/components/appearance/display-settings-drawer";
 import { CommonMenu } from "@/components/navigation/common-menu";
 import { MenuBreadcrumbs } from "@/components/navigation/menu-breadcrumbs";
 import { MenuTree } from "@/components/navigation/menu-tree";
@@ -14,7 +14,7 @@ import { useActiveOrganization } from "@/hooks/use-active-organization";
 import { useMenu } from "@/hooks/use-menu";
 import { useMenuTranslator } from "@/hooks/use-menu-translator";
 import { useMenuQuery } from "@/hooks/use-queries";
-import { localizeMenu } from "@/lib/menu";
+import { findActiveTrail, localizeMenu } from "@/lib/menu";
 import { useSession } from "@/providers/session-provider";
 import { uiSelectors } from "@/lib/stores/ui-store";
 import { useUiStore } from "@/providers/ui-store-provider";
@@ -26,9 +26,9 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 import { HeaderSearch } from "./header-search";
 import { MobileDrawer } from "./mobile-drawer";
-import { MobileMenuButton } from "./mobile-menu-button";
 import { NotificationsButton } from "./notifications-button";
 import { Sidebar } from "./sidebar";
+import { SidebarToggle } from "./sidebar-toggle";
 
 const NO_GROUPS: MenuGroup[] = [];
 
@@ -41,6 +41,10 @@ export interface DashboardShellProps {
   /** Slots in the mobile bottom navigation (see `config/navigation.ts`). */
   bottomNavSlots: number;
   fontSwitcher?: boolean;
+  styleSwitcher?: boolean;
+  /** Target of "Manage workspaces" and "All settings"; each link is hidden when unset. */
+  manageOrganizationsHref?: string;
+  allSettingsHref?: string;
   /** Current year for the copyright line, passed from the server so both renders agree. */
   year: number;
   /** Injected sign-out handler (a Server Action in this demo). */
@@ -59,6 +63,9 @@ export function DashboardShell({
   footerLinks,
   bottomNavSlots,
   fontSwitcher = false,
+  styleSwitcher = true,
+  manageOrganizationsHref,
+  allSettingsHref,
   year,
   onLogout,
   children,
@@ -114,19 +121,22 @@ export function DashboardShell({
     switch: t("organization.switch"),
     search: t("organization.search"),
     noResults: t("organization.noResults"),
+    workspaces: t("organization.workspaces"),
+    manage: t("organization.manage"),
   };
   const accountLabels = {
     menu: t("account.menu"),
     logout: t("account.logout"),
-    signedInAs: t("account.signedInAs"),
   };
 
-  const switcher = (railCollapsed: boolean) => (
+  const switcher = (railCollapsed: boolean, inDrawer = false) => (
     <OrganizationSwitcher
       organizations={organizations}
       activeOrganizationId={organization.id}
       onSelect={setActiveOrganization}
       collapsed={railCollapsed}
+      placement={inDrawer ? "bottom-start" : "right-start"}
+      manageHref={manageOrganizationsHref}
       labels={switcherLabels}
     />
   );
@@ -154,14 +164,18 @@ export function DashboardShell({
       pathname={pathname}
       collapsed={railCollapsed}
       onNavigate={onNavigate}
+      heading={t("common.resources")}
     />
   );
-  const account = (railCollapsed: boolean) => (
+  const pageTitle =
+    findActiveTrail(menu, pathname)?.items.at(-1)?.label ?? t("shell.pageTitleFallback");
+  const account = (railCollapsed: boolean, inDrawer = false) => (
     <AccountMenu
       user={user}
       items={accountItems}
       onLogout={onLogout}
       collapsed={railCollapsed}
+      placement={inDrawer ? "top-start" : "right-end"}
       labels={accountLabels}
     />
   );
@@ -173,7 +187,6 @@ export function DashboardShell({
       sidebar={
         <Sidebar
           collapsed={collapsed}
-          onToggleCollapsed={toggleSidebar}
           organizationSwitcher={switcher(collapsed)}
           navigation={navigation(collapsed)}
           commonMenu={commonLinks(collapsed)}
@@ -181,21 +194,27 @@ export function DashboardShell({
           labels={{
             navigation: t("shell.mainNavigation"),
             commonNavigation: t("shell.commonNavigation"),
-            collapse: t("shell.collapseSidebar"),
-            expand: t("shell.expandSidebar"),
           }}
         />
       }
       header={
         <Header
-          menuButton={
-            <MobileMenuButton
-              label={t("shell.openMenu")}
-              expanded={drawerOpen}
-              onClick={() => setMobileDrawerOpen(true)}
+          toggle={
+            <SidebarToggle
+              collapsed={collapsed}
+              onToggleCollapsed={toggleSidebar}
+              drawerOpen={drawerOpen}
+              onOpenDrawer={() => setMobileDrawerOpen(true)}
+              labels={{
+                collapse: t("shell.collapseSidebar"),
+                expand: t("shell.expandSidebar"),
+                openMenu: t("shell.openMenu"),
+              }}
             />
           }
           branding={<Branding name={siteName} />}
+          title={pageTitle}
+          subtitle={organization.name}
           breadcrumbs={
             <MenuBreadcrumbs
               groups={menu}
@@ -213,7 +232,13 @@ export function DashboardShell({
           notifications={
             <NotificationsButton label={t("shell.notifications")} />
           }
-          actions={<AppearanceMenu fontSwitcher={fontSwitcher} />}
+          actions={
+            <DisplaySettingsDrawer
+              styleSwitcher={styleSwitcher}
+              fontSwitcher={fontSwitcher}
+              allSettingsHref={allSettingsHref}
+            />
+          }
         />
       }
       footer={
@@ -230,10 +255,10 @@ export function DashboardShell({
           title={t("shell.mainNavigation")}
           closeLabel={t("shell.close")}
           pathname={pathname}
-          organizationSwitcher={switcher(false)}
+          organizationSwitcher={switcher(false, true)}
           navigation={navigation(false, closeDrawer)}
           commonMenu={commonLinks(false, closeDrawer)}
-          account={account(false)}
+          account={account(false, true)}
         />
       }
       bottomNav={

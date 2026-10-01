@@ -1,9 +1,6 @@
 "use client";
 
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
-import { useId, type ReactNode } from "react";
-import { Button } from "bokoui/react";
-import { Tooltip } from "bokoui/react/client";
+import type { ReactNode } from "react";
 import { sidebarClass } from "bokoui/core";
 
 export interface SidebarLabels {
@@ -11,14 +8,14 @@ export interface SidebarLabels {
   navigation: string;
   /** Accessible name of the common links landmark. */
   commonNavigation: string;
-  collapse: string;
-  expand: string;
 }
 
+/** Id of the sidebar element, target of the toggle button's `aria-controls`. */
+export const SIDEBAR_ID = "app-sidebar";
+
 export interface SidebarProps {
-  /** Icon-only rail. Controlled by the caller so the state can live in a store. */
+  /** Icon-only rail. Controlled by the caller so the state can live in a store; the header toggle changes it. */
   collapsed: boolean;
-  onToggleCollapsed: () => void;
   /** Top section: organization switcher. */
   organizationSwitcher: ReactNode;
   /** Scrollable main navigation (a `MenuTree`). */
@@ -36,20 +33,15 @@ export interface SidebarProps {
  */
 export function Sidebar({
   collapsed,
-  onToggleCollapsed,
   organizationSwitcher,
   navigation,
   commonMenu,
   account,
   labels,
 }: SidebarProps) {
-  const id = useId();
-  const toggleLabel = collapsed ? labels.expand : labels.collapse;
-  const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose;
-
   return (
     <aside
-      id={id}
+      id={SIDEBAR_ID}
       data-tone="primary"
       data-collapsed={collapsed || undefined}
       className={sidebarClass("h-full gap-3 overflow-hidden")}
@@ -65,23 +57,6 @@ export function Sidebar({
       </nav>
 
       <div className="flex shrink-0 flex-col gap-1 border-t border-border pt-2">
-        <div className="flex group-data-[collapsed]/sidebar:justify-center">
-          <Tooltip content={toggleLabel} placement="right">
-            <Button
-              variant="ghost"
-              color="neutral"
-              size="sm"
-              iconOnly
-              aria-label={toggleLabel}
-              aria-expanded={!collapsed}
-              aria-controls={id}
-              onClick={onToggleCollapsed}
-              className="ms-auto group-data-[collapsed]/sidebar:ms-0"
-            >
-              <ToggleIcon aria-hidden="true" />
-            </Button>
-          </Tooltip>
-        </div>
         <nav aria-label={labels.commonNavigation}>{commonMenu}</nav>
       </div>
 

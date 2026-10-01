@@ -10,12 +10,16 @@ export interface CommonMenuProps {
   pathname: string;
   collapsed?: boolean;
   onNavigate?: () => void;
+  /** Small group heading above the links ("Resources"); hidden on the collapsed rail. */
+  heading?: string;
 }
 
 /** The menu under the main navigation; it comes from `config`, not from the active organization (FR-4.5). */
-export function CommonMenu({ items, pathname, collapsed = false, onNavigate }: CommonMenuProps) {
+export function CommonMenu({ items, pathname, collapsed = false, onNavigate, heading }: CommonMenuProps) {
   return (
-    <ul className="flex flex-col gap-1">
+    <>
+      {heading && !collapsed ? <p className="px-2 pb-1 text-caption text-muted-foreground">{heading}</p> : null}
+      <ul className="flex flex-col gap-1">
       {items.map((item) =>
         item.href ? (
           <li key={item.id}>
@@ -33,5 +37,6 @@ export function CommonMenu({ items, pathname, collapsed = false, onNavigate }: C
         ) : null,
       )}
     </ul>
+    </>
   );
 }

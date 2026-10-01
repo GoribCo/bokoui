@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { buttonClass } from "bokoui/core";
-import { AppearanceMenu } from "@/components/appearance/appearance-menu";
+import { DisplaySettingsDrawer } from "@/components/appearance/display-settings-drawer";
 import { AppFrame } from "@/components/layout/app-frame";
 import { Branding } from "@/components/layout/branding";
 import { Footer } from "@/components/layout/footer";
@@ -33,7 +33,7 @@ export default async function PublicLayout({
         <div className="flex h-14 w-full items-center justify-between gap-3 px-4 sm:px-6">
           <Branding name={siteConfig.name} />
           <div className="flex items-center gap-2">
-            <AppearanceMenu fontSwitcher={features.fontSwitcher} />
+            <DisplaySettingsDrawer styleSwitcher={features.styleSwitcher} fontSwitcher={features.fontSwitcher} />
             <Link
               href={SIGN_IN_PATH}
               data-tone="primary"
