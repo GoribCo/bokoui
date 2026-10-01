@@ -41,7 +41,13 @@
     "noNotifications": "কোনো নতুন বিজ্ঞপ্তি নেই",
     "notificationsUnread": "{count}টি অপঠিত",
     "markAllRead": "সব পঠিত হিসেবে চিহ্নিত করুন",
-    "viewAllNotifications": "সব বিজ্ঞপ্তি দেখুন"
+    "viewAllNotifications": "সব বিজ্ঞপ্তি দেখুন",
+    "notificationTabs": {
+      "all": "সব",
+      "unread": "অপঠিত",
+      "urgent": "জরুরি",
+      "invitations": "আমন্ত্রণ"
+    }
   },
   "organization": {
     "switch": "প্রতিষ্ঠান পরিবর্তন করুন",

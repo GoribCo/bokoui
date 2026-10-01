@@ -41,7 +41,13 @@
     "noNotifications": "You're all caught up",
     "notificationsUnread": "{count} unread",
     "markAllRead": "Mark all as read",
-    "viewAllNotifications": "View all notifications"
+    "viewAllNotifications": "View all notifications",
+    "notificationTabs": {
+      "all": "All",
+      "unread": "Unread",
+      "urgent": "Urgent",
+      "invitations": "Invitations"
+    }
   },
   "organization": {
     "switch": "Switch organization",

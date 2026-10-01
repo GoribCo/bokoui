@@ -237,6 +237,12 @@ export function DashboardShell({
                 unread: (count) => t("shell.notificationsUnread", { count }),
                 markAllRead: t("shell.markAllRead"),
                 viewAll: t("shell.viewAllNotifications"),
+                tabs: {
+                  all: t("shell.notificationTabs.all"),
+                  unread: t("shell.notificationTabs.unread"),
+                  urgent: t("shell.notificationTabs.urgent"),
+                  invitations: t("shell.notificationTabs.invitations"),
+                },
               }}
               items={sampleNotifications}
               viewAllHref="/notifications"

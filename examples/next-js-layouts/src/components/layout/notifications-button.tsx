@@ -1,15 +1,21 @@
 "use client";
 
-import { Bell, CalendarClock, CircleCheck, ClipboardCheck, type LucideIcon } from "lucide-react";
+import { Bell, CalendarClock, CircleCheck, ClipboardCheck, MailPlus, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "bokoui/react";
-import { Popover } from "bokoui/react/client";
+import { Popover, Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
+
+export type NotificationTab = "all" | "unread" | "urgent" | "invitations";
+
+const tabs: NotificationTab[] = ["all", "unread", "urgent", "invitations"];
 
 export interface NotificationItem {
   id: string;
   /** `action` needs a decision, `info` is for awareness, `success` confirms something done. */
-  kind?: "action" | "info" | "success";
+  kind?: "action" | "info" | "success" | "invitation";
+  /** Listed under the Urgent tab. */
+  urgent?: boolean;
   title: string;
   body?: string;
   /** Time or relative time, already formatted. */
@@ -27,6 +33,7 @@ export interface NotificationsButtonProps {
     unread: (count: number) => string;
     markAllRead: string;
     viewAll: string;
+    tabs: Record<NotificationTab, string>;
   };
   items?: NotificationItem[];
   /** Target of the footer link; the link is hidden when unset. */
@@ -37,6 +44,7 @@ const kindIcon: Record<NonNullable<NotificationItem["kind"]>, LucideIcon> = {
   action: ClipboardCheck,
   info: CalendarClock,
   success: CircleCheck,
+  invitation: MailPlus,
 };
 
 function NotificationRow({ item, unread, onOpen }: { item: NotificationItem; unread: boolean; onOpen: () => void }) {
@@ -76,6 +84,14 @@ export function NotificationsButton({ labels, items = [], viewAllHref }: Notific
   const [read, setRead] = useState<ReadonlySet<string>>(new Set());
   const isUnread = (item: NotificationItem) => Boolean(item.unread) && !read.has(item.id);
   const count = items.filter(isUnread).length;
+  const [tab, setTab] = useState<NotificationTab>("all");
+  const matches: Record<NotificationTab, (item: NotificationItem) => boolean> = {
+    all: () => true,
+    unread: isUnread,
+    urgent: (item) => Boolean(item.urgent),
+    invitations: (item) => item.kind === "invitation",
+  };
+  const visible = items.filter(matches[tab]);
   const markRead = (...ids: string[]) => setRead((prev) => new Set([...prev, ...ids]));
 
   return (
@@ -111,17 +127,34 @@ export function NotificationsButton({ labels, items = [], viewAllHref }: Notific
             </Button>
           ) : null}
         </div>
-        {items.length === 0 ? (
-          <p className="px-3 py-8 text-center text-nav text-muted-foreground">{labels.empty}</p>
-        ) : (
-          <ul className="flex max-h-[min(22rem,60dvh)] flex-col divide-y divide-border overflow-y-auto">
-            {items.map((item) => (
-              <li key={item.id}>
-                <NotificationRow item={item} unread={isUnread(item)} onOpen={() => markRead(item.id)} />
-              </li>
-            ))}
-          </ul>
-        )}
+        <Tabs value={tab} onValueChange={(value) => setTab(value as NotificationTab)}>
+          <TabList aria-label={labels.title} className="overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_button]:px-2.5">
+            {tabs.map((value) => {
+              const total = items.filter(matches[value]).length;
+              return (
+                <Tab key={value} value={value}>
+                  {labels.tabs[value]}
+                  {value !== "all" && total > 0 ? (
+                    <span className="ms-1 text-caption text-muted-foreground tabular-nums">{total}</span>
+                  ) : null}
+                </Tab>
+              );
+            })}
+          </TabList>
+          <TabPanel value={tab}>
+            {visible.length === 0 ? (
+              <p className="px-3 py-8 text-center text-nav text-muted-foreground">{labels.empty}</p>
+            ) : (
+              <ul className="flex max-h-[min(22rem,60dvh)] flex-col divide-y divide-border overflow-y-auto">
+                {visible.map((item) => (
+                  <li key={item.id}>
+                    <NotificationRow item={item} unread={isUnread(item)} onOpen={() => markRead(item.id)} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </TabPanel>
+        </Tabs>
         {viewAllHref ? (
           <Link
             href={viewAllHref}
