@@ -75,6 +75,8 @@ export function DisplaySettingsDrawer({
         title={t("title")}
         description={t("description")}
         closeLabel={t("close")}
+        // The app frame is capped at --shell-max-width and centered; keep the panel inside it on wide screens.
+        style={{ marginInlineEnd: "max(0px, calc((100% - var(--shell-max-width)) / 2))" }}
       >
         {open ? (
           <div className="flex flex-col gap-5">
