@@ -1,6 +1,9 @@
-import type { ApiClient } from "@/lib/api/client";
+import { apiClient, type ApiClient } from "@/lib/api/client";
 
-/** Base of every service: holds the API client, so the same class runs in the browser and on the server. */
+/**
+ * Base of every service. It holds the API client: the browser one by default, or the server one
+ * (`new MenuService(await getServerApi())`) when rendering on the server.
+ */
 export abstract class BaseService {
-  constructor(protected readonly client: ApiClient) {}
+  constructor(protected readonly client: ApiClient = apiClient) {}
 }

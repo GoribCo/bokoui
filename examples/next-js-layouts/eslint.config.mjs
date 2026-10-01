@@ -5,10 +5,11 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // TanStack Query is imported in one file only; everything else goes through it.
+  // Data hooks reach TanStack Query through `BaseQuery`; only the base class, the provider and the
+  // layout that hands server-fetched data to the client cache import it directly.
   {
     files: ["src/**/*.{ts,tsx}"],
-    ignores: ["src/lib/query/react-query.ts"],
+    ignores: ["src/lib/query/base-query.ts", "src/providers/query-provider.tsx", "src/app/(dashboard)/layout.tsx"],
     rules: {
       "no-restricted-imports": [
         "error",
@@ -16,7 +17,7 @@ const eslintConfig = defineConfig([
           paths: [
             {
               name: "@tanstack/react-query",
-              message: 'Import from "@/lib/query/react-query" instead.',
+              message: "Extend BaseQuery (src/lib/query/base-query.ts) in a use-*.ts hook instead.",
             },
           ],
         },

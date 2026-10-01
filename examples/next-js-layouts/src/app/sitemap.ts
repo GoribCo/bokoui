@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/config/site";
 import { publicOrganizationPath } from "@/lib/organization/organization-types";
-import { getServerServices } from "@/lib/services/server";
+import { getServerApi } from "@/lib/api/server";
+import { OrganizationService } from "@/lib/services/organization.service";
 
 /** Lists the public organization profiles; everything else is behind sign-in. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const organizations = await (await getServerServices({ withCookies: false })).organizations.listPublicOrganizations();
+  const organizations = await new OrganizationService(await getServerApi({ withCookies: false })).listPublicOrganizations();
   const home = { url: siteConfig.url, changeFrequency: "monthly" as const, priority: 1 };
   const profiles = organizations.map((org) => ({
     url: `${siteConfig.url}${publicOrganizationPath(org)}`,

@@ -1,4 +1,4 @@
-import { HydrationBoundary, QueryClient, dehydrate } from "@/lib/query/react-query";
+import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
@@ -11,7 +11,8 @@ import { siteConfig } from "@/lib/config/site";
 import { getInitialState } from "@/lib/session/initial-state";
 import { signOut } from "@/lib/auth/actions";
 import { queryKeys } from "@/lib/query/keys";
-import { getServerServices } from "@/lib/services/server";
+import { getServerApi } from "@/lib/api/server";
+import { MenuService } from "@/lib/services/menu.service";
 
 // The signed-in area stays out of search results (FR-11.5).
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -26,14 +27,14 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
   // Data the shell needs on first paint is fetched here and handed to the client query cache, so the
   // hooks in the shell (`useCommonMenu`, `useOrganizationMenu`) find it ready.
-  const services = await getServerServices();
+  const menus = new MenuService(await getServerApi());
   const queryClient = new QueryClient();
   await Promise.all([
-    queryClient.prefetchQuery({ queryKey: queryKeys.commonMenu, queryFn: () => services.menus.getCommonMenu(), staleTime: Infinity }),
+    queryClient.prefetchQuery({ queryKey: queryKeys.commonMenu, queryFn: () => menus.getCommonMenu(), staleTime: Infinity }),
     initialOrganizationId
       ? queryClient.prefetchQuery({
           queryKey: queryKeys.menu(initialOrganizationId),
-          queryFn: () => services.menus.getMenu(initialOrganizationId),
+          queryFn: () => menus.getMenu(initialOrganizationId),
         })
       : undefined,
   ]);

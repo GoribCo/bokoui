@@ -20,7 +20,7 @@ M = must do before copying, S = should do, C = could do. Items marked **First** 
 - Lint and typecheck pass. Spot checks with axe found no violations at 1280 px and 390 px, mostly in the flat style and light mode.
 - Not yet checked: dark mode, tablet widths, Bangla, the other 7 styles (partly checked for two components), screen readers.
 - No automated tests. Unit tests, browser checks and the acceptance walk-through are deferred in `tasks-layouts.md`.
-- Data now follows the host project's layering (section 2.7). The sample backend lives in `src/api` (data files in TypeScript, one handler file per resource, a route table) and is served over HTTP at `/api/v1/*` by `app/api/v1/[...path]/route.ts`. `lib/api/client.ts` calls it, `lib/services/*.service.ts` validate the answers with Zod, `hooks/use*.ts` wrap the services in TanStack Query, and components use only the hooks. Server Components use the same services through `getServerServices()`.
+- Data now follows the host project's layering (section 2.7). The sample backend lives in `src/api` (data files in TypeScript, one handler file per resource, a route table) and is served over HTTP at `/api/v1/*` by `app/api/v1/[...path]/route.ts`. `lib/api/client.ts` calls it, `lib/services/*.service.ts` validate the answers with Zod, `hooks/use*.ts` wrap the services in TanStack Query, and components use only the hooks. Server Components use the same service classes with the server client (`new MenuService(await getServerApi())`).
 - The session is still a cookie with the value `mock-session`; sign-in and sign-out are server actions, not API endpoints.
 - A browser pass over the changed pages (dashboard, notifications, organizations, filters, table, form, profile, public profile, landing) at 1280 px found no errors and no axe violations on the pages scanned.
 - Stub pages remain for `/account` and `/settings/privacy`. `/organizations` and `/notifications` now read real endpoints.
@@ -124,23 +124,22 @@ src/
     server.ts                   getServerApi(): same client for Server Components, forwards cookies (server only)
     errors.ts                   ApiError, isApiError
   lib/services/
-    base.service.ts             BaseService: holds the ApiClient
+    base.service.ts             BaseService: holds the ApiClient (browser client by default)
     <name>.service.ts           class XService extends BaseService: methods return validated, typed data
-    index.ts                    createServices(client) builds the instances; `services` is the browser set
-    server.ts                   getServerServices() (server only)
   lib/schemas/                  Zod schemas, one file per resource
   lib/query/keys.ts             query key factory shared by hooks and server prefetching
-  lib/query/react-query.ts      the only file that imports @tanstack/react-query; everything else imports from it
+  lib/query/base-query.ts       BaseQuery: wraps useQuery, useMutation, useQueryClient; the hooks extend it
   hooks/
-    use-<service>.ts            useOrganizations, useNotifications, useRecords, useProfile, useCommonMenu, ...
-                                mutations: useMarkNotificationsRead, useCreateStaff
+    use-<service>.ts            a class that extends BaseQuery (this.useQuery / this.useMutation) and the
+                                exported hook that calls it: useOrganizations, useNotifications, useRecords,
+                                useProfile, useCommonMenu; mutations useMarkNotificationsRead, useCreateStaff
 ```
 
 | ID | Requirement | P |
 |---|---|---|
 | HD-7.1 | **Layering is enforced:** a lint rule (or an import-boundary check) fails when a component imports `lib/api`, `lib/services` or `fetch`, when a service imports a hook or a component, or when anything outside `lib/api/server.ts` imports `next/headers` for data access | M |
-| HD-7.2 | **Naming:** services are classes, one per file `<resource>.service.ts`, named `<Resource>Service` and extending `BaseService` (the constructor takes the `ApiClient`); hooks are `use<Resource>` for reads and `use<Verb><Resource>` for mutations, in `hooks/use-<resource>.ts`; query keys live only in `lib/query/keys.ts`, and `@tanstack/react-query` is imported only in `lib/query/react-query.ts` (an ESLint `no-restricted-imports` rule enforces it). The host names hooks `useDoctors`, `useAppointments`; when copying, keep the host's file naming (camel case) and these hook names | M |
-| HD-7.3 | **Two clients, one service layer:** `apiClient` in the browser, `getServerApi()` on the server (cookies forwarded, absolute URL). Services take the client, so the same code runs in both places. The host has no server-side data fetching; if it stays client-only, `lib/api/server.ts` and `getServerServices` are dropped and Server Components stop reading data | S |
+| HD-7.2 | **Naming:** services are classes, one per file `<resource>.service.ts`, named `<Resource>Service` and extending `BaseService` (the constructor takes the `ApiClient`); hooks are `use<Resource>` for reads and `use<Verb><Resource>` for mutations, in `hooks/use-<resource>.ts`; query keys live only in `lib/query/keys.ts`, and a `use-*.ts` file never imports `@tanstack/react-query`: it defines a class that extends `BaseQuery` and calls `this.useQuery`, `this.useMutation` or `this.useQueryClient`. An ESLint `no-restricted-imports` rule enforces it; the only other importers are the query provider and the dashboard layout that hands server-fetched data to the client cache. The host names hooks `useDoctors`, `useAppointments`; when copying, keep the host's file naming (camel case) and these hook names | M |
+| HD-7.3 | **Two clients, one service layer:** a service takes an `ApiClient` in its constructor and uses the browser client by default (`new MenuService()`); server code passes the server client (`new MenuService(await getServerApi())`, cookies forwarded, absolute URL). There is no registry or factory. The host has no server-side data fetching; if it stays client-only, `lib/api/server.ts` is dropped and Server Components stop reading data | S |
 | HD-7.4 | **Contract:** every endpoint is described in one place (an OpenAPI file or shared Zod schemas in a package such as `@rxprofile/types`) that both `src/api` and the services use, so the sample backend cannot drift from the real one. Error codes (`UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`, `VALIDATION`, ...) and the paging `meta` shape are listed there | M |
 | HD-7.5 | **Auth as endpoints:** sign-in, sign-out and token refresh become API endpoints (`POST /auth/login`, `/auth/refresh`, `/auth/logout`), and the 401 then refresh then retry flow of the host's client moves into `ApiClient`. The current server actions stay only if the cookie model is chosen (HD-6.4) | M |
 | HD-7.6 | **Read-only versus write endpoints:** every mutation hook declares what it invalidates or updates in the cache (`useMarkNotificationsRead` does an optimistic update with rollback; `useCreateStaff` invalidates nothing because nothing is listed). New mutations follow one of those two shapes | S |

@@ -1,9 +1,19 @@
 "use client";
 
-import { useQuery } from "@/lib/query/react-query";
+import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { services } from "@/lib/services";
+import { ProfileService } from "@/lib/services/profile.service";
+
+class ProfileQuery extends BaseQuery {
+  private readonly service = new ProfileService();
+
+  get() {
+    return this.useQuery({ queryKey: queryKeys.profile, queryFn: () => this.service.getMyProfile() });
+  }
+}
+
+const profileQuery = new ProfileQuery();
 
 export function useProfile() {
-  return useQuery({ queryKey: queryKeys.profile, queryFn: () => services.profiles.getMyProfile() });
+  return profileQuery.get();
 }

@@ -10,7 +10,8 @@ import { organizationTypes } from "@/lib/config/organization-types";
 import { publicOrganizationPath } from "@/lib/organization/organization-types";
 import { buildMetadata } from "@/lib/seo";
 import { getSession } from "@/lib/session/session";
-import { getServerServices } from "@/lib/services/server";
+import { getServerApi } from "@/lib/api/server";
+import { OrganizationService } from "@/lib/services/organization.service";
 
 export const metadata = buildMetadata({
   title: "Welcome",
@@ -32,7 +33,7 @@ export default async function HomePage() {
   const [t, tType, organizations] = await Promise.all([
     getTranslations("home"),
     getTranslations("organizationType"),
-    getServerServices().then((services) => services.organizations.listPublicOrganizations()),
+    getServerApi().then((api) => new OrganizationService(api).listPublicOrganizations()),
   ]);
 
   return (

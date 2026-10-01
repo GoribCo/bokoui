@@ -1,10 +1,20 @@
 "use client";
 
-import { useQuery } from "@/lib/query/react-query";
+import { BaseQuery } from "@/lib/query/base-query";
 import { queryKeys } from "@/lib/query/keys";
-import { services } from "@/lib/services";
+import { OrganizationService } from "@/lib/services/organization.service";
+
+class OrganizationsQuery extends BaseQuery {
+  private readonly service = new OrganizationService();
+
+  list() {
+    return this.useQuery({ queryKey: queryKeys.organizations, queryFn: () => this.service.getOrganizations() });
+  }
+}
+
+const organizationsQuery = new OrganizationsQuery();
 
 /** Organizations of the signed-in user. */
 export function useOrganizations() {
-  return useQuery({ queryKey: queryKeys.organizations, queryFn: () => services.organizations.getOrganizations() });
+  return organizationsQuery.list();
 }
