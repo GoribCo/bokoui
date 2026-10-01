@@ -1,7 +1,7 @@
 # Software Requirements Specification: Layout Hardening Before Real Data
 
 Extends: [srs-layouts.md](srs-layouts.md) (the shell itself) and [plan-layouts-reference-ui.md](../plan-layouts-reference-ui.md) (the reference UI alignment).
-Version: 0.2 (draft) | Date: 2026-10-01
+Version: 0.3 (draft) | Date: 2026-10-01
 Host project reviewed: `/Users/wl/Workspace/projects/goribco/rxprofile/apps/web` (read-only review; see section 2.6 and appendix A)
 
 ## 1. Introduction
@@ -20,8 +20,11 @@ M = must do before copying, S = should do, C = could do. Items marked **First** 
 - Lint and typecheck pass. Spot checks with axe found no violations at 1280 px and 390 px, mostly in the flat style and light mode.
 - Not yet checked: dark mode, tablet widths, Bangla, the other 7 styles (partly checked for two components), screen readers.
 - No automated tests. Unit tests, browser checks and the acceptance walk-through are deferred in `tasks-layouts.md`.
-- Data comes from `lib/services/mock`. The session is a cookie with the value `mock-session`.
-- Stub pages exist for `/organizations`, `/notifications` and `/account`. Notification items are demo data in `lib/sample-data.ts`.
+- Data now follows the host project's layering (section 2.7). The sample backend lives in `src/api` (data files in TypeScript, one handler file per resource, a route table) and is served over HTTP at `/api/v1/*` by `app/api/v1/[...path]/route.ts`. `lib/api/client.ts` calls it, `lib/services/*.service.ts` validate the answers with Zod, `hooks/use*.ts` wrap the services in TanStack Query, and components use only the hooks. Server Components use the same services through `getServerServices()`.
+- The session is still a cookie with the value `mock-session`; sign-in and sign-out are server actions, not API endpoints.
+- A browser pass over the changed pages (dashboard, notifications, organizations, filters, table, form, profile, public profile, landing) at 1280 px found no errors and no axe violations on the pages scanned.
+- Stub pages remain for `/account` and `/settings/privacy`. `/organizations` and `/notifications` now read real endpoints.
+- A shadcn/ui copy of the shell exists in `examples/next-js-shadcn-ui` for comparison; the owner prefers the bokoui version (see HD-6.1).
 
 ## 2. Requirements
 
@@ -40,13 +43,13 @@ M = must do before copying, S = should do, C = could do. Items marked **First** 
 ### 2.2 Data and authentication seams (First)
 | ID | Requirement | P |
 |---|---|---|
-| HD-2.1 | A second, real-API implementation of the `services` interfaces (a `fetch`-based client with a configurable base URL) sits beside the mock, so the interfaces are proven against a real backend shape. A single setting selects mock or API | M |
-| HD-2.2 | Every service response is validated with the Zod schemas in `lib/schemas`; TypeScript types are inferred from those schemas, so an API change shows as a type error | M |
-| HD-2.3 | TanStack Query hooks expose loading, error and retry states. The shell shows a skeleton while the menu loads and an inline error with a retry button when it fails | M |
+| HD-2.1 | **Done for the sample backend (`src/api` over HTTP).** A second, real-API implementation of the `services` interfaces (a `fetch`-based client with a configurable base URL) sits beside the mock, so the interfaces are proven against a real backend shape. A single setting selects mock or API | M |
+| HD-2.2 | **Done for all current endpoints.** Every service response is validated with the Zod schemas in `lib/schemas`; TypeScript types are inferred from those schemas, so an API change shows as a type error | M |
+| HD-2.3 | **Partly done:** hooks expose `isPending` and `isError` and the list pages use them; the shell sidebar still lacks an error state with retry. TanStack Query hooks expose loading, error and retry states. The shell shows a skeleton while the menu loads and an inline error with a retry button when it fails | M |
 | HD-2.4 | A central handler treats 401 as an expired session (clear state, redirect to sign-in with a return path) and 403 as the forbidden view | M |
 | HD-2.5 | The session seam is documented: where the real provider plugs in (`getSession`, the proxy, sign-in and sign-out actions), with an example for one provider. The mock cookie is never accepted when `NODE_ENV` is production | M |
-| HD-2.6 | Notifications go through a service (list, mark read, mark all read) with read state kept on the server. The bell badge uses the unread count from that service | S |
-| HD-2.7 | Optional live updates for notifications and the unread count (polling interval or a push hook), off by default | C |
+| HD-2.6 | **Done:** `GET /notifications` and `POST /notifications/read`, an optimistic `useMarkNotificationsRead`, shared by the bell and the notifications page. Notifications go through a service (list, mark read, mark all read) with read state kept on the server. The bell badge uses the unread count from that service | S |
+| HD-2.7 | **Polling done (60 s refetch interval);** push is not. Optional live updates for notifications and the unread count (polling interval or a push hook), off by default | C |
 | HD-2.8 | Active role switching: a user with several roles in an organization can choose the active role, and menus and access checks follow it | S |
 
 ### 2.3 Shell edge cases and gaps
@@ -85,7 +88,7 @@ The host app already contains a working shell of its own (`DashboardLayout`, `Ap
 
 | ID | Requirement | P |
 |---|---|---|
-| HD-6.1 | **Decide the UI library path before copying.** The host uses shadcn/ui (Radix, owned code in `components/ui`) and class-based dark mode (`.dark`); this example uses `bokoui/react` with `data-theme` and `data-mode`. Choose one: (A) port the new patterns onto the host's shadcn components, keeping the host's theme tokens; (B) adopt bokoui in the host, replace the shadcn tokens and dark-mode mechanism, and migrate the existing UI; (C) copy only logic (menus, edge cases, tests) and leave all markup to the host. Record the choice in the host's docs. Recommended: A, because a full migration is large and every existing host screen already uses shadcn components | M |
+| HD-6.1 | **Status: a shadcn copy was built and rejected by the owner, who prefers bokoui; the remaining choice is how to bring bokoui into the host (B or the gradual path in the chat summary), not whether.** **Decide the UI library path before copying.** The host uses shadcn/ui (Radix, owned code in `components/ui`) and class-based dark mode (`.dark`); this example uses `bokoui/react` with `data-theme` and `data-mode`. Choose one: (A) port the new patterns onto the host's shadcn components, keeping the host's theme tokens; (B) adopt bokoui in the host, replace the shadcn tokens and dark-mode mechanism, and migrate the existing UI; (C) copy only logic (menus, edge cases, tests) and leave all markup to the host. Record the choice in the host's docs. Recommended: A, because a full migration is large and every existing host screen already uses shadcn components | M |
 | HD-6.2 | Authorization: the host evaluates scoped permissions (personal, organization, branch, platform) with a pure evaluator that fails closed, deny wins, and every route and menu entry carries a `PermissionId`. This example uses a flat role check. Re-express the menu filtering and page guards on the host's `evaluate`, `<Can>` and `useAuth().can`, and remove this example's `lib/access` | M |
 | HD-6.3 | Workspace model: the host treats a workspace as a menu section with a scope, and switching navigates to that section's overview URL (`/workplaces/{slug}/...`), so the URL carries the workspace. This example keeps the active organization in a store and cookie. Use the host's URL-scoped model; keep this example's switcher only as a visual pattern (search above 6 entries, type subtitle, "Manage workspaces") | M |
 | HD-6.4 | Authentication: the host uses client-side JWT access and refresh tokens in `localStorage`, with `RouteGuard` and `AuthProvider`. This example uses a server cookie, `proxy.ts` and server-side redirects, which also require a server runtime (the host has a GitHub Pages deploy workflow, and its docs mention an earlier static-export phase, so confirm how it is deployed today). Decide: keep the host's client auth and drop the proxy and server session from the copy, or move the host to httpOnly cookies (an API change). Do not mix both | M |
@@ -105,11 +108,76 @@ The host app already contains a working shell of its own (`DashboardLayout`, `Ap
 | HD-6.18 | Tests: follow the host's conventions: unit tests next to the code as `*.test.ts` with `node:test` (not Jest or Vitest), Playwright specs in `tests/` for desktop and an iPhone 13 profile on a separate dev server and dist directory. Port HD-1.1 to HD-1.3 into those tools. The host's baseline is 77 of 82 unit tests passing with 5 known failures; the copy must not add failures | M |
 | HD-6.19 | Documentation: describe the copied shell in the host's `apps/web/CLAUDE.md` source map and `src/app/README.md` (route ownership), and fix or delete the stale `README.md` sections the host already warns about, instead of leaving a second README | S |
 
+### 2.7 Data layer structure (adopt the host's pattern)
+The host's rule is one direction only: `page` (thin) to client component to `useX` hook to `lib/services/x.service.ts` to `apiClient` to the server. Components never call `fetch` or `apiClient`. The example now follows it, with the sample backend behind HTTP so the swap to a real server is a configuration change.
+
+```
+src/
+  api/                          the backend (deleted when a real one exists)
+    data/*.ts                   sample data in TypeScript
+    endpoints/*.ts              one handler file per resource: (context) => { results, meta?, status? }
+    router.ts                   route table (method, path with :params, handler) and the { success, results, meta } envelope
+    auth.ts  types.ts           session check, HttpError, handler types
+  app/api/v1/[...path]/route.ts HTTP adapter for the router (GET, POST, PUT, PATCH, DELETE)
+  lib/api/
+    client.ts                   ApiClient: base URL, JSON, envelope, ApiError; `apiClient` for the browser
+    server.ts                   getServerApi(): same client for Server Components, forwards cookies (server only)
+    errors.ts                   ApiError, isApiError
+  lib/services/
+    <name>.service.ts           createXService(client): methods return validated, typed data
+    index.ts                    createServices(client) and `services` (browser)
+    server.ts                   getServerServices() (server only)
+  lib/schemas/                  Zod schemas, one file per resource
+  lib/query/keys.ts             query key factory shared by hooks and server prefetching
+  hooks/
+    use-<service>.ts            useOrganizations, useNotifications, useRecords, useProfile, useCommonMenu, ...
+                                mutations: useMarkNotificationsRead, useCreateStaff
+```
+
+| ID | Requirement | P |
+|---|---|---|
+| HD-7.1 | **Layering is enforced:** a lint rule (or an import-boundary check) fails when a component imports `lib/api`, `lib/services` or `fetch`, when a service imports a hook or a component, or when anything outside `lib/api/server.ts` imports `next/headers` for data access | M |
+| HD-7.2 | **Naming:** services are `<resource>.service.ts` exporting `create<Resource>Service(client)`; hooks are `use<Resource>` for reads and `use<Verb><Resource>` for mutations, in `hooks/use-<resource>.ts`; query keys live only in `lib/query/keys.ts`. The host names hooks `useDoctors`, `useAppointments`; when copying, keep the host's file naming (camel case) and these hook names | M |
+| HD-7.3 | **Two clients, one service layer:** `apiClient` in the browser, `getServerApi()` on the server (cookies forwarded, absolute URL). Services take the client, so the same code runs in both places. The host has no server-side data fetching; if it stays client-only, `lib/api/server.ts` and `getServerServices` are dropped and Server Components stop reading data | S |
+| HD-7.4 | **Contract:** every endpoint is described in one place (an OpenAPI file or shared Zod schemas in a package such as `@rxprofile/types`) that both `src/api` and the services use, so the sample backend cannot drift from the real one. Error codes (`UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`, `VALIDATION`, ...) and the paging `meta` shape are listed there | M |
+| HD-7.5 | **Auth as endpoints:** sign-in, sign-out and token refresh become API endpoints (`POST /auth/login`, `/auth/refresh`, `/auth/logout`), and the 401 then refresh then retry flow of the host's client moves into `ApiClient`. The current server actions stay only if the cookie model is chosen (HD-6.4) | M |
+| HD-7.6 | **Read-only versus write endpoints:** every mutation hook declares what it invalidates or updates in the cache (`useMarkNotificationsRead` does an optimistic update with rollback; `useCreateStaff` invalidates nothing because nothing is listed). New mutations follow one of those two shapes | S |
+| HD-7.7 | **Paging, filtering and sorting** use one query-string convention (`page`, `pageSize`, `q`, `status`, `sort`) and one `meta` block; list hooks keep the previous page while loading and debounce text input | S |
+| HD-7.8 | **Prefetch rule:** only what the first paint needs is prefetched in a layout (`commonMenu`, the active organization's menu); everything else loads in the hook. Prefetch and hook use the same key and the same service call | S |
+| HD-7.9 | **Tests:** endpoint handlers are plain functions and get unit tests for success, 401, 403, 404 and validation; services get tests against a fake `ApiClient`; hooks get tests with a `QueryClientProvider` | M |
+| HD-7.10 | **Mapping to the host:** the host's services are singleton functions over a shared `apiClient` and its mocks return `mockResponse()`. Move this example's `createXService(client)` shape to the host's function style, keep the service names, and replace `src/api` with the host's real endpoints (the host API already uses `{ success, results, meta }` and a `/v1` prefix, so the envelope and base URL match) | M |
+| HD-7.11 | **Failure handling in the browser:** a global `QueryClient` default and an error boundary turn a failed query into a defined message with retry; a 401 anywhere signs the user out with a return path; a 403 shows the forbidden view | M |
+
+### 2.8 State management
+The rule is that each kind of state has one owner, and no state is copied from one owner to another.
+
+| State | Owner | Where in the example | Rule |
+|---|---|---|---|
+| Server data (lists, menus, notifications, profile, session) | TanStack Query | `hooks/use-*.ts` | Never stored in Zustand or context; read through hooks; the session is a query seeded by the server (`useSessionQuery`) and `SessionProvider` only derives roles from it |
+| Interface state that outlives a page (sidebar collapsed, "More" sheet) | Zustand | `lib/stores/ui-store.ts` | Persist only what the first server render needs (the collapsed flag, in a cookie); keep transient state (an open sheet) unpersisted |
+| Active organization | Zustand with a cookie | `lib/stores/organization-store.ts` | Menus and permissions are keyed by it, so switching needs no manual invalidation. The host puts the workspace in the URL (HD-6.3); in that model this store is removed |
+| Shareable view state (tab, filter, page) | URL through nuqs | `hooks/use-list-params.ts` | Anything a user could bookmark or send belongs here and also forms the query key |
+| Form state | React Hook Form with Zod | `components/auth`, `components/examples` | Local to the form; the schema is shared with the server where one exists |
+| Derived values (effective roles, filtered menu, page title) | Computed in render | `useMenu`, `SessionProvider` | `useMemo` or selectors; never stored |
+| Short-lived component state (open popover, hovered row) | `useState` | components | Stays in the component |
+| Appearance (theme, style, font size, language) | The `<html>` element and `localStorage` or a cookie | `components/appearance` | Applied before first paint by a script in `<head>`; read through small hooks |
+
+| ID | Requirement | P |
+|---|---|---|
+| HD-8.1 | **State inventory:** the README lists every piece of state with its owner as in the table above, and a new piece of state is added to it in the same change | S |
+| HD-8.2 | **Sign-out and organization switch reset what they must:** on sign-out the query cache and the stores are cleared (today a server redirect reloads the page, which hides the gap; a client-side sign-out would leave the previous user's data in the cache). On an organization switch, queries keyed by organization stay valid and organization-independent queries (`commonMenu`, `profile`) are kept | M |
+| HD-8.3 | **Query defaults** are set once (`staleTime`, retry policy, refetch on focus for the session and notifications queries only) and documented with the reason for each; per-hook overrides are the exception | S |
+| HD-8.4 | **Store hygiene:** each store exports typed selectors (done) and no component subscribes to a whole store; stores have unit tests for their actions and for cookie persistence (see HD-1.1) | S |
+| HD-8.5 | **Hydration safety:** every value that differs between server and browser (stored theme, font size, collapsed flag, locale) is either seeded by the server from a cookie, or applied by a head script before React starts; no `useEffect` that changes the layout after mount | M |
+| HD-8.6 | **Host alignment:** the host uses React context providers plus TanStack Query and no Zustand (HD-6.17). Decide whether the copy adds Zustand or keeps the host's providers: with the workspace in the URL, the remaining Zustand state is only the collapsed sidebar, which a small context or the library's own provider can hold. Query hooks and nuqs are kept either way | M |
+| HD-8.7 | **Developer tooling:** TanStack Query Devtools in development only; a documented way to inspect the stores | C |
+
 ## 3. Recommended order
 0. **Decide first (2.6):** HD-6.1 (UI library path), HD-6.4 (auth model), HD-6.2 and HD-6.3 (authorization and workspace model), HD-6.5 (i18n), HD-6.17 (dependency versions). These change the size and shape of everything below; if the answer is path A, much of 2.2 and 2.4 is replaced by the host's own pieces (HD-6.6, HD-6.7).
 1. **Verification first (2.1):** HD-1.1, HD-1.2, HD-1.5, HD-1.8. These make every later change safe.
 2. **Reuse (2.4):** HD-4.1 to HD-4.3. Cheap, and removes the biggest copy-time risk.
-3. **Data seam (2.2):** HD-2.1 to HD-2.5. Proves the shell against a real API shape and handles failures.
+3. **Data seam (2.2, 2.7):** HD-2.1 to HD-2.3 are done for the sample backend. Next: HD-7.1 (enforce the layering), HD-7.4 (one contract), HD-7.5 (auth endpoints) and HD-7.11 (failure handling). Then HD-2.4 and HD-2.5.
+3b. **State management (2.8):** HD-8.2 (reset on sign-out) and HD-8.5 (hydration safety) first, then the rest.
 4. **Edge cases (2.3) and production readiness (2.5)** in parallel, then the remaining S and C items.
 
 ## 4. Acceptance criteria
@@ -117,11 +185,12 @@ The host app already contains a working shell of its own (`DashboardLayout`, `Ap
 2. The app starts against the mock and against a stub HTTP server using the same interfaces, with no component changes.
 3. A fresh copy of the folder, after following the README checklist and deleting the demo code, builds and signs in with a different data source.
 4. No file outside the configuration module contains the product name or demo email addresses.
-5. The decisions in section 2.6 are written into the host project's docs, and no copied file uses a second i18n system, authorization model, API client or router convention.
-6. A failed menu request, an expired session and a user with no organizations each show a defined screen, not a blank page or a crash.
+5. A component, hook or service added later can be traced through the layers in section 2.7 with no shortcut, and `src/api` can be removed by changing only `NEXT_PUBLIC_API_BASE_URL` and the service function bodies if the real contract differs.
+6. The decisions in section 2.6 are written into the host project's docs, and no copied file uses a second i18n system, authorization model, API client or router convention.
+7. A failed menu request, an expired session and a user with no organizations each show a defined screen, not a blank page or a crash.
 
 ## 5. Open questions
-0. Which path does the host take for HD-6.1 (port onto shadcn, adopt bokoui, or logic only)? Almost every other answer depends on it.
+0. How does bokoui enter the host (HD-6.1): replace shadcn in one go, or screen by screen behind the host's own `components/ui` re-exports? Almost every other answer depends on it.
 1. Does the host stay on client-side JWT auth (HD-6.4), or will it move to cookie sessions? That decides whether the proxy and server redirects are copied.
 2. Will the host project run a command palette (HD-3.3), or should search be removed?
 3. The host already has English, Bangla and Hindi; are any more planned, and does any need right-to-left (HD-5.4)?

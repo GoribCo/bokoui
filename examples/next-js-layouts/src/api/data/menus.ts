@@ -136,7 +136,7 @@ const companyMenu: MenuGroup[] = [
   },
 ];
 
-export const mockMenus: Record<string, MenuGroup[]> = {
+export const menusByOrganization: Record<string, MenuGroup[]> = {
   "org-hospital": hospitalMenu,
   "org-pharmacy": pharmacyMenu,
   "org-company": companyMenu,

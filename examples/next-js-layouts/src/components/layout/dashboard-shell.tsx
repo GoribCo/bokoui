@@ -13,8 +13,9 @@ import { OrganizationSwitcher } from "@/components/organization/organization-swi
 import { useActiveOrganization } from "@/hooks/use-active-organization";
 import { useMenu } from "@/hooks/use-menu";
 import { useMenuTranslator } from "@/hooks/use-menu-translator";
-import { useMenuQuery } from "@/hooks/use-queries";
-import { sampleNotifications } from "@/lib/sample-data";
+import { useCommonMenu } from "@/hooks/use-common-menu";
+import { useMarkNotificationsRead, useNotifications } from "@/hooks/use-notifications";
+import { useOrganizationMenu } from "@/hooks/use-organization-menu";
 import { DASHBOARD_PATH } from "@/lib/config/auth";
 import { findActiveTrail, localizeMenu } from "@/lib/menu";
 import { useSession } from "@/providers/session-provider";
@@ -33,11 +34,10 @@ import { Sidebar } from "./sidebar";
 import { SidebarToggle } from "./sidebar-toggle";
 
 const NO_GROUPS: MenuGroup[] = [];
+const NO_ITEMS: MenuItem[] = [];
 
 export interface DashboardShellProps {
   siteName: string;
-  /** Standard links under the navigation; the same for every organization. */
-  commonMenu: MenuItem[];
   accountMenuItems: MenuItem[];
   footerLinks: FooterLink[];
   /** Slots in the mobile bottom navigation (see `config/navigation.ts`). */
@@ -59,7 +59,6 @@ export interface DashboardShellProps {
  */
 export function DashboardShell({
   siteName,
-  commonMenu,
   accountMenuItems,
   footerLinks,
   bottomNavSlots,
@@ -77,15 +76,18 @@ export function DashboardShell({
     useActiveOrganization();
   const translate = useMenuTranslator();
 
-  const menuQuery = useMenuQuery(organization.id);
+  const menuQuery = useOrganizationMenu(organization.id);
+  const commonMenuQuery = useCommonMenu();
+  const notificationsQuery = useNotifications();
+  const markRead = useMarkNotificationsRead();
   const menu = useMenu(menuQuery.data ?? NO_GROUPS);
   const common = useMemo(
     () =>
       localizeMenu(
-        [{ id: "common", label: "", items: commonMenu }],
+        [{ id: "common", label: "", items: commonMenuQuery.data ?? NO_ITEMS }],
         translate,
       )[0]?.items ?? [],
-    [commonMenu, translate],
+    [commonMenuQuery.data, translate],
   );
   const accountItems = useMemo(
     () =>
@@ -245,7 +247,8 @@ export function DashboardShell({
                   invitations: t("shell.notificationTabs.invitations"),
                 },
               }}
-              items={sampleNotifications}
+              items={notificationsQuery.data ?? []}
+            onMarkRead={(ids) => markRead.mutate(ids)}
               viewAllHref="/notifications"
             />
           }

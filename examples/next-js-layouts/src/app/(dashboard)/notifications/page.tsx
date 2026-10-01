@@ -1,13 +1,15 @@
-import { Text } from "bokoui/react";
-import { StaticPage } from "@/components/layout/static-page";
+import { PageContainer } from "@/components/layout/page-container";
+import { PageHeader } from "@/components/layout/page-header";
+import { NotificationList } from "@/components/layout/notification-list";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ title: "Notifications", path: "/notifications" });
 
 export default function NotificationsPage() {
   return (
-    <StaticPage title="Notifications" description="The full notification list belongs to the host project.">
-      <Text>Show filters, read state and history here.</Text>
-    </StaticPage>
+    <PageContainer size="md">
+      <PageHeader title="Notifications" description="Everything sent to you, newest first." />
+      <NotificationList />
+    </PageContainer>
   );
 }

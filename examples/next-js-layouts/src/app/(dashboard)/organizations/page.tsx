@@ -1,15 +1,15 @@
-import { Text } from "bokoui/react";
-import { StaticPage } from "@/components/layout/static-page";
-import { getSession } from "@/lib/session/session";
+import { PageContainer } from "@/components/layout/page-container";
+import { PageHeader } from "@/components/layout/page-header";
+import { OrganizationList } from "@/components/organization/organization-list";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ title: "Manage workspaces", path: "/organizations" });
 
-export default async function OrganizationsPage() {
-  const session = await getSession();
+export default function OrganizationsPage() {
   return (
-    <StaticPage title="Manage workspaces" description="Workspace administration belongs to the host project.">
-      <Text>Signed in as {session?.user.email}. Add, rename and remove workspaces here.</Text>
-    </StaticPage>
+    <PageContainer>
+      <PageHeader title="Manage workspaces" description="Administration (add, rename, remove) belongs to the host project." />
+      <OrganizationList />
+    </PageContainer>
   );
 }

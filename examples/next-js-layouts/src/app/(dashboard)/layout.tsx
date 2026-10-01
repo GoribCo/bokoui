@@ -11,8 +11,7 @@ import { siteConfig } from "@/lib/config/site";
 import { getInitialState } from "@/lib/session/initial-state";
 import { signOut } from "@/lib/auth/actions";
 import { queryKeys } from "@/lib/query/keys";
-import { menuSchema } from "@/lib/schemas";
-import { services } from "@/lib/services";
+import { getServerServices } from "@/lib/services/server";
 
 // The signed-in area stays out of search results (FR-11.5).
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -25,13 +24,16 @@ export default async function DashboardLayout({ children }: { children: ReactNod
   const { session, initialOrganizationId } = await getInitialState();
   if (!session) redirect(SIGN_IN_PATH);
 
+  // Data the shell needs on first paint is fetched here and handed to the client query cache, so the
+  // hooks in the shell (`useCommonMenu`, `useOrganizationMenu`) find it ready.
+  const services = await getServerServices();
   const queryClient = new QueryClient();
-  const [commonMenu] = await Promise.all([
-    services.menus.getCommonMenu(),
+  await Promise.all([
+    queryClient.prefetchQuery({ queryKey: queryKeys.commonMenu, queryFn: () => services.menus.getCommonMenu(), staleTime: Infinity }),
     initialOrganizationId
       ? queryClient.prefetchQuery({
           queryKey: queryKeys.menu(initialOrganizationId),
-          queryFn: async () => menuSchema.parse(await services.menus.getMenu(initialOrganizationId)),
+          queryFn: () => services.menus.getMenu(initialOrganizationId),
         })
       : undefined,
   ]);
@@ -40,7 +42,6 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     <HydrationBoundary state={dehydrate(queryClient)}>
       <DashboardShell
         siteName={siteConfig.name}
-        commonMenu={commonMenu}
         accountMenuItems={accountMenuItems}
         footerLinks={siteConfig.footerLinks}
         bottomNavSlots={bottomNavSlots}

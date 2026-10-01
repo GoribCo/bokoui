@@ -1,5 +1,9 @@
 export { menuGroupSchema, menuItemSchema, menuSchema } from "./menu";
+export { notificationSchema } from "./notification";
 export { organizationSchema, organizationTypeSchema } from "./organization";
+export { profileSchema } from "./profile";
+export { publicOrganizationSchema } from "./public-organization";
+export { recordSchema } from "./record";
 export { roleSchema } from "./role";
 export { sessionSchema, userSchema } from "./session";
 export { signInSchema } from "./auth";

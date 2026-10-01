@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
-import { services } from "@/lib/services";
+import { getServerApi } from "@/lib/api/server";
+import { createServices } from "@/lib/services";
 import type { OrganizationType, PublicOrganization } from "@/lib/types";
 
 /** Profiles change rarely and are read by anyone: keep each one for an hour, or until its tag is revalidated. */
@@ -11,7 +12,9 @@ export const publicOrganizationTag = (type: OrganizationType, slug: string) => `
  * Cached lookup of a public profile (FR-3.9, "on demand with caching"): nothing is prebuilt, the first
  * request fetches from the service and later ones reuse the result. `null` (unknown slug) is cached too.
  */
-export function getPublicOrganization(type: OrganizationType, slug: string): Promise<PublicOrganization | null> {
+export async function getPublicOrganization(type: OrganizationType, slug: string): Promise<PublicOrganization | null> {
+  // Resolved outside the cached function: it reads request headers, and public data needs no cookies.
+  const services = createServices(await getServerApi({ withCookies: false }));
   return unstable_cache(
     () => services.organizations.getPublicOrganization(type, slug),
     ["public-organization", type, slug],

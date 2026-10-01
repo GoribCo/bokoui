@@ -1,6 +1,6 @@
 import type { Organization, PublicOrganization, UserProfile } from "@/lib/types";
 
-export const mockProfile: UserProfile = {
+export const profile: UserProfile = {
   id: "user-1",
   name: "Amina Rahman",
   email: "amina.rahman@example.com",
@@ -10,7 +10,7 @@ export const mockProfile: UserProfile = {
 };
 
 /** One user, three organizations of different types, with different roles in each. */
-export const mockOrganizations: Organization[] = [
+export const organizations: Organization[] = [
   {
     id: "org-hospital",
     slug: "green-valley-hospital",
@@ -35,7 +35,7 @@ export const mockOrganizations: Organization[] = [
 ];
 
 /** Public profiles: the user's organizations plus a few others, slugs unique within a type. */
-export const mockPublicOrganizations: PublicOrganization[] = [
+export const publicOrganizations: PublicOrganization[] = [
   {
     id: "org-hospital",
     slug: "green-valley-hospital",

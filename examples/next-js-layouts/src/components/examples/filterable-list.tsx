@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
 import { Badge, Input, Pagination } from "bokoui/react";
 import { Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
 import { useListParams } from "@/hooks/use-list-params";
 import { listTabs, type ListTab } from "@/lib/query/search-params";
-import { sampleRecords } from "@/lib/sample-data";
+import { useDebouncedValue } from "@/hooks/use-debounced-value";
+import { useRecords } from "@/hooks/use-records";
 
 const PAGE_SIZE = 8;
 const tabLabels: Record<ListTab, string> = { all: "All", active: "Active", archived: "Archived" };
@@ -14,16 +14,12 @@ const tabLabels: Record<ListTab, string> = { all: "All", active: "Active", archi
 export function FilterableList() {
   const { tab, q, page, setTab, setQuery, setPage } = useListParams();
 
-  const matches = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return sampleRecords.filter(
-      (record) => (tab === "all" || record.status === tab) && (!needle || record.name.toLowerCase().includes(needle)),
-    );
-  }, [tab, q]);
-
-  const pageCount = Math.max(1, Math.ceil(matches.length / PAGE_SIZE));
-  const current = Math.min(page, pageCount);
-  const rows = matches.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
+  // Filtering and paging happen on the server (`GET /records`); the URL state is the query.
+  const search = useDebouncedValue(q.trim());
+  const records = useRecords({ status: tab, q: search, page, pageSize: PAGE_SIZE });
+  const rows = records.data?.items ?? [];
+  const pageCount = records.data?.meta.totalPages ?? 1;
+  const current = records.data?.meta.page ?? page;
 
   return (
     <div className="flex flex-col gap-4">
@@ -47,7 +43,8 @@ export function FilterableList() {
           <TabPanel key={value} value={value}>
             {value === tab ? (
               <ul className="mt-3 flex flex-col divide-y divide-border rounded-card border border-border">
-                {rows.length === 0 ? <li className="p-4 text-muted-foreground">No matches</li> : null}
+                {records.isPending ? <li className="p-4 text-muted-foreground">Loading…</li> : null}
+                {records.isSuccess && rows.length === 0 ? <li className="p-4 text-muted-foreground">No matches</li> : null}
                 {rows.map((record) => (
                   <li key={record.id} className="flex items-center justify-between gap-3 p-3">
                     <span className="min-w-0 truncate">{record.name}</span>

@@ -5,24 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "bokoui/react";
 import { Popover, Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
+import type { Notification } from "@/lib/types";
 
 export type NotificationTab = "all" | "unread" | "urgent" | "invitations";
 
 const tabs: NotificationTab[] = ["all", "unread", "urgent", "invitations"];
-
-export interface NotificationItem {
-  id: string;
-  /** `action` needs a decision, `info` is for awareness, `success` confirms something done. */
-  kind?: "action" | "info" | "success" | "invitation";
-  /** Listed under the Urgent tab. */
-  urgent?: boolean;
-  title: string;
-  body?: string;
-  /** Time or relative time, already formatted. */
-  time?: string;
-  unread?: boolean;
-  href?: string;
-}
 
 export interface NotificationsButtonProps {
   labels: {
@@ -35,19 +22,21 @@ export interface NotificationsButtonProps {
     viewAll: string;
     tabs: Record<NotificationTab, string>;
   };
-  items?: NotificationItem[];
+  items?: Notification[];
+  /** Marks the given notifications read; all of them when `ids` is omitted. */
+  onMarkRead: (ids?: string[]) => void;
   /** Target of the footer link; the link is hidden when unset. */
   viewAllHref?: string;
 }
 
-const kindIcon: Record<NonNullable<NotificationItem["kind"]>, LucideIcon> = {
+const kindIcon: Record<Notification["kind"], LucideIcon> = {
   action: ClipboardCheck,
   info: CalendarClock,
   success: CircleCheck,
   invitation: MailPlus,
 };
 
-function NotificationRow({ item, unread, onOpen }: { item: NotificationItem; unread: boolean; onOpen: () => void }) {
+function NotificationRow({ item, unread, onOpen }: { item: Notification; unread: boolean; onOpen: () => void }) {
   const Icon = kindIcon[item.kind ?? "info"];
   const content = (
     <>
@@ -80,19 +69,17 @@ function NotificationRow({ item, unread, onOpen }: { item: NotificationItem; unr
 }
 
 /** Bell that opens a panel of notifications: unread ones marked by an accent edge, with mark-all-read and a link to the full list. */
-export function NotificationsButton({ labels, items = [], viewAllHref }: NotificationsButtonProps) {
-  const [read, setRead] = useState<ReadonlySet<string>>(new Set());
-  const isUnread = (item: NotificationItem) => Boolean(item.unread) && !read.has(item.id);
+export function NotificationsButton({ labels, items = [], onMarkRead, viewAllHref }: NotificationsButtonProps) {
+  const isUnread = (item: Notification) => item.unread;
   const count = items.filter(isUnread).length;
   const [tab, setTab] = useState<NotificationTab>("all");
-  const matches: Record<NotificationTab, (item: NotificationItem) => boolean> = {
+  const matches: Record<NotificationTab, (item: Notification) => boolean> = {
     all: () => true,
     unread: isUnread,
     urgent: (item) => Boolean(item.urgent),
     invitations: (item) => item.kind === "invitation",
   };
   const visible = items.filter(matches[tab]);
-  const markRead = (...ids: string[]) => setRead((prev) => new Set([...prev, ...ids]));
 
   return (
     <Popover
@@ -122,7 +109,7 @@ export function NotificationsButton({ labels, items = [], viewAllHref }: Notific
             {count > 0 ? <span className="text-caption text-muted-foreground">{labels.unread(count)}</span> : null}
           </div>
           {count > 0 ? (
-            <Button size="sm" variant="ghost" onClick={() => markRead(...items.map((item) => item.id))}>
+            <Button size="sm" variant="ghost" onClick={() => onMarkRead()}>
               {labels.markAllRead}
             </Button>
           ) : null}
@@ -148,7 +135,7 @@ export function NotificationsButton({ labels, items = [], viewAllHref }: Notific
               <ul className="flex max-h-[min(22rem,60dvh)] flex-col divide-y divide-border overflow-y-auto">
                 {visible.map((item) => (
                   <li key={item.id}>
-                    <NotificationRow item={item} unread={isUnread(item)} onOpen={() => markRead(item.id)} />
+                    <NotificationRow item={item} unread={isUnread(item)} onOpen={() => item.unread && onMarkRead([item.id])} />
                   </li>
                 ))}
               </ul>

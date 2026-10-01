@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { useSessionQuery } from "@/hooks/use-session-query";
 import { effectiveRoles } from "@/lib/access";
 import type { Role, Session } from "@/lib/types";
 
@@ -12,7 +13,9 @@ export interface SessionContextValue extends Session {
 const SessionContext = createContext<SessionContextValue | null>(null);
 
 /** `session` is `null` outside the signed-in area (public pages, sign-in). */
-export function SessionProvider({ session, children }: { session: Session | null; children: ReactNode }) {
+export function SessionProvider({ session: initialSession, children }: { session: Session | null; children: ReactNode }) {
+  // The session is server state: it comes from the query cache, seeded by what the server rendered.
+  const { data: session } = useSessionQuery(initialSession);
   const value = useMemo<SessionContextValue | null>(() => {
     if (!session) return null;
     const rolesByOrganization = Object.fromEntries(

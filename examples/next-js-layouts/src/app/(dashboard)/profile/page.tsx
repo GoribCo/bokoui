@@ -6,15 +6,14 @@ import { PageHeader } from "@/components/layout/page-header";
 import { UserAvatar } from "@/components/account/user-avatar";
 import { formatDate } from "@/lib/i18n/format";
 import { buildMetadata } from "@/lib/seo";
-import { getSession } from "@/lib/session/session";
-import { services } from "@/lib/services";
+import { getServerServices } from "@/lib/services/server";
 import type { LocaleCode } from "@/lib/types";
 
 export const metadata = buildMetadata({ title: "Profile", path: "/profile" });
 
 export default async function ProfilePage() {
-  const session = await getSession();
-  const profile = session ? await services.profiles.getProfile(session.user.id) : null;
+  const services = await getServerServices();
+  const profile = await services.profiles.getMyProfile().catch(() => null);
   if (!profile) notFound();
   const locale = (await getLocale()) as LocaleCode;
 
