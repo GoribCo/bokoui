@@ -124,11 +124,13 @@ src/
     server.ts                   getServerApi(): same client for Server Components, forwards cookies (server only)
     errors.ts                   ApiError, isApiError
   lib/services/
-    <name>.service.ts           createXService(client): methods return validated, typed data
-    index.ts                    createServices(client) and `services` (browser)
+    base.service.ts             BaseService: holds the ApiClient
+    <name>.service.ts           class XService extends BaseService: methods return validated, typed data
+    index.ts                    createServices(client) builds the instances; `services` is the browser set
     server.ts                   getServerServices() (server only)
   lib/schemas/                  Zod schemas, one file per resource
   lib/query/keys.ts             query key factory shared by hooks and server prefetching
+  lib/query/react-query.ts      the only file that imports @tanstack/react-query; everything else imports from it
   hooks/
     use-<service>.ts            useOrganizations, useNotifications, useRecords, useProfile, useCommonMenu, ...
                                 mutations: useMarkNotificationsRead, useCreateStaff
@@ -137,7 +139,7 @@ src/
 | ID | Requirement | P |
 |---|---|---|
 | HD-7.1 | **Layering is enforced:** a lint rule (or an import-boundary check) fails when a component imports `lib/api`, `lib/services` or `fetch`, when a service imports a hook or a component, or when anything outside `lib/api/server.ts` imports `next/headers` for data access | M |
-| HD-7.2 | **Naming:** services are `<resource>.service.ts` exporting `create<Resource>Service(client)`; hooks are `use<Resource>` for reads and `use<Verb><Resource>` for mutations, in `hooks/use-<resource>.ts`; query keys live only in `lib/query/keys.ts`. The host names hooks `useDoctors`, `useAppointments`; when copying, keep the host's file naming (camel case) and these hook names | M |
+| HD-7.2 | **Naming:** services are classes, one per file `<resource>.service.ts`, named `<Resource>Service` and extending `BaseService` (the constructor takes the `ApiClient`); hooks are `use<Resource>` for reads and `use<Verb><Resource>` for mutations, in `hooks/use-<resource>.ts`; query keys live only in `lib/query/keys.ts`, and `@tanstack/react-query` is imported only in `lib/query/react-query.ts` (an ESLint `no-restricted-imports` rule enforces it). The host names hooks `useDoctors`, `useAppointments`; when copying, keep the host's file naming (camel case) and these hook names | M |
 | HD-7.3 | **Two clients, one service layer:** `apiClient` in the browser, `getServerApi()` on the server (cookies forwarded, absolute URL). Services take the client, so the same code runs in both places. The host has no server-side data fetching; if it stays client-only, `lib/api/server.ts` and `getServerServices` are dropped and Server Components stop reading data | S |
 | HD-7.4 | **Contract:** every endpoint is described in one place (an OpenAPI file or shared Zod schemas in a package such as `@rxprofile/types`) that both `src/api` and the services use, so the sample backend cannot drift from the real one. Error codes (`UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`, `VALIDATION`, ...) and the paging `meta` shape are listed there | M |
 | HD-7.5 | **Auth as endpoints:** sign-in, sign-out and token refresh become API endpoints (`POST /auth/login`, `/auth/refresh`, `/auth/logout`), and the 401 then refresh then retry flow of the host's client moves into `ApiClient`. The current server actions stay only if the cookie model is chosen (HD-6.4) | M |
@@ -145,7 +147,7 @@ src/
 | HD-7.7 | **Paging, filtering and sorting** use one query-string convention (`page`, `pageSize`, `q`, `status`, `sort`) and one `meta` block; list hooks keep the previous page while loading and debounce text input | S |
 | HD-7.8 | **Prefetch rule:** only what the first paint needs is prefetched in a layout (`commonMenu`, the active organization's menu); everything else loads in the hook. Prefetch and hook use the same key and the same service call | S |
 | HD-7.9 | **Tests:** endpoint handlers are plain functions and get unit tests for success, 401, 403, 404 and validation; services get tests against a fake `ApiClient`; hooks get tests with a `QueryClientProvider` | M |
-| HD-7.10 | **Mapping to the host:** the host's services are singleton functions over a shared `apiClient` and its mocks return `mockResponse()`. Move this example's `createXService(client)` shape to the host's function style, keep the service names, and replace `src/api` with the host's real endpoints (the host API already uses `{ success, results, meta }` and a `/v1` prefix, so the envelope and base URL match) | M |
+| HD-7.10 | **Mapping to the host:** the host's services are functions over a shared singleton `apiClient` and its mocks return `mockResponse()`. Either keep this example's service classes (plain classes over the same client shape) or move them to the host's function style; keep the service and method names either way, and replace `src/api` with the host's real endpoints (the host API already uses `{ success, results, meta }` and a `/v1` prefix, so the envelope and base URL match) | M |
 | HD-7.11 | **Failure handling in the browser:** a global `QueryClient` default and an error boundary turn a failed query into a defined message with retry; a 401 anywhere signs the user out with a return path; a 403 shows the forbidden view | M |
 
 ### 2.8 State management
