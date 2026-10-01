@@ -15,6 +15,7 @@ import { useMenu } from "@/hooks/use-menu";
 import { useMenuTranslator } from "@/hooks/use-menu-translator";
 import { useMenuQuery } from "@/hooks/use-queries";
 import { sampleNotifications } from "@/lib/sample-data";
+import { DASHBOARD_PATH } from "@/lib/config/auth";
 import { findActiveTrail, localizeMenu } from "@/lib/menu";
 import { useSession } from "@/providers/session-provider";
 import { uiSelectors } from "@/lib/stores/ui-store";
@@ -212,7 +213,7 @@ export function DashboardShell({
               }}
             />
           }
-          branding={<Branding name={siteName} />}
+          branding={<Branding name={siteName} href={DASHBOARD_PATH} />}
           title={pageTitle}
           subtitle={organization.name}
           breadcrumbs={

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { Breadcrumb, BreadcrumbItem } from "bokoui/react";
+import { DASHBOARD_PATH } from "@/lib/config/auth";
 import { findActiveTrail } from "@/lib/menu";
 import type { MenuGroup, MenuItem } from "@/lib/types";
 
@@ -18,7 +19,7 @@ export interface MenuBreadcrumbsProps {
 const MAX_CRUMBS = 4;
 
 /** Breadcrumbs from the menu's parent chain of the active item (FR-7.3). Renders nothing off-menu. */
-export function MenuBreadcrumbs({ groups, pathname, homeLabel, label, homeHref = "/" }: MenuBreadcrumbsProps) {
+export function MenuBreadcrumbs({ groups, pathname, homeLabel, label, homeHref = DASHBOARD_PATH }: MenuBreadcrumbsProps) {
   const trail = findActiveTrail(groups, pathname)?.items;
   // A single crumb would only repeat the page title in the header.
   if (!trail || trail.length < 2) return null;

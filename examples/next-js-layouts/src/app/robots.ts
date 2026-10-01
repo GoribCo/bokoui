@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: organizationSegments.map((segment) => `/${segment}/`),
+      allow: ["/$", ...organizationSegments.map((segment) => `/${segment}/`)],
       disallow: "/",
     },
     sitemap: `${siteConfig.url}/sitemap.xml`,

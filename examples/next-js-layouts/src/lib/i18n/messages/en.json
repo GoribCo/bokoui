@@ -137,5 +137,25 @@
     "style": "Design style",
     "font": "Font",
     "title": "Display settings"
+  },
+  "home": {
+    "eyebrow": "Healthcare workspace platform",
+    "title": "One place for every organization you work with",
+    "description": "Sign in to switch between hospitals, pharmacies and companies, each with the menus and tools your roles allow.",
+    "signIn": "Sign in",
+    "browse": "Browse organizations",
+    "featuresTitle": "Built for large, multi-organization teams",
+    "f1t": "Multiple organizations",
+    "f1d": "Move between workspaces without signing out; the navigation follows the one you pick.",
+    "f2t": "Role-based access",
+    "f2d": "One account can hold several roles. Menus and pages show only what each role may use.",
+    "f3t": "Comfortable to read",
+    "f3d": "Choose a theme, text size and language that suit you; the choice is remembered.",
+    "f4t": "Works on any screen",
+    "f4d": "A sidebar on desktop and bottom navigation on phones, with the same pages in both.",
+    "orgsTitle": "Public organization profiles",
+    "orgsDescription": "Anyone can view these pages without signing in.",
+    "ctaTitle": "Ready to open your workspace?",
+    "ctaDescription": "Use any email and password to open the demo."
   }
 }

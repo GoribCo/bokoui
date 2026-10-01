@@ -1,3 +1,4 @@
+import { DASHBOARD_PATH } from "@/lib/config/auth";
 import type { MenuGroup, MenuItem } from "@/lib/types";
 
 const departments = [
@@ -44,7 +45,7 @@ const hospitalMenu: MenuGroup[] = [
     label: "Overview",
     labelKey: "menu.groups.overview",
     items: [
-      { id: "dashboard", label: "Dashboard", labelKey: "menu.dashboard", icon: "layout-dashboard", href: "/" },
+      { id: "dashboard", label: "Dashboard", labelKey: "menu.dashboard", icon: "layout-dashboard", href: DASHBOARD_PATH },
       { id: "schedule", label: "Schedule", icon: "calendar", href: "/examples/table", badge: 3 },
     ],
   },
@@ -78,7 +79,7 @@ const pharmacyMenu: MenuGroup[] = [
     id: "overview",
     label: "Overview",
     labelKey: "menu.groups.overview",
-    items: [{ id: "dashboard", label: "Dashboard", labelKey: "menu.dashboard", icon: "layout-dashboard", href: "/" }],
+    items: [{ id: "dashboard", label: "Dashboard", labelKey: "menu.dashboard", icon: "layout-dashboard", href: DASHBOARD_PATH }],
   },
   {
     id: "inventory",
@@ -108,7 +109,7 @@ const companyMenu: MenuGroup[] = [
     id: "overview",
     label: "Overview",
     labelKey: "menu.groups.overview",
-    items: [{ id: "dashboard", label: "Dashboard", labelKey: "menu.dashboard", icon: "layout-dashboard", href: "/" }],
+    items: [{ id: "dashboard", label: "Dashboard", labelKey: "menu.dashboard", icon: "layout-dashboard", href: DASHBOARD_PATH }],
   },
   {
     id: "people",
