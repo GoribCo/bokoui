@@ -231,9 +231,15 @@ export function DashboardShell({
           }
           notifications={
             <NotificationsButton
-              label={t("shell.notifications")}
-              emptyLabel={t("shell.noNotifications")}
+              labels={{
+                title: t("shell.notifications"),
+                empty: t("shell.noNotifications"),
+                unread: (count) => t("shell.notificationsUnread", { count }),
+                markAllRead: t("shell.markAllRead"),
+                viewAll: t("shell.viewAllNotifications"),
+              }}
               items={sampleNotifications}
+              viewAllHref="/notifications"
             />
           }
           actions={
