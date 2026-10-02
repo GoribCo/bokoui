@@ -7,6 +7,10 @@
   --bokoui-ink-tone: 50%;
   --bokoui-heading-weight: 700;
   --bokoui-heading-tracking: -0.02em;
+  --bokoui-card-border-width: 0px;
+  --bokoui-control-bg: var(--bokoui-surface);
+  --bokoui-pressed-bg: var(--bokoui-muted);
+  --bokoui-field-bg: var(--bokoui-field);
 }
 
 :root[data-theme="neumorphism"]:not([data-mode="dark"]) {
@@ -27,13 +31,8 @@
   --bokoui-warning: #b45309;
   --bokoui-warning-fg: #ffffff;
   --bokoui-card-shadow: 9px 9px 20px #bcc3d4, -9px -9px 20px #ffffff;
-  --bokoui-card-border-width: 0px;
-  --bokoui-control-bg: var(--bokoui-surface);
-  --bokoui-control-bg-hover: var(--bokoui-surface);
   --bokoui-control-shadow: 5px 5px 11px #bcc3d4, -5px -5px 11px #ffffff;
-  --bokoui-pressed-bg: var(--bokoui-muted);
   --bokoui-pressed-shadow: inset 4px 4px 9px #bcc3d4, inset -4px -4px 9px #ffffff;
-  --bokoui-field-bg: var(--bokoui-field);
   --bokoui-field-shadow: inset 4px 4px 9px #bcc3d4, inset -4px -4px 9px #ffffff;
   --bokoui-solid-image: linear-gradient(145deg, #8460f5, #5f3ad6);
   --bokoui-solid-shadow: 6px 6px 14px #bcc3d4, -6px -6px 14px #ffffff;
@@ -55,13 +54,8 @@
   --bokoui-accent: #4fd1bd;
   --bokoui-accent-fg: #0b1f1c;
   --bokoui-card-shadow: 9px 9px 20px #1c1f2b, -9px -9px 20px #383d50;
-  --bokoui-card-border-width: 0px;
-  --bokoui-control-bg: var(--bokoui-surface);
-  --bokoui-control-bg-hover: var(--bokoui-surface);
   --bokoui-control-shadow: 5px 5px 11px #1c1f2b, -5px -5px 11px #383d50;
-  --bokoui-pressed-bg: var(--bokoui-muted);
   --bokoui-pressed-shadow: inset 4px 4px 9px #1c1f2b, inset -4px -4px 9px #383d50;
-  --bokoui-field-bg: var(--bokoui-field);
   --bokoui-field-shadow: inset 4px 4px 9px #1c1f2b, inset -4px -4px 9px #383d50;
   --bokoui-solid-image: linear-gradient(145deg, #b3a3ff, #8c76f5);
   --bokoui-solid-shadow: 6px 6px 14px #1c1f2b, -6px -6px 14px #383d50;

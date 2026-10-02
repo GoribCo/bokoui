@@ -1,0 +1,9 @@
+/* The eight classic styles. `bokoui/styles-lite.css` loads only these. */
+@import "./flat.css";
+@import "./material.css";
+@import "./swiss.css";
+@import "./brutalism.css";
+@import "./neo-brutalism.css";
+@import "./monochrome.css";
+@import "./oled.css";
+@import "./fluent.css";

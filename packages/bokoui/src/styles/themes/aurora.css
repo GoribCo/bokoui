@@ -5,6 +5,10 @@
   --bokoui-radius-card: 1.5rem;
   --bokoui-heading-weight: 700;
   --bokoui-heading-tracking: -0.02em;
+  --bokoui-card-backdrop: blur(20px) saturate(140%);
+  --bokoui-card-border-width: 1px;
+  --bokoui-control-backdrop: blur(14px);
+  --bokoui-page-bg: transparent;
 }
 
 :root[data-theme="aurora"]:not([data-mode="dark"]) {
@@ -26,19 +30,14 @@
   --bokoui-card-bg: rgba(255,255,255,0.6);
   --bokoui-card-shadow: 0 8px 28px rgba(16,90,100,0.12);
   --bokoui-card-border: rgba(255,255,255,0.85);
-  --bokoui-card-backdrop: blur(20px) saturate(140%);
-  --bokoui-card-border-width: 1px;
   --bokoui-control-bg: rgba(255,255,255,0.65);
-  --bokoui-control-bg-hover: rgba(255,255,255,0.65);
   --bokoui-control-border: rgba(255,255,255,0.9);
-  --bokoui-control-backdrop: blur(14px);
   --bokoui-pressed-bg: rgba(255,255,255,0.85);
   --bokoui-field-bg: rgba(255,255,255,0.7);
   --bokoui-field-border-effect: rgba(15,118,110,0.35);
   --bokoui-solid-image: linear-gradient(135deg, #14b8a6, #0f766e);
   --bokoui-solid-shadow: 0 8px 22px rgba(15,118,110,0.35);
   --bokoui-page-image: radial-gradient(ellipse at 15% 0%, rgba(110,231,183,0.7), transparent 50%), radial-gradient(ellipse at 85% 10%, rgba(165,180,252,0.65), transparent 50%), radial-gradient(ellipse at 50% 60%, rgba(125,211,252,0.45), transparent 55%), radial-gradient(ellipse at 10% 100%, rgba(244,184,252,0.5), transparent 50%), linear-gradient(#eefaf7, #eefaf7);
-  --bokoui-page-bg: transparent;
 }
 
 :root[data-theme="aurora"][data-mode="dark"] {
@@ -60,17 +59,12 @@
   --bokoui-card-bg: rgba(255,255,255,0.06);
   --bokoui-card-shadow: 0 8px 32px rgba(0,0,0,0.35);
   --bokoui-card-border: rgba(255,255,255,0.14);
-  --bokoui-card-backdrop: blur(20px) saturate(140%);
-  --bokoui-card-border-width: 1px;
   --bokoui-control-bg: rgba(255,255,255,0.08);
-  --bokoui-control-bg-hover: rgba(255,255,255,0.08);
   --bokoui-control-border: rgba(255,255,255,0.16);
-  --bokoui-control-backdrop: blur(14px);
   --bokoui-pressed-bg: rgba(255,255,255,0.18);
   --bokoui-field-bg: rgba(255,255,255,0.05);
   --bokoui-field-border-effect: rgba(255,255,255,0.2);
   --bokoui-solid-image: linear-gradient(135deg, #5eead4, #38bdf8);
   --bokoui-solid-shadow: 0 0 24px rgba(94,234,212,0.35);
   --bokoui-page-image: radial-gradient(ellipse at 20% 0%, rgba(52,211,153,0.45), transparent 50%), radial-gradient(ellipse at 80% 10%, rgba(167,139,250,0.45), transparent 50%), radial-gradient(ellipse at 50% 60%, rgba(34,211,238,0.25), transparent 55%), radial-gradient(ellipse at 10% 100%, rgba(240,171,252,0.3), transparent 50%), linear-gradient(#070b1a, #070b1a);
-  --bokoui-page-bg: transparent;
 }

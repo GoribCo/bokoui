@@ -3,8 +3,6 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const entry = path.resolve(import.meta.dirname, "../src/styles/bokoui.css");
-
 function inline(file) {
   const dir = path.dirname(file);
   return fs
@@ -12,13 +10,15 @@ function inline(file) {
     .replace(/@import\s+"(\.[^"]+)";/g, (_, rel) => inline(path.resolve(dir, rel)));
 }
 
-const out = path.resolve(import.meta.dirname, "../dist/styles.css");
-fs.mkdirSync(path.dirname(out), { recursive: true });
 // Tailwind skips node_modules when auto-detecting classes; register the built JS explicitly
 // so consumers need no manual @source line.
-const css = inline(entry) + '\n/* Scan the components in this package for Tailwind classes. */\n@source "./";\n';
-fs.writeFileSync(out, css);
-console.log("wrote", path.relative(process.cwd(), out));
+const SOURCE = '\n/* Scan the components in this package for Tailwind classes. */\n@source "./";\n';
+for (const [from, to] of [["bokoui.css", "styles.css"], ["bokoui-lite.css", "styles-lite.css"]]) {
+  const out = path.resolve(import.meta.dirname, "../dist", to);
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, inline(path.resolve(import.meta.dirname, "../src/styles", from)) + SOURCE);
+  console.log("wrote", path.relative(process.cwd(), out));
+}
 
 // 2. React entries: client markers, then the barrels apps import.
 const dist = path.resolve(import.meta.dirname, "../dist/react");

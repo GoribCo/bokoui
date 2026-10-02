@@ -5,6 +5,10 @@
   --bokoui-radius-card: 1.5rem;
   --bokoui-heading-weight: 700;
   --bokoui-heading-tracking: -0.02em;
+  --bokoui-card-border-width: 0px;
+  --bokoui-control-bg: var(--bokoui-surface);
+  --bokoui-pressed-bg: var(--bokoui-muted);
+  --bokoui-field-bg: var(--bokoui-field);
 }
 
 :root[data-theme="soft-ui"]:not([data-mode="dark"]) {
@@ -23,13 +27,8 @@
   --bokoui-accent: #0b7f70;
   --bokoui-accent-fg: #ffffff;
   --bokoui-card-shadow: 0 12px 32px rgba(108,120,170,0.18), 0 2px 6px rgba(108,120,170,0.10), inset 0 1px 0 rgba(255,255,255,0.9);
-  --bokoui-card-border-width: 0px;
-  --bokoui-control-bg: var(--bokoui-surface);
-  --bokoui-control-bg-hover: var(--bokoui-surface);
   --bokoui-control-shadow: 0 6px 16px rgba(108,120,170,0.16), inset 0 1px 0 rgba(255,255,255,0.9);
-  --bokoui-pressed-bg: var(--bokoui-muted);
   --bokoui-pressed-shadow: inset 0 3px 8px rgba(108,120,170,0.25);
-  --bokoui-field-bg: var(--bokoui-field);
   --bokoui-field-shadow: inset 0 2px 6px rgba(108,120,170,0.16);
   --bokoui-solid-image: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0) 60%);
   --bokoui-solid-shadow: 0 8px 20px rgba(108,92,231,0.35);
@@ -50,13 +49,8 @@
   --bokoui-accent: #4fd1bd;
   --bokoui-accent-fg: #0b1f1c;
   --bokoui-card-shadow: 0 12px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
-  --bokoui-card-border-width: 0px;
-  --bokoui-control-bg: var(--bokoui-surface);
-  --bokoui-control-bg-hover: var(--bokoui-surface);
   --bokoui-control-shadow: 0 6px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
-  --bokoui-pressed-bg: var(--bokoui-muted);
   --bokoui-pressed-shadow: inset 0 3px 8px rgba(0,0,0,0.4);
-  --bokoui-field-bg: var(--bokoui-field);
   --bokoui-field-shadow: inset 0 2px 6px rgba(0,0,0,0.35);
   --bokoui-solid-image: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0) 60%);
   --bokoui-solid-shadow: 0 8px 20px rgba(157,140,255,0.3);

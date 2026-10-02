@@ -53,16 +53,16 @@ describe("source layout", () => {
 });
 
 describe("style registry", () => {
-  const cssIds = readdirSync(join(src, "styles/themes")).filter((f) => f.endsWith(".css") && f !== "index.css").map((f) => f.slice(0, -4)).sort();
+  const cssIds = readdirSync(join(src, "styles/themes")).filter((f) => f.endsWith(".css") && !["index.css", "classic.css", "materials.css"].includes(f)).map((f) => f.slice(0, -4)).sort();
   const registered: string[] = themes.map((t) => t.id).sort();
 
   it("every registered style has a CSS file and the other way round", () => {
     expect(registered).toEqual(cssIds);
   });
 
-  it("every style is imported by themes/index.css", () => {
-    const index = read(join(src, "styles/themes/index.css"));
-    expect(registered.filter((id) => !index.includes(`"./${id}.css"`))).toEqual([]);
+  it("every style is imported by classic.css or materials.css", () => {
+    const imported = read(join(src, "styles/themes/classic.css")) + read(join(src, "styles/themes/materials.css"));
+    expect(registered.filter((id) => !imported.includes(`"./${id}.css"`))).toEqual([]);
   });
 
   it("every style defined in code for Expo is registered", () => {
