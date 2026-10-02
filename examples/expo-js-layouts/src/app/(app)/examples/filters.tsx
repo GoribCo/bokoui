@@ -1,4 +1,4 @@
-import { Badge, Input, Text } from "bokoui/expo/ui";
+import { Badge, Card, Input, Text } from "bokoui/expo/ui";
 import { Pagination, Tab, TabList, Tabs } from "bokoui/expo/blocks";
 import { useTheme } from "bokoui/expo";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -57,7 +57,7 @@ export default function FiltersScreen() {
           ))}
         </TabList>
       </Tabs>
-      <View style={{ borderWidth: tokens.borderWidth, borderColor: tokens.border, borderRadius: tokens.radiusCard, backgroundColor: tokens.surface }}>
+      <Card padding="none" style={{ gap: 0, overflow: "hidden" }}>
         {rows.length === 0 ? (
           <Text muted style={{ padding: 16 }}>
             {t("examples.noMatches")}
@@ -72,7 +72,7 @@ export default function FiltersScreen() {
             </View>
           ))
         )}
-      </View>
+      </Card>
       <Pagination page={current} pageCount={pageCount} onPageChange={(next) => setParams({ page: next })} label={t("examples.pages")} />
     </PageContainer>
   );

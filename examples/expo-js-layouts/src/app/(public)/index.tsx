@@ -1,4 +1,4 @@
-import { Button, Card, CardHeader, Grid, Heading, Text } from "bokoui/expo/ui";
+import { Button, Card, CardHeader, Grid, Heading, Surface, Text } from "bokoui/expo/ui";
 import { useTheme } from "bokoui/expo";
 import { Redirect, useRouter } from "expo-router";
 import { Building2, Languages, LayoutPanelLeft, ShieldCheck, type LucideIcon } from "lucide-react-native";
@@ -36,7 +36,7 @@ export default function HomeScreen() {
 
   return (
     <>
-      <View style={{ backgroundColor: tokens.surface, borderBottomWidth: tokens.borderWidth, borderColor: tokens.border }}>
+      <Surface kind="card" style={{ backgroundColor: tokens.surface, borderBottomWidth: tokens.borderWidth, borderColor: tokens.border }} overrideStyle={{ borderRadius: 0, borderWidth: 0, borderBottomWidth: tokens.borderWidth }}>
         <PageContainer>
           <View style={{ gap: 20, paddingVertical: 16, maxWidth: 672 }}>
             <Text style={{ color: tokens.primary, fontWeight: "600" }}>{t("home.eyebrow")}</Text>
@@ -49,7 +49,7 @@ export default function HomeScreen() {
             </View>
           </View>
         </PageContainer>
-      </View>
+      </Surface>
 
       <PageContainer>
         <View accessibilityRole="summary" style={{ gap: 20 }}>

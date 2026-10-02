@@ -1,5 +1,5 @@
 import { Text } from "bokoui/expo/ui";
-import { useTheme } from "bokoui/expo";
+import { useTheme, withAlpha } from "bokoui/expo";
 import { View } from "react-native";
 
 export interface BarListItem {
@@ -23,7 +23,7 @@ export function BarList({ items }: { items: BarListItem[] }) {
             accessibilityRole="progressbar"
             accessibilityLabel={item.label}
             accessibilityValue={{ min: 0, max: 100, now: item.percent }}
-            style={{ flex: 1, height: 28, borderRadius: 8, overflow: "hidden", backgroundColor: tokens.bg }}
+            style={{ flex: 1, height: 28, borderRadius: 8, overflow: "hidden", backgroundColor: withAlpha(tokens.fg, 0.08) }}
           >
             <View style={{ width: `${item.percent}%`, height: "100%", borderRadius: 8, backgroundColor: tokens.primary, opacity: 0.85 }} />
           </View>

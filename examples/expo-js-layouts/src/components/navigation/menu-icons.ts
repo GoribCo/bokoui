@@ -1,5 +1,6 @@
 import {
   Building2,
+  Calculator,
   Calendar,
   ChartColumn,
   Circle,
@@ -11,6 +12,7 @@ import {
   LayoutDashboard,
   Lock,
   Package,
+  Palette,
   Pill,
   Settings,
   Shield,
@@ -27,6 +29,7 @@ import type { IconName } from "@/lib/types";
 export const menuIcons: Record<IconName, LucideIcon> = {
   "bar-chart": ChartColumn,
   "building-2": Building2,
+  calculator: Calculator,
   calendar: Calendar,
   clipboard: ClipboardList,
   "file-text": FileText,
@@ -36,6 +39,7 @@ export const menuIcons: Record<IconName, LucideIcon> = {
   "layout-dashboard": LayoutDashboard,
   lock: Lock,
   package: Package,
+  palette: Palette,
   pill: Pill,
   settings: Settings,
   shield: Shield,

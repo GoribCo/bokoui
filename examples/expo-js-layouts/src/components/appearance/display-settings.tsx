@@ -59,7 +59,6 @@ export function DisplaySettings({ styleSwitcher = features.styleSwitcher }: Disp
                   {t("displaySettings.style")}
                 </Text>
                 <SegmentedChips
-                  scroll
                   label={t("displaySettings.style")}
                   value={style}
                   onChange={setStyle}

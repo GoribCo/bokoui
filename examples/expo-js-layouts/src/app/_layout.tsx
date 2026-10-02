@@ -1,5 +1,6 @@
+import { Backdrop } from "bokoui/expo/ui";
 import { useTheme } from "bokoui/expo";
-import { Stack, type ErrorBoundaryProps } from "expo-router";
+import { DefaultTheme, Stack, ThemeProvider as NavigationThemeProvider, type ErrorBoundaryProps } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { reportError } from "@/lib/monitoring/report-error";
@@ -23,13 +24,20 @@ export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
   );
 }
 
+const transparentNavigationTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: "transparent" } };
+
 function ThemedStack() {
   const { tokens, resolvedMode } = useTheme();
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: tokens.bg }}>
+      {/* The style's page (gradient, glows) sits behind every screen; screens stay transparent. */}
+      <Backdrop />
       <StatusBar style={resolvedMode === "dark" ? "light" : "dark"} />
-      <Stack screenOptions={{ headerShown: false, animation: "none", contentStyle: { backgroundColor: tokens.bg } }} />
-    </>
+      {/* The navigation container paints its own background; make it see-through so the Backdrop shows. */}
+      <NavigationThemeProvider value={transparentNavigationTheme}>
+        <Stack screenOptions={{ headerShown: false, animation: "none", contentStyle: { backgroundColor: "transparent" } }} />
+      </NavigationThemeProvider>
+    </View>
   );
 }
 

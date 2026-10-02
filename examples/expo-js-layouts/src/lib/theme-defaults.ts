@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { modes, themes, type ThemeId, type ThemeMode } from "bokoui/expo";
+import { modes, nativeStyles, themes, type ThemeId, type ThemeMode } from "bokoui/expo";
 import { siteConfig } from "@/lib/config";
 import { customThemes } from "@/styles/custom-themes";
 
@@ -13,7 +13,7 @@ export interface ThemeDefaults {
 }
 
 const knownStyle = (value: string | null): value is ThemeId =>
-  Boolean(value) && (themes.some((theme) => theme.id === value) || value! in customThemes);
+  Boolean(value) && (themes.some((theme) => theme.id === value) || value! in nativeStyles || value! in customThemes);
 
 const knownMode = (value: string | null): value is ThemeMode => modes.includes(value as ThemeMode);
 

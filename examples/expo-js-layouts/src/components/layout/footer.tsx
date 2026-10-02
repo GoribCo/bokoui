@@ -1,4 +1,4 @@
-import { Text } from "bokoui/expo/ui";
+import { Surface, Text } from "bokoui/expo/ui";
 import { useTheme } from "bokoui/expo";
 import { Pressable, View } from "react-native";
 import { useNavigate } from "@/hooks/use-navigate";
@@ -17,7 +17,9 @@ export function Footer({ links, copyright, navigationLabel }: FooterProps) {
   const { tokens } = useTheme();
   const navigate = useNavigate();
   return (
-    <View
+    <Surface
+      kind="card"
+      overrideStyle={{ borderRadius: 0, borderWidth: 0, borderTopWidth: tokens.borderWidth }}
       style={{
         gap: 4,
         alignItems: "center",
@@ -47,6 +49,6 @@ export function Footer({ links, copyright, navigationLabel }: FooterProps) {
       <Text variant="caption" muted style={{ textAlign: "center" }}>
         {copyright}
       </Text>
-    </View>
+    </Surface>
   );
 }

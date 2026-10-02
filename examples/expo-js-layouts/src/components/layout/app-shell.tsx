@@ -1,3 +1,4 @@
+import { Surface } from "bokoui/expo/ui";
 import { useTheme } from "bokoui/expo";
 import type { ReactNode } from "react";
 import { ScrollView, View } from "react-native";
@@ -25,24 +26,22 @@ export function AppShell({ sidebar, header, footer, bottomNav, overlays, childre
   const { tokens } = useTheme();
   const insets = useSafeAreaInsets();
   return (
-    <View style={{ flex: 1, flexDirection: "column", backgroundColor: tokens.bg, paddingLeft: insets.left, paddingRight: insets.right }}>
+    <View style={{ flex: 1, flexDirection: "column", paddingLeft: insets.left, paddingRight: insets.right }}>
       <View style={{ flex: 1, flexDirection: "row" }}>
         {sidebar ? (
-          <View style={{ paddingTop: insets.top, backgroundColor: tokens.surface, borderRightWidth: tokens.borderWidth, borderColor: tokens.border }}>
+          <View style={{ paddingTop: insets.top, backgroundColor: tokens.effects.card ? "transparent" : tokens.surface, borderRightWidth: tokens.borderWidth, borderColor: tokens.border }}>
             {sidebar}
           </View>
         ) : null}
         <View style={{ flex: 1 }}>
-          <View
-            style={{
-              paddingTop: insets.top,
-              backgroundColor: tokens.surface,
-              borderBottomWidth: tokens.borderWidth,
-              borderColor: tokens.border,
-            }}
+          <Surface
+            kind="card"
+            style={{ paddingTop: insets.top, backgroundColor: tokens.surface, borderBottomWidth: tokens.borderWidth, borderColor: tokens.border }}
+            // A bar, not a panel: square corners and only a bottom edge.
+            overrideStyle={{ borderRadius: 0, borderWidth: 0, borderBottomWidth: tokens.borderWidth }}
           >
             {header}
-          </View>
+          </Surface>
           <ScrollView
             style={{ flex: 1 }}
             contentContainerStyle={{ flexGrow: 1, paddingBottom: bottomNav ? 0 : insets.bottom }}

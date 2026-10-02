@@ -25,6 +25,10 @@ Sign in with any email and password; the sign-in screen lists three sample accou
 
 Data flows one way: component, hook, service, `ApiClient`, API. Components never import `lib/services` or `lib/api`.
 
+## Styles
+
+The display settings sheet and `/examples/styles` (the style gallery) list 20 styles: the 8 shared ones and 12 Expo-only ones (Minimalism, Bento, Material 3, Soft UI, Neumorphism, Claymorphism, Skeuomorphism, Terminal, Synthwave, Glassmorphism, Liquid Glass, Aurora), each in light and dark. Sample screens that show a style at work: `/examples/showcase-home`, `/examples/showcase-settings`, `/examples/showcase-calculator` and `/dashboard`. Screens stay transparent over `Backdrop` (see `app/_layout.tsx`), and bars, header, sidebar and footer use `Surface`, so gradient and glass styles show through. On a device, glass blur needs `expo-blur` (installed here).
+
 ## Replace the sample API
 
 1. Set `EXPO_PUBLIC_API_BASE_URL` (for example `https://api.example.com/v1`). `ApiClient` then uses real `fetch` instead of the in-process transport (`lib/api/instance.ts`).

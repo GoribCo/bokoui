@@ -1,4 +1,4 @@
-import { Button } from "bokoui/expo/ui";
+import { Button, Surface } from "bokoui/expo/ui";
 import { useTheme } from "bokoui/expo";
 import { useRouter } from "expo-router";
 import type { ReactNode } from "react";
@@ -30,8 +30,8 @@ export function PublicFrame({ signInButton = true, centered = false, children }:
   const links = useFooterLinks(siteConfig.footerLinks);
 
   return (
-    <View style={{ flex: 1, backgroundColor: tokens.bg, paddingLeft: insets.left, paddingRight: insets.right }}>
-      <View style={{ paddingTop: insets.top, backgroundColor: tokens.surface, borderBottomWidth: tokens.borderWidth, borderColor: tokens.border }}>
+    <View style={{ flex: 1, paddingLeft: insets.left, paddingRight: insets.right }}>
+      <Surface kind="card" style={{ paddingTop: insets.top, backgroundColor: tokens.surface, borderBottomWidth: tokens.borderWidth, borderColor: tokens.border }} overrideStyle={{ borderRadius: 0, borderWidth: 0, borderBottomWidth: tokens.borderWidth }}>
         <View accessibilityRole="header" style={{ minHeight: 56, flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8, paddingHorizontal: 16 }}>
           <Branding name={siteConfig.name} onPress={() => router.replace(toRoute("/"))} />
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
@@ -43,7 +43,7 @@ export function PublicFrame({ signInButton = true, centered = false, children }:
             ) : null}
           </View>
         </View>
-      </View>
+      </Surface>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
         <View style={{ flexGrow: 1, justifyContent: centered ? "center" : "flex-start" }}>{children}</View>
         <Footer links={links} copyright={t("footer.copyright", { year: new Date().getFullYear(), name: siteConfig.name })} navigationLabel={t("footer.navigation")} />

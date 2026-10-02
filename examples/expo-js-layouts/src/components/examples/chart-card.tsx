@@ -1,5 +1,5 @@
 import { Card, Text } from "bokoui/expo/ui";
-import { mix, useTheme } from "bokoui/expo";
+import { mix, useTheme, withAlpha } from "bokoui/expo";
 import type { ReactNode } from "react";
 import { View } from "react-native";
 
@@ -18,7 +18,7 @@ export interface ChartCardProps {
 /** A card for one chart: title and period chip, a headline number with its change, then the chart. */
 export function ChartCard({ title, period, value, delta, caption, children }: ChartCardProps) {
   const { tokens } = useTheme();
-  const color = mix(tokens.success, tokens.fg, tokens.inkTone);
+  const color = mix(tokens.success, tokens.fg, 0.55);
   return (
     <Card style={{ borderWidth: 0, gap: 12 }}>
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
@@ -26,7 +26,7 @@ export function ChartCard({ title, period, value, delta, caption, children }: Ch
           {title}
         </Text>
         {period ? (
-          <View style={{ paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999, backgroundColor: tokens.bg }}>
+          <View style={{ paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999, backgroundColor: withAlpha(tokens.fg, 0.06) }}>
             <Text variant="caption" muted>
               {period}
             </Text>

@@ -1,5 +1,5 @@
 import { Button, Card, Heading, Text } from "bokoui/expo/ui";
-import { useTheme } from "bokoui/expo";
+import { useTheme, withAlpha } from "bokoui/expo";
 import { CircleDollarSign, Percent, ShoppingBag, Sparkles, Users } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -54,7 +54,7 @@ export default function DashboardScreen() {
 
       <Card variant="outline" style={{ borderStyle: "dashed", flexDirection: "column" }}>
         <View style={{ flexDirection: "row", gap: 12 }}>
-          <View style={{ width: 40, height: 40, borderRadius: 12, alignItems: "center", justifyContent: "center", backgroundColor: tokens.bg }}>
+          <View style={{ width: 40, height: 40, borderRadius: 12, alignItems: "center", justifyContent: "center", backgroundColor: withAlpha(tokens.fg, 0.06) }}>
             <Sparkles size={18} color={tokens.primary} />
           </View>
           <View style={{ flex: 1, gap: 4 }}>
