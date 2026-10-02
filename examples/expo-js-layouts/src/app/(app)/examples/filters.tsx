@@ -1,4 +1,6 @@
-import { Badge, Input, Pagination, Tab, TabList, Tabs, Text, useTheme } from "bokoui/expo";
+import { Badge, Input, Text } from "bokoui/expo/ui";
+import { Pagination, Tab, TabList, Tabs } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";

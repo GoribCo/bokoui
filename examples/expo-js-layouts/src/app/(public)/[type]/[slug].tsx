@@ -1,4 +1,4 @@
-import { Skeleton } from "bokoui/expo";
+import { Skeleton } from "bokoui/expo/ui";
 import { useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
 import { NotFoundView } from "@/components/layout/not-found-view";

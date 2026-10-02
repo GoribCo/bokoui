@@ -1,4 +1,4 @@
-import { Drawer } from "bokoui/expo";
+import { Drawer } from "bokoui/expo/blocks";
 import { ScrollView } from "react-native";
 import { MenuTree } from "@/components/navigation/menu-tree";
 import { useSheetHeight } from "@/hooks/use-sheet-height";

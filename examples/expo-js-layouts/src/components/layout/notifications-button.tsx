@@ -1,4 +1,6 @@
-import { Badge, Button, Drawer, useTheme } from "bokoui/expo";
+import { Badge, Button } from "bokoui/expo/ui";
+import { Drawer } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { Bell } from "lucide-react-native";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";

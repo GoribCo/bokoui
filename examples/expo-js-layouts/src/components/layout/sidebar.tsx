@@ -1,4 +1,4 @@
-import { Sidebar as BokoSidebar } from "bokoui/expo";
+import { Sidebar as BokoSidebar } from "bokoui/expo/blocks";
 import type { ReactNode } from "react";
 import { View } from "react-native";
 

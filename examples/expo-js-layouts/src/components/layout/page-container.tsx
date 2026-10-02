@@ -1,4 +1,4 @@
-import { Container, type ContainerProps } from "bokoui/expo";
+import { Container, type ContainerProps } from "bokoui/expo/ui";
 import type { ReactNode } from "react";
 
 export interface PageContainerProps {

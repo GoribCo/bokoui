@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { ThemeProvider, ToastProvider } from "bokoui/expo";
+import { ToastProvider } from "bokoui/expo/ui";
+import { ThemeProvider } from "bokoui/expo";
 import { useEffect, useState, type ReactNode } from "react";
 import { fontAssets } from "@/lib/fonts/fonts";
 import { initI18n } from "@/lib/i18n";

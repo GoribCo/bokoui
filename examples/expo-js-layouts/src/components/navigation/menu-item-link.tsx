@@ -1,4 +1,5 @@
-import { Badge, Text, useTheme } from "bokoui/expo";
+import { Badge, Text } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { ChevronDown, ChevronRight } from "lucide-react-native";
 import { Pressable, View } from "react-native";
 import { useNavigate } from "@/hooks/use-navigate";

@@ -1,4 +1,6 @@
-import { Divider, Drawer, Text, useTheme } from "bokoui/expo";
+import { Divider, Text } from "bokoui/expo/ui";
+import { Drawer } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { X } from "lucide-react-native";
 import type { ReactNode } from "react";
 import { ScrollView, View, useWindowDimensions } from "react-native";

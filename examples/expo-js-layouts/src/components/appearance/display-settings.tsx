@@ -1,4 +1,6 @@
-import { Drawer, Text, useTheme, type ThemeMode } from "bokoui/expo";
+import { Text } from "bokoui/expo/ui";
+import { Drawer } from "bokoui/expo/blocks";
+import { useTheme, type ThemeMode } from "bokoui/expo";
 import { SlidersHorizontal } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

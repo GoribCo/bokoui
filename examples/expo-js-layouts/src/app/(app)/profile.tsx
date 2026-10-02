@@ -1,4 +1,4 @@
-import { Card, Skeleton, Text } from "bokoui/expo";
+import { Card, Skeleton, Text } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { UserAvatar } from "@/components/account/user-avatar";

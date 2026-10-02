@@ -1,4 +1,4 @@
-import { Button } from "bokoui/expo";
+import { Button } from "bokoui/expo/ui";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { toRoute } from "@/lib/menu";

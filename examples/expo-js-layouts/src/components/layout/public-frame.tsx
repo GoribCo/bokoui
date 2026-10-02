@@ -1,4 +1,5 @@
-import { Button, useTheme } from "bokoui/expo";
+import { Button } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { useRouter } from "expo-router";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";

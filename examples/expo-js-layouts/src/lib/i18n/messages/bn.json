@@ -204,7 +204,22 @@
     "contactDescription": "দলের সঙ্গে যোগাযোগের উপায়।",
     "contactSupport": "সহায়তা",
     "contactPrivacy": "গোপনীয়তা বিষয়ক প্রশ্ন",
-    "legalUpdated": "সর্বশেষ হালনাগাদ"
+    "legalUpdated": "সর্বশেষ হালনাগাদ",
+    "kpiRevenue": "মোট আয়",
+    "kpiSales": "মাসিক বিক্রি",
+    "kpiClients": "সক্রিয় ক্লায়েন্ট",
+    "kpiConversion": "রূপান্তর হার",
+    "last30": "গত ৩০ দিন",
+    "salesGrowth": "বিক্রয় প্রবৃদ্ধির সারসংক্ষেপ",
+    "totalRevenueCaption": "মোট আয়",
+    "audienceGrowth": "দর্শক প্রবৃদ্ধির সারসংক্ষেপ",
+    "totalUsersCaption": "মোট ব্যবহারকারী",
+    "topProducts": "পণ্য অনুযায়ী বিক্রি",
+    "thisYear": "এই বছর",
+    "upgradeTitle": "স্মার্ট বিক্রয় অন্তর্দৃষ্টি পান",
+    "upgradeBody": "উন্নত রিপোর্ট, পূর্বাভাস ও দলের কাজের হিসাব এক জায়গায়।",
+    "upgradeAction": "প্ল্যান আপগ্রেড",
+    "learnMore": "আরও জানুন"
   },
   "examples": {
     "tableTitle": "টেবিল",

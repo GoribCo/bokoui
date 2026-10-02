@@ -1,4 +1,4 @@
-import { Badge, Card, CardHeader, Grid, Heading, Skeleton, Text } from "bokoui/expo";
+import { Badge, Card, CardHeader, Grid, Heading, Skeleton, Text } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { QueryError } from "@/components/layout/query-error";

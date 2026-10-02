@@ -1,4 +1,5 @@
-import { Skeleton, useTheme } from "bokoui/expo";
+import { Skeleton } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useIsWide } from "@/hooks/use-is-wide";

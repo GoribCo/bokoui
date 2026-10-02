@@ -1,4 +1,4 @@
-import { Alert, Button } from "bokoui/expo";
+import { Alert, Button } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { isApiError } from "@/lib/api/errors";
 

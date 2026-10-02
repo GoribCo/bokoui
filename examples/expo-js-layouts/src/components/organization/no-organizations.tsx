@@ -1,4 +1,5 @@
-import { EmptyState, useTheme } from "bokoui/expo";
+import { EmptyState } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { Building2 } from "lucide-react-native";
 import type { ReactNode } from "react";
 

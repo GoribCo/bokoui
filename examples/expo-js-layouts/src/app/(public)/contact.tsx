@@ -1,4 +1,4 @@
-import { Link, Text } from "bokoui/expo";
+import { Link, Text } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { StaticPage } from "@/components/layout/static-page";

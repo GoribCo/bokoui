@@ -1,4 +1,4 @@
-import { Text } from "bokoui/expo";
+import { Text } from "bokoui/expo/ui";
 import { useState } from "react";
 import { View } from "react-native";
 import type { MenuGroup, MenuItem } from "@/lib/types";

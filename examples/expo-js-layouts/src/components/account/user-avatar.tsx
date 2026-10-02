@@ -1,4 +1,4 @@
-import { Avatar, type AvatarProps } from "bokoui/expo";
+import { Avatar, type AvatarProps } from "bokoui/expo/ui";
 import type { User } from "@/lib/types";
 
 export interface UserAvatarProps {

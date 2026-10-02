@@ -1,4 +1,5 @@
-import { Badge, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "bokoui/expo";
+import { Badge } from "bokoui/expo/ui";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "bokoui/expo/blocks";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PageContainer } from "@/components/layout/page-container";

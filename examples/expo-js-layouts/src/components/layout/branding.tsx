@@ -1,4 +1,5 @@
-import { Text, useTheme } from "bokoui/expo";
+import { Text } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { Image, Pressable, View } from "react-native";
 import Svg, { Path, Rect } from "react-native-svg";
 import { siteConfig } from "@/lib/config/site";

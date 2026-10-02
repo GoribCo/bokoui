@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Card, CardHeader, Divider, FormField, Heading, Input, Text, useTheme } from "bokoui/expo";
+import { Button, Card, CardHeader, Divider, FormField, Heading, Input, Text } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

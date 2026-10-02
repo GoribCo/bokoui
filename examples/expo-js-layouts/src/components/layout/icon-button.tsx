@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from "bokoui/expo";
+import { Button, type ButtonProps } from "bokoui/expo/ui";
 import type { ReactNode } from "react";
 
 export interface IconButtonProps extends Omit<ButtonProps, "children" | "iconOnly" | "leftIcon" | "rightIcon"> {

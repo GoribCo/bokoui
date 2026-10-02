@@ -1,4 +1,4 @@
-import { Button } from "bokoui/expo";
+import { Button } from "bokoui/expo/ui";
 import { ScrollView, View } from "react-native";
 
 export interface ChipOption<T extends string> {

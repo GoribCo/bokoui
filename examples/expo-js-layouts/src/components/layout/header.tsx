@@ -1,4 +1,5 @@
-import { Text, useTheme } from "bokoui/expo";
+import { Text } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import type { ReactNode } from "react";
 import { View } from "react-native";
 

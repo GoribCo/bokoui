@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Text } from "bokoui/expo";
+import { Text } from "bokoui/expo/ui";
 import { PageContainer } from "./page-container";
 import { PageHeader } from "./page-header";
 import { useScreenTitle } from "./screen-title";

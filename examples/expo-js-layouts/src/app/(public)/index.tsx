@@ -1,4 +1,5 @@
-import { Button, Card, CardHeader, Grid, Heading, Text, useTheme } from "bokoui/expo";
+import { Button, Card, CardHeader, Grid, Heading, Text } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { Redirect, useRouter } from "expo-router";
 import { Building2, Languages, LayoutPanelLeft, ShieldCheck, type LucideIcon } from "lucide-react-native";
 import { useTranslation } from "react-i18next";

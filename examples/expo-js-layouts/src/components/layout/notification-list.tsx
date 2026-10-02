@@ -1,4 +1,6 @@
-import { Badge, Button, EmptyState, Tab, TabList, Tabs, Text, useTheme } from "bokoui/expo";
+import { Badge, Button, Text } from "bokoui/expo/ui";
+import { EmptyState, Tab, TabList, Tabs } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { Bell, CalendarClock, CircleCheck, ClipboardCheck, MailPlus, type LucideIcon } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, View } from "react-native";

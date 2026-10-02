@@ -1,4 +1,6 @@
-import { Button, Divider, Drawer, Text, useTheme } from "bokoui/expo";
+import { Button, Divider, Text } from "bokoui/expo/ui";
+import { Drawer } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { ChevronsUpDown, LogOut } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, View } from "react-native";

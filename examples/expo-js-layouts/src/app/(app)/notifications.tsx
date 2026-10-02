@@ -1,4 +1,4 @@
-import { Skeleton } from "bokoui/expo";
+import { Skeleton } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { NotificationList } from "@/components/layout/notification-list";

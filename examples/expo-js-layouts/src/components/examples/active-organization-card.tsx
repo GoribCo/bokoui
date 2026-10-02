@@ -1,4 +1,4 @@
-import { Badge, Card, CardHeader, Heading, Text } from "bokoui/expo";
+import { Badge, Card, CardHeader, Heading, Text } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { useActiveOrganization } from "@/hooks/use-active-organization";

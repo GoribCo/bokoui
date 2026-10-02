@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Checkbox, DatePicker, FormField, Input, Select, Textarea, useToast } from "bokoui/expo";
+import { Button, Checkbox, FormField, Input, Select, Textarea, useToast } from "bokoui/expo/ui";
+import { DatePicker } from "bokoui/expo/blocks";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";

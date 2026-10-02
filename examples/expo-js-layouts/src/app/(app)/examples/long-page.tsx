@@ -1,4 +1,4 @@
-import { Card, CardHeader, Heading, Text } from "bokoui/expo";
+import { Card, CardHeader, Heading, Text } from "bokoui/expo/ui";
 import { useTranslation } from "react-i18next";
 import { PageContainer } from "@/components/layout/page-container";
 import { PageHeader } from "@/components/layout/page-header";

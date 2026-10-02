@@ -1,4 +1,4 @@
-import { Button } from "bokoui/expo";
+import { Button } from "bokoui/expo/ui";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { reportError } from "@/lib/monitoring/report-error";

@@ -1,4 +1,4 @@
-import { Avatar, Badge, Card, CardHeader, Heading, Link, Text } from "bokoui/expo";
+import { Avatar, Badge, Card, CardHeader, Heading, Link, Text } from "bokoui/expo/ui";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";

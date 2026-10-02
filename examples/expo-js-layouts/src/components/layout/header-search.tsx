@@ -1,4 +1,6 @@
-import { Drawer, Input, Spinner, Text, useTheme } from "bokoui/expo";
+import { Input, Spinner, Text } from "bokoui/expo/ui";
+import { Drawer } from "bokoui/expo/blocks";
+import { useTheme } from "bokoui/expo";
 import { Search } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

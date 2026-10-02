@@ -1,4 +1,4 @@
-import { Heading, Text } from "bokoui/expo";
+import { Heading, Text } from "bokoui/expo/ui";
 import { View } from "react-native";
 import type { LegalDocumentContent } from "@/lib/content/legal";
 import { PageContainer } from "./page-container";

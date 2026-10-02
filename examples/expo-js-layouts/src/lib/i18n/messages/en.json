@@ -204,7 +204,22 @@
     "contactDescription": "How to reach the team.",
     "contactSupport": "Support",
     "contactPrivacy": "Privacy questions",
-    "legalUpdated": "Last updated"
+    "legalUpdated": "Last updated",
+    "kpiRevenue": "Total revenue",
+    "kpiSales": "Monthly sales",
+    "kpiClients": "Active clients",
+    "kpiConversion": "Conversion rate",
+    "last30": "Last 30 days",
+    "salesGrowth": "Sales growth overview",
+    "totalRevenueCaption": "total revenue",
+    "audienceGrowth": "Audience growth overview",
+    "totalUsersCaption": "total users",
+    "topProducts": "Sales by product",
+    "thisYear": "This year",
+    "upgradeTitle": "Unlock smart sales insights",
+    "upgradeBody": "Advanced reports, forecasting tools, and team performance tracking in one place.",
+    "upgradeAction": "Upgrade plan",
+    "learnMore": "Learn more"
   },
   "examples": {
     "tableTitle": "Table",

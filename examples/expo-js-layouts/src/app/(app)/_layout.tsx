@@ -1,4 +1,4 @@
-import { Button } from "bokoui/expo";
+import { Button } from "bokoui/expo/ui";
 import { Redirect, Slot, type ErrorBoundaryProps } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { DashboardShell } from "@/components/layout/dashboard-shell";

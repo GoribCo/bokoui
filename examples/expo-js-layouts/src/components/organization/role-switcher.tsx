@@ -1,4 +1,4 @@
-import { Select, Text } from "bokoui/expo";
+import { Select, Text } from "bokoui/expo/ui";
 import { useMemo } from "react";
 import { View } from "react-native";
 

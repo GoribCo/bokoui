@@ -1,4 +1,5 @@
-import { Skeleton, useTheme } from "bokoui/expo";
+import { Skeleton } from "bokoui/expo/ui";
+import { useTheme } from "bokoui/expo";
 import { Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react-native";
 import { usePathname, useRouter } from "expo-router";
 import { useMemo, type ReactNode } from "react";
