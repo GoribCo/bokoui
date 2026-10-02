@@ -6,6 +6,7 @@ export * from "./button";
 export * from "./card";
 export * from "./divider";
 export * from "./empty-state";
+export * from "./floating-nav";
 export * from "./form-field";
 export * from "./image";
 export * from "./input";

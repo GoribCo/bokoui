@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Breadcrumb, BreadcrumbItem } from "./breadcrumb";
+import { FloatingNav, FloatingNavItem } from "./floating-nav";
 import { Pagination } from "./pagination";
 import { Sidebar, SidebarItem, SidebarSection } from "./sidebar";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "./table";
@@ -165,5 +166,34 @@ describe("Sidebar", () => {
   it("marks disabled items", () => {
     render(<Example />);
     expect(screen.getByRole("link", { name: /Locked/ })).toHaveAttribute("aria-disabled", "true");
+  });
+});
+
+describe("FloatingNav", () => {
+  it("is a labelled landmark of links; the active one is marked current", () => {
+    render(
+      <FloatingNav aria-label="Primary">
+        <FloatingNavItem href="/" active aria-label="Home">H</FloatingNavItem>
+        <FloatingNavItem href="/stats" aria-label="Stats">S</FloatingNavItem>
+      </FloatingNav>,
+    );
+    const nav = screen.getByRole("navigation", { name: "Primary" });
+    expect(within(nav).getAllByRole("link")).toHaveLength(2);
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "Stats" })).not.toHaveAttribute("aria-current");
+  });
+
+  it("is fixed by default and flows in the layout with fixed={false}", () => {
+    const { rerender } = render(<FloatingNav aria-label="A"><FloatingNavItem href="/">x</FloatingNavItem></FloatingNav>);
+    expect(screen.getByRole("navigation")).toHaveClass("fixed");
+    rerender(<FloatingNav aria-label="A" fixed={false}><FloatingNavItem href="/">x</FloatingNavItem></FloatingNav>);
+    expect(screen.getByRole("navigation")).not.toHaveClass("fixed");
+  });
+
+  it("renders buttons through `as`", async () => {
+    const onClick = vi.fn();
+    render(<FloatingNav aria-label="A"><FloatingNavItem as="button" type="button" aria-label="Go" onClick={onClick}>g</FloatingNavItem></FloatingNav>);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    expect(onClick).toHaveBeenCalled();
   });
 });

@@ -19,5 +19,8 @@ export default defineConfig({
     "react/theme-script": "src/react/theme/theme-script.tsx",
     "vue/index": "src/vue/index.ts",
     "expo/index": "src/expo/index.ts",
+    // Basic elements and composed blocks of Expo, importable on their own.
+    "expo/ui": "src/expo/ui/index.ts",
+    "expo/blocks": "src/expo/blocks/index.ts",
   },
 });

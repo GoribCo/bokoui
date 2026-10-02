@@ -1,15 +1,10 @@
 import { cloneElement, type ReactElement, type ReactNode } from "react";
 import { View, type ViewStyle } from "react-native";
 import { AnchoredLayer, useAnchor, type LayerAlign } from "../internal/anchored";
+import type { TriggerProps } from "../internal/trigger";
 import { useControllable } from "../internal/use-controllable";
 
-/** Props the trigger element receives. Any pressable (Button, Pressable) accepts them. */
-export interface TriggerProps {
-  onPress?: () => void;
-  onLongPress?: () => void;
-  accessibilityHint?: string;
-  accessibilityState?: { expanded?: boolean };
-}
+export type { TriggerProps };
 
 export interface PopoverProps {
   /** The element that toggles the popover. It must accept `onPress`. */

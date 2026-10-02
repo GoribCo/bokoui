@@ -31,6 +31,7 @@ export * from "./recipes/toggle";
 export * from "./recipes/image";
 export * from "./recipes/input";
 export * from "./recipes/modal";
+export * from "./recipes/floating-nav";
 export * from "./recipes/navbar";
 export * from "./recipes/pagination";
 export * from "./recipes/progress";

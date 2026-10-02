@@ -2,7 +2,7 @@ import { cloneElement, useEffect, useState, type ReactElement, type ReactNode } 
 import { Text as RNText, View } from "react-native";
 import { useTheme } from "../theme";
 import { AnchoredLayer, useAnchor } from "../internal/anchored";
-import type { TriggerProps } from "./popover";
+import type { TriggerProps } from "../internal/trigger";
 
 export interface TooltipProps {
   /** Tooltip text. Keep it short. */

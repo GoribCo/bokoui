@@ -1,6 +1,6 @@
 {
   "name": "bokoui",
-  "version": "0.2.35",
+  "version": "0.2.38",
   "description": "Themeable UI components for Tailwind CSS v4 (React, Vue, React Native/Expo) with 8 design styles and light/dark modes",
   "keywords": [
     "react",
@@ -55,6 +55,14 @@
     "./expo": {
       "types": "./dist/expo/index.d.ts",
       "import": "./dist/expo/index.js"
+    },
+    "./expo/ui": {
+      "types": "./dist/expo/ui.d.ts",
+      "import": "./dist/expo/ui.js"
+    },
+    "./expo/blocks": {
+      "types": "./dist/expo/blocks.d.ts",
+      "import": "./dist/expo/blocks.js"
     },
     "./styles.css": "./dist/styles.css",
     "./tokens.json": "./dist/tokens.json",

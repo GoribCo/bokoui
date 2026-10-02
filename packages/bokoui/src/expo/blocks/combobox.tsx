@@ -5,7 +5,7 @@ import { useTheme } from "../theme";
 import { tone } from "../internal/shared";
 import { OptionList, type Option } from "../internal/option-list";
 import { useControllable } from "../internal/use-controllable";
-import { Input, type InputProps } from "./input";
+import { Input, type InputProps } from "../ui/input";
 
 export type ComboboxOption = Option;
 

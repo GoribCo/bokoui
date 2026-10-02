@@ -3,7 +3,7 @@ import { Pressable, Text as RNText, View } from "react-native";
 import { useTheme } from "../theme";
 import { tone } from "../internal/shared";
 import { AnchoredLayer, useAnchor } from "../internal/anchored";
-import type { TriggerProps } from "./popover";
+import type { TriggerProps } from "../internal/trigger";
 
 const MenuContext = createContext<{ close: () => void } | null>(null);
 
