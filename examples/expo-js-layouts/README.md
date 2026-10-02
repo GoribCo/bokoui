@@ -1,24 +1,41 @@
-# bokoui Expo example
+# bokoui Expo layouts
 
-Demo app for [bokoui](../../packages/bokoui) using `bokoui/expo`, built with Expo (SDK 57) and Expo Router. It shows the same page as the [Next.js](../next-js) and [Nuxt](../nuxt-js) examples: style and mode switcher, every Button variant and Input state, typography and a custom theme. There is no Tailwind or CSS here; the components paint themselves from the same theme tokens.
+The generic application shell (drawer, bottom navigation, sidebar on wide screens, organization and role switching, notifications, display settings, English and Bangla) built on `bokoui/expo` and Expo Router. It is the mobile port of [next-js-layouts](../next-js-layouts); all data is sample data behind the same service interfaces. Task list: [tasks-layouts-expo](../../docs/tasks/tasks-layouts-expo.md).
 
 ## Run
 
 ```bash
 npm install
-npm run dev          # Metro on :8081 (or $PORT); press w for web, i for iOS, a for Android
-npm run web          # web only
+npm run dev          # Metro on :3004 (or $PORT); press w for web, i for iOS, a for Android
+npm run lint
+npm run typecheck
 ```
 
-`bokoui` is installed from the registry in `.npmrc` (local Verdaccio, `http://127.0.0.1:4873/`). From the repo root, `./run.sh` publishes the library there and runs every example on its own port.
+`bokoui` comes from the registry in `.npmrc` (local Verdaccio). From the repo root, `./run.sh` publishes the library and runs every example.
+
+Sign in with any email and password; the sign-in screen lists three sample accounts (several organizations and roles, no organization, sixty organizations).
 
 ## Structure
 
-- `src/app/_layout.tsx`: `ThemeProvider` from `bokoui/expo` (with `AsyncStorage` to persist the choice and the custom theme) around an Expo Router `Stack`.
-- `src/app/index.tsx`: component showcase.
-- `src/components/theme-switcher.tsx`: style chips and mode toggle built from `useTheme()`.
-- `src/styles/custom-themes.ts`: example app-defined theme.
+- `src/app`: routes only. `(public)` (landing, public profiles `/[type]/[slug]`, help, contact, legal), `(auth)` (sign-in), `(app)` (the shell; its layout guards the session).
+- `src/components`: presentational components by area (`layout`, `navigation`, `organization`, `account`, `appearance`, `auth`, `examples`). `layout/dashboard-shell.tsx` is the one connected component.
+- `src/hooks`: `use-<resource>` data hooks (a class extending `BaseQuery`, the only importer of TanStack Query) and UI hooks.
+- `src/providers`: `AppProviders` (theme, query, session, toast; holds the splash screen until fonts, stores, language, theme and session are ready).
+- `src/api`: the in-process sample API. `src/lib`: `contract` (the single API description), `services`, `api` (client and transports), `schemas`, `stores` (Zustand, persisted to AsyncStorage), `config`, `i18n`, `menu`, `access`, `authorization`.
 
-## Status
+Data flows one way: component, hook, service, `ApiClient`, API. Components never import `lib/services` or `lib/api`.
 
-Checked by bundling for web and iOS (Hermes) and by driving the web build in a browser at phone width. Not yet run on a physical device, simulator or Android.
+## Replace the sample API
+
+1. Set `EXPO_PUBLIC_API_BASE_URL` (for example `https://api.example.com/v1`). `ApiClient` then uses real `fetch` instead of the in-process transport (`lib/api/instance.ts`).
+2. Implement the endpoints of `src/lib/contract/index.ts`, or change the contract first. Answers use `{ success, results, meta }`; login returns the user and a `tokens` pair, `/auth/refresh` takes `{ refreshToken }`. The client sends `Authorization: Bearer`, refreshes once on a 401 and retries.
+3. Delete `src/api` and the `sampleTransport` import in `lib/api/instance.ts`.
+
+Tokens are kept in `expo-secure-store` on devices and in AsyncStorage on the web build.
+
+## Add things
+
+- **A screen:** a file under `src/app/(app)/`; call `useScreenTitle(title)`; build it from `PageContainer` and `PageHeader`.
+- **A menu item:** add it to the organization's menu in `src/api/data/menus.ts` (or your API). `icon` is a name in `components/navigation/menu-icons.ts`; `labelKey` is a key in the catalogs; `requiredRoles` and `requiredPermissions` filter it. The UI shows groups plus one nested level.
+- **An organization type:** one entry in `lib/config/organization-types.ts`, one member of `OrganizationDetails` (`lib/types/organization.ts`, its schema, and a case in `components/organization/public-profile.tsx`). Its public route `/{segment}/{slug}` needs no new file.
+- **A language:** add the code to `lib/i18n/config.ts`, a catalog `lib/i18n/messages/<code>.json` and an entry in `lib/i18n/messages.ts`. The display settings sheet lists it by itself.
