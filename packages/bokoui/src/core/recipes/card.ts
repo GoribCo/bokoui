@@ -5,12 +5,12 @@ export type CardVariant = "outline" | "elevated" | "filled";
 export type CardPadding = "none" | "sm" | "md" | "lg";
 
 export const cardVariants = cva(
-  ["flex flex-col rounded-card font-ui text-foreground", "border-[length:var(--bokoui-border-width)]"],
+  ["flex flex-col rounded-card font-ui text-foreground", "border-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))]"],
   {
     variants: {
       variant: {
-        outline: "border-border bg-surface",
-        elevated: "border-border bg-surface shadow-button",
+        outline: "surface-card",
+        elevated: "surface-card-raised",
         filled: "border-transparent bg-muted",
       },
       padding: {

@@ -31,19 +31,19 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         solid: [
-          "border-(--tone-border) bg-(--tone) text-(--tone-fg) shadow-button",
+          "border-[color:var(--bokoui-solid-border,var(--tone-border))] bg-(--tone) text-(--tone-fg) [background-image:var(--bokoui-solid-image,none)] [box-shadow:var(--bokoui-solid-shadow,var(--bokoui-shadow-button))]",
           "enabled:hover:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-hover-mix))] enabled:hover:shadow-button-hover",
-          "enabled:active:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-active-mix))]",
+          "enabled:active:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-active-mix))] enabled:active:[box-shadow:var(--bokoui-pressed-shadow,var(--bokoui-shadow-button-hover))]",
         ],
         outline: [
-          "border-(--tone-ink) bg-transparent text-(--tone-ink) shadow-button",
-          "enabled:hover:bg-(--tone-soft) enabled:hover:shadow-button-hover",
-          "enabled:active:bg-(--tone-soft-hover)",
+          "border-[color:var(--bokoui-control-border,var(--tone-ink))] bg-[var(--bokoui-control-bg,transparent)] text-(--tone-ink) [background-image:var(--bokoui-control-image,none)] [box-shadow:var(--bokoui-control-shadow,var(--bokoui-shadow-button))] [-webkit-backdrop-filter:var(--bokoui-control-backdrop,none)] [backdrop-filter:var(--bokoui-control-backdrop,none)]",
+          "enabled:hover:bg-[var(--bokoui-control-bg-hover,var(--tone-soft))] enabled:hover:shadow-button-hover",
+          "enabled:active:bg-[var(--bokoui-pressed-bg,var(--tone-soft-hover))] enabled:active:[box-shadow:var(--bokoui-pressed-shadow,var(--bokoui-shadow-button-hover))]",
         ],
         soft: [
-          "border-transparent bg-(--tone-soft) text-(--tone-ink)",
-          "enabled:hover:bg-(--tone-soft-hover)",
-          "enabled:active:bg-(--tone-soft-hover)",
+          "border-[color:var(--bokoui-control-border,transparent)] bg-[var(--bokoui-control-bg,var(--tone-soft))] text-(--tone-ink) [background-image:var(--bokoui-control-image,none)] [box-shadow:var(--bokoui-control-shadow,none)] [-webkit-backdrop-filter:var(--bokoui-control-backdrop,none)] [backdrop-filter:var(--bokoui-control-backdrop,none)]",
+          "enabled:hover:bg-[var(--bokoui-control-bg-hover,var(--tone-soft-hover))]",
+          "enabled:active:bg-[var(--bokoui-pressed-bg,var(--tone-soft-hover))] enabled:active:[box-shadow:var(--bokoui-pressed-shadow,none)]",
         ],
         ghost: [
           "border-transparent bg-transparent text-(--tone-ink)",

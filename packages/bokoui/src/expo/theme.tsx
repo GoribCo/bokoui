@@ -47,8 +47,9 @@ export function ThemeProvider({
 
   // The styles that ship with `bokoui/expo` (glass, clay, ...) come first; yours may replace one by id.
   const allThemes = useMemo(() => ({ ...nativeStyles, ...customThemes }), [customThemes]);
+  // The shared list already names the styles that ship with `bokoui/expo`; add only the ids it does not know.
   const options = useMemo(
-    () => [...themes, ...Object.entries(allThemes).map(([id, t]) => ({ id, label: t.label }))],
+    () => [...themes, ...Object.entries(allThemes).filter(([id]) => !themes.some((t) => t.id === id)).map(([id, t]) => ({ id, label: t.label }))],
     [allThemes],
   );
 

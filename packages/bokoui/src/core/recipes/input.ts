@@ -24,7 +24,7 @@ export const inputVariants = cva(
     variants: {
       variant: {
         outline: [
-          "border-field-border bg-field",
+          "surface-field",
           "enabled:hover:border-(--tone-ink) focus-visible:border-(--tone-ink)",
           "aria-invalid:border-(--tone)",
         ],

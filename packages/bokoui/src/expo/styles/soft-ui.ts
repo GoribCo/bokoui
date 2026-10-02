@@ -6,7 +6,7 @@ export const softUi: NativeCustomTheme = {
   base: "flat",
   tokens: { "radius-control": "1rem", "radius-button": "1rem", "radius-card": "1.5rem", "heading-weight": "700", "heading-tracking": "-0.02em" },
   light: {
-    bg: "#eef1f8", fg: "#1f2437", surface: "#f6f8fd", muted: "#e6eaf4", "muted-fg": "#555d78", border: "#dbe1ef", field: "#f6f8fd", "field-border": "#8d96b4", ring: "#6c5ce7",
+    bg: "#eef1f8", fg: "#1f2437", surface: "#f6f8fd", muted: "#e6eaf4", "muted-fg": "#555d78", border: "#dbe1ef", field: "#f6f8fd", "field-border": "#7a83a3", ring: "#6c5ce7",
     primary: "#6c5ce7", "primary-fg": "#ffffff", secondary: "#5b6486", accent: "#0b7f70", "accent-fg": "#ffffff",
   },
   dark: {

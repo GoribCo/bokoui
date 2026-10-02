@@ -4,9 +4,9 @@ import type { NativeCustomTheme } from "@/expo";
 export const minimalism: NativeCustomTheme = {
   label: "Minimalism",
   base: "flat",
-  tokens: { "radius-control": "0.375rem", "radius-button": "0.375rem", "radius-card": "0.5rem", "heading-weight": "500", "heading-tracking": "-0.01em", "ink-tone": "100%" },
+  tokens: { "radius-control": "0.375rem", "radius-button": "0.375rem", "radius-card": "0.5rem", "heading-weight": "500", "heading-tracking": "-0.01em" },
   light: {
-    bg: "#ffffff", fg: "#111111", surface: "#ffffff", muted: "#f5f5f5", "muted-fg": "#5c5c5c", border: "#e6e6e6", field: "#ffffff", "field-border": "#b5b5b5", ring: "#111111",
+    bg: "#ffffff", fg: "#111111", surface: "#ffffff", muted: "#f5f5f5", "muted-fg": "#5c5c5c", border: "#e6e6e6", field: "#ffffff", "field-border": "#8a8a8a", ring: "#111111",
     primary: "#111111", "primary-fg": "#ffffff", secondary: "#555555", "secondary-fg": "#ffffff", accent: "#6b6b6b", "accent-fg": "#ffffff",
   },
   dark: {

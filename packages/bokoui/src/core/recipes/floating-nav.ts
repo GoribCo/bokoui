@@ -7,7 +7,7 @@ import { cn, type ClassValue } from "../cn";
  * layout, so content is never covered.
  */
 export const floatingNavVariants = cva(
-  "z-30 flex w-full items-center justify-around gap-1 rounded-full border-[length:var(--bokoui-border-width)] border-border bg-surface/90 p-1 font-ui text-muted-foreground shadow-lg backdrop-blur",
+  "z-30 flex w-full items-center justify-around gap-1 rounded-full border-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card p-1 font-ui text-muted-foreground [box-shadow:var(--bokoui-card-shadow,0_10px_30px_rgb(0_0_0/0.12))]",
   {
     variants: {
       fixed: { true: "fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] mx-auto w-auto max-w-md", false: "" },

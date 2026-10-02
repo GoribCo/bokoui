@@ -6,8 +6,8 @@ export const bento: NativeCustomTheme = {
   base: "flat",
   tokens: { "radius-control": "0.875rem", "radius-button": "0.875rem", "radius-card": "1.75rem", "heading-weight": "700", "heading-tracking": "-0.03em" },
   light: {
-    bg: "#eef0f4", fg: "#14161a", surface: "#ffffff", muted: "#e4e7ec", "muted-fg": "#525a66", border: "#dfe3ea", field: "#ffffff", "field-border": "#8f98a8", ring: "#3b5bfd",
-    primary: "#3b5bfd", "primary-fg": "#ffffff", secondary: "#475569", accent: "#ff6b3d", "accent-fg": "#14110f",
+    bg: "#eef0f4", fg: "#14161a", surface: "#ffffff", muted: "#e4e7ec", "muted-fg": "#525a66", border: "#dfe3ea", field: "#ffffff", "field-border": "#7a8396", ring: "#3b5bfd",
+    primary: "#3b5bfd", "primary-fg": "#ffffff", secondary: "#475569", accent: "#e8552a", "accent-fg": "#14110f",
   },
   dark: {
     bg: "#0e1014", fg: "#eceff4", surface: "#171a21", muted: "#20242d", "muted-fg": "#a5adbb", border: "#262b35", field: "#0e1014", "field-border": "#6b7384", ring: "#7d93ff",

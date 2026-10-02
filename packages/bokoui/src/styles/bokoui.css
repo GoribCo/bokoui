@@ -83,6 +83,9 @@
 
   body {
     background: var(--bokoui-bg);
+    /* A gradient or glow mesh behind the app, for styles that have one (glass, aurora, synthwave, ...). */
+    background-image: var(--bokoui-page-image, none);
+    background-attachment: fixed;
     color: var(--bokoui-fg);
     font-family: var(--bokoui-font);
   }

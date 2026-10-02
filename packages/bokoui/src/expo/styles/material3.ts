@@ -4,7 +4,7 @@ import type { NativeCustomTheme } from "@/expo";
 export const material3: NativeCustomTheme = {
   label: "Material 3",
   base: "flat",
-  tokens: { "radius-control": "0.75rem", "radius-button": "999px", "radius-card": "0.75rem", "heading-weight": "400", "heading-tracking": "0em", "btn-weight": "500", "ink-tone": "85%" },
+  tokens: { "radius-control": "0.75rem", "radius-button": "999px", "radius-card": "0.75rem", "heading-weight": "400", "heading-tracking": "0em", "btn-weight": "500" },
   light: {
     bg: "#fef7ff", fg: "#1d1b20", surface: "#f3edf7", muted: "#e7e0ec", "muted-fg": "#49454f", border: "#cac4d0", field: "#fef7ff", "field-border": "#79747e", ring: "#6750a4",
     primary: "#6750a4", "primary-fg": "#ffffff", secondary: "#625b71", "secondary-fg": "#ffffff", accent: "#7d5260", "accent-fg": "#ffffff",

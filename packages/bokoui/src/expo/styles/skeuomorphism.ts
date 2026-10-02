@@ -4,13 +4,13 @@ import type { NativeCustomTheme } from "@/expo";
 export const skeuomorphism: NativeCustomTheme = {
   label: "Skeuomorphism",
   base: "flat",
-  tokens: { "radius-control": "0.625rem", "radius-button": "0.75rem", "radius-card": "1rem", "heading-weight": "700", "heading-tracking": "-0.01em", "btn-weight": "700" },
+  tokens: { "radius-control": "0.625rem", "radius-button": "0.75rem", "radius-card": "1rem", "heading-weight": "700", "heading-tracking": "-0.01em", "btn-weight": "700", "ink-tone": "45%" },
   light: {
-    bg: "#cfd2d8", fg: "#1c1d20", surface: "#e6e8ec", muted: "#c3c7ce", "muted-fg": "#41454e", border: "#a9adb6", field: "#f2f3f5", "field-border": "#8d929c", ring: "#6a48e8",
-    primary: "#5a38d6", "primary-fg": "#ffffff", secondary: "#41454e", accent: "#a3320a", "accent-fg": "#ffffff",
+    bg: "#cfd2d8", fg: "#1c1d20", surface: "#e6e8ec", muted: "#c3c7ce", "muted-fg": "#41454e", border: "#a9adb6", field: "#f2f3f5", "field-border": "#62666f", ring: "#6a48e8",
+    primary: "#5a38d6", "primary-fg": "#ffffff", secondary: "#41454e", accent: "#a3320a", "accent-fg": "#ffffff", warning: "#a14a07", "warning-fg": "#ffffff",
   },
   dark: {
-    bg: "#1f2023", fg: "#ececef", surface: "#34363b", muted: "#2a2c30", "muted-fg": "#b0b4bd", border: "#4a4d55", field: "#17181a", "field-border": "#5b5f68", ring: "#a794ff",
+    bg: "#1f2023", fg: "#ececef", surface: "#34363b", muted: "#2a2c30", "muted-fg": "#b0b4bd", border: "#4a4d55", field: "#17181a", "field-border": "#7d818b", ring: "#a794ff",
     primary: "#a794ff", "primary-fg": "#140f33", secondary: "#b0b4bd", accent: "#ff9a6b", "accent-fg": "#2a0f00",
   },
   lightEffects: {

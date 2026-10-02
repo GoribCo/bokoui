@@ -11,7 +11,7 @@ export type ModalPlacement = "center" | "right" | "left" | "bottom";
 export const modalVariants = cva(
   [
     "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] flex-col overflow-hidden p-0",
-    "rounded-card border-[length:var(--bokoui-border-width)] border-border bg-surface font-ui text-foreground shadow-button-hover",
+    "rounded-card border-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-overlay font-ui text-foreground",
     "backdrop:bg-black/50 backdrop:backdrop-blur-[2px]",
     // `flex` only when open: a base `display` would override the UA `dialog:not([open]) { display: none }`.
     "open:flex",

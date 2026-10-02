@@ -10,6 +10,11 @@
  * Effects: shadow-button shadow-button-hover shift-hover shift-active
  * Type:    font font-heading font-mono heading-weight heading-tracking heading-transform
  *          text-leading btn-weight btn-transform btn-tracking
+ * Materials (optional, defined only by styles that need them; every recipe falls back to the plain look):
+ *          card-bg card-image card-shadow card-border card-border-width card-backdrop
+ *          control-bg control-bg-hover control-image control-shadow control-border control-backdrop
+ *          pressed-bg pressed-image pressed-shadow   field-bg field-image field-shadow field-border-effect
+ *          solid-image solid-shadow solid-border   page-image page-bg (transparent: frames let the page image show)
  * Focus:   ring-width ring-offset
  * Motion:  duration ease
  * State:   disabled-opacity
@@ -40,6 +45,45 @@
  */
 :root:not([data-mode="dark"]) [data-tone="warning"] {
   --tone-ink: color-mix(in srgb, var(--tone) 45%, var(--bokoui-fg));
+}
+
+/*
+ * Surface materials. A style (glass, clay, neumorphism, ...) sets the optional `--bokoui-card-*`, `--bokoui-field-*`
+ * tokens and these utilities paint them; without the tokens each utility is the plain surface, so the eight classic
+ * styles look exactly as before. `card-backdrop` is a full filter value such as `blur(24px) saturate(140%)`.
+ */
+@utility surface-card {
+  background-color: var(--bokoui-card-bg, var(--bokoui-surface));
+  background-image: var(--bokoui-card-image, none);
+  border-color: var(--bokoui-card-border, var(--bokoui-border));
+  box-shadow: var(--bokoui-card-shadow, none);
+  -webkit-backdrop-filter: var(--bokoui-card-backdrop, none);
+  backdrop-filter: var(--bokoui-card-backdrop, none);
+}
+
+/* Same as surface-card, with the style's raised-button shadow as the fallback (elevated cards). */
+@utility surface-card-raised {
+  background-color: var(--bokoui-card-bg, var(--bokoui-surface));
+  background-image: var(--bokoui-card-image, none);
+  border-color: var(--bokoui-card-border, var(--bokoui-border));
+  box-shadow: var(--bokoui-card-shadow, var(--bokoui-shadow-button));
+  -webkit-backdrop-filter: var(--bokoui-card-backdrop, none);
+  backdrop-filter: var(--bokoui-card-backdrop, none);
+}
+
+/* Dialogs and sheets float over a dimmed page: an opaque fill (a see-through one would look gray), the style's edge and shadow. */
+@utility surface-overlay {
+  background-color: var(--bokoui-surface);
+  background-image: var(--bokoui-card-image, none);
+  border-color: var(--bokoui-card-border, var(--bokoui-border));
+  box-shadow: var(--bokoui-card-shadow, var(--bokoui-shadow-button-hover));
+}
+
+@utility surface-field {
+  background-color: var(--bokoui-field-bg, var(--bokoui-field));
+  background-image: var(--bokoui-field-image, none);
+  border-color: var(--bokoui-field-border-effect, var(--bokoui-field-border));
+  box-shadow: var(--bokoui-field-shadow, none);
 }
 
 /* Focus ring shared by all interactive components. */

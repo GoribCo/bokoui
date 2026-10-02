@@ -2,7 +2,7 @@
 
 # Project: bokoui (Tailwind CSS v4 + Next.js UI framework)
 
-Themeable React components with 8 design styles (flat, material, swiss, brutalism, neo-brutalism, monochrome, oled, fluent) and light/dark modes. Style (`data-theme`) and mode (`data-mode`) are independent axes on `<html>`.
+Themeable React components with 20 design styles (flat, material, swiss, brutalism, neo-brutalism, monochrome, oled, fluent, plus the material styles minimalism, bento, material-3, soft-ui, neumorphism, claymorphism, skeuomorphism, terminal, synthwave, glassmorphism, liquid-glass, aurora) and light/dark modes. Style (`data-theme`) and mode (`data-mode`) are independent axes on `<html>`.
 
 Docs: [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-framework.md) (update checkboxes when finishing a task), [component conventions](docs/component-conventions.md), [layout plan](docs/plan-layouts.md), [Tailwind plan](docs/plan-tailwindcss.md).
 
@@ -44,7 +44,7 @@ The demo app consumes the published package from `node_modules`, so after editin
 - Next.js here is 16.x with breaking changes: read the relevant guide in `node_modules/next/dist/docs/` before writing Next-specific code.
 - TypeScript `strict` is on; no `any`.
 - Components: typed variants via `class-variance-authority` (color, variant, action, size), `forwardRef`, merge `className` with `cn()`, accessible states (hover/focus/active/disabled/loading/error). Use `"use client"` only when a component needs it. Button is the reference implementation.
-- Styling goes through design tokens (CSS variables in `tokens.css`, mapped to Tailwind v4 `@theme`); never hard-code colors in components. A new style is a new file in `styles/themes/`, imported from `themes/index.css` and registered in `themes.ts`.
+- Styling goes through design tokens (CSS variables in `tokens.css`, mapped to Tailwind v4 `@theme`); never hard-code colors in components. A new style is a new file in `styles/themes/`, imported from `themes/index.css` and registered in `themes.ts`. The twelve material styles are the exception: edit `src/expo/styles/<id>.ts` and run `node scripts/sync-expo-styles.mjs`, which writes their CSS.
 - Respect `prefers-reduced-motion`. Avoid theme flash: `ThemeScript` must stay in `<head>`.
 - A new component is a class recipe in `src/core/recipes/` plus a thin binding in each of `src/react`, `src/vue`, `src/expo`; export it from that folder's `index.ts`. Keep React/Vue/RN imports out of `core`.
 

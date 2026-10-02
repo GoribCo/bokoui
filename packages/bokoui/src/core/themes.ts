@@ -8,6 +8,20 @@ export const themes = [
   { id: "monochrome", label: "Monochrome" },
   { id: "oled", label: "Dark / OLED" },
   { id: "fluent", label: "Fluent" },
+  // Material styles (shadows, gradients, glass). Their colors and materials are defined in code for Expo
+  // (src/expo/styles) and generated into CSS for the web (scripts/sync-expo-styles.mjs).
+  { id: "minimalism", label: "Minimalism" },
+  { id: "bento", label: "Bento" },
+  { id: "material-3", label: "Material 3" },
+  { id: "soft-ui", label: "Soft UI" },
+  { id: "neumorphism", label: "Neumorphism" },
+  { id: "claymorphism", label: "Claymorphism" },
+  { id: "skeuomorphism", label: "Skeuomorphism" },
+  { id: "terminal", label: "Terminal" },
+  { id: "synthwave", label: "Synthwave" },
+  { id: "glassmorphism", label: "Glassmorphism" },
+  { id: "liquid-glass", label: "Liquid Glass" },
+  { id: "aurora", label: "Aurora" },
 ] as const;
 
 export type BuiltinThemeId = (typeof themes)[number]["id"];

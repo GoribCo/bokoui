@@ -6,8 +6,8 @@ export const glass: NativeCustomTheme = {
   base: "flat",
   tokens: { "radius-control": "1rem", "radius-button": "1rem", "radius-card": "1.5rem", "heading-weight": "700", "heading-tracking": "-0.02em" },
   light: {
-    bg: "#dfe6fb", fg: "#1b2144", surface: "#eef1fd", muted: "#e3e8fb", "muted-fg": "#44507e", border: "#c9d1f0", field: "#f4f6ff", "field-border": "#7f8ac0", ring: "#4b5bf0",
-    primary: "#4b5bf0", "primary-fg": "#ffffff", secondary: "#44507e", accent: "#a21c7a", "accent-fg": "#ffffff",
+    bg: "#dfe6fb", fg: "#1b2144", surface: "#eef1fd", muted: "#e3e8fb", "muted-fg": "#44507e", border: "#c9d1f0", field: "#f4f6ff", "field-border": "#6a76ad", ring: "#4b5bf0",
+    primary: "#4b5bf0", "primary-fg": "#ffffff", secondary: "#44507e", accent: "#a21c7a", "accent-fg": "#ffffff", warning: "#a14a07", "warning-fg": "#ffffff",
   },
   dark: {
     bg: "#0f1230", fg: "#eef0ff", surface: "#1a1e4a", muted: "#1b1f4a", "muted-fg": "#b9c0f2", border: "#3a418a", field: "#141842", "field-border": "#6b76c9", ring: "#8b9bff",

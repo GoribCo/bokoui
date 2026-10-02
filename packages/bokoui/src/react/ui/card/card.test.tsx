@@ -7,7 +7,7 @@ describe("Card", () => {
     render(<Card data-testid="c">Body</Card>);
     const card = screen.getByTestId("c");
     expect(card).toHaveTextContent("Body");
-    expect(card).toHaveClass("bg-surface", "gap-4");
+    expect(card).toHaveClass("surface-card", "gap-4");
   });
 
   it("switches variant and padding", () => {
@@ -19,7 +19,7 @@ describe("Card", () => {
 
   it("adds elevation only for elevated", () => {
     render(<Card data-testid="c" variant="elevated" />);
-    expect(screen.getByTestId("c")).toHaveClass("shadow-button");
+    expect(screen.getByTestId("c")).toHaveClass("surface-card-raised");
   });
 
   it("adds interactive feedback only when asked", () => {

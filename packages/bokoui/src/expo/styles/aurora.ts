@@ -6,7 +6,7 @@ export const aurora: NativeCustomTheme = {
   base: "flat",
   tokens: { "radius-control": "1rem", "radius-button": "1rem", "radius-card": "1.5rem", "heading-weight": "700", "heading-tracking": "-0.02em" },
   light: {
-    bg: "#eefaf7", fg: "#10253a", surface: "#f7fffd", muted: "#dff3ee", "muted-fg": "#3b5a63", border: "#c3e4dc", field: "#fafffd", "field-border": "#6f9aa0", ring: "#0f766e",
+    bg: "#eefaf7", fg: "#10253a", surface: "#f7fffd", muted: "#dff3ee", "muted-fg": "#3b5a63", border: "#c3e4dc", field: "#fafffd", "field-border": "#5a878d", ring: "#0f766e",
     primary: "#0f766e", "primary-fg": "#ffffff", secondary: "#5b3fd1", "secondary-fg": "#ffffff", accent: "#a21c7a", "accent-fg": "#ffffff",
   },
   dark: {

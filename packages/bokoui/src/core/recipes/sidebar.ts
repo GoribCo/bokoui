@@ -10,7 +10,7 @@ import { cn, type ClassValue } from "../cn";
 export const sidebarClass = (className?: ClassValue) =>
   cn(
     "group/sidebar flex w-60 shrink-0 flex-col gap-1 overflow-y-auto p-3 font-ui",
-    "border-e-[length:var(--bokoui-border-width)] border-border bg-surface",
+    "border-e-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card",
     "transition-[width] duration-(--bokoui-duration) ease-ui motion-reduce:transition-none",
     "data-[collapsed]:w-16 data-[collapsed]:items-center data-[collapsed]:px-2",
     className,

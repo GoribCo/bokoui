@@ -1,9 +1,9 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 
-export const navbarVariants = cva("z-20 w-full border-b-[length:var(--bokoui-border-width)] border-border bg-surface font-ui text-foreground", {
+export const navbarVariants = cva("z-20 w-full border-b-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card font-ui text-foreground", {
   variants: {
-    sticky: { true: "sticky top-0 bg-surface/90 backdrop-blur", false: "" },
+    sticky: { true: "sticky top-0 backdrop-blur", false: "" },
   },
   defaultVariants: { sticky: false },
 });
