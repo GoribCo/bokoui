@@ -210,3 +210,7 @@ Cookie-backed state is read on the server (`src/lib/session/initial-state.ts`) s
 - Public organization profiles are fetched on demand and cached for an hour with `unstable_cache` (`src/lib/organization/public-organization.ts`). The app does not use Cache Components, because the root layout reads cookies (locale, sidebar state).
 - `forbidden()` needs `experimental.authInterrupts` in `next.config.ts`; it is experimental in this Next.js version.
 - Jotai and Redux Toolkit are deliberately not installed (SRS FR-9.6).
+
+## Styles
+
+The display settings menu and `/examples/styles` (the style gallery) list 20 styles, including the 12 material ones (glassmorphism, neumorphism, claymorphism, ...). Sample screens that show a style at work: `/examples/showcase-home`, `/examples/showcase-settings`, `/examples/showcase-calculator` and `/dashboard`. The header, footer and hero use the `surface-card` utility, `AppFrame` lets the page gradient show (`--bokoui-page-bg`), and the mobile bottom bar is the `FloatingNav` pill.

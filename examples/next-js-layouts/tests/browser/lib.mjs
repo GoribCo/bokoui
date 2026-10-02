@@ -9,7 +9,10 @@ import { fileURLToPath } from "node:url";
 
 export const projectDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
-export const STYLES = ["flat", "material", "swiss", "brutalism", "neo-brutalism", "monochrome", "oled", "fluent"];
+export const STYLES = [
+  "flat", "material", "swiss", "brutalism", "neo-brutalism", "monochrome", "oled", "fluent",
+  "minimalism", "bento", "material-3", "soft-ui", "neumorphism", "claymorphism", "skeuomorphism", "terminal", "synthwave", "glassmorphism", "liquid-glass", "aurora",
+];
 export const MODES = ["light", "dark"];
 export const WIDTHS = [
   { width: 390, height: 844, mobile: true },
@@ -41,6 +44,10 @@ export const APP_ROUTES = [
   "/examples/form", // demo
   "/examples/long-page", // demo
   "/examples/table", // demo
+  "/examples/styles",
+  "/examples/showcase-home",
+  "/examples/showcase-settings",
+  "/examples/showcase-calculator",
   "/notifications",
   "/organizations",
   "/profile",

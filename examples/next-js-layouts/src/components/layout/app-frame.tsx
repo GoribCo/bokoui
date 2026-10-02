@@ -17,10 +17,10 @@ export interface AppFrameProps {
 export function AppFrame({ fixedHeight = false, children }: AppFrameProps) {
   return (
     <div
-      className={`bg-muted text-foreground ${fixedHeight ? "h-dvh overflow-hidden" : "min-h-dvh"}`}
+      className={`bg-[var(--bokoui-page-bg,var(--bokoui-muted))] text-foreground ${fixedHeight ? "h-dvh overflow-hidden" : "min-h-dvh"}`}
     >
       <div
-        className={`mx-auto flex max-w-(--shell-max-width) flex-col bg-background min-[100rem]:border-x min-[100rem]:border-border ${
+        className={`mx-auto flex max-w-(--shell-max-width) flex-col bg-[var(--bokoui-page-bg,var(--bokoui-bg))] min-[100rem]:border-x min-[100rem]:border-border ${
           fixedHeight ? "h-full overflow-hidden" : "min-h-dvh"
         }`}
       >

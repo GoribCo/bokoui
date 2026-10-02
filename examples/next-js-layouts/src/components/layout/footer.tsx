@@ -13,7 +13,7 @@ export interface FooterProps {
 /** Page footer: configurable links and a copyright line. Sits at the end of the scrolling content (FR-8.1). */
 export function Footer({ links, copyright, navigationLabel }: FooterProps) {
   return (
-    <footer className="border-t border-border bg-surface text-caption text-muted-foreground">
+    <footer className="border-t-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card text-caption text-muted-foreground">
       <div className="flex w-full flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <nav aria-label={navigationLabel}>
           <ul className="flex flex-wrap gap-x-4 gap-y-1">

@@ -37,7 +37,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="border-b border-border bg-surface">
+      <section className="border-b-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card">
         <PageContainer size="lg">
           <div className="flex max-w-2xl flex-col gap-5 py-10 md:py-16">
             <p data-tone="primary" className="text-nav font-medium text-(--tone-ink)">{t("eyebrow")}</p>

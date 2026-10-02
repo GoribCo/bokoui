@@ -37,7 +37,7 @@
 
 /* Height reserved for the mobile bottom navigation (AppShell keeps content clear of it). */
 :root {
-  --bottom-nav-height: 3.5rem;
+  --bottom-nav-height: 5.5rem;
   /* Widest the application frame (sidebar + content) grows: 1600px. */
   --shell-max-width: 100rem;
 }

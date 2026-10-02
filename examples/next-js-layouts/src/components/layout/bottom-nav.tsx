@@ -3,6 +3,7 @@
 import { Ellipsis } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { FloatingNav, FloatingNavItem } from "bokoui/react";
 import { MenuIcon } from "@/components/navigation/menu-icon";
 import { findActiveTrail } from "@/lib/menu";
 import type { MenuGroup, MenuItem } from "@/lib/types";
@@ -27,11 +28,6 @@ export interface BottomNavProps {
   onMoreOpenChange: (open: boolean) => void;
   labels: BottomNavLabels;
 }
-
-const entryClass =
-  "flex h-full w-full min-w-0 flex-col items-center justify-center gap-0.5 px-1 text-caption text-muted-foreground " +
-  "focus-ring hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-(--tone-ink) " +
-  "data-[active]:font-medium data-[active]:text-(--tone-ink) [&_svg]:size-5";
 
 /**
  * Mobile navigation bar (below `md`): top-level items, sub menus in a sheet above the bar, overflow
@@ -64,60 +60,43 @@ export function BottomNav({
 
   return (
     <>
-      <nav
-        aria-label={labels.navigation}
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)]"
-        data-tone="primary"
-      >
-        <ul className="grid h-(--bottom-nav-height) grid-flow-col auto-cols-fr">
-          {visible.map((item) => {
-            const active = item.id === activeTopId;
-            const hasChildren = Boolean(item.children?.length);
-            return (
-              <li key={item.id} className="min-w-0">
-                {hasChildren || !item.href ? (
-                  <button
-                    type="button"
-                    aria-haspopup="dialog"
-                    aria-expanded={sheetItem?.id === item.id}
-                    data-active={active || undefined}
-                    className={entryClass}
-                    onClick={() => setSheetItem(item)}
-                  >
-                    <MenuIcon name={item.icon} />
-                    <span className="max-w-full truncate">{item.label}</span>
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    prefetch={false}
-                    aria-current={active ? "page" : undefined}
-                    className={entryClass}
-                  >
-                    <MenuIcon name={item.icon} />
-                    <span className="max-w-full truncate">{item.label}</span>
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-          {overflow ? (
-            <li className="min-w-0">
-              <button
-                type="button"
-                aria-haspopup="dialog"
-                aria-expanded={moreOpen}
-                data-active={moreActive || undefined}
-                className={entryClass}
-                onClick={() => onMoreOpenChange(true)}
-              >
-                <Ellipsis aria-hidden="true" />
-                <span className="max-w-full truncate">{labels.more}</span>
-              </button>
-            </li>
-          ) : null}
-        </ul>
-      </nav>
+      <FloatingNav aria-label={labels.navigation} data-tone="primary">
+        {visible.map((item) => {
+          const active = item.id === activeTopId;
+          const hasChildren = Boolean(item.children?.length);
+          return hasChildren || !item.href ? (
+            <FloatingNavItem
+              key={item.id}
+              as="button"
+              type="button"
+              active={active}
+              aria-label={item.label}
+              aria-haspopup="dialog"
+              aria-expanded={sheetItem?.id === item.id}
+              onClick={() => setSheetItem(item)}
+            >
+              <MenuIcon name={item.icon} />
+            </FloatingNavItem>
+          ) : (
+            <FloatingNavItem key={item.id} as={Link} href={item.href} prefetch={false} active={active} aria-label={item.label}>
+              <MenuIcon name={item.icon} />
+            </FloatingNavItem>
+          );
+        })}
+        {overflow ? (
+          <FloatingNavItem
+            as="button"
+            type="button"
+            active={moreActive}
+            aria-label={labels.more}
+            aria-haspopup="dialog"
+            aria-expanded={moreOpen}
+            onClick={() => onMoreOpenChange(true)}
+          >
+            <Ellipsis aria-hidden="true" />
+          </FloatingNavItem>
+        ) : null}
+      </FloatingNav>
 
       <SubMenuSheet
         open={sheetItem !== null}

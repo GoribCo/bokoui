@@ -39,6 +39,18 @@ function departmentsTree(): MenuItem[] {
   return tree.map((item) => (item.label === "Oncology" ? { ...item, requiredRoles: ["doctor"] } : item));
 }
 
+/** Sample screens that show a design style at work; every organization gets the same group. */
+const stylesGroup: MenuGroup = {
+  id: "styles",
+  label: "Style showcase",
+  items: [
+    { id: "style-gallery", label: "Style gallery", icon: "palette", href: "/examples/styles" },
+    { id: "style-home", label: "Sample: home", icon: "layout-dashboard", href: "/examples/showcase-home" },
+    { id: "style-settings", label: "Sample: settings", icon: "settings", href: "/examples/showcase-settings" },
+    { id: "style-calculator", label: "Sample: calculator", icon: "calculator", href: "/examples/showcase-calculator" },
+  ],
+};
+
 export const hospitalMenu: MenuGroup[] = [
   {
     id: "overview",
@@ -72,6 +84,7 @@ export const hospitalMenu: MenuGroup[] = [
       { id: "reports", label: "Reports", icon: "bar-chart", href: "/examples/long-page", requiredPermissions: ["organization.reports.view"] },
     ],
   },
+  stylesGroup,
 ];
 
 const pharmacyMenu: MenuGroup[] = [
@@ -102,6 +115,7 @@ const pharmacyMenu: MenuGroup[] = [
     label: "Sales",
     items: [{ id: "prescriptions", label: "Prescriptions", icon: "clipboard", href: "/examples/form" }],
   },
+  stylesGroup,
 ];
 
 const companyMenu: MenuGroup[] = [
@@ -134,6 +148,7 @@ const companyMenu: MenuGroup[] = [
     requiredRoles: ["auditor"],
     items: [{ id: "audits", label: "Audit log", icon: "shield", href: "/admin" }],
   },
+  stylesGroup,
 ];
 
 export const menusByOrganization: Record<string, MenuGroup[]> = {

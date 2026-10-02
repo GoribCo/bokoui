@@ -25,7 +25,7 @@ export interface HeaderProps {
  */
 export function Header({ toggle, collapsed = false, branding, title, subtitle, breadcrumbs, search, notifications, actions }: HeaderProps) {
   return (
-    <header className="shrink-0 border-b border-border bg-background">
+    <header className="shrink-0 border-b-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card">
       <div className="flex h-14 w-full items-center gap-3 px-3 sm:px-4 md:ps-0">
         {/* From md up the branding cell is as wide as the sidebar, so the toggle lands on its edge. */}
         <div
