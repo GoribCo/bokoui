@@ -13,6 +13,8 @@ A component is one class recipe in core plus a thin binding per platform:
 | Vue | `src/vue/<name>.ts` | `defineComponent` with a render function (no SFCs), same recipe. |
 | Expo | `src/expo/components.tsx` | Styles from `tokens.generated.ts` (no Tailwind classes). |
 
+**Basic elements and blocks (Expo now, React next, Vue later).** A basic element is one control or display (Button, Input, Label, Badge, Select, Toast, Tooltip). A block combines several elements or parts (Navbar, FloatingNav, Sidebar, Tabs, Table, Modal, Menu, Popover, Calendar). Expo keeps them in `src/expo/ui/` and `src/expo/blocks/`, importable as `bokoui/expo/ui`, `bokoui/expo/blocks`, or both from `bokoui/expo`. A new multi-part component goes in `blocks/`.
+
 Bindings hold no styling decisions. If two bindings would need the same `if`, it belongs in the recipe.
 
 ## Prop vocabulary

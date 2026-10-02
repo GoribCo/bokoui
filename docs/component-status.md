@@ -33,6 +33,7 @@ Working order: build **React first**, show it in `examples/next-js`, then port t
 | Table | yes | todo | untested | yes | web-only pattern; Expo: fixed column width, scrolls sideways |
 | Sidebar | yes | todo | untested | yes | server-safe (CSS-only collapsed state, no context); wrap items in `Tooltip` when collapsed; Expo: `collapsed` makes an icon rail |
 | Navbar | yes | todo | untested | yes | client entry (mobile menu state); Expo: links collapse under 768px |
+| FloatingNav, FloatingNavItem | yes | todo | yes (web build) | no | floating pill bottom bar of icon buttons, current item filled; React: server-safe, `as` takes a router link or `button`, `fixed` pins it above the safe area; Expo: `bottomInset`, `icon` may be a function of the color; used by `examples/expo-js-layouts` |
 | Progress | yes | todo | untested | yes | server-safe; indeterminate uses `animate-bokoui-indeterminate` (keyframes in `bokoui.css`) |
 | Skeleton, SkeletonText | yes | todo | untested | yes | decorative (`aria-hidden`); mark the region `aria-busy` |
 | Accordion | yes | todo | untested | yes | client entry; height animates via grid rows; closed panels are `inert`; Expo: no height animation |
