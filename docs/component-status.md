@@ -58,6 +58,7 @@ Working order: build **React first**, show it in `examples/next-js`, then port t
 | `examples/expo-js` | Expo (web build) | 3000 | `/`, `/forms`, `/display`, `/feedback`, `/overlays`, `/navigation` |
 | `examples/next-js` | React / Next.js | 3001 | `/`, `/playground`, `/forms`, `/display`, `/table`, `/feedback`, `/overlays`, `/tabs`, `/accordion`, `/patterns`, `/navigation` |
 | `examples/nuxt-js` | Vue / Nuxt | 3002 | `/`, `/forms`, `/display`, `/feedback`, `/overlays`, `/tabs` |
+| `examples/expo-js-layouts` | Expo (web build), application shell, port of next-js-layouts | 3004 | `/`, `/sign-in`, `/dashboard`, `/examples/*`, `/admin`, public profiles `/[type]/[slug]`; not part of the switcher |
 | `examples/next-js-layouts` | React, application shell (see below) | 3003 | `/`, `/examples/*`, `/admin`, `/sign-in`, public profiles `/hospital/[slug]`, `/pharmacy/[slug]`, `/company/[slug]`; not part of the switcher |
 
 The home page (`/`, "Button, Input & Typography") is the same content in all three demos and is deliberately left as it was first written (Expo omits "Responsive props", which is web-only). Each demo's header has a React / Vue / Expo switcher (see the root README); it keeps the current page where the target has it. The per-platform page lists live in each switcher and must be updated when a page is added.
@@ -126,3 +127,14 @@ Bugs only a real browser (or a Node environment) showed, and the guard that now 
 - `:read-only` matching buttons: `select.test.tsx`.
 - Vue components touching `window` during server rendering: `src/vue/ssr.test.ts`.
 - Stale `.next` cache in the demo: `run.sh` now clears it.
+
+## Expo application shell (`examples/expo-js-layouts`): gaps found in `bokoui/expo`
+
+Verified on the Expo web build (390, 768 and 1280 px, all 8 styles in both modes, English and Bangla, axe); not run on a device or simulator. Gaps worked around in the app, not fixed in the library:
+
+- **`Drawer` / `Modal` body does not flex.** The card sizes to its content, so a scrolling list inside needs an explicit height (`useSheetHeight`, `MobileDrawer`). A `flex: 1` body would remove that.
+- **`Drawer` cannot sit above a bottom bar**, and a side drawer starts under the status bar (no safe-area padding), so the app draws its own title row. A bottom sheet therefore covers the bottom navigation instead of opening above it.
+- **No font family.** Components never set `fontFamily`, so Noto Sans Bengali is loaded (`lib/fonts`) but only applies to text the app styles itself; Bengali otherwise falls back to the platform font.
+- **`ThemeProvider` has no "ready" flag.** It reads its saved style and mode after mounting; the app pre-reads the same AsyncStorage keys (`lib/theme-defaults.ts`) so the first frame is right.
+- **axe findings that come from the library:** `Select` (`role="combobox"` without `aria-controls`) and `Table` (`role="grid"` without row structure) on the web build.
+- `Link` has no `external` prop; there is no Icon on Expo (the app uses `lucide-react-native`).

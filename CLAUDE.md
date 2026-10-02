@@ -19,7 +19,8 @@ Separate installs, no root `package.json` or workspaces. Each of the two project
   - `scripts/`: `postbuild.mjs` (inlines CSS `@import`s, adds `@source "./"`, prepends `"use client"` to `dist/react/theme.js`), `build-tokens.mjs`, `audit-contrast.mjs`, `publish-local.sh`.
 - `examples/next-js/` is the Next.js demo (`bokoui/react`); `examples/nuxt-js/` is the Nuxt demo (`bokoui/vue`); `examples/expo-js/` is the Expo demo (`bokoui/expo`, has its own AGENTS.md: read the Expo docs before touching Expo APIs). All import from the installed `bokoui` package, not relative paths.
 - `examples/next-js-layouts/` is the generic application shell (sidebar, header, footer, mobile navigation, org switching, roles, i18n) on `bokoui/react`; all data is mock data behind `src/services`. Specs: [SRS](docs/srs/srs-layouts.md), [tasks](docs/tasks/tasks-layouts.md). Has its own `package.json`, `node_modules` and lockfile like the others.
-- `run.sh` (root): build + publish the library to Verdaccio, then run every example concurrently (fixed ports: expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003).
+- `examples/expo-js-layouts/` is the same application shell on `bokoui/expo` (expo-router, in-process sample API, Zustand, TanStack Query, i18next). Task list: [tasks-layouts-expo](docs/tasks/tasks-layouts-expo.md). Has its own `AGENTS.md`: read the Expo docs before touching Expo APIs.
+- `run.sh` (root): build + publish the library to Verdaccio, then run every example concurrently (fixed ports: expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003, expo-js-layouts 3004).
 
 `@/*` maps to `./src/*` within each project.
 

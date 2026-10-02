@@ -65,72 +65,73 @@ Framework-neutral modules are copied from `examples/next-js-layouts/src/lib` wit
 | NFR | Accessibility (roles, labels, 44 pt targets, reduce motion), all 8 styles and both modes, 390 pt phone and 768 and 1280 pt web, strict TypeScript, portability through services |
 
 ## Phase 0: Project setup
-- [ ] T0.1 Read the Expo SDK 57 docs for: expo-router (groups, `Stack.Protected`, `Tabs`, error boundaries, not-found, search params), `expo-secure-store`, `expo-localization`, `expo-font`, `expo-splash-screen`, safe area context
-- [ ] T0.2 Clean `examples/expo-js-layouts/` (currently a copy of `expo-js`): remove the demo screens (`display`, `feedback`, `forms`, `navigation`, `overlays`, `page-nav`, `pages`, `screen`, `platform-switcher`, `hint-row`, `animated-icon*`, `web-badge`, `external-link`, `themed-*`, `ui/collapsible`, `constants/theme`, `hooks/use-color-scheme*`, `hooks/use-theme`); keep `ThemeProvider` wiring, `custom-themes.ts` and the theme switcher logic for reuse
-- [ ] T0.3 Package setup: name `expo-js-layouts`, `bokoui` version matching the published one, `.npmrc` for the local registry, `app.json` name/slug/scheme, `@/*` alias in `tsconfig.json`, scripts `dev`, `lint`, `typecheck`, `build:pkg`, `publish:local` as in the other examples
-- [ ] T0.4 Install dependencies with `npx expo install` where an Expo version exists: `zustand`, `@tanstack/react-query`, `react-hook-form`, `zod`, `@hookform/resolvers`, `i18next`, `react-i18next`, `expo-localization`, `expo-secure-store`, `@expo-google-fonts/noto-sans-bengali`, `@react-native-async-storage/async-storage` (no Jotai, no Redux Toolkit, FR-9.6)
-- [ ] T0.5 Create the folder structure: `src/app` (routes only), `src/components/{layout,navigation,organization,account,appearance,auth,examples}`, `src/hooks`, `src/providers`, `src/api`, `src/styles`, `src/lib/{api,services,schemas,types,query,stores,config,i18n,access,authorization,menu,session,auth,monitoring,contract}`
-- [ ] T0.6 Short `README.md` (run, scripts, structure) and a port entry: `run.sh` runs this app on port 3004; `CLAUDE.md` repository layout and the examples list name it
+- [x] T0.1 Read the Expo SDK 57 docs for: expo-router (groups, `Stack.Protected`, `Tabs`, error boundaries, not-found, search params), `expo-secure-store`, `expo-localization`, `expo-font`, `expo-splash-screen`, safe area context
+- [x] T0.2 Clean `examples/expo-js-layouts/` (currently a copy of `expo-js`): remove the demo screens (`display`, `feedback`, `forms`, `navigation`, `overlays`, `page-nav`, `pages`, `screen`, `platform-switcher`, `hint-row`, `animated-icon*`, `web-badge`, `external-link`, `themed-*`, `ui/collapsible`, `constants/theme`, `hooks/use-color-scheme*`, `hooks/use-theme`); keep `ThemeProvider` wiring, `custom-themes.ts` and the theme switcher logic for reuse
+- [x] T0.3 Package setup: name `expo-js-layouts`, `bokoui` version matching the published one, `.npmrc` for the local registry, `app.json` name/slug/scheme, `@/*` alias in `tsconfig.json`, scripts `dev`, `lint`, `typecheck`, `build:pkg`, `publish:local` as in the other examples
+- [x] T0.4 Install dependencies with `npx expo install` where an Expo version exists: `zustand`, `@tanstack/react-query`, `react-hook-form`, `zod`, `@hookform/resolvers`, `i18next`, `react-i18next`, `expo-localization`, `expo-secure-store`, `@expo-google-fonts/noto-sans-bengali`, `@react-native-async-storage/async-storage` (no Jotai, no Redux Toolkit, FR-9.6)
+- [x] T0.5 Create the folder structure: `src/app` (routes only), `src/components/{layout,navigation,organization,account,appearance,auth,examples}`, `src/hooks`, `src/providers`, `src/api`, `src/styles`, `src/lib/{api,services,schemas,types,query,stores,config,i18n,access,authorization,menu,session,auth,monitoring,contract}`
+- [x] T0.6 Short `README.md` (run, scripts, structure) and a port entry: `run.sh` runs this app on port 3004; `CLAUDE.md` repository layout and the examples list name it
 
 ## Phase 1: Types, contract and sample API
-- [ ] T1.1 Copy `lib/types`, `lib/schemas` and `lib/contract` (endpoints, errors, paging) from the web app, minus the demo-only `records` and `staff` endpoints; keep names and exports identical
-- [ ] T1.2 `lib/api/errors.ts` (`ApiError`, `isApiError`) and `lib/api/client.ts`: `ApiClient` with a pluggable transport (`fetch` transport and in-process transport), `{ success, results, meta }` envelope parsing, bearer token from token storage, one refresh and one retry on 401, a session-expired callback
-- [ ] T1.3 `lib/auth/token-storage.ts`: access and refresh tokens in `expo-secure-store` on native and AsyncStorage on web, one async interface
-- [ ] T1.4 Sample API in `src/api`: copy the data (one user with several roles, three organizations of different types, per-organization menus, common menu, a menu with a large number of items, notifications, profile, public organizations, a user with no organization and a user with many) and the endpoint handlers; a `router.ts` built from the contract; `auth.ts` issuing and checking sample tokens with expiry; a small artificial latency
-- [ ] T1.5 Services: copy `BaseService` and `session`, `menu`, `organization`, `profile`, `notification`, `search`, `auth` services; `lib/services/index.ts` exports the shared instances (the one place to swap mocks for a real API)
+- [x] T1.1 Copy `lib/types`, `lib/schemas` and `lib/contract` (endpoints, errors, paging) from the web app, minus the demo-only `records` and `staff` endpoints; keep names and exports identical
+- [x] T1.2 `lib/api/errors.ts` (`ApiError`, `isApiError`) and `lib/api/client.ts`: `ApiClient` with a pluggable transport (`fetch` transport and in-process transport), `{ success, results, meta }` envelope parsing, bearer token from token storage, one refresh and one retry on 401, a session-expired callback
+- [x] T1.3 `lib/auth/token-storage.ts`: access and refresh tokens in `expo-secure-store` on native and AsyncStorage on web, one async interface
+- [x] T1.4 Sample API in `src/api`: copy the data (one user with several roles, three organizations of different types, per-organization menus, common menu, a menu with a large number of items, notifications, profile, public organizations, a user with no organization and a user with many) and the endpoint handlers; a `router.ts` built from the contract; `auth.ts` issuing and checking sample tokens with expiry; a small artificial latency
+- [x] T1.5 Services: copy `BaseService` and `session`, `menu`, `organization`, `profile`, `notification`, `search`, `auth` services; `lib/services/index.ts` exports the shared instances (the one place to swap mocks for a real API)
 
 ## Phase 2: Foundations
-- [ ] T2.1 Copy the pure modules unchanged: `lib/access`, `lib/authorization` (types, permissions, role templates, evaluate, from-session, assignments), `lib/menu` (active, filter, flatten, labels, footer-links) and `lib/config` (site without web-only fields, features, navigation with `bottomNavSlots`, common-menu, account-menu, auth, organization-types, search); adjust only paths and web-specific values (for example `DASHBOARD_PATH`)
-- [ ] T2.2 i18n: copy `en.json` and `bn.json` (drop the web-only keys), `lib/i18n/config.ts` (`locales`, `localeMeta`, `defaultLocale`), initialize `i18next` with `expo-localization` as the first-run default and AsyncStorage for the saved choice; a `useMenuTranslator` hook with the same API as the web app; locale-aware date and number helpers
-- [ ] T2.3 Fonts: register fonts in `lib/fonts.ts` (Latin system font, Noto Sans Bengali for `bn`) and load them through `expo-font`; one place defines the mapping (FR-12.1)
-- [ ] T2.4 Icon registry `components/navigation/menu-icons.ts` mapping `IconName` strings to `lucide-react-native` icons and `menu-icon.tsx` that renders them with theme token colors
-- [ ] T2.5 `lib/monitoring/report-error.ts` with `setErrorReporter`; wire the React Native global error handler and unhandled promise rejections to it
+- [x] T2.1 Copy the pure modules unchanged: `lib/access`, `lib/authorization` (types, permissions, role templates, evaluate, from-session, assignments), `lib/menu` (active, filter, flatten, labels, footer-links) and `lib/config` (site without web-only fields, features, navigation with `bottomNavSlots`, common-menu, account-menu, auth, organization-types, search); adjust only paths and web-specific values (for example `DASHBOARD_PATH`)
+- [x] T2.2 i18n: copy `en.json` and `bn.json` (drop the web-only keys), `lib/i18n/config.ts` (`locales`, `localeMeta`, `defaultLocale`), initialize `i18next` with `expo-localization` as the first-run default and AsyncStorage for the saved choice; a `useMenuTranslator` hook with the same API as the web app; locale-aware date and number helpers
+- [x] T2.3 Fonts: register fonts in `lib/fonts.ts` (Latin system font, Noto Sans Bengali for `bn`) and load them through `expo-font`; one place defines the mapping (FR-12.1)
+- [x] T2.4 Icon registry `components/navigation/menu-icons.ts` mapping `IconName` strings to `lucide-react-native` icons and `menu-icon.tsx` that renders them with theme token colors
+- [x] T2.5 `lib/monitoring/report-error.ts` with `setErrorReporter`; wire the React Native global error handler and unhandled promise rejections to it
 
 ## Phase 3: State and providers
-- [ ] T3.1 `QueryProvider` with a shared `QueryClient`; connect TanStack's focus manager to `AppState` and the online manager to connectivity; copy `BaseQuery` and `lib/query/keys.ts` (without demo keys)
-- [ ] T3.2 Zustand stores with `persist` on AsyncStorage: UI store (drawer open, bottom-nav More open, sidebar collapsed for wide screens), organization store (active organization id), role store (active role); typed selectors as in the web app; a `hydrated` flag exposed for the splash gate
-- [ ] T3.3 `SessionProvider` and `useSession` (typed session), `useActiveOrganization` (session + stores, stale id falls back to the default), `useMenu` (role and permission filtered, localized)
-- [ ] T3.4 Data hooks built on `BaseQuery`: `use-session-query`, `use-organizations`, `use-organization-menu`, `use-common-menu`, `use-profile`, `use-notifications` (with optimistic mark-read), `use-search`, `use-auth` (`useLogin`, `useLogout`, `useSessionExpiry`)
-- [ ] T3.5 `AppProviders` composing: theme (bokoui `ThemeProvider` with AsyncStorage and custom themes), i18n, query, stores, toast; holds the splash screen until fonts, stores and the saved locale are ready (no flash, NFR-2)
-- [ ] T3.6 Session expiry handler: clears the query cache and stored organization and role, then goes to sign-in with a return target
+- [x] T3.1 `QueryProvider` with a shared `QueryClient`; connect TanStack's focus manager to `AppState` and the online manager to connectivity; copy `BaseQuery` and `lib/query/keys.ts` (without demo keys)
+- [x] T3.2 Zustand stores with `persist` on AsyncStorage: UI store (drawer open, bottom-nav More open, sidebar collapsed for wide screens), organization store (active organization id), role store (active role); typed selectors as in the web app; a `hydrated` flag exposed for the splash gate
+- [x] T3.3 `SessionProvider` and `useSession` (typed session), `useActiveOrganization` (session + stores, stale id falls back to the default), `useMenu` (role and permission filtered, localized)
+- [x] T3.4 Data hooks built on `BaseQuery`: `use-session-query`, `use-organizations`, `use-organization-menu`, `use-common-menu`, `use-profile`, `use-notifications` (with optimistic mark-read), `use-search`, `use-auth` (`useLogin`, `useLogout`, `useSessionExpiry`)
+- [x] T3.5 `AppProviders` composing: theme (bokoui `ThemeProvider` with AsyncStorage and custom themes), i18n, query, stores, toast; holds the splash screen until fonts, stores and the saved locale are ready (no flash, NFR-2)
+- [x] T3.6 Session expiry handler: clears the query cache and stored organization and role, then goes to sign-in with a return target
 
 ## Phase 4: Shell components (presentational, typed props)
-- [ ] T4.1 `AppShell` (header slot, content, footer slot, bottom-nav slot, overlays slot) with safe-area insets, a scroll area that reserves space for the bottom bar; `PageContainer` and `PageHeader` (title, description, actions) built on bokoui layout primitives
-- [ ] T4.2 `Header`: hamburger (phone), branding or screen title, notifications button with unread badge, display-settings button; slots for optional search and actions
-- [ ] T4.3 `MenuItemLink` and `MenuGroupSection` (`components/navigation/`): group headings, one nested level as an accordion, active state, badges, long-label truncation, accessibility roles and state
-- [ ] T4.4 `BottomNav`: top-level items as slots, count from config, overflow into "More", active state, safe-area padding, 44 pt targets; `SubMenuSheet` opens a bokoui bottom `Drawer` for items with children
-- [ ] T4.5 `MobileDrawer`: bokoui `Drawer` from the left with organization switcher, role switcher, menu groups, common menu and account area; closes on navigation
-- [ ] T4.6 `OrganizationSwitcher`: current organization (name, type, logo or initials), bottom-sheet list with search above six organizations, single-organization behavior, "Manage workspaces" link; `RoleSwitcher` (all roles or one); `NoOrganizations` empty state
-- [ ] T4.7 Account area: `UserAvatar` (photo with initials fallback), `AccountMenu` sheet (name, email, Manage account, View profile, Sign out through an injected handler)
-- [ ] T4.8 `CommonMenu` (standard items from config, independent of organization) and `Footer` (configurable links, copyright, rendered at the end of the content)
-- [ ] T4.9 `NotificationsButton` and `NotificationList` (tabs for all, urgent and invitations, read state, empty state) in a bokoui `Modal` or `Drawer`
-- [ ] T4.10 Status views: `StatusView`, `ErrorView`, `NotFoundView`, `QueryError`, `ShellSkeleton` built from bokoui `EmptyState`, `Alert`, `Skeleton`
+- [x] T4.1 `AppShell` (header slot, content, footer slot, bottom-nav slot, overlays slot) with safe-area insets, a scroll area that reserves space for the bottom bar; `PageContainer` and `PageHeader` (title, description, actions) built on bokoui layout primitives
+- [x] T4.2 `Header`: hamburger (phone), branding or screen title, notifications button with unread badge, display-settings button; slots for optional search and actions
+- [x] T4.3 `MenuItemLink` and `MenuGroupSection` (`components/navigation/`): group headings, one nested level as an accordion, active state, badges, long-label truncation, accessibility roles and state
+- [x] T4.4 `BottomNav`: top-level items as slots, count from config, overflow into "More", active state, safe-area padding, 44 pt targets; `SubMenuSheet` opens a bokoui bottom `Drawer` for items with children
+- [x] T4.5 `MobileDrawer`: bokoui `Drawer` from the left with organization switcher, role switcher, menu groups, common menu and account area; closes on navigation
+- [x] T4.6 `OrganizationSwitcher`: current organization (name, type, logo or initials), bottom-sheet list with search above six organizations, single-organization behavior, "Manage workspaces" link; `RoleSwitcher` (all roles or one); `NoOrganizations` empty state
+- [x] T4.7 Account area: `UserAvatar` (photo with initials fallback), `AccountMenu` sheet (name, email, Manage account, View profile, Sign out through an injected handler)
+- [x] T4.8 `CommonMenu` (standard items from config, independent of organization) and `Footer` (configurable links, copyright, rendered at the end of the content)
+- [x] T4.9 `NotificationsButton` and `NotificationList` (tabs for all, urgent and invitations, read state, empty state) in a bokoui `Modal` or `Drawer`
+- [x] T4.10 Status views: `StatusView`, `ErrorView`, `NotFoundView`, `QueryError`, `ShellSkeleton` built from bokoui `EmptyState`, `Alert`, `Skeleton`
 
 ## Phase 5: Appearance
-- [ ] T5.1 `DisplaySettings` sheet opened from the header: mode (light, dark, system), design style (8 styles plus the custom one, behind `features.styleSwitcher`), language chips with flags; changes persist and apply at once
-- [ ] T5.2 First-launch defaults from `siteConfig.defaultStyle` and `defaultMode`; applied before the first frame through the provider's saved values and the splash gate
+- [x] T5.1 `DisplaySettings` sheet opened from the header: mode (light, dark, system), design style (8 styles plus the custom one, behind `features.styleSwitcher`), language chips with flags; changes persist and apply at once
+- [x] T5.2 First-launch defaults from `siteConfig.defaultStyle` and `defaultMode`; applied before the first frame through the provider's saved values and the splash gate
 
 ## Phase 6: Routing and screens
-- [ ] T6.1 Route groups with their own layouts: `(public)` (landing, public profiles, legal, help, contact), `(auth)` (sign-in), `(app)` (the shell); root layout with `AppProviders`, `StatusBar` by mode, and the stack
-- [ ] T6.2 Guards: signed-out users are sent to sign-in with a return target, signed-in users who open the landing page or sign-in go to the dashboard; the `(app)` layout checks the session, then renders `DashboardShell` (the one connected component that wires hooks to the presentational parts)
-- [ ] T6.3 Navigation wiring: `(app)` uses a layout that shows the bottom bar on phone width and the permanent `Sidebar` (collapsible, state persisted) from 768 wide; menu `href` values map to routes through one helper (`lib/menu/route.ts`)
-- [ ] T6.4 Sign-in screen: React Hook Form + Zod (`signInSchema`), `useLogin`, error message from `ApiError`, return to the target after success; sample accounts listed on the screen (normal, `empty@`, `many@`)
-- [ ] T6.5 Landing screen for visitors (hero, features, public organization list, call to action; English and Bangla)
-- [ ] T6.6 Public profile screens `(public)/[type]/[slug]` built from the organization type registry, per-type sections, not-found for an unknown slug or type
-- [ ] T6.7 Signed-in screens: dashboard, notifications, organizations list, profile, account (stub), settings/privacy (stub), each with a screen title
-- [ ] T6.8 Sample screens exercising the shell: table (bokoui `Table`, sortable), form (React Hook Form + Zod with bokoui `FormField`, `Select`, `Checkbox`, `DatePicker`), filters (search, tabs and paging kept in router params), long scrolling page
-- [ ] T6.9 Role-restricted screen (`admin`) with the permission check in its layout and a forbidden view for users without it
-- [ ] T6.10 Static content screens: help, contact, legal terms and privacy (template text from `lib/content/legal.ts`, copied)
-- [ ] T6.11 Root and group `+not-found` screens, an `ErrorBoundary` export per group wired to `reportError`, and loading states with skeletons
+- [x] T6.1 Route groups with their own layouts: `(public)` (landing, public profiles, legal, help, contact), `(auth)` (sign-in), `(app)` (the shell); root layout with `AppProviders`, `StatusBar` by mode, and the stack
+- [x] T6.2 Guards: signed-out users are sent to sign-in with a return target, signed-in users who open the landing page or sign-in go to the dashboard; the `(app)` layout checks the session, then renders `DashboardShell` (the one connected component that wires hooks to the presentational parts)
+- [x] T6.3 Navigation wiring: `(app)` uses a layout that shows the bottom bar on phone width and the permanent `Sidebar` (collapsible, state persisted) from 768 wide; menu `href` values map to routes through one helper (`lib/menu/route.ts`)
+- [x] T6.4 Sign-in screen: React Hook Form + Zod (`signInSchema`), `useLogin`, error message from `ApiError`, return to the target after success; sample accounts listed on the screen (normal, `empty@`, `many@`)
+- [x] T6.5 Landing screen for visitors (hero, features, public organization list, call to action; English and Bangla)
+- [x] T6.6 Public profile screens `(public)/[type]/[slug]` built from the organization type registry, per-type sections, not-found for an unknown slug or type
+- [x] T6.7 Signed-in screens: dashboard, notifications, organizations list, profile, account (stub), settings/privacy (stub), each with a screen title
+- [x] T6.8 Sample screens exercising the shell: table (bokoui `Table`, sortable), form (React Hook Form + Zod with bokoui `FormField`, `Select`, `Checkbox`, `DatePicker`), filters (search, tabs and paging kept in router params), long scrolling page
+- [x] T6.9 Role-restricted screen (`admin`) with the permission check in its layout and a forbidden view for users without it
+- [x] T6.10 Static content screens: help, contact, legal terms and privacy (template text from `lib/content/legal.ts`, copied)
+- [x] T6.11 Root and group `+not-found` screens, an `ErrorBoundary` export per group wired to `reportError`, and loading states with skeletons
 
 ## Phase 7: Wide screens
-- [ ] T7.1 Tablet and web layout: `Sidebar` (organization switcher, menu groups, common menu, account) with the collapsed rail from bokoui `Sidebar`, header without the hamburger; one `useIsWide()` hook (768 breakpoint) decides between this and the phone layout, so resizing switches live without remounting state
+- [x] T7.1 Tablet and web layout: `Sidebar` (organization switcher, menu groups, common menu, account) with the collapsed rail from bokoui `Sidebar`, header without the hamburger; one `useIsWide()` hook (768 breakpoint) decides between this and the phone layout, so resizing switches live without remounting state
 
 ## Phase 8: Wrap-up
-- [ ] T8.1 `README.md`: how to run, how to replace the sample API with a real one (`EXPO_PUBLIC_API_BASE_URL`, `lib/contract`, services), how to add a screen, a menu item, an organization type and a language
-- [ ] T8.2 `npm run lint` and `npm run typecheck` clean (run `npx expo install --check` and `npx expo-doctor` once)
-- [ ] T8.3 One ad hoc verification on the Expo web build in a real browser (puppeteer-core with axe on a cloned build, as in the other examples): 390, 768 and 1280 px, all 8 styles and both modes, English and Bangla, the flows of the acceptance list below. Run on a simulator or device when one is available; note what was not checked
-- [ ] T8.4 Update this task list, `docs/component-status.md` (Expo demos table) and any bokoui Expo gap found while building (record the gap, fix it in `packages/bokoui/src/expo` only when it blocks a requirement)
+- [x] T8.1 `README.md`: how to run, how to replace the sample API with a real one (`EXPO_PUBLIC_API_BASE_URL`, `lib/contract`, services), how to add a screen, a menu item, an organization type and a language
+- [x] T8.2 `npm run lint` and `npm run typecheck` clean (run `npx expo install --check` and `npx expo-doctor` once)
+- [x] T8.3 One ad hoc verification on the Expo web build in a real browser (puppeteer-core with axe on a cloned build, as in the other examples): 390, 768 and 1280 px, all 8 styles and both modes, English and Bangla, the flows of the acceptance list below. Run on a simulator or device when one is available; note what was not checked
+  - *Done on the web build (390, 768, 1280; 8 styles x 2 modes with no contrast findings; English and Bangla; every route loads without console errors; org and role switching, forbidden view, notifications, search, display settings, sidebar collapse, sign-out, dead-token return to sign-in, live resize). **Not checked:** a device or simulator (safe areas, SecureStore, native Modal stacking, Hermes `Intl` for Bengali), mid-session token expiry (the in-memory token cache hides edits to storage), keyboard shortcuts (dropped). Remaining axe findings come from bokoui `Select` and `Table` (see component-status).*
+- [x] T8.4 Update this task list, `docs/component-status.md` (Expo demos table) and any bokoui Expo gap found while building (record the gap, fix it in `packages/bokoui/src/expo` only when it blocks a requirement)
 
 ## Acceptance (adapted from SRS section 6)
 1. The app opens on the landing screen; sign-in leads to the dashboard with header, content and footer; on phone width the bottom bar shows, from 768 wide the sidebar.

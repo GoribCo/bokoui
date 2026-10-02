@@ -5,7 +5,7 @@
 #   ./run.sh --no-publish skip build/publish, just install and run examples
 #
 # Ports are fixed so the React / Vue / Expo switcher in each example can link to the others:
-#   expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003 (any other example: 3010 and up).
+#   expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003, expo-js-layouts 3004 (any other example: 3010 and up).
 # Override with BOKOUI_PORT_EXPO / _REACT / _VUE. Ctrl+C stops all examples.
 set -euo pipefail
 
@@ -40,6 +40,7 @@ PORT_EXPO="${BOKOUI_PORT_EXPO:-3000}"
 PORT_REACT="${BOKOUI_PORT_REACT:-3001}"
 PORT_VUE="${BOKOUI_PORT_VUE:-3002}"
 PORT_LAYOUTS=3003
+PORT_EXPO_LAYOUTS=3004
 
 # Where each platform's demo lives, for the switcher. Every example reads the variable with its
 # own prefix (NEXT_PUBLIC_, NUXT_PUBLIC_, EXPO_PUBLIC_) and falls back to the same defaults.
@@ -53,6 +54,7 @@ port_for() {
     next-js) echo "$PORT_REACT" ;;
     nuxt-js) echo "$PORT_VUE" ;;
     next-js-layouts) echo "$PORT_LAYOUTS" ;;
+    expo-js-layouts) echo "$PORT_EXPO_LAYOUTS" ;;
     *) echo $((3010 + ${#PIDS[@]})) ;;
   esac
 }
