@@ -214,3 +214,7 @@ Cookie-backed state is read on the server (`src/lib/session/initial-state.ts`) s
 ## Styles
 
 The display settings menu and `/examples/styles` (the style gallery) list 20 styles, including the 12 material ones (glassmorphism, neumorphism, claymorphism, ...). Sample screens that show a style at work: `/examples/showcase-home`, `/examples/showcase-settings`, `/examples/showcase-calculator` and `/dashboard`. The header, footer and hero use the `surface-card` utility, `AppFrame` lets the page gradient show (`--bokoui-page-bg`), and the mobile bottom bar is the `FloatingNav` pill.
+
+## Tests
+
+All tests are in `test/`, beside `src`: `test/unit/` mirrors `src/` (run with `npm test`, `node:test`) and `test/browser/` holds the browser checks (`npm run check:browser`, builds a throwaway clone and drives Chrome). Unit tests import the code under test with the `@/` alias.

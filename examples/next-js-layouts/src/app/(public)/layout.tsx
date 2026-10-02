@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
-import { buttonClass } from "bokoui/core";
+import { buttonClass } from "bokoui/react";
 import { DisplaySettingsMenu } from "@/components/appearance/display-settings-menu";
 import { AppFrame } from "@/components/layout/app-frame";
 import { Branding } from "@/components/layout/branding";

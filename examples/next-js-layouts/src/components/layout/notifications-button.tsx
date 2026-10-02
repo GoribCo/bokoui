@@ -3,8 +3,7 @@
 import { Bell, CalendarClock, CircleCheck, ClipboardCheck, MailPlus, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { Button } from "bokoui/react";
-import { Popover, Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
+import { Button, Popover, Tab, TabList, TabPanel, Tabs } from "bokoui/react";
 import { features } from "@/lib/config/features";
 import { shortcuts } from "@/lib/config/shortcuts";
 import type { Notification } from "@/lib/types";

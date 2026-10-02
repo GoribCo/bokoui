@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Pressable, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size } from "@/core";
+import { type Action, type Color, type Size } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 import { fieldStyle } from "../internal/field";
 import { AnchoredLayer, useAnchor } from "../internal/anchored";
 import { OptionList, type Option } from "../internal/option-list";
@@ -31,7 +31,7 @@ export interface SelectProps {
 /** A listbox that opens under the field. Picking an option closes it. */
 export function Select({ options, value, defaultValue, onValueChange, placeholder = "Select…", size = "md", color = "primary", action, invalid = false, disabled = false, accessibilityLabel, style }: SelectProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   const [current, set] = useControllable<string | undefined>(value, defaultValue, onValueChange as ((v: string | undefined) => void) | undefined);
   const [open, setOpen] = useState(false);
   const { ref, rect, measure } = useAnchor();

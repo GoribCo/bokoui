@@ -2,8 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Button } from "bokoui/react";
-import { buttonClass } from "bokoui/core";
+import { Button, buttonClass } from "bokoui/react";
 import { useLogout } from "@/hooks/use-auth";
 import { siteConfig } from "@/lib/config/site";
 import { AppFrame } from "./app-frame";

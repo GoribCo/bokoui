@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { Pressable, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type TagStyleProps } from "@/core";
+import { type Action, type Color, type Size, type TagStyleProps } from "@/core";
 import { useTheme } from "../theme";
-import { isPlainText, surface, tone } from "../internal/shared";
+import { isPlainText, surface, useTone } from "../internal/shared";
 
 export interface TagProps extends TagStyleProps {
   color?: Color;
@@ -22,7 +22,7 @@ const tagSizes: Record<Size, { height: number; font: number }> = { sm: { height:
 
 export function Tag({ variant = "soft", size = "md", color = "primary", action, children, onPress, pressed, onRemove, removeLabel = "Remove", disabled, style }: TagProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const s = tagSizes[size];
   const fg = variant === "solid" ? c.fg : c.ink;
   const label = isPlainText(children) ? <RNText style={{ color: fg, fontSize: s.font, flexShrink: 1 }} numberOfLines={1}>{children}</RNText> : children;

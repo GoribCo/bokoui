@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react";
 import { TextInput, View, type StyleProp, type TextInputProps, type TextStyle, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type InputVariant } from "@/core";
+import { type Action, type Color, type Size, type InputVariant } from "@/core";
 import { useTheme } from "../theme";
 import { fieldStyle } from "../internal/field";
-import { sizes, tone } from "../internal/shared";
+import { sizes, useTone } from "../internal/shared";
 
 export interface InputProps extends Omit<TextInputProps, "style"> {
   variant?: InputVariant;
@@ -34,7 +34,7 @@ export function Input({
 }: InputProps) {
   const { tokens } = useTheme();
   const [focused, setFocused] = useState(false);
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   const s = sizes[size];
 
   return (

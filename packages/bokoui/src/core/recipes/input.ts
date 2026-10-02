@@ -2,6 +2,7 @@ import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import { inputSizeClasses, isResponsive, responsiveClasses, type Responsive } from "../responsive";
 import type { Size } from "../types";
+import { disabledClass, invalidBorderClass } from "./shared";
 
 export type InputVariant = "outline" | "filled" | "flushed";
 
@@ -13,7 +14,7 @@ export const inputVariants = cva(
     "focus-ring",
     // Touch devices get a 44px minimum target regardless of size.
     "pointer-coarse:min-h-11",
-    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+    disabledClass,
     // Buttons also match :read-only, so limit this to real text fields (Select is a button).
     "[&:is(input,textarea):read-only]:bg-muted",
     "file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium",
@@ -26,17 +27,17 @@ export const inputVariants = cva(
         outline: [
           "surface-field",
           "enabled:hover:border-(--tone-ink) focus-visible:border-(--tone-ink)",
-          "aria-invalid:border-(--tone)",
+          invalidBorderClass,
         ],
         filled: [
           "border-transparent bg-muted",
           "enabled:hover:bg-[color-mix(in_srgb,var(--bokoui-muted),var(--bokoui-fg)_6%)] focus-visible:border-(--tone-ink) focus-visible:bg-field",
-          "aria-invalid:border-(--tone)",
+          invalidBorderClass,
         ],
         flushed: [
           "rounded-none border-0 border-b-[length:var(--bokoui-border-width)] border-field-border bg-transparent px-0!",
           "focus-visible:border-(--tone-ink)",
-          "aria-invalid:border-(--tone)",
+          invalidBorderClass,
         ],
       },
       size: {

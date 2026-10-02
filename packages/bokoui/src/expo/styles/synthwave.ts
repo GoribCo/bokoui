@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Synthwave: a purple night sky with a sunset horizon, neon pink and cyan outlines that glow, uppercase headings. */
 export const synthwave: NativeCustomTheme = {

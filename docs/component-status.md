@@ -122,11 +122,11 @@ Left for this example: unit tests (menu filtering, access helpers, stores), brow
 
 Bugs only a real browser (or a Node environment) showed, and the guard that now covers each:
 
-- Tailwind classes built with template strings produce no CSS: `src/core/recipes/literal-classes.test.ts`.
-- `tailwind-merge` ignoring custom theme keys (`rounded-card` did not lose to `rounded-none`): `src/core/cn.test.ts`.
-- A `display` on a `<dialog>` base class made closed dialogs visible: `modal.test.tsx`.
-- `:read-only` matching buttons: `select.test.tsx`.
-- Vue components touching `window` during server rendering: `src/vue/ssr.test.ts`.
+- Tailwind classes built with template strings produce no CSS: `test/core/recipes/literal-classes.test.ts`.
+- `tailwind-merge` ignoring custom theme keys (`rounded-card` did not lose to `rounded-none`): `test/core/cn.test.ts`.
+- A `display` on a `<dialog>` base class made closed dialogs visible: `test/react/blocks/modal.test.tsx`.
+- `:read-only` matching buttons: `test/react/ui/select.test.tsx`.
+- Vue components touching `window` during server rendering: `test/vue/ssr.test.ts`.
 - Stale `.next` cache in the demo: `run.sh` now clears it.
 
 ## Expo application shell (`examples/expo-js-layouts`): gaps found in `bokoui/expo`

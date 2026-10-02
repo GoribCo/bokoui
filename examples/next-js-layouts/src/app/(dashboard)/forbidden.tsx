@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { buttonClass } from "bokoui/core";
+import { buttonClass } from "bokoui/react";
 import { DASHBOARD_PATH } from "@/lib/config/auth";
 import { StatusView } from "@/components/layout/status-view";
 

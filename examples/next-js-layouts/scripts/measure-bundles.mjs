@@ -3,7 +3,7 @@
 //
 //   npm run measure:bundles
 import puppeteer from "puppeteer-core";
-import { APP_ROUTES, PUBLIC_ROUTES, WIDTHS, chromePath, signInCookies, startClone } from "../tests/browser/lib.mjs";
+import { APP_ROUTES, PUBLIC_ROUTES, WIDTHS, chromePath, signInCookies, startClone } from "../test/browser/lib.mjs";
 
 const json = process.argv.includes("--json");
 const desktop = WIDTHS.find((v) => v.width === 1280);

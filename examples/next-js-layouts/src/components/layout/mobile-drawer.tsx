@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { Drawer } from "bokoui/react/client";
+import { Drawer } from "bokoui/react";
 
 export interface MobileDrawerProps {
   open: boolean;

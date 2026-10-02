@@ -2,6 +2,7 @@ import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import { icons, type IconNode } from "../icons";
 import type { Tone } from "../types";
+import { toneSolidClass } from "./shared";
 
 export type AlertVariant = "soft" | "solid" | "outline";
 
@@ -15,7 +16,7 @@ export const alertVariants = cva(
     variants: {
       variant: {
         soft: "border-transparent bg-(--tone-soft) text-foreground [&>svg:first-child]:text-(--tone-ink)",
-        solid: "border-(--tone-border) bg-(--tone) text-(--tone-fg)",
+        solid: toneSolidClass,
         outline: "border-(--tone-ink) bg-transparent text-foreground [&>svg:first-child]:text-(--tone-ink)",
       },
     },

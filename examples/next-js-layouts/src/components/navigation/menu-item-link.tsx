@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Badge } from "bokoui/react";
-import { Tooltip } from "bokoui/react/client";
-import { sidebarItemClass, sidebarItemEndClass, sidebarItemLabelClass } from "bokoui/core";
+import { Badge, sidebarItemClass, sidebarItemEndClass, sidebarItemLabelClass, Tooltip } from "bokoui/react";
 import { MenuIcon } from "./menu-icon";
 import { useTruncatedLabel } from "./use-truncated-label";
 import type { IconName } from "@/lib/types";

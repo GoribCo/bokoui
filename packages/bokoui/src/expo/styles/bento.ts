@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Bento: a soft gray page with borderless white tiles of big radius and a hint of shadow, bold tight headings. */
 export const bento: NativeCustomTheme = {

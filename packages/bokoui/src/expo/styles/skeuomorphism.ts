@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Skeuomorphism: brushed-metal gradients, bevels, strong highlights, sunken fields and glossy buttons, like physical hardware. */
 export const skeuomorphism: NativeCustomTheme = {

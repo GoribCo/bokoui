@@ -1,6 +1,8 @@
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import type { ViewStyle } from "react-native";
 import type { Action, Color, Size } from "@/core";
+import { resolveTone } from "@/core";
+import { useTheme } from "../theme";
 import { mix, withAlpha, type ResolvedTokens } from "../tokens";
 
 /** Palette for one tone: everything a component paints itself with. */
@@ -17,6 +19,15 @@ export function tone(t: ResolvedTokens, name: Color | Action) {
 }
 
 export type Tone = ReturnType<typeof tone>;
+
+/**
+ * The palette of a component's tone in the current style. `color` and `action` resolve like on the web
+ * (an action wins); `invalid` forces the danger tone. Memoized, so a component re-renders with a stable object.
+ */
+export function useTone(color: Color, action?: Action, invalid = false): Tone {
+  const { tokens } = useTheme();
+  return useMemo(() => tone(tokens, invalid ? "danger" : resolveTone(color, action)), [tokens, color, action, invalid]);
+}
 
 export const sizes: Record<Size, { height: number; padX: number; font: number }> = {
   sm: { height: 32, padX: 12, font: 14 },

@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import type { Size } from "../types";
+import { disabledClass } from "./shared";
 
 /**
  * A native `<input type="range">`: keyboard, touch, form submission and screen readers come
@@ -9,7 +10,7 @@ import type { Size } from "../types";
 export const sliderVariants = cva(
   [
     "block w-full cursor-pointer rounded-full accent-(--tone) focus-ring",
-    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+    disabledClass,
     "aria-invalid:accent-(--tone)",
     "pointer-coarse:min-h-11",
   ],

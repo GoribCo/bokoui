@@ -3,7 +3,6 @@ import { Modal as RNModal, Pressable, Text as RNText, View } from "react-native"
 import { type ModalPlacement, type ModalSize } from "@/core";
 import { useTheme } from "../theme";
 import { effectStyle } from "../effects";
-import { surface } from "../internal/shared";
 
 export interface ModalProps {
   open: boolean;

@@ -1,4 +1,4 @@
-import { MODE_KEY, STYLE_KEY } from "bokoui/core";
+import { MODE_KEY, STYLE_KEY } from "bokoui/react";
 
 /**
  * Script text that gives a first-time visitor the configured style and mode by seeding the choice that

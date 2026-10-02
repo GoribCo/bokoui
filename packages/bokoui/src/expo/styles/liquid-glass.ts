@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Liquid glass (iOS 26 look): more transparent and rounder than glass, saturated backdrop, a bright specular rim at the top edge. */
 export const liquidGlass: NativeCustomTheme = {

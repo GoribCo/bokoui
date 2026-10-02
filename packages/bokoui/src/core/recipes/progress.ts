@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import type { Size } from "../types";
+import { widthTransitionClass } from "./shared";
 
 export const progressTrackVariants = cva("relative w-full overflow-hidden rounded-full bg-muted", {
   variants: { size: { sm: "h-1.5", md: "h-2.5", lg: "h-4" } },
@@ -20,7 +21,7 @@ export const progressBarClass = (indeterminate: boolean) =>
     "h-full rounded-full bg-(--tone)",
     indeterminate
       ? "w-1/3 animate-bokoui-indeterminate motion-reduce:w-full motion-reduce:animate-pulse"
-      : "transition-[width] duration-(--bokoui-duration) ease-ui motion-reduce:transition-none",
+      : widthTransitionClass,
   );
 
 export const progressHeaderClass = "mb-1.5 flex items-baseline justify-between gap-4 font-ui text-sm text-foreground";

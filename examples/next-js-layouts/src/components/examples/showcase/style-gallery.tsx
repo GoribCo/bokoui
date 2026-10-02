@@ -3,10 +3,8 @@
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Button, Card, CardHeader, Heading } from "bokoui/react";
-import { buttonClass } from "bokoui/core";
+import { Button, buttonClass, Card, CardHeader, Heading, type ThemeMode } from "bokoui/react";
 import { useTheme } from "bokoui/react/theme";
-import type { ThemeMode } from "bokoui/core";
 import { PageContainer } from "@/components/layout/page-container";
 import { PageHeader } from "@/components/layout/page-header";
 

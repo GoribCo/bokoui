@@ -1,7 +1,6 @@
 "use client";
 
-import { Badge, Input, Pagination } from "bokoui/react";
-import { Tab, TabList, TabPanel, Tabs } from "bokoui/react/client";
+import { Badge, Input, Pagination, Tab, TabList, TabPanel, Tabs } from "bokoui/react";
 import { useListParams } from "@/hooks/use-list-params";
 import { listTabs, type ListTab } from "@/lib/query/search-params";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";

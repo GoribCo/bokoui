@@ -1,7 +1,7 @@
 import { Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type StepStatus } from "@/core";
+import { type Action, type Color, type StepStatus } from "@/core";
 import { useTheme } from "../theme";
-import { surface, tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 
 export interface Step {
   label: string;
@@ -21,7 +21,7 @@ export interface StepperProps {
 /** A progress trail for multi-step flows. Presentational: you own the step state and the buttons. */
 export function Stepper({ steps, current, orientation = "horizontal", color = "primary", action, style }: StepperProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const horizontal = orientation === "horizontal";
   return (
     <View accessibilityRole="list" style={[{ alignSelf: "stretch", flexDirection: horizontal ? "row" : "column", alignItems: "flex-start" }, style]}>

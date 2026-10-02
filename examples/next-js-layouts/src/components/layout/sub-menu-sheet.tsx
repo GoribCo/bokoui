@@ -1,6 +1,6 @@
 "use client";
 
-import { Drawer } from "bokoui/react/client";
+import { Drawer } from "bokoui/react";
 import { MenuTree } from "@/components/navigation/menu-tree";
 import type { MenuItem } from "@/lib/types";
 

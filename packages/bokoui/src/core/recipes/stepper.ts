@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
+import { toneSolidClass } from "./shared";
 
 export type StepStatus = "complete" | "current" | "upcoming";
 
@@ -21,7 +22,7 @@ export const stepIndicatorVariants = cva(
   {
     variants: {
       status: {
-        complete: "border-(--tone-border) bg-(--tone) text-(--tone-fg)",
+        complete: toneSolidClass,
         current: "border-(--tone-ink) bg-(--tone-soft) text-(--tone-ink)",
         upcoming: "border-border bg-surface text-muted-foreground",
       },

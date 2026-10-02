@@ -1,4 +1,4 @@
-import { Children, cloneElement, createContext, useContext, type ReactElement, type ReactNode } from "react";
+import { Children, createContext, useContext, type ReactNode } from "react";
 import { Pressable, ScrollView, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
 import type { TableStyleProps } from "@/core";
 import { useTheme } from "../theme";

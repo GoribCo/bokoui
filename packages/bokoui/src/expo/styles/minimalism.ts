@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Minimalism: white space, hairlines, black as the only accent, no shadows. */
 export const minimalism: NativeCustomTheme = {

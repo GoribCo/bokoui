@@ -20,9 +20,36 @@ const css = inline(entry) + '\n/* Scan the components in this package for Tailwi
 fs.writeFileSync(out, css);
 console.log("wrote", path.relative(process.cwd(), out));
 
-for (const name of ["theme", "client"]) {
-  const file = path.resolve(import.meta.dirname, `../dist/react/${name}.js`);
+// 2. React entries: client markers, then the barrels apps import.
+const dist = path.resolve(import.meta.dirname, "../dist/react");
+const src = path.resolve(import.meta.dirname, "../src/react");
+const names = (group) => fs.readdirSync(path.join(src, group)).filter((f) => f.endsWith(".tsx")).map((f) => f.slice(0, -4)).sort();
+const isClient = (group, name) => fs.readFileSync(path.join(src, group, `${name}.tsx`), "utf8").trimStart().startsWith('"use client"');
+const mark = (file) => {
   const code = fs.readFileSync(file, "utf8");
   if (!code.startsWith('"use client"')) fs.writeFileSync(file, `"use client";\n${code}`);
-  console.log(`marked dist/react/${name}.js with "use client"`);
+};
+
+mark(path.join(dist, "theme.js"));
+const groups = { ui: names("ui"), blocks: names("blocks") };
+const clientEntries = [];
+for (const [group, list] of Object.entries(groups)) {
+  for (const name of list) {
+    if (!isClient(group, name)) continue;
+    mark(path.join(dist, group, `${name}.js`));
+    clientEntries.push(`${group}/${name}`);
+  }
 }
+
+const reexport = (entries) => entries.map((entry) => `export * from "./${entry}";\n`);
+const barrel = (file, entries) => {
+  fs.writeFileSync(path.join(dist, `${file}.js`), reexport(entries).map((l) => l.replace(/";/, '.js";')).join(""));
+  fs.writeFileSync(path.join(dist, `${file}.d.ts`), reexport(entries).join(""));
+};
+const all = (group) => groups[group].map((name) => `${group}/${name}`);
+barrel("ui", all("ui"));
+barrel("blocks", all("blocks"));
+barrel("index", ["ui", "blocks", "shared"]);
+// Compatibility: the old entry that held only the stateful components.
+barrel("client", clientEntries);
+console.log(`wrote react barrels (${groups.ui.length} ui, ${groups.blocks.length} blocks, ${clientEntries.length} client)`);

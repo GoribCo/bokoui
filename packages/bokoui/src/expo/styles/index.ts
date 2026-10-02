@@ -1,4 +1,4 @@
-import type { NativeCustomThemes } from "@/expo";
+import { type NativeCustomThemes } from "../tokens";
 import { aurora } from "./aurora";
 import { bento } from "./bento";
 import { clay } from "./clay";

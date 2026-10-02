@@ -2,8 +2,7 @@
 
 import { Palette } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button } from "bokoui/react";
-import { Popover } from "bokoui/react/client";
+import { Button, Popover } from "bokoui/react";
 import { FontSizeControl } from "./font-size-control";
 import { FontSwitcher } from "./font-switcher";
 import { LanguageChips } from "./language-chips";

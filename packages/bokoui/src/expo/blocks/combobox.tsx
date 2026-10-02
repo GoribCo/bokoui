@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color } from "@/core";
+import { type Action, type Color } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 import { OptionList, type Option } from "../internal/option-list";
 import { useControllable } from "../internal/use-controllable";
 import { Input, type InputProps } from "../ui/input";
@@ -28,7 +28,7 @@ export interface ComboboxProps extends Omit<InputProps, "value" | "defaultValue"
  */
 export function Combobox({ options, value, defaultValue, onValueChange, emptyText = "No results", color = "primary", action, invalid, listStyle, onFocus, onBlur, ...props }: ComboboxProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   const [current, set] = useControllable<string | undefined>(value, defaultValue, onValueChange as ((v: string | undefined) => void) | undefined);
   const labelOf = (v: string | undefined) => options.find((o) => o.value === v)?.label ?? "";
   const [text, setText] = useState(labelOf(current));

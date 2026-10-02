@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Material 3: tonal surfaces, a purple key color, pill buttons, filled cards without borders. */
 export const material3: NativeCustomTheme = {

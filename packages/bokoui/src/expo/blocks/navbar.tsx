@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { Pressable, Text as RNText, View, useWindowDimensions, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color } from "@/core";
+import { type Action, type Color } from "@/core";
 import { useTheme } from "../theme";
-import { tone, type Tone } from "../internal/shared";
+import { type Tone, useTone } from "../internal/shared";
 
 const NavContext = createContext<{ tone: Tone; stacked: boolean } | null>(null);
 
@@ -25,7 +25,7 @@ export function Navbar({ brand, children, actions, color = "primary", action, me
   const { tokens } = useTheme();
   const { width } = useWindowDimensions();
   const [open, setOpen] = useState(false);
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const compact = width < breakpoint;
   return (
     <View accessibilityRole="toolbar" style={[{ alignSelf: "stretch", borderBottomWidth: tokens.borderWidth, borderColor: tokens.border, backgroundColor: tokens.surface }, style]}>

@@ -2,8 +2,7 @@ import { Building2, Languages, LayoutPanelLeft, ShieldCheck, type LucideIcon } f
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Card, CardHeader, Grid, Heading, Text } from "bokoui/react";
-import { buttonClass } from "bokoui/core";
+import { buttonClass, Card, CardHeader, Grid, Heading, Text } from "bokoui/react";
 import { PageContainer } from "@/components/layout/page-container";
 import { DASHBOARD_PATH, SIGN_IN_PATH } from "@/lib/config/auth";
 import { organizationTypes } from "@/lib/config/organization-types";

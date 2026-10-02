@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import type { Size } from "../types";
+import { toneSolidClass } from "./shared";
 
 export type BadgeVariant = "solid" | "soft" | "outline";
 
@@ -15,7 +16,7 @@ export const badgeVariants = cva(
   {
     variants: {
       variant: {
-        solid: "border-(--tone-border) bg-(--tone) text-(--tone-fg)",
+        solid: toneSolidClass,
         soft: "border-transparent bg-(--tone-soft) text-(--tone-ink)",
         outline: "border-(--tone-ink) bg-transparent text-(--tone-ink)",
       },

@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
+import { inlineSvgClass } from "./shared";
 
 export const navbarVariants = cva("z-20 w-full border-b-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card font-ui text-foreground", {
   variants: {
@@ -27,7 +28,7 @@ export const navbarLinkClass = (className?: ClassValue) =>
     "inline-flex items-center gap-2 rounded-control px-3 py-2 text-sm text-muted-foreground no-underline",
     "transition-colors duration-(--bokoui-duration) ease-ui hover:bg-muted hover:text-foreground focus-ring pointer-coarse:min-h-11",
     "aria-[current=page]:bg-(--tone-soft) aria-[current=page]:font-medium aria-[current=page]:text-(--tone-ink)",
-    "[&_svg]:size-4 [&_svg]:shrink-0",
+    inlineSvgClass,
     className,
   );
 export const navbarActionsClass = (className?: ClassValue) => cn("ms-auto flex items-center gap-2", className);

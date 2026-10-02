@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Aurora: a night sky of drifting green, cyan, violet and pink glows behind faint frosted cards. */
 export const aurora: NativeCustomTheme = {

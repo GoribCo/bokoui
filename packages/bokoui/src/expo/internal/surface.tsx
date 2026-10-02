@@ -1,7 +1,7 @@
-import type { ComponentType, ReactNode } from "react";
+import { useMemo, type ComponentType, type ReactNode } from "react";
 import { Platform, StyleSheet, View, type StyleProp, type ViewProps, type ViewStyle } from "react-native";
-import { effectStyle, type SurfaceEffect, type ThemeEffects } from "@/expo";
-import { useTheme } from "@/expo";
+import { effectStyle, type SurfaceEffect, type ThemeEffects } from "../effects";
+import { useTheme } from "../theme";
 
 type BlurViewType = ComponentType<{ intensity?: number; tint?: "light" | "dark" | "default"; style?: StyleProp<ViewStyle> }>;
 
@@ -40,9 +40,10 @@ export function Surface({ kind, style, overrideStyle, children, ...props }: Surf
   const { resolvedMode } = useTheme();
   const effect = useSurfaceEffect(kind);
   const radius = StyleSheet.flatten(style)?.borderRadius;
+  const material = useMemo(() => effectStyle(effect), [effect]);
   const nativeBlur = Boolean(effect?.blur) && Boolean(BlurView);
   return (
-    <View style={[style, effectStyle(effect), nativeBlur ? { overflow: "hidden" } : null, overrideStyle]} {...props}>
+    <View style={[style, material, nativeBlur ? { overflow: "hidden" } : null, overrideStyle]} {...props}>
       {nativeBlur && BlurView ? (
         <BlurView intensity={Math.min(100, (effect?.blur ?? 0) * 2.5)} tint={resolvedMode === "dark" ? "dark" : "light"} style={[StyleSheet.absoluteFill, { borderRadius: typeof radius === "number" ? radius : 0 }]} />
       ) : null}

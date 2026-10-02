@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Pressable, Text as RNText, type StyleProp, type ViewStyle } from "react-native";
 import type { Action, Color, DateBounds, Size, WeekStart } from "@/core";
-import { resolveTone } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 import { fieldStyle } from "../internal/field";
 import { useControllable } from "../internal/use-controllable";
 import { Calendar } from "./calendar";
@@ -30,7 +29,7 @@ export interface DatePickerProps extends DateBounds {
 /** A field that shows the chosen date and opens a Calendar in a dialog. Choosing a day closes it. */
 export function DatePicker({ value, defaultValue = null, onValueChange, placeholder = "Select date", locale, weekStartsOn, size = "md", color = "primary", action, invalid = false, disabled = false, title = "Choose a date", accessibilityLabel, style, min, max, isDisabled }: DatePickerProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   const [date, set] = useControllable<Date | null>(value, defaultValue, onValueChange as ((v: Date | null) => void) | undefined);
   const [open, setOpen] = useState(false);
   const text = date ? date.toLocaleDateString(locale, { dateStyle: "medium" }) : placeholder;

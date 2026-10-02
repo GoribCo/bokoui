@@ -1,7 +1,7 @@
 import { Animated, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type ProgressStyleProps } from "@/core";
+import { type Action, type Color, type Size, type ProgressStyleProps } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 import { useLoop } from "../internal/motion";
 
 export interface ProgressProps extends ProgressStyleProps {
@@ -19,7 +19,7 @@ const trackHeight: Record<Size, number> = { sm: 6, md: 10, lg: 16 };
 
 export function Progress({ value, max = 100, size = "md", color = "primary", action, label, showValue = false, style }: ProgressProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const indeterminate = value === undefined;
   const clamped = indeterminate ? 0 : Math.min(Math.max(value, 0), max);
   const percent = max > 0 ? Math.round((clamped / max) * 100) : 0;

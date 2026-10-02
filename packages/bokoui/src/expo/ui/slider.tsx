@@ -1,8 +1,8 @@
 import { useState, useRef, useMemo } from "react";
 import { PanResponder, Text as RNText, View, type StyleProp, type ViewStyle, type AccessibilityActionEvent, type LayoutChangeEvent } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type SliderStyleProps } from "@/core";
+import { type Action, type Color, type Size, type SliderStyleProps } from "@/core";
 import { useTheme } from "../theme";
-import { surface, tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 
 export interface SliderProps extends SliderStyleProps {
   value?: number;
@@ -43,7 +43,7 @@ export function Slider({
   style,
 }: SliderProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   const [inner, setInner] = useState(defaultValue);
   const [width, setWidth] = useState(0);
   const current = snap(value ?? inner, min, max, step);

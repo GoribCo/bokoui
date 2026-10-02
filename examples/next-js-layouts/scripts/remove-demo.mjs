@@ -32,7 +32,7 @@ export const demoPaths = [
   "src/api/endpoints/staff.ts",
   "src/api/data/records.ts",
   // Tests the manifest itself, so it goes too.
-  "src/lib/config/demo-removal.test.ts",
+  "test/unit/lib/config/demo-removal.test.ts",
 ];
 
 /** Pages rewritten to a minimal version that does not use the demo. */
@@ -115,7 +115,7 @@ export function removeDemo({ dryRun = false, log = console.log } = {}) {
     if (demoLink.test(text)) act(`point demo links in ${rel} at /dashboard`, () => writeFileSync(full, text.replace(demoLink, '"/dashboard"')));
     demoLink.lastIndex = 0;
   }
-  for (const dir of ["src", "tests"]) {
+  for (const dir of ["src", "test"]) {
     for (const file of walk(path.join(root, dir))) {
       const stripped = stripDemo(readFileSync(file, "utf8"));
       if (stripped !== null) act(`strip demo lines in ${path.relative(root, file)}`, () => writeFileSync(file, stripped));

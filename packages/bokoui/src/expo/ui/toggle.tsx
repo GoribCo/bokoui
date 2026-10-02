@@ -1,7 +1,7 @@
 import { Switch as RNSwitch, Pressable, Text as RNText, View, type StyleProp, type ViewProps, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size } from "@/core";
+import { type Action, type Color, type Size } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 
 export interface ToggleProps {
   checked: boolean;
@@ -33,7 +33,7 @@ function ToggleRow({
   style,
 }: ToggleProps & { role: "checkbox" | "radio" }) {
   const { tokens } = useTheme();
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   const box = boxPx[size];
   return (
     <Pressable
@@ -78,7 +78,7 @@ export const Radio = (props: ToggleProps) => <ToggleRow role="radio" {...props} 
 
 export function Switch({ checked, onCheckedChange, label, hideLabel = false, color = "primary", action, invalid, disabled, style }: ToggleProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
+  const c = useTone(color, action, invalid);
   return (
     <View style={[{ flexDirection: "row", alignItems: "center", gap: 8, minHeight: 44 }, style]}>
       <RNSwitch

@@ -1,4 +1,4 @@
-import { cloneElement, useEffect, useState, type ReactElement, type ReactNode } from "react";
+import { cloneElement, useEffect, useState, type ReactElement } from "react";
 import { Text as RNText, View } from "react-native";
 import { useTheme } from "../theme";
 import { AnchoredLayer, useAnchor } from "../internal/anchored";

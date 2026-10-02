@@ -8,10 +8,10 @@ Themeable UI components for Tailwind CSS v4 with eight design styles (Flat, Mate
 
 | Platform | Import | Notes |
 |---|---|---|
-| React / Next.js | `bokoui/react` | server-safe components (no state); `bokoui/react/client` stateful components (Tabs, Modal, Select, ...); `bokoui/react/theme` (client provider, switcher) and `bokoui/react/theme-script` (server) |
+| React / Next.js | `bokoui/react` | everything: basic elements, composed blocks, the shared types and class helpers (`buttonClass`, ...). `bokoui/react/ui` has the basic elements only, `bokoui/react/blocks` the composed ones; `bokoui/react/theme` (client provider, switcher) and `bokoui/react/theme-script` (server). `bokoui/react/client` is the old stateful-only entry, kept for compatibility |
 | Vue / Nuxt | `bokoui/vue` | same components as Vue 3 components, plus `ThemeProvider`, `ThemeSwitcher`, `useTheme`, `buildThemeScript` |
 | React Native / Expo | `bokoui/expo` | native components + `ThemeProvider`; no CSS or Tailwind needed |
-| Any (framework-neutral) | `bokoui/core` | class recipes (`buttonClass`, ...), theme engine, types |
+| Any (framework-neutral) | `bokoui/core` | internal building block (recipes, theme engine); apps should not need it, `bokoui/react` and `bokoui/expo` re-export what they need |
 | Web build | `bokoui/styles.css` | tokens, themes, Tailwind mapping (React and Vue) |
 | Any | `bokoui/tokens.json` | every style x mode as plain token values |
 | Docs tooling | `bokoui/props.json` | every React component's own props (name, type, default, description), generated from the types |
@@ -157,18 +157,20 @@ React is the reference platform; Vue and Expo follow. The full, current matrix (
 |---|---|---|
 | Basics | Button, Input, Heading, Text, Link, Icon | `bokoui/react` |
 | Forms | FormField, Label, Textarea, Checkbox, Radio, RadioGroup, Switch, Slider | `bokoui/react` |
-| | Select, Combobox, DatePicker, Calendar, Rating, FileUpload | `bokoui/react/client` |
+| | Select, Rating | `bokoui/react/ui` |
+| | Combobox, DatePicker, Calendar, FileUpload | `bokoui/react/blocks` |
 | Data display | Badge, Avatar, Tag, Card, Divider, Image, Table, Stepper, EmptyState, Skeleton, Progress | `bokoui/react` |
 | Feedback | Alert, Spinner | `bokoui/react` |
-| | ToastProvider + `useToast` | `bokoui/react/client` |
-| Overlays | Modal, Drawer, Tooltip, Popover, Menu, CommandPalette | `bokoui/react/client` |
+| | ToastProvider + `useToast` | `bokoui/react/ui` |
+| Overlays | Tooltip | `bokoui/react/ui` |
+| | Modal, Drawer, Popover, Menu, CommandPalette | `bokoui/react/blocks` |
 | Navigation | Breadcrumb, Pagination, Sidebar | `bokoui/react` |
-| | Navbar, Tabs, Accordion | `bokoui/react/client` |
+| | Navbar, Tabs, Accordion, FloatingNav | `bokoui/react/blocks` |
 | Layout | Stack, Inline, Grid, Container | `bokoui/react` |
 
 ### Server and client components
 
-`bokoui/react` has no state or effects, so it works in Next.js Server Components. Anything that needs state, effects or browser APIs lives in `bokoui/react/client`, which is marked `"use client"`. Components in `bokoui/react` that take event handlers (`Tag onRemove`, `Pagination onPageChange`, `Button onClick`) must be rendered from a Client Component when you pass a function.
+Import from `bokoui/react`, `bokoui/react/ui` or `bokoui/react/blocks` in server and client files alike. Each stateful component (Tabs, Modal, Select, ...) starts with its own `"use client"` line, so Next.js treats only those as client components and the stateless ones (Button, Card, Table, Sidebar, ...) stay Server Components. Components that take event handlers (`Tag onRemove`, `Pagination onPageChange`, `Button onClick`) must be rendered from a Client Component when you pass a function.
 
 ### Forms
 
@@ -176,7 +178,7 @@ React is the reference platform; Vue and Expo follow. The full, current matrix (
 
 ```tsx
 import { FormField, Input } from "bokoui/react";
-import { Select } from "bokoui/react/client";
+import { Select } from "bokoui/react";
 
 <FormField label="Email" hint="We never share it" error={errors.email} required>
   <Input type="email" />
@@ -285,8 +287,8 @@ Run from this directory after `npm install`:
 
 | Script | Does |
 |---|---|
-| `npm run build` | Generate tokens, build every entry with tsup into `dist/`, inline the CSS, mark the client entries (`react/theme.js`, `react/client.js`), write `dist/tokens.json` and `dist/props.json` |
-| `npm test` | Vitest: unit tests, axe accessibility tests, Vue server-rendering tests (`npm run test:watch` while developing) |
+| `npm run build` | Generate tokens, build every entry with tsup into `dist/`, inline the CSS, put `"use client"` on the stateful React entries, write the `react`, `react/ui`, `react/blocks` barrels, check the client boundaries, write `dist/tokens.json` and `dist/props.json` |
+| `npm test` | Vitest, all in `test/` (`test/core`, `test/react`, `test/vue`, `test/a11y`, `test/structure`): unit tests, axe accessibility tests, Vue server-rendering tests, structure checks (`npm run test:watch` while developing) |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run audit` | Contrast audit for every style/mode pair, including tinted backgrounds (run after changing theme tokens) |
 | `npm run tokens` | Regenerate `src/expo/tokens.generated.ts` from the theme CSS |

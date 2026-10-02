@@ -1,7 +1,7 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { Pressable, View, type StyleProp, type ViewStyle } from "react-native";
-import { useTheme } from "@/expo";
-import { Surface } from "@/expo";
+import { useTheme } from "../theme";
+import { Surface } from "../internal/surface";
 
 const FloatingNavContext = createContext(false);
 

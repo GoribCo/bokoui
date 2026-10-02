@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { buttonClass } from "bokoui/core";
+import { buttonClass } from "bokoui/react";
 import { StatusView } from "./status-view";
 
 /** Content of the 404 pages (global and inside the shell). */

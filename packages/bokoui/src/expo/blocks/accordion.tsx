@@ -1,8 +1,8 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { Pressable, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color } from "@/core";
+import { type Action, type Color } from "@/core";
 import { useTheme } from "../theme";
-import { tone, type Tone } from "../internal/shared";
+import { type Tone, useTone } from "../internal/shared";
 import { useControllable } from "../internal/use-controllable";
 
 interface AccordionContextValue {
@@ -55,7 +55,6 @@ export type AccordionProps = BaseProps &
 
 /** `<Accordion><AccordionItem value="a"><AccordionTrigger>Q</AccordionTrigger><AccordionContent>A</AccordionContent></AccordionItem></Accordion>` */
 export function Accordion(props: AccordionProps) {
-  const { tokens } = useTheme();
   const { color = "primary", action, children, style } = props;
   const multiple = props.type === "multiple";
   const collapsible = props.type === "multiple" ? true : (props.collapsible ?? true);
@@ -74,7 +73,7 @@ export function Accordion(props: AccordionProps) {
       else if (collapsible) setOpen([]);
     } else setOpen(multiple ? [...open, value] : [value]);
   };
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   return (
     <AccordionContext.Provider value={{ isOpen: (v) => open.includes(v), toggle, tone: c }}>
       <View style={[{ alignSelf: "stretch" }, style]}>{children}</View>

@@ -1,8 +1,7 @@
 "use client";
 
 import { Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react";
-import { Button } from "bokoui/react";
-import { Tooltip } from "bokoui/react/client";
+import { Button, Tooltip } from "bokoui/react";
 import { SIDEBAR_ID } from "./sidebar";
 
 export interface SidebarToggleProps {

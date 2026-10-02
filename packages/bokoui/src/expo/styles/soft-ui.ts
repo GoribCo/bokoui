@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Soft UI: a pale blue-gray page, cards lifted by wide diffused shadows with a white top edge, soft glow on the primary action. */
 export const softUi: NativeCustomTheme = {

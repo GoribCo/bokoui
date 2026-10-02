@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Claymorphism: puffy, inflated shapes (a soft drop shadow, a bright inner top edge, a shaded inner bottom) on a lavender page. */
 export const clay: NativeCustomTheme = {

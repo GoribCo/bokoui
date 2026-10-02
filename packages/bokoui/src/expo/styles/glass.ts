@@ -1,4 +1,4 @@
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 /** Glassmorphism: frosted translucent panels with a bright edge over a colorful blurred page. */
 export const glass: NativeCustomTheme = {

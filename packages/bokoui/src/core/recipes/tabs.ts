@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
+import { inlineSvgClass } from "./shared";
 
 export type TabsVariant = "underline" | "pills";
 export type TabsOrientation = "horizontal" | "vertical";
@@ -30,7 +31,7 @@ export const tabVariants = cva(
     "px-3 h-10 pointer-coarse:min-h-11 text-muted-foreground",
     "transition-[background-color,color,border-color] duration-(--bokoui-duration) ease-ui focus-ring",
     "enabled:hover:text-foreground disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
-    "[&_svg]:size-4 [&_svg]:shrink-0",
+    inlineSvgClass,
   ],
   {
     variants: {

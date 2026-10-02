@@ -1,7 +1,7 @@
 import { Pressable, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, getPageRange, type Action, type Color, type Size, type PaginationStyleProps } from "@/core";
+import { getPageRange, type Action, type Color, type Size, type PaginationStyleProps } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 
 export interface PaginationProps extends PaginationStyleProps {
   /** Current page, 1-based. */
@@ -22,7 +22,7 @@ const pageFont: Record<Size, number> = { sm: 12, md: 14, lg: 16 };
 
 export function Pagination({ page, pageCount, onPageChange, siblings = 1, size = "md", color = "primary", action, hideEdges = false, label = "Pagination", style }: PaginationProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const control = (target: number, content: string, name: string, disabled: boolean, current = false) => (
     <Pressable
       key={name}

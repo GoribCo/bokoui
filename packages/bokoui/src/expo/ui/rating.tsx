@@ -1,8 +1,8 @@
 import { useControllable } from "../internal/use-controllable";
 import { Pressable, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type RatingStyleProps } from "@/core";
+import { type Action, type Color, type Size, type RatingStyleProps } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 
 export interface RatingProps extends RatingStyleProps {
   /** Selected stars (controlled). 0 = none. */
@@ -23,7 +23,7 @@ const starPx: Record<Size, number> = { sm: 16, md: 20, lg: 28 };
 
 export function Rating({ value, defaultValue = 0, onValueChange, max = 5, readOnly = false, size = "md", color = "primary", action, label = "Rating", style }: RatingProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const [current, set] = useControllable(value, defaultValue, onValueChange);
   const px = starPx[size];
   const star = (n: number) => (

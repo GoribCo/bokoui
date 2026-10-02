@@ -1,8 +1,8 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { Pressable, ScrollView, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type TabsStyleProps } from "@/core";
+import { type Action, type Color, type TabsStyleProps } from "@/core";
 import { useTheme } from "../theme";
-import { tone, type Tone } from "../internal/shared";
+import { type Tone, useTone } from "../internal/shared";
 import { useControllable } from "../internal/use-controllable";
 
 interface TabsContextValue extends TabsStyleProps {
@@ -32,9 +32,8 @@ export interface TabsProps extends TabsStyleProps {
 
 /** Compound component: `<Tabs><TabList><Tab value="a"/></TabList><TabPanel value="a"/></Tabs>`. */
 export function Tabs({ value, defaultValue, onValueChange, variant = "underline", orientation = "horizontal", color = "primary", action, children, style }: TabsProps) {
-  const { tokens } = useTheme();
   const [current, select] = useControllable<string | undefined>(value, defaultValue, onValueChange as ((v: string | undefined) => void) | undefined);
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   return (
     <TabsContext.Provider value={{ value: current, select: (v) => select(v), variant, orientation, tone: c }}>
       <View style={[{ alignSelf: "stretch", flexDirection: orientation === "vertical" ? "row" : "column", gap: 12 }, style]}>{children}</View>

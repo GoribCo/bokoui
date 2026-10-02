@@ -9,11 +9,11 @@ A component is one class recipe in core plus a thin binding per platform:
 | Layer | Path | Contains |
 | --- | --- | --- |
 | Recipe | `src/core/recipes/<name>.ts` | `cva` variants, `<name>Class()` helper, `<Name>StyleProps` type. No React/Vue imports. |
-| React | `src/react/ui/<name>/<name>.tsx` | `forwardRef`, calls the recipe, sets `data-*`/`aria-*`. |
+| React | `src/react/ui/<name>.tsx` (basic) or `src/react/blocks/<name>.tsx` (composed) | `forwardRef`, calls the recipe, sets `data-*`/`aria-*`. A stateful file starts with `"use client";`. |
 | Vue | `src/vue/<name>.ts` | `defineComponent` with a render function (no SFCs), same recipe. |
-| Expo | `src/expo/components.tsx` | Styles from `tokens.generated.ts` (no Tailwind classes). |
+| Expo | `src/expo/ui/<name>.tsx` or `src/expo/blocks/<name>.tsx` | Styles from the resolved tokens and effects (no Tailwind classes). |
 
-**Basic elements and blocks (Expo now, React next, Vue later).** A basic element is one control or display (Button, Input, Label, Badge, Select, Toast, Tooltip). A block combines several elements or parts (Navbar, FloatingNav, Sidebar, Tabs, Table, Modal, Menu, Popover, Calendar). Expo keeps them in `src/expo/ui/` and `src/expo/blocks/`, importable as `bokoui/expo/ui`, `bokoui/expo/blocks`, or both from `bokoui/expo`. A new multi-part component goes in `blocks/`.
+**Basic elements and blocks (Expo and React; Vue later).** A basic element is one control or display (Button, Input, Label, Badge, Select, Toast, Tooltip). A block combines several elements or parts (Navbar, FloatingNav, Sidebar, Tabs, Table, Modal, Menu, Popover, Calendar). Both platforms keep them in `ui/` and `blocks/` and export `bokoui/<platform>/ui`, `bokoui/<platform>/blocks`, or both from `bokoui/<platform>`. A new multi-part component goes in `blocks/`. App code imports only from these entries and `bokoui/<platform>/theme`: the types, `cn` and class helpers an app needs are re-exported there (`src/core/public.ts`), so nothing in an app imports `bokoui/core`.
 
 Bindings hold no styling decisions. If two bindings would need the same `if`, it belongs in the recipe.
 
@@ -92,20 +92,18 @@ Rules:
 
 ## Server-safe vs client components (React)
 
-`bokoui/react` holds components with no state or effects (Button, Input, Card, ...). They work in Next.js Server Components.
+A React component with state, effects or browser APIs (Tabs, Modal, Tooltip, Menu, Select) starts with `"use client";`; the build is one entry per component file, `scripts/postbuild.mjs` puts that line on the output file and writes the barrels, and `scripts/check-client-boundaries.mjs` fails the build if a file without it can reach a hook. A file without the line must not import hooks (stateless helpers that only need ids can use `useId`, allowed on the server). Barrels are not build entries: esbuild would move a component's code out of the file that carries the directive.
 
-Components that need state, effects or browser APIs (Tabs, Modal, Tooltip, Menu, Select) live in `src/react/client/` and are exported from `bokoui/react/client`, which `scripts/postbuild.mjs` marks `"use client"`. Do not put hooks in `src/react/ui/`. Stateless helpers that only need a few ids can use `useId` (allowed on the server) instead.
-
-Shared hooks for overlays are in `src/react/client/floating.ts` (`useFloating`, `useTopLayer`); the pure positioning and keyboard logic they use is in `src/core/position.ts` and `src/core/keyboard.ts` and is tested without React.
+Shared hooks for overlays are in `src/react/internal/floating.ts` (`useFloating`, `useTopLayer`); the pure positioning and keyboard logic they use is in `src/core/position.ts` and `src/core/keyboard.ts` and is tested without React.
 
 ## Adding a component: checklist
 
 1. **Recipe.** `src/core/recipes/<name>.ts`: `cva` with base classes, variants, `defaultVariants`; export `<name>Variants`, `<Name>StyleProps`, `<name>Class()`. Add `export * from "./recipes/<name>";` to `src/core/index.ts`.
-2. **React.** Server-safe: `src/react/ui/<name>/<name>.tsx` and `index.ts`; add `export * from "./<name>";` to `src/react/ui/index.ts`. Stateful: `src/react/client/<name>.tsx`, exported from `src/react/client/index.ts`.
+2. **React.** `src/react/ui/<name>.tsx` (basic) or `src/react/blocks/<name>.tsx` (composed), and `export * from "./<name>";` in that folder's `index.ts`. Stateful: first line `"use client";`. No other registration: the build and the barrels find the file.
 3. **Vue.** `src/vue/<name>.ts`; export from `src/vue/index.ts`. Vue models use `modelValue` + `update:modelValue`.
-4. **Expo.** Add to `src/expo/components.tsx` and export from `src/expo/index.ts`. If the component is not ready for native, say so in the task list rather than silently skipping.
+4. **Expo.** `src/expo/ui/<name>.tsx` or `src/expo/blocks/<name>.tsx`, exported from that folder's `index.ts`. If the component is not ready for native, say so in the task list rather than silently skipping.
 5. **Tokens.** Reuse existing tokens. If a new one is required, add it to `tokens.css` and every file in `styles/themes/`, then run `npm run tokens` and `npm run audit`.
-6. **Tests.** Co-locate `<name>.test.tsx` next to the React component. Cover: default render, each variant/size maps to expected classes or attributes, `data-tone`/`action` override, each state (disabled, loading, invalid where relevant), keyboard interaction, `className` merge, and ref forwarding.
+6. **Tests.** All tests live in `test/` beside `src`, in folders that mirror it (`test/core`, `test/react/ui`, `test/react/blocks`, `test/vue`, `test/a11y`, `test/structure`). Import from the barrels (`@/react/ui`, `@/react/blocks`), not from component files. Cover: default render, each variant/size maps to expected classes or attributes, `data-tone`/`action` override, each state (disabled, loading, invalid where relevant), keyboard interaction, `className` merge, and ref forwarding.
 7. **Verify.** In `packages/bokoui`: `npm test`, `npm run typecheck`, `npm run build`. Then publish locally, bump the example's `bokoui` version, and check it under all 8 styles in light and dark.
 8. **Docs.** Tick the task in `docs/tasks/tasks-ui-framework.md`. When the playground exists, add the component to it.
 

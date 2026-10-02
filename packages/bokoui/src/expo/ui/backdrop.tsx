@@ -1,6 +1,6 @@
 import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native";
-import { gradientStyle } from "@/expo";
-import { useTheme } from "@/expo";
+import { gradientStyle } from "../effects";
+import { useTheme } from "../theme";
 
 export interface BackdropProps {
   style?: StyleProp<ViewStyle>;

@@ -1,10 +1,10 @@
 import { type ReactNode } from "react";
 import { ActivityIndicator, Pressable, Text as RNText, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type Variant } from "@/core";
-import { useTheme } from "@/expo";
-import { effectStyle } from "@/expo";
+import { type Action, type Color, type Size, type Variant } from "@/core";
+import { useTheme } from "../theme";
+import { effectStyle } from "../effects";
 import { applyMix } from "../tokens";
-import { sizes, tone } from "../internal/shared";
+import { sizes, useTone } from "../internal/shared";
 
 export interface ButtonProps extends Omit<PressableProps, "children" | "style"> {
   variant?: Variant;
@@ -36,7 +36,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const s = sizes[size];
   const off = disabled || loading;
 

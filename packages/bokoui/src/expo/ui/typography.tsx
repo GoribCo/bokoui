@@ -1,7 +1,7 @@
 import { Linking, Text as RNText, useWindowDimensions, type TextProps as RNTextProps } from "react-native";
-import { resolveTone, type Action, type Color, type HeadingLevel, type HeadingSize, type TextVariant } from "@/core";
+import { type Action, type Color, type HeadingLevel, type HeadingSize, type TextVariant } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 
 const headingPx: Record<HeadingSize, [number, number]> = {
   // [base, from 768px wide]
@@ -89,8 +89,7 @@ export interface LinkProps extends RNTextProps {
 }
 
 export function Link({ href, color = "primary", action, underline = "hover", style, onPress, ...props }: LinkProps) {
-  const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   return (
     <RNText
       accessibilityRole="link"

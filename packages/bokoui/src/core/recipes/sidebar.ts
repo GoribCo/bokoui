@@ -1,4 +1,5 @@
 import { cn, type ClassValue } from "../cn";
+import { collapsedSrOnlyClass, widthTransitionClass } from "./shared";
 
 /*
  * Collapsed state is `data-collapsed` on the <nav>; items and titles react through the
@@ -11,7 +12,7 @@ export const sidebarClass = (className?: ClassValue) =>
   cn(
     "group/sidebar flex w-60 shrink-0 flex-col gap-1 overflow-y-auto p-3 font-ui",
     "border-e-[length:var(--bokoui-card-border-width,var(--bokoui-border-width))] surface-card",
-    "transition-[width] duration-(--bokoui-duration) ease-ui motion-reduce:transition-none",
+    widthTransitionClass,
     "data-[collapsed]:w-16 data-[collapsed]:items-center data-[collapsed]:px-2",
     className,
   );
@@ -20,7 +21,7 @@ export const sidebarSectionClass = (className?: ClassValue) => cn("flex flex-col
 
 export const sidebarSectionTitleClass = cn(
   "px-3 pb-1 text-xs font-medium tracking-wide text-muted-foreground uppercase",
-  "group-data-[collapsed]/sidebar:sr-only",
+  collapsedSrOnlyClass,
 );
 
 /** Active page comes from `aria-current="page"`. */
@@ -37,6 +38,6 @@ export const sidebarItemClass = (className?: ClassValue) =>
   );
 
 /** Text next to the icon; hidden visually (kept for screen readers) when collapsed. */
-export const sidebarItemLabelClass = cn("min-w-0 flex-1 truncate text-start", "group-data-[collapsed]/sidebar:sr-only");
+export const sidebarItemLabelClass = cn("min-w-0 flex-1 truncate text-start", collapsedSrOnlyClass);
 export const sidebarItemDescriptionClass = "block truncate text-xs font-normal text-muted-foreground";
-export const sidebarItemEndClass = cn("ms-auto shrink-0", "group-data-[collapsed]/sidebar:sr-only");
+export const sidebarItemEndClass = cn("ms-auto shrink-0", collapsedSrOnlyClass);

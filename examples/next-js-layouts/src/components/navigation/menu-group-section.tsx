@@ -3,9 +3,7 @@
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useId } from "react";
-import { SidebarSection } from "bokoui/react";
-import { Tooltip } from "bokoui/react/client";
-import { sidebarItemClass, sidebarItemLabelClass } from "bokoui/core";
+import { sidebarItemClass, sidebarItemLabelClass, SidebarSection, Tooltip } from "bokoui/react";
 import type { MenuGroup, MenuItem } from "@/lib/types";
 import { MenuIcon } from "./menu-icon";
 import { MenuItemLink } from "./menu-item-link";

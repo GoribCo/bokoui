@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { Text as RNText, View, type StyleProp, type TextStyle, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color, type Size, type BadgeVariant } from "@/core";
+import { type Action, type Color, type Size, type BadgeVariant } from "@/core";
 import { useTheme } from "../theme";
-import { isPlainText, surface, tone } from "../internal/shared";
+import { isPlainText, surface, useTone } from "../internal/shared";
 
 export interface BadgeProps {
   variant?: BadgeVariant;
@@ -21,7 +21,7 @@ const badgeSizes: Record<Size, { height: number; padX: number; font: number }> =
 
 export function Badge({ variant = "soft", size = "md", color = "primary", action, children, style }: BadgeProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const s = badgeSizes[size];
   const solid = variant === "solid";
   const fg = solid ? c.fg : c.ink;

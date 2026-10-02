@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import type { Size } from "../types";
+import { toneSolidClass } from "./shared";
 
 export type TagVariant = "soft" | "outline" | "solid";
 
@@ -16,7 +17,7 @@ export const tagVariants = cva(
       variant: {
         soft: "border-transparent bg-(--tone-soft) text-(--tone-ink)",
         outline: "border-(--tone-ink) bg-transparent text-(--tone-ink)",
-        solid: "border-(--tone-border) bg-(--tone) text-(--tone-fg)",
+        solid: toneSolidClass,
       },
       size: { sm: "h-6 pl-2 pr-1 text-xs", md: "h-7 pl-2.5 pr-1.5 text-sm", lg: "h-8 pl-3 pr-2 text-sm" },
       interactive: {

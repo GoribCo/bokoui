@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 import type { Size } from "../types";
+import { disabledClass } from "./shared";
 
 /*
  * Checkbox, Radio and Switch are native inputs (appearance-none) so keyboard, form
@@ -13,7 +14,7 @@ const control = [
   "border-[length:var(--bokoui-border-width)] border-field-border bg-field",
   "transition-[background-color,border-color,box-shadow] duration-(--bokoui-duration) ease-ui focus-ring",
   "enabled:hover:border-(--tone-ink) aria-invalid:border-(--tone)",
-  "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+  disabledClass,
 ];
 
 const checkedFill = "checked:border-(--tone-border) checked:bg-(--tone)";

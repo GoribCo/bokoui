@@ -10,6 +10,7 @@ import {
   type Responsive,
 } from "../responsive";
 import type { Size, Variant } from "../types";
+import { disabledClass } from "./shared";
 
 /**
  * All variant styling lives here. Colors come from `data-tone` (see styles/tokens.css),
@@ -22,7 +23,7 @@ export const buttonVariants = cva(
     "font-ui [font-weight:var(--bokoui-btn-weight)] [text-transform:var(--bokoui-btn-transform)] [letter-spacing:var(--bokoui-btn-tracking)]",
     "transition-[background-color,border-color,color,box-shadow,translate] duration-(--bokoui-duration) ease-ui",
     "focus-ring [&_svg]:size-4 [&_svg]:shrink-0",
-    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+    disabledClass,
     "enabled:hover:[translate:var(--bokoui-shift-hover)] enabled:active:[translate:var(--bokoui-shift-active)]",
     // Touch devices get a 44px minimum target regardless of size.
     "pointer-coarse:min-h-11",

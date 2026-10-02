@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Pressable, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { addMonths, getMonthGrid, getWeekdayOrder, isDateDisabled, isSameDay, isSameMonth, resolveTone, startOfDay, startOfMonth, type Action, type Color, type DateBounds, type WeekStart } from "@/core";
+import { addMonths, getMonthGrid, getWeekdayOrder, isDateDisabled, isSameDay, isSameMonth, startOfDay, startOfMonth, type Action, type Color, type DateBounds, type WeekStart } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { useTone } from "../internal/shared";
 import { useControllable } from "../internal/use-controllable";
 
 /** Intl can be missing on some JS engines; fall back to English-ish output instead of crashing. */
@@ -33,7 +33,7 @@ export interface CalendarProps extends DateBounds {
 /** A month grid with previous/next buttons. Date logic is shared with the web version through core. */
 export function Calendar({ value, defaultValue = null, onValueChange, defaultMonth, weekStartsOn = 0, locale, color = "primary", action, min, max, isDisabled, style }: CalendarProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const [selected, select] = useControllable<Date | null>(value, defaultValue, onValueChange as ((v: Date | null) => void) | undefined);
   const [month, setMonth] = useState(() => startOfMonth(selected ?? defaultMonth ?? new Date()));
   const today = startOfDay(new Date());

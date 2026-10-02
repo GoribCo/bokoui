@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import type { NativeCustomTheme } from "@/expo";
+import { type NativeCustomTheme } from "../tokens";
 
 const mono = Platform.select({ ios: "Menlo", android: "monospace", default: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace' });
 

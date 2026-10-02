@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { sidebarClass } from "bokoui/core";
+import { sidebarClass } from "bokoui/react";
 
 export interface SidebarLabels {
   /** Accessible name of the main navigation landmark. */

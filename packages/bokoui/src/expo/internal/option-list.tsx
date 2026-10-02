@@ -1,6 +1,6 @@
 import { Pressable, ScrollView, Text as RNText, View } from "react-native";
 import { useTheme } from "../theme";
-import { tone, type Tone } from "./shared";
+import { type Tone } from "./shared";
 
 export interface Option {
   value: string;

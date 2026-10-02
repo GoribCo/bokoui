@@ -1,9 +1,9 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { Pressable, ScrollView, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, type Action, type Color } from "@/core";
-import { useTheme } from "@/expo";
-import { tone, type Tone } from "../internal/shared";
-import { Surface } from "@/expo";
+import { type Action, type Color } from "@/core";
+import { useTheme } from "../theme";
+import { Surface } from "../internal/surface";
+import { type Tone, useTone } from "../internal/shared";
 
 const SidebarContext = createContext<{ collapsed: boolean; tone: Tone } | null>(null);
 
@@ -19,7 +19,7 @@ export interface SidebarProps {
 
 export function Sidebar({ collapsed = false, color = "primary", action, label = "Sidebar", children, style }: SidebarProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   return (
     <SidebarContext.Provider value={{ collapsed, tone: c }}>
       <Surface

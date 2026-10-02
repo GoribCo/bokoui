@@ -1,4 +1,5 @@
 import { cn, type ClassValue } from "../cn";
+import { disabledClass } from "./shared";
 
 export const accordionClass = (className?: ClassValue) =>
   cn("w-full font-ui text-foreground", className);
@@ -11,7 +12,7 @@ export const accordionTriggerClass = (className?: ClassValue) =>
   cn(
     "flex w-full items-center justify-between gap-4 rounded-control py-4 text-start text-sm font-medium",
     "transition-colors duration-(--bokoui-duration) ease-ui hover:text-(--tone-ink) focus-ring pointer-coarse:min-h-11",
-    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+    disabledClass,
     "[&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground [&>svg]:transition-transform [&>svg]:duration-(--bokoui-duration) motion-reduce:[&>svg]:transition-none",
     "aria-expanded:[&>svg]:rotate-180",
     className,

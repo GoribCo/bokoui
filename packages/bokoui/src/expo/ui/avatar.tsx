@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { Image as RNImage, StyleSheet, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
-import { resolveTone, getInitials, type Action, type Color, type Size, type AvatarShape } from "@/core";
+import { getInitials, type Action, type Color, type Size, type AvatarShape } from "@/core";
 import { useTheme } from "../theme";
-import { tone } from "../internal/shared";
+import { tone, useTone } from "../internal/shared";
 
 export interface AvatarProps {
   size?: Size;
@@ -37,7 +37,7 @@ export function Avatar({
   style,
 }: AvatarProps) {
   const { tokens } = useTheme();
-  const c = tone(tokens, resolveTone(color, action));
+  const c = useTone(color, action);
   const { box, font } = avatarPx[size];
   const radius = shape === "circle" ? box / 2 : tokens.radiusControl;
   return (

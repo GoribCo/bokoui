@@ -9,7 +9,7 @@ import path from "node:path";
 import ts from "typescript";
 
 const root = path.resolve(import.meta.dirname, "..");
-const entries = ["src/react/ui/index.ts", "src/react/client/index.ts"].map((p) => path.join(root, p));
+const entries = ["src/react/ui/index.ts", "src/react/blocks/index.ts"].map((p) => path.join(root, p));
 
 const configPath = path.join(root, "tsconfig.json");
 const config = ts.getParsedCommandLineOfConfigFile(configPath, {}, { ...ts.sys, onUnRecoverableConfigFileDiagnostic: () => {} });
