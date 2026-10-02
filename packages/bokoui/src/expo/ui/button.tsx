@@ -1,7 +1,8 @@
 import { type ReactNode } from "react";
 import { ActivityIndicator, Pressable, Text as RNText, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
 import { resolveTone, type Action, type Color, type Size, type Variant } from "@/core";
-import { useTheme } from "../theme";
+import { useTheme } from "@/expo";
+import { effectStyle } from "@/expo";
 import { applyMix } from "../tokens";
 import { sizes, tone } from "../internal/shared";
 
@@ -49,6 +50,19 @@ export function Button({
     return pressed ? c.soft : "transparent"; // ghost
   };
   const borderColor = solid ? c.border : variant === "outline" ? c.ink : "transparent";
+  // The style's material: a glossy fill for solid buttons, a raised (pressed: sunken) body for soft and outline ones.
+  const fx = tokens.effects;
+  const raised = variant === "soft" || variant === "outline";
+  const material = (pressed: boolean): ViewStyle | null =>
+    solid && fx.solid
+      ? { ...effectStyle(fx.solid), ...(pressed && fx.pressed?.shadow ? { boxShadow: fx.pressed.shadow } : null) }
+      : raised && fx.control
+        ? {
+            // A material body is a surface, not a tint of the tone: the tone only colors the label.
+            backgroundColor: pressed ? tokens.muted : tokens.surface,
+            ...effectStyle(pressed && fx.pressed ? { ...fx.control, ...fx.pressed } : fx.control),
+          }
+        : null;
 
   return (
     <Pressable
@@ -69,6 +83,7 @@ export function Button({
           borderWidth: tokens.borderWidth,
           borderColor,
           backgroundColor: bg(pressed),
+          ...material(pressed),
           opacity: off ? tokens.disabledOpacity : 1,
           alignSelf: fullWidth ? "stretch" : "flex-start",
         },
@@ -82,6 +97,7 @@ export function Button({
             color: fg,
             fontSize: s.font,
             fontWeight: tokens.btnWeight,
+            fontFamily: tokens.fontFamily,
             textTransform: tokens.btnTransform,
             letterSpacing: tokens.btnTracking * s.font,
             textDecorationLine: variant === "link" ? "underline" : "none",

@@ -39,6 +39,7 @@ export function Heading({ as = "h2", size, style, ...props }: HeadingProps) {
       style={[
         {
           color: tokens.fg,
+          fontFamily: tokens.fontFamily,
           fontSize: px,
           lineHeight: px * 1.2,
           fontWeight: tokens.headingWeight,
@@ -67,6 +68,7 @@ export function Text({ variant = "body", muted = false, style, ...props }: TextP
       style={[
         {
           color: muted ? tokens.mutedFg : tokens.fg,
+          fontFamily: tokens.fontFamily,
           fontSize: px,
           lineHeight: px * tokens.textLeading,
         },

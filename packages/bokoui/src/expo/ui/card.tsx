@@ -1,7 +1,7 @@
 import { View, type StyleProp, type ViewProps, type ViewStyle } from "react-native";
 import { type CardPadding, type CardVariant } from "@/core";
 import { useTheme } from "../theme";
-import { surface } from "../internal/shared";
+import { Surface } from "../internal/surface";
 
 export interface CardProps extends Omit<ViewProps, "style"> {
   variant?: CardVariant;
@@ -19,23 +19,18 @@ const cardPad: Record<CardPadding, { pad: number; gap: number }> = {
 export function Card({ variant = "outline", padding = "md", style, ...props }: CardProps) {
   const { tokens } = useTheme();
   const { pad, gap } = cardPad[padding];
-  return (
-    <View
-      style={[
-        {
-          alignSelf: "stretch",
-          padding: pad,
-          gap,
-          borderRadius: tokens.radiusCard,
-          borderWidth: tokens.borderWidth,
-          borderColor: variant === "filled" ? "transparent" : tokens.border,
-          backgroundColor: variant === "filled" ? tokens.muted : tokens.surface,
-        },
-        style,
-      ]}
-      {...props}
-    />
-  );
+  const base: ViewStyle = {
+    alignSelf: "stretch",
+    padding: pad,
+    gap,
+    borderRadius: tokens.radiusCard,
+    borderWidth: tokens.borderWidth,
+    borderColor: variant === "filled" ? "transparent" : tokens.border,
+    backgroundColor: variant === "filled" ? tokens.muted : tokens.surface,
+  };
+  // A filled card is a flat tint; only the outlined card takes the style's material (shadows, glass).
+  if (variant === "filled") return <View style={[base, style]} {...props} />;
+  return <Surface kind="card" style={base} overrideStyle={style} {...props} />;
 }
 
 export function CardHeader({ style, ...props }: ViewProps) {

@@ -8,7 +8,7 @@ export default defineConfig({
   clean: true,
   tsconfig: "tsconfig.json",
   // Framework runtimes are peers of the matching entry point, never bundled.
-  external: ["react", "react-dom", "react/jsx-runtime", "vue", "react-native"],
+  external: ["react", "react-dom", "react/jsx-runtime", "vue", "react-native", "expo-blur"],
   entry: {
     core: "src/core/index.ts",
     "react/index": "src/react/index.ts",

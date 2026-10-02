@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { Modal as RNModal, Pressable, Text as RNText, View } from "react-native";
 import { type ModalPlacement, type ModalSize } from "@/core";
 import { useTheme } from "../theme";
+import { effectStyle } from "../effects";
 import { surface } from "../internal/shared";
 
 export interface ModalProps {
@@ -75,6 +76,7 @@ export function Modal({
             borderColor: tokens.border,
             backgroundColor: tokens.surface,
             overflow: "hidden",
+            ...effectStyle(tokens.effects.card, { opaque: true }),
             ...edge.card,
           }}
         >

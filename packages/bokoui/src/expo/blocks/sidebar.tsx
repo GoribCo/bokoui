@@ -1,8 +1,9 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { Pressable, ScrollView, Text as RNText, View, type StyleProp, type ViewStyle } from "react-native";
 import { resolveTone, type Action, type Color } from "@/core";
-import { useTheme } from "../theme";
+import { useTheme } from "@/expo";
 import { tone, type Tone } from "../internal/shared";
+import { Surface } from "@/expo";
 
 const SidebarContext = createContext<{ collapsed: boolean; tone: Tone } | null>(null);
 
@@ -21,12 +22,15 @@ export function Sidebar({ collapsed = false, color = "primary", action, label = 
   const c = tone(tokens, resolveTone(color, action));
   return (
     <SidebarContext.Provider value={{ collapsed, tone: c }}>
-      <View
+      <Surface
+        kind="card"
         accessibilityLabel={label}
-        style={[{ width: collapsed ? 64 : 256, alignSelf: "stretch", borderRightWidth: tokens.borderWidth, borderColor: tokens.border, backgroundColor: tokens.surface }, style]}
+        style={{ width: collapsed ? 64 : 256, alignSelf: "stretch", borderRightWidth: tokens.borderWidth, borderColor: tokens.border, backgroundColor: tokens.surface }}
+        // The material gives a panel; a sidebar only has its right edge and square corners.
+        overrideStyle={[{ borderRadius: 0, borderWidth: 0, borderRightWidth: tokens.borderWidth }, style]}
       >
         <ScrollView contentContainerStyle={{ padding: collapsed ? 8 : 12, gap: 4, alignItems: collapsed ? "center" : "stretch" }}>{children}</ScrollView>
-      </View>
+      </Surface>
     </SidebarContext.Provider>
   );
 }

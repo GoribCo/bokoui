@@ -53,7 +53,7 @@ export function Input({
           setFocused(false);
           onBlur?.(e);
         }}
-        style={[{ flex: 1, color: tokens.fg, fontSize: s.font, paddingVertical: 0 }, style]}
+        style={[{ flex: 1, color: tokens.fg, fontFamily: tokens.fontFamily, fontSize: s.font, paddingVertical: 0 }, style]}
       />
       {endAdornment}
     </View>

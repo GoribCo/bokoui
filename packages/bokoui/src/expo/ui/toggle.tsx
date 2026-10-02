@@ -8,6 +8,8 @@ export interface ToggleProps {
   onCheckedChange?: (checked: boolean) => void;
   /** Text next to the control; the whole row is pressable. */
   label?: string;
+  /** Keep `label` as the accessible name of a `Switch` but do not draw it (the row already says it). */
+  hideLabel?: boolean;
   size?: Size;
   color?: Color;
   action?: Action;
@@ -74,7 +76,7 @@ function ToggleRow({
 export const Checkbox = (props: ToggleProps) => <ToggleRow role="checkbox" {...props} />;
 export const Radio = (props: ToggleProps) => <ToggleRow role="radio" {...props} />;
 
-export function Switch({ checked, onCheckedChange, label, color = "primary", action, invalid, disabled, style }: ToggleProps) {
+export function Switch({ checked, onCheckedChange, label, hideLabel = false, color = "primary", action, invalid, disabled, style }: ToggleProps) {
   const { tokens } = useTheme();
   const c = tone(tokens, invalid ? "danger" : resolveTone(color, action));
   return (
@@ -88,7 +90,7 @@ export function Switch({ checked, onCheckedChange, label, color = "primary", act
         trackColor={{ false: tokens.muted, true: c.base }}
         thumbColor={checked ? c.fg : tokens.mutedFg}
       />
-      {label ? <RNText style={{ color: tokens.fg, fontSize: 14, opacity: disabled ? tokens.disabledOpacity : 1 }}>{label}</RNText> : null}
+      {label && !hideLabel ? <RNText style={{ color: tokens.fg, fontFamily: tokens.fontFamily, fontSize: 14, opacity: disabled ? tokens.disabledOpacity : 1 }}>{label}</RNText> : null}
     </View>
   );
 }

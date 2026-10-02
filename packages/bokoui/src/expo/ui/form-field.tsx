@@ -12,7 +12,7 @@ export function Label({ required, disabled, children, style, ...props }: LabelPr
   const { tokens } = useTheme();
   return (
     <RNText
-      style={[{ color: tokens.fg, fontSize: 14, fontWeight: "500", opacity: disabled ? tokens.disabledOpacity : 1 }, style]}
+      style={[{ color: tokens.fg, fontFamily: tokens.fontFamily, fontSize: 14, fontWeight: "500", opacity: disabled ? tokens.disabledOpacity : 1 }, style]}
       {...props}
     >
       {children}

@@ -1,15 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useColorScheme } from "react-native";
-import {
-  defaultTheme,
-  modes,
-  themes,
-  type CustomThemes,
-  type ResolvedMode,
-  type ThemeId,
-  type ThemeMode,
-} from "@/core";
-import { resolveTokens, type ResolvedTokens } from "./tokens";
+import { defaultTheme, modes, themes, type ResolvedMode, type ThemeId, type ThemeMode } from "@/core";
+import { nativeStyles } from "./styles";
+import { resolveTokens, type NativeCustomThemes, type ResolvedTokens } from "./tokens";
 
 /** AsyncStorage-compatible persistence (optional). */
 export interface ThemeStorage {
@@ -31,7 +24,7 @@ const ThemeContext = createContext<NativeThemeContextValue | null>(null);
 
 const STYLE_KEY = "bokoui-theme-style";
 const MODE_KEY = "bokoui-theme-mode";
-const EMPTY: CustomThemes = {};
+const EMPTY: NativeCustomThemes = {};
 
 export function ThemeProvider({
   children,
@@ -42,7 +35,7 @@ export function ThemeProvider({
 }: {
   children: ReactNode;
   /** User-defined themes keyed by id. Pass a stable reference. */
-  customThemes?: CustomThemes;
+  customThemes?: NativeCustomThemes;
   defaultStyle?: ThemeId;
   defaultMode?: ThemeMode;
   /** e.g. `@react-native-async-storage/async-storage`; without it the choice lasts for the session. */
@@ -52,9 +45,11 @@ export function ThemeProvider({
   const [mode, setModeState] = useState<ThemeMode>(defaultMode);
   const system = useColorScheme();
 
+  // The styles that ship with `bokoui/expo` (glass, clay, ...) come first; yours may replace one by id.
+  const allThemes = useMemo(() => ({ ...nativeStyles, ...customThemes }), [customThemes]);
   const options = useMemo(
-    () => [...themes, ...Object.entries(customThemes).map(([id, t]) => ({ id, label: t.label }))],
-    [customThemes],
+    () => [...themes, ...Object.entries(allThemes).map(([id, t]) => ({ id, label: t.label }))],
+    [allThemes],
   );
 
   useEffect(() => {
@@ -86,7 +81,7 @@ export function ThemeProvider({
   );
 
   const resolvedMode: ResolvedMode = mode === "system" ? (system === "dark" ? "dark" : "light") : mode;
-  const tokens = useMemo(() => resolveTokens(style, resolvedMode, customThemes), [style, resolvedMode, customThemes]);
+  const tokens = useMemo(() => resolveTokens(style, resolvedMode, allThemes), [style, resolvedMode, allThemes]);
 
   const value = useMemo(
     () => ({ style, mode, resolvedMode, themes: options, tokens, setStyle, setMode }),

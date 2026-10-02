@@ -1,6 +1,7 @@
 import type { ViewStyle } from "react-native";
 import type { InputVariant, Size } from "@/core";
 import type { ResolvedTokens } from "../tokens";
+import { effectStyle } from "../effects";
 import { sizes, type Tone } from "./shared";
 
 /** Box of a text-field-like control (Input, Select, DatePicker): same look in every state. */
@@ -11,7 +12,7 @@ export function fieldStyle(
 ): ViewStyle {
   const s = sizes[size];
   const flushed = variant === "flushed";
-  return {
+  const base: ViewStyle = {
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "stretch",
@@ -25,4 +26,8 @@ export function fieldStyle(
     backgroundColor: flushed ? "transparent" : variant === "filled" && !focused ? tokens.muted : tokens.field,
     opacity: disabled ? tokens.disabledOpacity : 1,
   };
+  // The style's material for text fields (a sunken well, a frosted pane); focus and invalid keep their ring color.
+  const fx = effectStyle(tokens.effects.field);
+  const ring = invalid || focused ? { borderColor: base.borderColor } : null;
+  return flushed ? base : { ...base, ...fx, ...ring };
 }

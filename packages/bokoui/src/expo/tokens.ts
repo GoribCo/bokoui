@@ -1,4 +1,5 @@
-import { defaultTheme, type CustomThemes, type ResolvedMode, type ThemeId } from "@/core";
+import { defaultTheme, type CustomTheme, type ResolvedMode, type ThemeId, type TokenMap } from "@/core";
+import type { ThemeEffects } from "./effects";
 import { generatedTokens } from "./tokens.generated";
 
 /** Design tokens resolved for React Native: numbers instead of rem/px strings. */
@@ -32,9 +33,28 @@ export interface NativeTokens {
   btnTracking: number;
   hoverMix: string;
   activeMix: string;
+  /** Surface materials of the style: shadows, gradients, blur (see `effects.ts`). Empty for the classic styles. */
+  effects: ThemeEffects;
+  /** Font family for all text, from `effects.fontFamily`; `undefined` keeps the platform font. */
+  fontFamily: string | undefined;
   /** Raw token map (web values), for anything not modeled above. */
   raw: Record<string, string>;
 }
+
+/** A style defined in code: the web `CustomTheme` (a base style plus token overrides) and its surface materials. */
+export type NativeTokenMap = TokenMap & { "radius-card"?: string };
+
+export interface NativeCustomTheme extends Omit<CustomTheme, "tokens" | "light" | "dark"> {
+  tokens?: NativeTokenMap;
+  light?: NativeTokenMap;
+  dark?: NativeTokenMap;
+  /** Materials for both modes. */
+  effects?: ThemeEffects;
+  lightEffects?: ThemeEffects;
+  darkEffects?: ThemeEffects;
+}
+
+export type NativeCustomThemes = Record<string, NativeCustomTheme>;
 
 export type ToneName =
   | "primary"
@@ -60,7 +80,7 @@ const weight = (v: string | undefined, fallback: NativeTokens["btnWeight"]) => (
 export function resolveTokens(
   style: ThemeId,
   mode: ResolvedMode,
-  customThemes: CustomThemes = {},
+  customThemes: NativeCustomThemes = {},
 ): NativeTokens & Record<ToneName | `${ToneName}Fg`, string> {
   const custom = customThemes[style];
   const baseId = custom ? (custom.base ?? defaultTheme) : style;
@@ -69,6 +89,8 @@ export function resolveTokens(
     ...(generatedTokens[baseId] ?? generatedTokens[defaultTheme])[mode],
     ...(custom ? { ...custom.tokens, ...custom[mode] } : {}),
   } as Record<string, string>;
+
+  const effects: ThemeEffects = custom ? { ...custom.effects, ...(mode === "dark" ? custom.darkEffects : custom.lightEffects) } : {};
 
   const tones = (["primary", "secondary", "accent", "neutral", "success", "warning", "danger", "info"] as const).reduce(
     (acc, t) => ({ ...acc, [t]: raw[t], [`${t}Fg`]: raw[`${t}-fg`] }),
@@ -103,6 +125,8 @@ export function resolveTokens(
     btnTracking: em(raw["btn-tracking"]),
     hoverMix: raw["hover-mix"] ?? "black 10%",
     activeMix: raw["active-mix"] ?? "black 18%",
+    effects,
+    fontFamily: effects.fontFamily,
     raw,
   };
 }

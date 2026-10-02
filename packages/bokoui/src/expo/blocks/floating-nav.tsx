@@ -1,6 +1,7 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { Pressable, View, type StyleProp, type ViewStyle } from "react-native";
-import { useTheme } from "../theme";
+import { useTheme } from "@/expo";
+import { Surface } from "@/expo";
 
 const FloatingNavContext = createContext(false);
 
@@ -25,32 +26,28 @@ export function FloatingNav({ label = "Main", bottomInset = 0, children, style }
   return (
     <FloatingNavContext.Provider value>
       <View style={{ paddingHorizontal: 16, paddingTop: 8, paddingBottom: Math.max(bottomInset, 12) }}>
-        <View
+        <Surface
+          kind="card"
           accessibilityRole="tablist"
           accessibilityLabel={label}
-          style={[
-            {
-              flexDirection: "row",
-              alignSelf: "center",
-              width: "100%",
-              maxWidth: 448,
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 999,
-              backgroundColor: tokens.surface,
-              borderWidth: tokens.borderWidth,
-              borderColor: tokens.border,
-              shadowColor: "#000",
-              shadowOpacity: 0.08,
-              shadowRadius: 16,
-              shadowOffset: { width: 0, height: 4 },
-              elevation: 4,
-            },
-            style,
-          ]}
+          style={{
+            flexDirection: "row",
+            alignSelf: "center",
+            width: "100%",
+            maxWidth: 448,
+            paddingHorizontal: 8,
+            paddingVertical: 4,
+            borderRadius: 999,
+            backgroundColor: tokens.surface,
+            borderWidth: tokens.borderWidth,
+            borderColor: tokens.border,
+            // Without a style material the pill gets a plain drop shadow.
+            ...(tokens.effects.card ? null : { shadowColor: "#000", shadowOpacity: 0.08, shadowRadius: 16, shadowOffset: { width: 0, height: 4 }, elevation: 4 }),
+          }}
+          overrideStyle={style}
         >
           {children}
-        </View>
+        </Surface>
       </View>
     </FloatingNavContext.Provider>
   );
