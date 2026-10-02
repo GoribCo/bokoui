@@ -139,3 +139,13 @@ Verified on the Expo web build (390, 768 and 1280 px, all 8 styles in both modes
 - **`ThemeProvider` has no "ready" flag.** It reads its saved style and mode after mounting; the app pre-reads the same AsyncStorage keys (`lib/theme-defaults.ts`) so the first frame is right.
 - **axe findings that come from the library:** `Select` (`role="combobox"` without `aria-controls`) and `Table` (`role="grid"` without row structure) on the web build.
 - `Link` has no `external` prop; there is no Icon on Expo (the app uses `lucide-react-native`).
+
+## Expo-only design styles and materials
+
+`bokoui/expo` ships 12 styles on top of the 8 shared ones, defined in code in `packages/bokoui/src/expo/styles/` (colors through the web token names, plus surface *effects*): Minimalism, Bento, Material 3, Soft UI, Neumorphism, Claymorphism, Skeuomorphism, Terminal, Synthwave, Glassmorphism, Liquid Glass, Aurora. `ThemeProvider` lists them with the built-in ones; pass your own in `customThemes` (an `NativeCustomTheme` may also set `effects`, `lightEffects`, `darkEffects`).
+
+- **Effects** (`src/expo/effects.ts`): per surface kind (`card`, `control`, `pressed`, `field`, `solid`) a fill, a gradient, comma-separated shadows (outer and `inset`), blur and saturation; plus a `page` gradient and a `fontFamily`. They are CSS-like strings: the web build passes them to CSS, devices parse `boxShadow` and `experimental_backgroundImage` (React Native 0.86).
+- **Used by:** Card, Button (solid, soft, outline), text fields, Modal/Drawer card (opaque), Sidebar, FloatingNav; text components take `fontFamily`. `Surface` and `Backdrop` are exported from `bokoui/expo/ui` for your own panels and the page behind the app.
+- **Blur on a device** needs the optional peer `expo-blur`; without it a glass surface keeps its translucent fill. On the web it is `backdropFilter`.
+- **Not done:** the web packages (React, Vue) do not have these styles; they need new shadow/blur/gradient tokens in `styles/tokens.css` first. `npm run audit` does not cover them (axe on the Expo web build did: no contrast findings for the 20 styles in both modes; translucent glass cannot be judged by axe, text colors are chosen for the page behind). Typography is covered by `fontFamily` only where bokoui draws the text (Text, Heading, Button, Input, Label, Switch).
+- **Unverified on a device:** `boxShadow` strings with `inset`, `experimental_backgroundImage` radial gradients and `expo-blur` were checked on the web build only.
