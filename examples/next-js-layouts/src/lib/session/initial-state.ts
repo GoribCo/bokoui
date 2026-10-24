@@ -21,17 +21,18 @@ export interface InitialState {
  * Cached per request, so the root and dashboard layouts share one read.
  */
 export const getInitialState = cache(async (): Promise<InitialState> => {
-  const [session, cookieStore] = await Promise.all([getSession(), cookies()]);
+  // Static demo: pages are built once, so there is no request to read cookies from.
+  const [session, cookieStore] = await Promise.all([getSession(), process.env.NEXT_PUBLIC_DEMO === "true" ? undefined : cookies()]);
   return {
     session,
     initialOrganizationId: session
       ? resolveActiveOrganizationId(
           session.organizations,
-          cookieStore.get(ACTIVE_ORGANIZATION_COOKIE)?.value,
+          cookieStore?.get(ACTIVE_ORGANIZATION_COOKIE)?.value,
           session.defaultOrganizationId,
         )
       : null,
-    initialActiveRole: parseRoleCookie(cookieStore.get(ACTIVE_ROLE_COOKIE)?.value),
-    initialUi: { sidebarCollapsed: parseSidebarCookie(cookieStore.get(SIDEBAR_COOKIE)?.value) },
+    initialActiveRole: parseRoleCookie(cookieStore?.get(ACTIVE_ROLE_COOKIE)?.value),
+    initialUi: { sidebarCollapsed: parseSidebarCookie(cookieStore?.get(SIDEBAR_COOKIE)?.value) },
   };
 });

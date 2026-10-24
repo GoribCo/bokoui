@@ -3,4 +3,5 @@ import { createPublicProfileRoute } from "@/components/organization/public-profi
 const route = createPublicProfileRoute("hospital");
 
 export const generateMetadata = route.generateMetadata;
+export const generateStaticParams = route.generateStaticParams;
 export default route.Page;

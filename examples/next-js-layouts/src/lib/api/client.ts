@@ -79,6 +79,14 @@ export class ApiClient {
   }
 
   private async send<T>(path: string, init: RequestInit, cache?: CacheOptions) {
+    // Static demo: no server to call, so the sample backend runs in-process (browser and build alike).
+    if (process.env.NEXT_PUBLIC_DEMO === "true") {
+      const { handleApiRequest } = await import("@/api/router");
+      const url = new URL(path, "http://demo.invalid");
+      const response = await handleApiRequest(new Request(url, init), url.pathname.split("/").filter(Boolean));
+      const text = await response.text();
+      return { response, body: (text ? JSON.parse(text) : {}) as Envelope<T> };
+    }
     const { baseUrl, cookie } = await this.target(Boolean(cache));
     const response = await fetch(`${baseUrl}${path}`, {
       ...init,

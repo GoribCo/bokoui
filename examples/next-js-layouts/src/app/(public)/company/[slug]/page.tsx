@@ -3,4 +3,5 @@ import { createPublicProfileRoute } from "@/components/organization/public-profi
 const route = createPublicProfileRoute("company");
 
 export const generateMetadata = route.generateMetadata;
+export const generateStaticParams = route.generateStaticParams;
 export default route.Page;

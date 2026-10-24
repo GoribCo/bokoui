@@ -33,6 +33,12 @@ function level(names: string[][], depth: number, path: string[]): MenuItem[] {
 }
 
 /** About 700 items, five levels deep: stress data for the navigation UI. */
+/** Every `/departments/...` path of the tree, for the static demo to build ahead. */
+export const departmentPaths = (): string[][] => {
+  const walk = (items: MenuItem[]): string[][] => items.flatMap((item) => [item.href!.replace("/departments/", "").split("/"), ...walk(item.children ?? [])]);
+  return walk(departmentsTree());
+};
+
 function departmentsTree(): MenuItem[] {
   const tree = level([departments, wards, units, teams, resources], 0, []);
   // Oncology is visible to doctors only.

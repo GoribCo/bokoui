@@ -46,12 +46,24 @@ const securityHeaders = [
   ...(isProduction ? [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" }] : []),
 ];
 
-const nextConfig: NextConfig = {
-  // Enables `forbidden()` and forbidden.tsx (a real 403 for role-restricted pages).
-  experimental: { authInterrupts: true },
-  async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
-  },
-};
+/** Static demo for GitHub Pages: `NEXT_PUBLIC_DEMO=true NEXT_PUBLIC_BASE_PATH=/bokoui/next-layouts` after `scripts/prepare-static.mjs`. */
+const isDemo = process.env.NEXT_PUBLIC_DEMO === "true";
+
+const nextConfig: NextConfig = isDemo
+  ? {
+      output: "export",
+      basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
+      trailingSlash: true,
+      images: { unoptimized: true },
+      experimental: { authInterrupts: true },
+      turbopack: { resolveAlias: { "node:crypto": "./demo/crypto-stub.ts" } },
+    }
+  : {
+      // Enables `forbidden()` and forbidden.tsx (a real 403 for role-restricted pages).
+      experimental: { authInterrupts: true },
+      async headers() {
+        return [{ source: "/:path*", headers: securityHeaders }];
+      },
+    };
 
 export default withNextIntl(nextConfig);

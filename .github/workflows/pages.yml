@@ -76,6 +76,18 @@ jobs:
           npm install $NPM
           npx expo export --platform web
           cp -r dist ../../site/expo
+      - name: Next.js layouts (static demo)
+        working-directory: examples/next-js-layouts
+        env:
+          NEXT_PUBLIC_DEMO: "true"
+          NEXT_PUBLIC_BASE_PATH: ${{ env.BASE }}/next-layouts
+        run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
+          npm install $NPM
+          node scripts/prepare-static.mjs
+          npx next build
+          cp -r out ../../site/next-layouts
       - name: Expo layouts (web)
         working-directory: examples/expo-js-layouts
         continue-on-error: true

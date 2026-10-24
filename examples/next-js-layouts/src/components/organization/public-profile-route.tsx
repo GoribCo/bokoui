@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicProfile } from "@/components/organization/public-profile";
 import { publicOrganizationPath } from "@/lib/organization/organization-types";
-import { getPublicOrganization } from "@/lib/organization/public-organization";
+import { getPublicOrganization, listPublicSlugs } from "@/lib/organization/public-organization";
 import { siteConfig } from "@/lib/config/site";
 import { buildMetadata } from "@/lib/seo";
 import type { OrganizationType, PublicOrganization } from "@/lib/types";
@@ -62,5 +62,11 @@ export function createPublicProfileRoute(type: OrganizationType) {
     );
   }
 
-  return { generateMetadata, Page };
+  /** Static demo only: pages are built ahead for every sample organization of this type. */
+  async function generateStaticParams() {
+    if (process.env.NEXT_PUBLIC_DEMO !== "true") return [];
+    return listPublicSlugs(type);
+  }
+
+  return { generateMetadata, Page, generateStaticParams };
 }

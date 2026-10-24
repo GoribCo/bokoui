@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { SignInForm } from "@/components/auth/sign-in-form";
-import { RETURN_TO_PARAM } from "@/lib/config/auth";
+import { DASHBOARD_PATH, RETURN_TO_PARAM } from "@/lib/config/auth";
 import { safeReturnPath } from "@/lib/auth/paths";
 import { buildMetadata } from "@/lib/seo";
 
@@ -12,6 +13,8 @@ export async function generateMetadata() {
 export default async function SignInPage({
   searchParams,
 }: PageProps<"/sign-in">) {
+  // Static demo: nobody signs in, the dashboard is open.
+  if (process.env.NEXT_PUBLIC_DEMO === "true") redirect(DASHBOARD_PATH);
   const params = await searchParams;
   const next = params[RETURN_TO_PARAM];
   return (

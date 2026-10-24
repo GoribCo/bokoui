@@ -76,7 +76,7 @@ function json(body: unknown, status: number, cookies: ApiCookie[] = []) {
 /** Runs the matching handler and wraps its result in the `{ success, results, meta }` envelope. */
 export async function handleApiRequest(request: Request, segments: string[]): Promise<Response> {
   // The sample backend has no real users or storage: it must never serve production traffic by accident.
-  if (process.env.NODE_ENV === "production" && process.env.ALLOW_SAMPLE_API !== "true") {
+  if (process.env.NODE_ENV === "production" && process.env.ALLOW_SAMPLE_API !== "true" && process.env.NEXT_PUBLIC_DEMO !== "true") {
     return json({ success: false, message: "The sample API is disabled in production", code: "SAMPLE_API_DISABLED" }, 503);
   }
   const candidates = routes.map((route) => ({ route, params: match(route, segments) })).filter((entry) => entry.params);
