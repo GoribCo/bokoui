@@ -16,6 +16,8 @@ export default defineNuxtConfig({
       urlExpo: 'http://localhost:3000',
     },
   },
+  // The crawler follows the platform switcher's links to the other demos (served by other builds); skip them.
+  nitro: { prerender: { ignore: ['/bokoui/react', '/bokoui/expo'] } },
   app: {
     // GitHub Pages serves the Vue demo under /bokoui/vue/ (NUXT_APP_BASE_URL is set in CI).
     baseURL: process.env.NUXT_APP_BASE_URL ?? '/',
