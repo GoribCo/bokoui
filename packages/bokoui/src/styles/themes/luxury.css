@@ -1,0 +1,48 @@
+/* Luxury Typography: elegant serif, black and gold, wide letter-spacing. */
+:root[data-theme="luxury"] {
+  --bokoui-radius-control: 0.125rem;
+  --bokoui-radius-button: 0.125rem;
+  --bokoui-radius-card: 0.25rem;
+  --bokoui-border-width: 1px;
+  --bokoui-font-heading: "Playfair Display", Georgia, serif;
+  --bokoui-heading-weight: 600;
+  --bokoui-heading-tracking: 0.04em;
+  --bokoui-btn-tracking: 0.08em;
+  --bokoui-btn-transform: uppercase;
+}
+
+:root[data-theme="luxury"]:not([data-mode="dark"]) {
+  --bokoui-bg: #f8f5ef;
+  --bokoui-fg: #141414;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #ece4d2;
+  --bokoui-muted-fg: #514a3a;
+  --bokoui-border: #141414;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #141414;
+  --bokoui-ring: #9a7b2e;
+  --bokoui-primary: #9a7b2e;
+  --bokoui-primary-fg: #141414;
+  --bokoui-secondary: #141414;
+  --bokoui-secondary-fg: #f8f5ef;
+  --bokoui-accent: #5a3e1a;
+  --bokoui-accent-fg: #ffffff;
+}
+
+:root[data-theme="luxury"][data-mode="dark"] {
+  --bokoui-bg: #0c0c0c;
+  --bokoui-fg: #f0e6c8;
+  --bokoui-surface: #161616;
+  --bokoui-muted: #201f1a;
+  --bokoui-muted-fg: #c9bb94;
+  --bokoui-border: #d4af37;
+  --bokoui-field: #0c0c0c;
+  --bokoui-field-border: #d4af37;
+  --bokoui-ring: #d4af37;
+  --bokoui-primary: #d4af37;
+  --bokoui-primary-fg: #141200;
+  --bokoui-secondary: #f0e6c8;
+  --bokoui-secondary-fg: #0c0c0c;
+  --bokoui-accent: #c08a3e;
+  --bokoui-accent-fg: #140a00;
+}

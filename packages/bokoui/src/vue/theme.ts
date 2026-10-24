@@ -17,7 +17,7 @@ import {
   type ResolvedMode,
   type ThemeId,
   type ThemeMode,
-} from "../core";
+} from "@/core";
 import { Button } from "./button";
 
 // Client-only state. Server render and first client render use the defaults (no hydration

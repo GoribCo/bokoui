@@ -1,6 +1,5 @@
 /** Screens of this demo, in navigation order. The platform switcher uses the same list. */
 export const pages = [
-  { href: '/setup', label: 'Setup' },
   { href: '/', label: 'Basics' },
   { href: '/playground', label: 'Overview' },
   { href: '/forms', label: 'Forms' },

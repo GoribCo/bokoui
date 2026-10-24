@@ -1,0 +1,50 @@
+/* Scrapbook: collage/craft paper, warm cutout tones, playful handwritten headings. */
+:root[data-theme="scrapbook"] {
+  --bokoui-radius-control: 0.9rem;
+  --bokoui-radius-button: 0.9rem;
+  --bokoui-radius-card: 1rem;
+  --bokoui-border-width: 2px;
+  --bokoui-font-heading: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+  --bokoui-heading-weight: 700;
+  --bokoui-heading-tracking: 0;
+}
+
+:root[data-theme="scrapbook"]:not([data-mode="dark"]) {
+  --bokoui-bg: #f8ecd2;
+  --bokoui-fg: #3a2a1a;
+  --bokoui-surface: #fffaf0;
+  --bokoui-muted: #f0dfb8;
+  --bokoui-muted-fg: #6b5234;
+  --bokoui-border: #3a2a1a;
+  --bokoui-field: #fffaf0;
+  --bokoui-field-border: #8a6a3a;
+  --bokoui-ring: #a8431f;
+  --bokoui-primary: #a8431f;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #3f6b4e;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #8a5c00;
+  --bokoui-accent-fg: #ffffff;
+  --bokoui-warning: #7a5000;
+  --bokoui-warning-fg: #ffffff;
+  --bokoui-danger: #b31f1f;
+  --bokoui-danger-fg: #ffffff;
+}
+
+:root[data-theme="scrapbook"][data-mode="dark"] {
+  --bokoui-bg: #20160e;
+  --bokoui-fg: #f6e8cf;
+  --bokoui-surface: #2b1f14;
+  --bokoui-muted: #352619;
+  --bokoui-muted-fg: #cdb795;
+  --bokoui-border: #5a4228;
+  --bokoui-field: #20160e;
+  --bokoui-field-border: #9a7a52;
+  --bokoui-ring: #ff8a5c;
+  --bokoui-primary: #ff8a5c;
+  --bokoui-primary-fg: #2a0f04;
+  --bokoui-secondary: #7fcf9e;
+  --bokoui-secondary-fg: #04200f;
+  --bokoui-accent: #ffcf52;
+  --bokoui-accent-fg: #241a00;
+}

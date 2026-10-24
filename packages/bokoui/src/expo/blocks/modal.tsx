@@ -13,7 +13,7 @@ export interface ModalProps {
   footer?: ReactNode;
   children?: ReactNode;
   size?: ModalSize;
-  /** `center` is a dialog; `left`, `right` and `bottom` anchor it to an edge (see `Drawer`). */
+  /** `center` is a dialog; `left`, `right`, `top` and `bottom` anchor it to an edge (see `Drawer`). */
   placement?: ModalPlacement;
   closeOnBackdrop?: boolean;
   showClose?: boolean;
@@ -29,6 +29,11 @@ function placementStyles(placement: ModalPlacement, radius: number) {
       return { backdrop: { alignItems: "flex-end", padding: 0 }, card: { height: "100%", maxHeight: "100%", maxWidth: 384, borderRadius: 0, borderRightWidth: 0 } } as const;
     case "left":
       return { backdrop: { alignItems: "flex-start", padding: 0 }, card: { height: "100%", maxHeight: "100%", maxWidth: 384, borderRadius: 0, borderLeftWidth: 0 } } as const;
+    case "top":
+      return {
+        backdrop: { justifyContent: "flex-start", padding: 0 },
+        card: { maxHeight: "85%", maxWidth: "100%", borderTopLeftRadius: 0, borderTopRightRadius: 0, borderBottomLeftRadius: radius, borderBottomRightRadius: radius, borderTopWidth: 0 },
+      } as const;
     case "bottom":
       return {
         backdrop: { justifyContent: "flex-end", padding: 0 },
@@ -109,9 +114,9 @@ export function Modal({
 }
 
 export type DrawerProps = Omit<ModalProps, "placement" | "size"> & {
-  /** Edge it slides from. Default `right`. */
+  /** Edge it slides from: `left`, `right`, `top` or `bottom`. Default `bottom` (the native bottom-sheet convention on phones). */
   side?: Exclude<ModalPlacement, "center">;
 };
 
-/** A `Modal` anchored to an edge. */
-export const Drawer = ({ side = "right", ...props }: DrawerProps) => <Modal placement={side} {...props} />;
+/** A `Modal` anchored to an edge. Defaults to a bottom sheet, matching native mobile convention. */
+export const Drawer = ({ side = "bottom", ...props }: DrawerProps) => <Modal placement={side} {...props} />;

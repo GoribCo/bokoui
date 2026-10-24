@@ -157,10 +157,10 @@ export function PopoverDemo() {
 }
 
 export function DrawerDemo() {
-  const [side, setSide] = useState<"right" | "left" | "bottom" | null>(null);
+  const [side, setSide] = useState<"right" | "left" | "top" | "bottom" | null>(null);
   return (
     <div className="flex flex-wrap items-center gap-3">
-      {(["right", "left", "bottom"] as const).map((s) => (
+      {(["right", "left", "top", "bottom"] as const).map((s) => (
         <Button key={s} variant="outline" onClick={() => setSide(s)}>
           {s === "bottom" ? "Bottom sheet" : `${s[0].toUpperCase()}${s.slice(1)} drawer`}
         </Button>

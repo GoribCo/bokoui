@@ -1,7 +1,7 @@
 "use client";
 
 import { cn, modes } from "@/core";
-import { Button } from "../ui/button";
+import { Button } from "@/react";
 import { useTheme } from "./theme-provider";
 
 const modeLabels = { light: "Light", dark: "Dark", system: "System" } as const;

@@ -1,0 +1,47 @@
+/* Cyberpunk: neon magenta/cyan on near-black, Blade Runner-adjacent. */
+:root[data-theme="cyberpunk"] {
+  --bokoui-radius-control: 0.25rem;
+  --bokoui-radius-button: 0.25rem;
+  --bokoui-radius-card: 0.5rem;
+  --bokoui-border-width: 1px;
+  --bokoui-heading-weight: 700;
+  --bokoui-heading-tracking: 0.04em;
+  --bokoui-heading-transform: uppercase;
+  --bokoui-btn-transform: uppercase;
+}
+
+:root[data-theme="cyberpunk"]:not([data-mode="dark"]) {
+  --bokoui-bg: #f6eefc;
+  --bokoui-fg: #180a26;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #ece0fa;
+  --bokoui-muted-fg: #4a3466;
+  --bokoui-border: #180a26;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #5a3f85;
+  --bokoui-ring: #b000c9;
+  --bokoui-primary: #b000c9;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #006e8f;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #d1004f;
+  --bokoui-accent-fg: #ffffff;
+}
+
+:root[data-theme="cyberpunk"][data-mode="dark"] {
+  --bokoui-bg: #0a0414;
+  --bokoui-fg: #f6e8ff;
+  --bokoui-surface: #160a28;
+  --bokoui-muted: #1c0f33;
+  --bokoui-muted-fg: #c9a9ec;
+  --bokoui-border: #4a2170;
+  --bokoui-field: #0a0414;
+  --bokoui-field-border: #8a5bc5;
+  --bokoui-ring: #00f6ff;
+  --bokoui-primary: #ff2fd0;
+  --bokoui-primary-fg: #1a0215;
+  --bokoui-secondary: #00f6ff;
+  --bokoui-secondary-fg: #00171a;
+  --bokoui-accent: #ffe14d;
+  --bokoui-accent-fg: #1a1500;
+}

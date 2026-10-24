@@ -1,0 +1,44 @@
+/* Conceptual Sketch: pencil and paper, graphite monochrome with a red-pen accent. */
+:root[data-theme="sketch"] {
+  --bokoui-radius-control: 0.375rem;
+  --bokoui-radius-button: 0.375rem;
+  --bokoui-radius-card: 0.5rem;
+  --bokoui-border-width: 1px;
+  --bokoui-heading-weight: 600;
+}
+
+:root[data-theme="sketch"]:not([data-mode="dark"]) {
+  --bokoui-bg: #fbfaf6;
+  --bokoui-fg: #2b2b2b;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #eeece4;
+  --bokoui-muted-fg: #5c5c5c;
+  --bokoui-border: #2b2b2b;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #2b2b2b;
+  --bokoui-ring: #b33a3a;
+  --bokoui-primary: #4a4a4a;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #b33a3a;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #2f6f8f;
+  --bokoui-accent-fg: #ffffff;
+}
+
+:root[data-theme="sketch"][data-mode="dark"] {
+  --bokoui-bg: #1c1c1c;
+  --bokoui-fg: #ece9e2;
+  --bokoui-surface: #262626;
+  --bokoui-muted: #303030;
+  --bokoui-muted-fg: #b8b4ac;
+  --bokoui-border: #ece9e2;
+  --bokoui-field: #1c1c1c;
+  --bokoui-field-border: #ece9e2;
+  --bokoui-ring: #ff8a6a;
+  --bokoui-primary: #cfcac0;
+  --bokoui-primary-fg: #1c1c1c;
+  --bokoui-secondary: #ff8a6a;
+  --bokoui-secondary-fg: #2a0a02;
+  --bokoui-accent: #6fc3ea;
+  --bokoui-accent-fg: #04202a;
+}

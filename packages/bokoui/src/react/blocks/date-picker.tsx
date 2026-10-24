@@ -3,8 +3,8 @@
 import { forwardRef, useMemo, useState, type ButtonHTMLAttributes } from "react";
 import { cn, icons, inputClass, resolveTone, toISODate, type Action, type Color, type DateBounds, type InputStyleProps, type WeekStart } from "@/core";
 import { Icon } from "../internal/icon";
-import { Calendar } from "./calendar";
-import { Popover } from "./popover";
+import { Calendar } from "@/react";
+import { Popover } from "@/react";
 
 export interface DatePickerProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value" | "defaultValue" | "onChange" | "size" | "type">,

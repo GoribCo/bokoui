@@ -5,7 +5,7 @@ import { Row, Screen, Section } from '@/components/screen';
 
 export default function Overlays() {
   const [modal, setModal] = useState(false);
-  const [drawer, setDrawer] = useState<'left' | 'right' | 'bottom' | null>(null);
+  const [drawer, setDrawer] = useState<'left' | 'right' | 'top' | 'bottom' | null>(null);
   const [last, setLast] = useState('none');
 
   return (
@@ -13,7 +13,7 @@ export default function Overlays() {
       <Section title="Modal and Drawer">
         <Row>
           <Button onPress={() => setModal(true)}>Open modal</Button>
-          {(['left', 'right', 'bottom'] as const).map((side) => (
+          {(['left', 'right', 'top', 'bottom'] as const).map((side) => (
             <Button key={side} variant="outline" onPress={() => setDrawer(side)}>
               Drawer {side}
             </Button>
