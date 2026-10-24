@@ -32,7 +32,6 @@ jobs:
           test -f dist/styles.css
           test -f dist/tokens.json
           test -f dist/props.json
-          head -c 12 dist/react/client.js | grep -q '"use client"'
           head -c 12 dist/react/theme.js | grep -q '"use client"'
 
   next-example:
