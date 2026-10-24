@@ -17,9 +17,9 @@ const platforms: Platform[] = [
     id: "vue",
     label: "Vue",
     url: process.env.NEXT_PUBLIC_BOKOUI_URL_VUE ?? "http://localhost:3002",
-    paths: ["/", "/forms", "/display", "/feedback", "/overlays", "/tabs"],
+    paths: ["/", "/setup", "/forms", "/display", "/feedback", "/overlays", "/tabs"],
   },
-  { id: "expo", label: "Expo", url: process.env.NEXT_PUBLIC_BOKOUI_URL_EXPO ?? "http://localhost:3000", paths: ["/"] },
+  { id: "expo", label: "Expo", url: process.env.NEXT_PUBLIC_BOKOUI_URL_EXPO ?? "http://localhost:3000", paths: ["/", "/setup"] },
 ];
 
 const CURRENT = "react";

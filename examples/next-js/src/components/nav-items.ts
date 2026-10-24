@@ -6,6 +6,7 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
+  { href: "/setup", label: "Setup", description: "Install and first-time setup" },
   { href: "/", label: "Home", description: "Button, Input, typography" },
   { href: "/playground", label: "Overview", description: "Get started and component index" },
   { href: "/forms", label: "Forms", description: "Fields, Select, Checkbox, Radio, Switch" },

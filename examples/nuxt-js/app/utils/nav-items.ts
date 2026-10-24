@@ -5,6 +5,7 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
+  { to: '/setup', label: 'Setup', description: 'Install and first-time setup' },
   { to: '/', label: 'Home', description: 'Button, Input, typography' },
   { to: '/forms', label: 'Forms', description: 'Fields, Select, Checkbox, Radio, Switch' },
   { to: '/display', label: 'Data display', description: 'Badge, Avatar, Card, Divider, Image' },

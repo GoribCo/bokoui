@@ -7,7 +7,7 @@ const CURRENT = 'vue'
 const platforms = computed(() => [
   { id: 'react', label: 'React', url: urls.urlReact as string, paths: 'all' as const },
   { id: 'vue', label: 'Vue', url: urls.urlVue as string, paths: 'all' as const },
-  { id: 'expo', label: 'Expo', url: urls.urlExpo as string, paths: ['/'] },
+  { id: 'expo', label: 'Expo', url: urls.urlExpo as string, paths: ['/', '/setup'] },
 ])
 
 /** The same page on another platform, or that demo's home when it has no matching page. */

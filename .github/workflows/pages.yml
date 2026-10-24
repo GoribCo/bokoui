@@ -76,6 +76,17 @@ jobs:
           npm install $NPM
           npx expo export --platform web
           cp -r dist ../../site/expo
+      - name: Expo layouts (web)
+        working-directory: examples/expo-js-layouts
+        continue-on-error: true
+        env:
+          EXPO_BASE_URL: ${{ env.BASE }}/expo-layouts
+        run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
+          npm install $NPM
+          npx expo export --platform web
+          cp -r dist ../../site/expo-layouts
       # The demos' component pages are the docs; /<platform>/docs/ points at them.
       - name: Docs entry points
         run: |
