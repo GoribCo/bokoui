@@ -76,6 +76,13 @@ jobs:
           npm install $NPM
           npx expo export --platform web
           cp -r dist ../../site/expo
+      # The demos' component pages are the docs; /<platform>/docs/ points at them.
+      - name: Docs entry points
+        run: |
+          for p in react vue expo; do
+            mkdir -p site/$p/docs
+            echo "<!doctype html><meta charset=utf-8><meta http-equiv=refresh content=\"0;url=../\"><a href=../>Docs</a>" > site/$p/docs/index.html
+          done
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
