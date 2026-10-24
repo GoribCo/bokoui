@@ -1,0 +1,48 @@
+/* Editorial Design: magazine print, serif headlines, generous whitespace, thin rules. */
+:root[data-theme="editorial"] {
+  --bokoui-radius-control: 0.25rem;
+  --bokoui-radius-button: 0.25rem;
+  --bokoui-radius-card: 0.25rem;
+  --bokoui-border-width: 1px;
+  --bokoui-font-heading: Georgia, "Times New Roman", serif;
+  --bokoui-heading-weight: 700;
+  --bokoui-heading-tracking: -0.01em;
+  --bokoui-text-leading: 1.65;
+  --bokoui-btn-tracking: 0.02em;
+}
+
+:root[data-theme="editorial"]:not([data-mode="dark"]) {
+  --bokoui-bg: #faf7f1;
+  --bokoui-fg: #1a1a1a;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #f0ebe0;
+  --bokoui-muted-fg: #55504a;
+  --bokoui-border: #1a1a1a;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #1a1a1a;
+  --bokoui-ring: #8a1c1c;
+  --bokoui-primary: #8a1c1c;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #1a1a1a;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #1f3a5f;
+  --bokoui-accent-fg: #ffffff;
+}
+
+:root[data-theme="editorial"][data-mode="dark"] {
+  --bokoui-bg: #141210;
+  --bokoui-fg: #f3efe6;
+  --bokoui-surface: #1d1a16;
+  --bokoui-muted: #26221d;
+  --bokoui-muted-fg: #bdb4a4;
+  --bokoui-border: #f3efe6;
+  --bokoui-field: #141210;
+  --bokoui-field-border: #f3efe6;
+  --bokoui-ring: #ff6b6b;
+  --bokoui-primary: #ff6b6b;
+  --bokoui-primary-fg: #1a0505;
+  --bokoui-secondary: #f3efe6;
+  --bokoui-secondary-fg: #141210;
+  --bokoui-accent: #7aa2d4;
+  --bokoui-accent-fg: #0a1420;
+}

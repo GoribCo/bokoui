@@ -82,7 +82,7 @@
     "build": "node scripts/build-tokens.mjs && tsup && node scripts/postbuild.mjs && node scripts/check-client-boundaries.mjs && node scripts/build-tokens.mjs --dist && node scripts/build-props.mjs",
     "typecheck": "tsc --noEmit",
     "audit": "node scripts/audit-contrast.mjs",
-    "publish:local": "bash scripts/publish-local.sh",
+    "dev": "node scripts/build-tokens.mjs && tsup --watch --onSuccess \"node scripts/postbuild.mjs\"",
     "prepublishOnly": "npm run build",
     "tokens": "node scripts/build-tokens.mjs",
     "test": "vitest run",

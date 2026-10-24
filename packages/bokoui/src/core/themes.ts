@@ -22,6 +22,20 @@ export const themes = [
   { id: "glassmorphism", label: "Glassmorphism" },
   { id: "liquid-glass", label: "Liquid Glass" },
   { id: "aurora", label: "Aurora" },
+  { id: "cybercore", label: "Cybercore" },
+  { id: "cyberpunk", label: "Cyberpunk" },
+  { id: "scrapbook", label: "Scrapbook" },
+  { id: "surrealism", label: "Surrealism" },
+  { id: "y2k", label: "Y2K Aesthetic" },
+  { id: "pixel-art", label: "Pixel Art" },
+  { id: "editorial", label: "Editorial Design" },
+  { id: "maximalism", label: "Maximalism" },
+  { id: "luxury", label: "Luxury Typography" },
+  { id: "sketch", label: "Conceptual Sketch" },
+  { id: "ethereal", label: "Ethereal" },
+  { id: "bohemian", label: "Bohemian" },
+  { id: "victorian", label: "Victorian" },
+  { id: "wabi-sabi", label: "Wabi-Sabi" },
 ] as const;
 
 export type BuiltinThemeId = (typeof themes)[number]["id"];

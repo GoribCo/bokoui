@@ -1,0 +1,50 @@
+/* Cybercore: techwear/cyber-utility. Graphite and neon green/cyan, monospace, sharp small corners. */
+:root[data-theme="cybercore"] {
+  --bokoui-radius-control: 0.375rem;
+  --bokoui-radius-button: 0.375rem;
+  --bokoui-radius-card: 0.5rem;
+  --bokoui-border-width: 1px;
+  --bokoui-font: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --bokoui-heading-weight: 700;
+  --bokoui-heading-tracking: 0.02em;
+  --bokoui-heading-transform: uppercase;
+  --bokoui-btn-transform: uppercase;
+  --bokoui-btn-tracking: 0.04em;
+  --bokoui-duration: 100ms;
+}
+
+:root[data-theme="cybercore"]:not([data-mode="dark"]) {
+  --bokoui-bg: #eef2ef;
+  --bokoui-fg: #0c120d;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #e1e8e2;
+  --bokoui-muted-fg: #3a4740;
+  --bokoui-border: #0c120d;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #0c120d;
+  --bokoui-ring: #0e7a44;
+  --bokoui-primary: #0e7a44;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #1f6b63;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #006b78;
+  --bokoui-accent-fg: #ffffff;
+}
+
+:root[data-theme="cybercore"][data-mode="dark"] {
+  --bokoui-bg: #0a0f0c;
+  --bokoui-fg: #d7ffe4;
+  --bokoui-surface: #111a14;
+  --bokoui-muted: #141f16;
+  --bokoui-muted-fg: #9bcaa7;
+  --bokoui-border: #2d4034;
+  --bokoui-field: #0a0f0c;
+  --bokoui-field-border: #5a7a64;
+  --bokoui-ring: #39ff14;
+  --bokoui-primary: #39ff14;
+  --bokoui-primary-fg: #06130a;
+  --bokoui-secondary: #00e5ff;
+  --bokoui-secondary-fg: #001217;
+  --bokoui-accent: #7cffb2;
+  --bokoui-accent-fg: #04150a;
+}

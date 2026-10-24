@@ -12,7 +12,7 @@ Themeable UI components for Tailwind CSS v4 with eight design styles (Flat, Mate
 | Vue / Nuxt | `bokoui/vue` | same components as Vue 3 components, plus `ThemeProvider`, `ThemeSwitcher`, `useTheme`, `buildThemeScript` |
 | React Native / Expo | `bokoui/expo` | native components + `ThemeProvider`; no CSS or Tailwind needed |
 | Any (framework-neutral) | `bokoui/core` | internal building block (recipes, theme engine); apps should not need it, `bokoui/react` and `bokoui/expo` re-export what they need |
-| Web build | `bokoui/styles.css` | tokens, all 20 themes, Tailwind mapping (React and Vue); ~10 KB gzipped. `bokoui/styles-lite.css` has the 8 classic themes only (~6 KB gzipped): use it only if the app offers just those styles |
+| Web build | `bokoui/styles.css` | tokens, all 36 themes, Tailwind mapping (React and Vue); ~10 KB gzipped. `bokoui/styles-lite.css` has the 8 classic themes only (~6 KB gzipped): use it only if the app offers just those styles |
 | Any | `bokoui/tokens.json` | every style x mode as plain token values |
 | Docs tooling | `bokoui/props.json` | every React component's own props (name, type, default, description), generated from the types |
 

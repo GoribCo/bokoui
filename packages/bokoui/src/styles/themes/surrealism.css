@@ -1,0 +1,45 @@
+/* Surrealism: dreamlike pastels, soft melting shapes, generous rounding. */
+:root[data-theme="surrealism"] {
+  --bokoui-radius-control: 1.25rem;
+  --bokoui-radius-button: 1.25rem;
+  --bokoui-radius-card: 1.75rem;
+  --bokoui-heading-weight: 600;
+  --bokoui-heading-tracking: -0.01em;
+  --bokoui-duration: 200ms;
+}
+
+:root[data-theme="surrealism"]:not([data-mode="dark"]) {
+  --bokoui-bg: #eef0fb;
+  --bokoui-fg: #241b3d;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #e3e2f8;
+  --bokoui-muted-fg: #574a7a;
+  --bokoui-border: #cfc9ee;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #8a7fc0;
+  --bokoui-ring: #6a45e8;
+  --bokoui-primary: #6a45e8;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #d6336c;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #a8406f;
+  --bokoui-accent-fg: #ffffff;
+}
+
+:root[data-theme="surrealism"][data-mode="dark"] {
+  --bokoui-bg: #140f28;
+  --bokoui-fg: #ece7ff;
+  --bokoui-surface: #1f1840;
+  --bokoui-muted: #241c4d;
+  --bokoui-muted-fg: #bdb0e8;
+  --bokoui-border: #4a3d85;
+  --bokoui-field: #140f28;
+  --bokoui-field-border: #6a5bb0;
+  --bokoui-ring: #a98bff;
+  --bokoui-primary: #a98bff;
+  --bokoui-primary-fg: #190a33;
+  --bokoui-secondary: #ff7fb0;
+  --bokoui-secondary-fg: #330015;
+  --bokoui-accent: #ffd166;
+  --bokoui-accent-fg: #241a00;
+}

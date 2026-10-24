@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { cn, type ClassValue } from "../cn";
 
 export type ModalSize = "sm" | "md" | "lg" | "full";
-export type ModalPlacement = "center" | "right" | "left" | "bottom";
+export type ModalPlacement = "center" | "right" | "left" | "top" | "bottom";
 
 /**
  * A native `<dialog>` opened with `showModal()`. The browser provides the top layer, focus
@@ -29,6 +29,7 @@ export const modalVariants = cva(
         center: "",
         right: "m-0 ms-auto h-dvh max-h-dvh w-full rounded-none border-y-0 border-e-0",
         left: "m-0 me-auto h-dvh max-h-dvh w-full rounded-none border-y-0 border-s-0",
+        top: "m-0 mb-auto max-h-[85dvh] w-full max-w-none rounded-t-none border-x-0 border-t-0",
         bottom: "m-0 mt-auto max-h-[85dvh] w-full max-w-none rounded-b-none border-x-0 border-b-0",
       },
     },
@@ -38,7 +39,7 @@ export const modalVariants = cva(
 
 export interface ModalStyleProps {
   size?: ModalSize;
-  /** `center` is a dialog; `left`, `right` and `bottom` anchor it to an edge as a drawer/sheet. */
+  /** `center` is a dialog; `left`, `right`, `top` and `bottom` anchor it to an edge as a drawer/sheet. */
   placement?: ModalPlacement;
 }
 

@@ -1,0 +1,54 @@
+/* Pixel Art: 8-bit retro, hard edges, blocky step shadows, NES-ish palette. */
+:root[data-theme="pixel-art"] {
+  --bokoui-radius-control: 0;
+  --bokoui-radius-button: 0;
+  --bokoui-radius-card: 0;
+  --bokoui-border-width: 2px;
+  --bokoui-border-strength: 100%;
+  --bokoui-font: "Press Start 2P", ui-monospace, "Cascadia Mono", monospace;
+  --bokoui-heading-transform: uppercase;
+  --bokoui-heading-tracking: 0;
+  --bokoui-shadow-button: 3px 3px 0 0 var(--bokoui-shadow-color);
+  --bokoui-shadow-button-hover: 1px 1px 0 0 var(--bokoui-shadow-color);
+  --bokoui-shift-hover: 2px 2px;
+  --bokoui-shift-active: 3px 3px;
+  --bokoui-duration: 0ms;
+}
+
+:root[data-theme="pixel-art"]:not([data-mode="dark"]) {
+  --bokoui-bg: #eef0ff;
+  --bokoui-fg: #0a0a1a;
+  --bokoui-surface: #ffffff;
+  --bokoui-muted: #d8dcff;
+  --bokoui-muted-fg: #3a3a6a;
+  --bokoui-border: #0a0a1a;
+  --bokoui-field: #ffffff;
+  --bokoui-field-border: #0a0a1a;
+  --bokoui-ring: #3a5cff;
+  --bokoui-primary: #3a5cff;
+  --bokoui-primary-fg: #ffffff;
+  --bokoui-secondary: #c71f2c;
+  --bokoui-secondary-fg: #ffffff;
+  --bokoui-accent: #946200;
+  --bokoui-accent-fg: #ffffff;
+  --bokoui-shadow-color: #0a0a1a;
+}
+
+:root[data-theme="pixel-art"][data-mode="dark"] {
+  --bokoui-bg: #0a0a1a;
+  --bokoui-fg: #e8eaff;
+  --bokoui-surface: #14142a;
+  --bokoui-muted: #1c1c38;
+  --bokoui-muted-fg: #a0a4d0;
+  --bokoui-border: #e8eaff;
+  --bokoui-field: #0a0a1a;
+  --bokoui-field-border: #e8eaff;
+  --bokoui-ring: #6fe3ff;
+  --bokoui-primary: #6fe3ff;
+  --bokoui-primary-fg: #0a0a1a;
+  --bokoui-secondary: #ff5c7a;
+  --bokoui-secondary-fg: #1a0205;
+  --bokoui-accent: #ffe066;
+  --bokoui-accent-fg: #1a1500;
+  --bokoui-shadow-color: #e8eaff;
+}

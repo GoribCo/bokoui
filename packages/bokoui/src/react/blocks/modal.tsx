@@ -136,7 +136,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(function Modal(
 });
 
 export type DrawerProps = Omit<ModalProps, "placement"> & {
-  /** Edge the drawer slides from. Default `right`. */
+  /** Edge the drawer slides from: `left`, `right`, `top` or `bottom`. Default `right`. */
   side?: Exclude<ModalProps["placement"], "center">;
 };
 
