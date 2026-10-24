@@ -13,9 +13,16 @@ useHead({
 <template>
   <ThemeProvider :custom-themes="customThemes">
     <NuxtRouteAnnouncer />
-    <header class="sticky top-0 z-10 border-b bg-background/90 px-6 py-3 backdrop-blur">
+    <!-- Sticky only from md: on a phone the wrapped header would take a fifth of the screen. -->
+    <header class="z-10 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b bg-background/90 px-4 py-3 backdrop-blur sm:px-6 md:sticky md:top-0 md:h-[57px] md:flex-nowrap md:py-0">
       <ThemeSwitcher />
+      <PlatformSwitcher />
     </header>
-    <NuxtPage />
+    <div class="flex min-h-[calc(100dvh-57px)] flex-col md:flex-row">
+      <SideNav />
+      <div class="min-w-0 flex-1">
+        <NuxtPage />
+      </div>
+    </div>
   </ThemeProvider>
 </template>

@@ -1,0 +1,39 @@
+name: Publish to npm and GitHub Packages
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/bokoui
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --registry=https://registry.npmjs.org/
+      - run: npm test
+      - run: npm run build
+      - name: npm
+        run: |
+          npm config set //registry.npmjs.org/:_authToken "$NODE_AUTH_TOKEN"
+          npm publish --access public --provenance --registry=https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # GitHub Packages needs the scope to match the owner: publishes as @goribco/bokoui.
+      - name: GitHub Packages
+        run: |
+          npm pkg set name=@goribco/bokoui
+          npm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
+          npm publish --registry=https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

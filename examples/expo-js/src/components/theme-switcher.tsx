@@ -1,9 +1,9 @@
 import { Button, Text, useTheme, type ThemeMode } from 'bokoui/expo';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 
 const modeLabels: Record<ThemeMode, string> = { light: 'Light', dark: 'Dark', system: 'System' };
 
-/** Style chips (scrollable) and a mode toggle, built from the public useTheme() API. */
+/** Style chips (wrapping, so every style is visible) and a mode toggle, built from the public useTheme() API. */
 export function ThemeSwitcher() {
   const { style, mode, themes, setStyle, setMode } = useTheme();
   return (
@@ -11,7 +11,7 @@ export function ThemeSwitcher() {
       <Text variant="small" muted>
         Style
       </Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
         {themes.map((theme) => (
           <Button
             key={theme.id}
@@ -22,7 +22,7 @@ export function ThemeSwitcher() {
             {theme.label}
           </Button>
         ))}
-      </ScrollView>
+      </View>
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {(['light', 'dark', 'system'] as const).map((m) => (
           <Button

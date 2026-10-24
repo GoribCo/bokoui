@@ -1,0 +1,32 @@
+/*
+ * Type scale and font mapping. To change fonts edit `lib/fonts/fonts.ts`; to change the scale edit this file.
+ * Utilities: text-title, text-section, text-nav, text-caption (Tailwind v4 generates them from @theme).
+ */
+@theme inline {
+  --text-title: 1.5rem;
+  --text-title--line-height: 2rem;
+  --text-section: 1.125rem;
+  --text-section--line-height: 1.75rem;
+  --text-nav: 0.875rem;
+  --text-nav--line-height: 1.25rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/*
+ * Bangla: Noto Sans Bengali covers only the Bengali block (see lib/fonts/fonts.ts), so it comes first
+ * and Latin text falls through to the regular UI font.
+ */
+:root:lang(bn) body {
+  font-family: var(--font-noto-bengali), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Height reserved for the mobile bottom navigation (the shell keeps content clear of it). */
+:root {
+  --bottom-nav-height: 3.5rem;
+  /* Widest the application frame (sidebar + content) grows: 1600px. */
+  --shell-max-width: 100rem;
+  --header-height: 3.5rem;
+}

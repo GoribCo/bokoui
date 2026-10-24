@@ -10,6 +10,7 @@ import {
   type Responsive,
 } from "../responsive";
 import type { Size, Variant } from "../types";
+import { disabledClass } from "./shared";
 
 /**
  * All variant styling lives here. Colors come from `data-tone` (see styles/tokens.css),
@@ -22,7 +23,7 @@ export const buttonVariants = cva(
     "font-ui [font-weight:var(--bokoui-btn-weight)] [text-transform:var(--bokoui-btn-transform)] [letter-spacing:var(--bokoui-btn-tracking)]",
     "transition-[background-color,border-color,color,box-shadow,translate] duration-(--bokoui-duration) ease-ui",
     "focus-ring [&_svg]:size-4 [&_svg]:shrink-0",
-    "disabled:cursor-not-allowed disabled:opacity-(--bokoui-disabled-opacity)",
+    disabledClass,
     "enabled:hover:[translate:var(--bokoui-shift-hover)] enabled:active:[translate:var(--bokoui-shift-active)]",
     // Touch devices get a 44px minimum target regardless of size.
     "pointer-coarse:min-h-11",
@@ -31,19 +32,19 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         solid: [
-          "border-(--tone-border) bg-(--tone) text-(--tone-fg) shadow-button",
+          "border-[color:var(--bokoui-solid-border,var(--tone-border))] bg-(--tone) text-(--tone-fg) [background-image:var(--bokoui-solid-image,none)] [box-shadow:var(--bokoui-solid-shadow,var(--bokoui-shadow-button))]",
           "enabled:hover:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-hover-mix))] enabled:hover:shadow-button-hover",
-          "enabled:active:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-active-mix))]",
+          "enabled:active:bg-[color-mix(in_srgb,var(--tone),var(--bokoui-active-mix))] enabled:active:[box-shadow:var(--bokoui-pressed-shadow,var(--bokoui-shadow-button-hover))]",
         ],
         outline: [
-          "border-(--tone-ink) bg-transparent text-(--tone-ink) shadow-button",
-          "enabled:hover:bg-(--tone-soft) enabled:hover:shadow-button-hover",
-          "enabled:active:bg-(--tone-soft-hover)",
+          "border-[color:var(--bokoui-control-border,var(--tone-ink))] bg-[var(--bokoui-control-bg,transparent)] text-(--tone-ink) [background-image:var(--bokoui-control-image,none)] [box-shadow:var(--bokoui-control-shadow,var(--bokoui-shadow-button))] [-webkit-backdrop-filter:var(--bokoui-control-backdrop,none)] [backdrop-filter:var(--bokoui-control-backdrop,none)]",
+          "enabled:hover:bg-[var(--bokoui-control-bg-hover,var(--bokoui-control-bg,var(--tone-soft)))] enabled:hover:shadow-button-hover",
+          "enabled:active:bg-[var(--bokoui-pressed-bg,var(--tone-soft-hover))] enabled:active:[box-shadow:var(--bokoui-pressed-shadow,var(--bokoui-shadow-button-hover))]",
         ],
         soft: [
-          "border-transparent bg-(--tone-soft) text-(--tone-ink)",
-          "enabled:hover:bg-(--tone-soft-hover)",
-          "enabled:active:bg-(--tone-soft-hover)",
+          "border-[color:var(--bokoui-control-border,transparent)] bg-[var(--bokoui-control-bg,var(--tone-soft))] text-(--tone-ink) [background-image:var(--bokoui-control-image,none)] [box-shadow:var(--bokoui-control-shadow,none)] [-webkit-backdrop-filter:var(--bokoui-control-backdrop,none)] [backdrop-filter:var(--bokoui-control-backdrop,none)]",
+          "enabled:hover:bg-[var(--bokoui-control-bg-hover,var(--bokoui-control-bg,var(--tone-soft-hover)))]",
+          "enabled:active:bg-[var(--bokoui-pressed-bg,var(--tone-soft-hover))] enabled:active:[box-shadow:var(--bokoui-pressed-shadow,none)]",
         ],
         ghost: [
           "border-transparent bg-transparent text-(--tone-ink)",

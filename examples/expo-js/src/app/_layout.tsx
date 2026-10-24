@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeProvider, useTheme } from 'bokoui/expo';
+import { ThemeProvider, ToastProvider, useTheme } from 'bokoui/expo';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
@@ -10,7 +10,9 @@ function ThemedStack() {
   return (
     <>
       <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: tokens.bg } }} />
+      <ToastProvider placement="bottom-center" offset={32}>
+        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: tokens.bg } }} />
+      </ToastProvider>
     </>
   );
 }

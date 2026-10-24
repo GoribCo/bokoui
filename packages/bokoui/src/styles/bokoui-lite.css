@@ -1,0 +1,6 @@
+/*
+ * bokoui stylesheet with the eight classic styles only (about half the size). Published as `bokoui/styles-lite.css`.
+ * Use it when the app offers only flat, material, swiss, brutalism, neo-brutalism, monochrome, oled and fluent.
+ */
+@import "./core.css";
+@import "./themes/classic.css";

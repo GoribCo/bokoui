@@ -1,9 +1,3 @@
-/* Register a new style: add its file here and its entry in src/components/theme/themes.ts. */
-@import "./flat.css";
-@import "./material.css";
-@import "./swiss.css";
-@import "./brutalism.css";
-@import "./neo-brutalism.css";
-@import "./monochrome.css";
-@import "./oled.css";
-@import "./fluent.css";
+/* Register a new classic style in classic.css (and in src/core/themes.ts). Material styles are generated into materials.css. */
+@import "./classic.css";
+@import "./materials.css";

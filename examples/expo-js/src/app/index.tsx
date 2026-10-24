@@ -1,36 +1,15 @@
 import { Button, Heading, Input, Link, Text, actions, colors, sizes, useTheme, variants } from 'bokoui/expo';
 import { Search } from 'lucide-react-native';
-import type { ReactNode } from 'react';
-import { ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
-import { ThemeSwitcher } from '@/components/theme-switcher';
-
-function Section({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <View style={{ gap: 16 }}>
-      <Heading as="h2" size="lg">
-        {title}
-      </Heading>
-      {children}
-    </View>
-  );
-}
-
-const Row = ({ children }: { children: ReactNode }) => (
-  <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>{children}</View>
-);
+import { Row, Screen, Section } from '@/components/screen';
 
 export default function Home() {
   const { tokens } = useTheme();
   const icon = <Search size={16} color={tokens.mutedFg} />;
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.bg }}>
-      <ScrollView contentContainerStyle={{ padding: 24, gap: 40, maxWidth: 896, width: '100%', alignSelf: 'center' }}>
-        <ThemeSwitcher />
-        <Heading as="h1">Button, Input &amp; Typography</Heading>
-
+    <Screen title="Button, Input & Typography">
         <Section title="Button: variant x color">
           {variants.map((variant) => (
             <View key={variant} style={{ gap: 6 }}>
@@ -160,7 +139,6 @@ export default function Home() {
             </Button>
           </Row>
         </Section>
-      </ScrollView>
-    </SafeAreaView>
+    </Screen>
   );
 }

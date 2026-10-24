@@ -1,0 +1,49 @@
+import {
+  Building2,
+  Calendar,
+  ChartColumn,
+  Circle,
+  CircleHelp,
+  ClipboardList,
+  FileText,
+  Folder,
+  Hospital,
+  LayoutDashboard,
+  Lock,
+  Package,
+  Pill,
+  Settings,
+  Shield,
+  Stethoscope,
+  Truck,
+  User,
+  Users,
+  Wallet,
+  type LucideIcon,
+} from "lucide-react";
+import type { IconName } from "@/lib/types";
+
+/** Icon registry: menu data refers to icons by name, so menus can live in JSON or an API. Add entries here. */
+export const menuIcons: Record<IconName, LucideIcon> = {
+  "bar-chart": ChartColumn,
+  "building-2": Building2,
+  calendar: Calendar,
+  clipboard: ClipboardList,
+  "file-text": FileText,
+  folder: Folder,
+  "help-circle": CircleHelp,
+  hospital: Hospital,
+  "layout-dashboard": LayoutDashboard,
+  lock: Lock,
+  package: Package,
+  pill: Pill,
+  settings: Settings,
+  shield: Shield,
+  stethoscope: Stethoscope,
+  truck: Truck,
+  user: User,
+  users: Users,
+  wallet: Wallet,
+};
+
+export const fallbackMenuIcon: LucideIcon = Circle;

@@ -1,0 +1,90 @@
+/*
+ * bokoui stylesheet without any theme: tokens, Tailwind mapping, base rules. `bokoui.css` and `bokoui-lite.css` add the themes.
+ */
+@import "./tokens.css";
+
+/* `dark:` follows the data-mode attribute, not the OS setting directly. */
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+
+/* Token -> Tailwind mapping. Utilities like bg-primary or rounded-button resolve to --bokoui-* vars. */
+@theme inline {
+  --color-background: var(--bokoui-bg);
+  --color-foreground: var(--bokoui-fg);
+  --color-surface: var(--bokoui-surface);
+  --color-muted: var(--bokoui-muted);
+  --color-muted-foreground: var(--bokoui-muted-fg);
+  --color-border: var(--bokoui-border);
+  --color-field: var(--bokoui-field);
+  --color-field-border: var(--bokoui-field-border);
+  --color-ring: var(--bokoui-ring);
+
+  --color-primary: var(--bokoui-primary);
+  --color-primary-foreground: var(--bokoui-primary-fg);
+  --color-secondary: var(--bokoui-secondary);
+  --color-secondary-foreground: var(--bokoui-secondary-fg);
+  --color-accent: var(--bokoui-accent);
+  --color-accent-foreground: var(--bokoui-accent-fg);
+  --color-neutral: var(--bokoui-neutral);
+  --color-neutral-foreground: var(--bokoui-neutral-fg);
+  --color-success: var(--bokoui-success);
+  --color-success-foreground: var(--bokoui-success-fg);
+  --color-warning: var(--bokoui-warning);
+  --color-warning-foreground: var(--bokoui-warning-fg);
+  --color-danger: var(--bokoui-danger);
+  --color-danger-foreground: var(--bokoui-danger-fg);
+  --color-info: var(--bokoui-info);
+  --color-info-foreground: var(--bokoui-info-fg);
+
+  --radius-control: var(--bokoui-radius-control);
+  --radius-button: var(--bokoui-radius-button);
+  --radius-card: var(--bokoui-radius-card);
+  --shadow-button: var(--bokoui-shadow-button);
+  --shadow-button-hover: var(--bokoui-shadow-button-hover);
+  --font-ui: var(--bokoui-font);
+  --font-heading: var(--bokoui-font-heading);
+  --font-mono: var(--bokoui-font-mono);
+  --ease-ui: var(--bokoui-ease);
+}
+
+/* Keyframes used by Progress (indeterminate) and Toast. Utilities: animate-bokoui-indeterminate, animate-bokoui-toast-in. */
+@theme {
+  --animate-bokoui-indeterminate: bokoui-indeterminate 1.4s ease-in-out infinite;
+  --animate-bokoui-toast-in: bokoui-toast-in var(--bokoui-duration, 150ms) ease-out;
+
+  @keyframes bokoui-indeterminate {
+    0% {
+      translate: -100% 0;
+    }
+    100% {
+      translate: 300% 0;
+    }
+  }
+
+  @keyframes bokoui-toast-in {
+    from {
+      opacity: 0;
+      translate: 0 0.5rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--bokoui-border);
+  }
+
+  body {
+    background: var(--bokoui-bg);
+    /* A gradient or glow mesh behind the app, for styles that have one (glass, aurora, synthwave, ...). */
+    background-image: var(--bokoui-page-image, none);
+    background-attachment: fixed;
+    color: var(--bokoui-fg);
+    font-family: var(--bokoui-font);
+  }
+}

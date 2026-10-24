@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "bokoui/styles.css";
+@import "../styles/typography.css";
+
+/* Display settings: the font size scales every rem-based token. */
+:root[data-font-size="sm"] {
+  font-size: 93.75%;
+}
+:root[data-font-size="lg"] {
+  font-size: 112.5%;
+}

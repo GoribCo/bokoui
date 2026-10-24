@@ -1,6 +1,21 @@
 // Vue 3 components. Same class recipes and CSS as `bokoui/react`, rendered with Vue.
+export { Alert } from "./alert";
+export { Avatar } from "./avatar";
+export { Spinner } from "./spinner";
+export { Badge } from "./badge";
+export { Divider } from "./divider";
 export { Button } from "./button";
+export { Card, CardHeader, CardFooter } from "./card";
+export { Image } from "./image";
 export { Input } from "./input";
+export { Label, FormField } from "./form-field";
+export { Textarea } from "./textarea";
+export { Checkbox, Radio, RadioGroup, Switch } from "./toggle";
+export { Tabs, TabList, Tab, TabPanel } from "./tabs";
+export { Modal } from "./modal";
+export { Tooltip } from "./tooltip";
+export { Menu, MenuItem, MenuSeparator, MenuLabel } from "./menu";
+export { Select, type SelectOption } from "./select";
 export { Heading, Text, Link } from "./typography";
 export { ThemeProvider, ThemeSwitcher, useTheme } from "./theme";
 export { buildThemeScript } from "../core/theme-script";

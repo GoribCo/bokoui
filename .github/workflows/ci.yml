@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main, restructure]
+  pull_request:
+
+jobs:
+  library:
+    name: Library (typecheck, test, audit, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/bokoui
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/bokoui/package-lock.json
+      # .npmrc points at a local registry that only exists on a developer machine.
+      - run: npm ci --registry=https://registry.npmjs.org/
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run audit
+      - run: npm run build
+      - name: Package is complete
+        run: |
+          test -f dist/styles.css
+          test -f dist/tokens.json
+          test -f dist/props.json
+          head -c 12 dist/react/client.js | grep -q '"use client"'
+          head -c 12 dist/react/theme.js | grep -q '"use client"'
+
+  next-example:
+    name: Next.js example (lint, typecheck, build)
+    needs: library
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/next-js
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build and pack the library
+        working-directory: packages/bokoui
+        run: |
+          npm ci --registry=https://registry.npmjs.org/
+          npm run build
+          npm pack --pack-destination "$RUNNER_TEMP"
+      - name: Install the example against the packed library
+        run: |
+          npm install --registry=https://registry.npmjs.org/
+          npm install --no-save "$RUNNER_TEMP"/bokoui-*.tgz
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run typecheck
+
+  layouts-example:
+    name: Layouts example (lint, typecheck, unit tests, build, browser checks)
+    needs: library
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/next-js-layouts
+    env:
+      CHROME_PATH: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # The unit tests run TypeScript directly with node:test, which needs a recent Node.
+          node-version: 24
+      - name: Build and pack the library
+        working-directory: packages/bokoui
+        run: |
+          npm ci --registry=https://registry.npmjs.org/
+          npm run build
+          npm pack --pack-destination "$RUNNER_TEMP"
+      - name: Install the example against the packed library
+        run: |
+          npm install --registry=https://registry.npmjs.org/
+          npm install --no-save "$RUNNER_TEMP"/bokoui-*.tgz
+      # Lint, typecheck (runs `next typegen` first), unit tests and a production build.
+      - run: npm run check
+        env:
+          ALLOW_SAMPLE_API: "true"
+          AUTH_JWT_SECRET: ci-only-secret
+      # Builds a clone of the app and drives Chrome: every route at three widths, all styles and modes,
+      # the interactive parts, focus and touch targets, metadata. Fails on any axe violation.
+      - run: npm run check:browser

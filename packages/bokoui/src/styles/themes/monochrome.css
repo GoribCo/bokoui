@@ -2,6 +2,7 @@
 :root[data-theme="monochrome"] {
   --bokoui-radius-control: 0.25rem;
   --bokoui-radius-button: 0.25rem;
+  --bokoui-radius-card: 0.25rem;
   --bokoui-font: var(--font-geist-sans, ui-sans-serif), system-ui, -apple-system, "Segoe UI", sans-serif;
   --bokoui-heading-weight: 500;
   --bokoui-btn-weight: 500;

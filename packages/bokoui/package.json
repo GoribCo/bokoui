@@ -1,6 +1,6 @@
 {
   "name": "bokoui",
-  "version": "0.2.7",
+  "version": "0.2.52",
   "description": "Themeable UI components for Tailwind CSS v4 (React, Vue, React Native/Expo) with 8 design styles and light/dark modes",
   "keywords": [
     "react",
@@ -36,6 +36,18 @@
       "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.js"
     },
+    "./react/ui": {
+      "types": "./dist/react/ui.d.ts",
+      "import": "./dist/react/ui.js"
+    },
+    "./react/blocks": {
+      "types": "./dist/react/blocks.d.ts",
+      "import": "./dist/react/blocks.js"
+    },
+    "./react/client": {
+      "types": "./dist/react/client.d.ts",
+      "import": "./dist/react/client.js"
+    },
     "./react/theme": {
       "types": "./dist/react/theme.d.ts",
       "import": "./dist/react/theme.js"
@@ -52,17 +64,29 @@
       "types": "./dist/expo/index.d.ts",
       "import": "./dist/expo/index.js"
     },
+    "./expo/ui": {
+      "types": "./dist/expo/ui.d.ts",
+      "import": "./dist/expo/ui.js"
+    },
+    "./expo/blocks": {
+      "types": "./dist/expo/blocks.d.ts",
+      "import": "./dist/expo/blocks.js"
+    },
     "./styles.css": "./dist/styles.css",
+    "./styles-lite.css": "./dist/styles-lite.css",
     "./tokens.json": "./dist/tokens.json",
+    "./props.json": "./dist/props.json",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "node scripts/build-tokens.mjs && tsup && node scripts/postbuild.mjs && node scripts/build-tokens.mjs --dist",
+    "build": "node scripts/build-tokens.mjs && tsup && node scripts/postbuild.mjs && node scripts/check-client-boundaries.mjs && node scripts/build-tokens.mjs --dist && node scripts/build-props.mjs",
     "typecheck": "tsc --noEmit",
     "audit": "node scripts/audit-contrast.mjs",
     "publish:local": "bash scripts/publish-local.sh",
     "prepublishOnly": "npm run build",
-    "tokens": "node scripts/build-tokens.mjs"
+    "tokens": "node scripts/build-tokens.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -73,23 +97,32 @@
   "peerDependencies": {
     "react": "^19",
     "react-dom": "^19",
-    "vue": "^3.5",
     "react-native": ">=0.76",
-    "tailwindcss": "^4.1"
+    "tailwindcss": "^4.1",
+    "vue": "^3.5",
+    "expo-blur": ">=14"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^22.20.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vue/test-utils": "^2.5.1",
+    "axe-core": "^4.13.0",
+    "jsdom": "^29.1.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-native": "^0.87.1",
     "tailwindcss": "^4",
     "tsup": "^8.5.1",
     "typescript": "^5",
+    "vitest": "^5.0.3",
     "vue": "^3.5.43"
   },
   "peerDependenciesMeta": {
@@ -106,6 +139,9 @@
       "optional": true
     },
     "tailwindcss": {
+      "optional": true
+    },
+    "expo-blur": {
       "optional": true
     }
   }

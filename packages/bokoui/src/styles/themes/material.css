@@ -2,6 +2,7 @@
 :root[data-theme="material"] {
   --bokoui-radius-control: 0.25rem;
   --bokoui-radius-button: 9999px;
+  --bokoui-radius-card: 0.75rem;
   --bokoui-shadow-button: 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 3px 1px rgb(0 0 0 / 0.15);
   --bokoui-shadow-button-hover: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
   --bokoui-font: var(--font-roboto, Roboto), system-ui, -apple-system, "Segoe UI", sans-serif;

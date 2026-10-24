@@ -1,4 +1,4 @@
-import { ExternalLink, LoaderCircle } from "lucide";
+import { ArrowDown, CalendarDays, FileText, Search, Star, Upload, ArrowUp, ArrowUpDown, Check, ChevronDown, ChevronLeft, ChevronRight, CircleAlert, CircleCheck, Ellipsis, ExternalLink, Info, LoaderCircle, Menu, Minus, PanelLeftClose, PanelLeftOpen, TriangleAlert, X } from "lucide";
 
 /** Lucide icon data (framework-neutral). React and Vue render it as <svg>. */
 export type IconNode = [tag: string, attrs: Record<string, string | number>][];
@@ -6,6 +6,28 @@ export type IconNode = [tag: string, attrs: Record<string, string | number>][];
 export const icons = {
   loader: LoaderCircle as IconNode,
   externalLink: ExternalLink as IconNode,
+  info: Info as IconNode,
+  success: CircleCheck as IconNode,
+  warning: TriangleAlert as IconNode,
+  danger: CircleAlert as IconNode,
+  close: X as IconNode,
+  check: Check as IconNode,
+  chevronDown: ChevronDown as IconNode,
+  minus: Minus as IconNode,
+  star: Star as IconNode,
+  search: Search as IconNode,
+  calendar: CalendarDays as IconNode,
+  upload: Upload as IconNode,
+  file: FileText as IconNode,
+  chevronLeft: ChevronLeft as IconNode,
+  chevronRight: ChevronRight as IconNode,
+  ellipsis: Ellipsis as IconNode,
+  menu: Menu as IconNode,
+  panelClose: PanelLeftClose as IconNode,
+  panelOpen: PanelLeftOpen as IconNode,
+  sortAsc: ArrowUp as IconNode,
+  sortDesc: ArrowDown as IconNode,
+  sortNone: ArrowUpDown as IconNode,
 };
 
 /** Attributes shared by every Lucide `<svg>` (24px grid, stroke icons). */
