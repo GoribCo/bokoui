@@ -29,6 +29,7 @@ jobs:
       - name: Build and pack the library
         working-directory: packages/bokoui
         run: |
+          sed -i 's#http://127.0.0.1:4873/#https://registry.npmjs.org/#g' package-lock.json
           npm ci $NPM
           npm run build
           npm pack --pack-destination "$RUNNER_TEMP"
@@ -44,8 +45,9 @@ jobs:
           NEXT_PUBLIC_BOKOUI_URL_VUE: ${{ env.BASE }}/vue
           NEXT_PUBLIC_BOKOUI_URL_EXPO: ${{ env.BASE }}/expo
         run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
           npm install $NPM
-          npm install --no-save $NPM "$RUNNER_TEMP"/bokoui-*.tgz
           npm run build
           cp -r out ../../site/react
       - name: Vue (Nuxt)
@@ -56,8 +58,9 @@ jobs:
           NUXT_PUBLIC_URL_VUE: ${{ env.BASE }}/vue
           NUXT_PUBLIC_URL_EXPO: ${{ env.BASE }}/expo
         run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
           npm install $NPM
-          npm install --no-save $NPM "$RUNNER_TEMP"/bokoui-*.tgz
           npx nuxt generate
           cp -r .output/public ../../site/vue
       - name: Expo (web)
@@ -68,8 +71,9 @@ jobs:
           EXPO_PUBLIC_BOKOUI_URL_VUE: ${{ env.BASE }}/vue
           EXPO_PUBLIC_BOKOUI_URL_EXPO: ${{ env.BASE }}/expo
         run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
           npm install $NPM
-          npm install --no-save $NPM "$RUNNER_TEMP"/bokoui-*.tgz
           npx expo export --platform web
           cp -r dist ../../site/expo
       - uses: actions/upload-pages-artifact@v3

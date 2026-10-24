@@ -12,6 +12,8 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      HAS_NPM_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
     defaults:
       run:
         working-directory: packages/bokoui
@@ -20,10 +22,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm ci --registry=https://registry.npmjs.org/
+      - run: |
+          sed -i 's#http://127.0.0.1:4873/#https://registry.npmjs.org/#g' package-lock.json
+          npm ci --registry=https://registry.npmjs.org/
       - run: npm test
       - run: npm run build
-      - name: npm
+      - name: npm (skipped until an NPM_TOKEN secret exists)
+        if: ${{ env.HAS_NPM_TOKEN == 'true' }}
         run: |
           npm config set //registry.npmjs.org/:_authToken "$NODE_AUTH_TOKEN"
           npm publish --access public --provenance --registry=https://registry.npmjs.org/
