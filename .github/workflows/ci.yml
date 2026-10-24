@@ -20,7 +20,9 @@ jobs:
           cache: npm
           cache-dependency-path: packages/bokoui/package-lock.json
       # .npmrc points at a local registry that only exists on a developer machine.
-      - run: npm ci --registry=https://registry.npmjs.org/
+      - run: |
+          sed -i 's#http://127.0.0.1:4873/#https://registry.npmjs.org/#g' package-lock.json
+          npm ci --registry=https://registry.npmjs.org/
       - run: npm run typecheck
       - run: npm test
       - run: npm run audit
@@ -48,13 +50,15 @@ jobs:
       - name: Build and pack the library
         working-directory: packages/bokoui
         run: |
+          sed -i 's#http://127.0.0.1:4873/#https://registry.npmjs.org/#g' package-lock.json
           npm ci --registry=https://registry.npmjs.org/
           npm run build
           npm pack --pack-destination "$RUNNER_TEMP"
       - name: Install the example against the packed library
         run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
           npm install --registry=https://registry.npmjs.org/
-          npm install --no-save "$RUNNER_TEMP"/bokoui-*.tgz
       - run: npm run lint
       - run: npm run build
       - run: npm run typecheck
@@ -77,13 +81,15 @@ jobs:
       - name: Build and pack the library
         working-directory: packages/bokoui
         run: |
+          sed -i 's#http://127.0.0.1:4873/#https://registry.npmjs.org/#g' package-lock.json
           npm ci --registry=https://registry.npmjs.org/
           npm run build
           npm pack --pack-destination "$RUNNER_TEMP"
       - name: Install the example against the packed library
         run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
           npm install --registry=https://registry.npmjs.org/
-          npm install --no-save "$RUNNER_TEMP"/bokoui-*.tgz
       # Lint, typecheck (runs `next typegen` first), unit tests and a production build.
       - run: npm run check
         env:

@@ -20,7 +20,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm ci --registry=https://registry.npmjs.org/
+      - run: |
+          sed -i 's#http://127.0.0.1:4873/#https://registry.npmjs.org/#g' package-lock.json
+          npm ci --registry=https://registry.npmjs.org/
       - run: npm test
       - run: npm run build
       - name: npm
