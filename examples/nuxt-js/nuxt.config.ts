@@ -17,6 +17,8 @@ export default defineNuxtConfig({
     },
   },
   app: {
+    // GitHub Pages serves the Vue demo under /bokoui/vue/ (NUXT_APP_BASE_URL is set in CI).
+    baseURL: process.env.NUXT_APP_BASE_URL ?? '/',
     head: {
       title: 'UI Framework (Nuxt)',
       meta: [{ name: 'description', content: 'Themeable UI components built with Nuxt and Tailwind CSS' }],

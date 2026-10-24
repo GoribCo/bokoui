@@ -1,0 +1,87 @@
+name: Deploy demos to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  BASE: /bokoui
+  NPM: --registry=https://registry.npmjs.org/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build and pack the library
+        working-directory: packages/bokoui
+        run: |
+          npm ci $NPM
+          npm run build
+          npm pack --pack-destination "$RUNNER_TEMP"
+      - name: Landing page
+        run: |
+          mkdir site
+          cp examples/showcase/index.html examples/showcase/.nojekyll site/
+      - name: React (Next.js)
+        working-directory: examples/next-js
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ env.BASE }}/react
+          NEXT_PUBLIC_BOKOUI_URL_REACT: ${{ env.BASE }}/react
+          NEXT_PUBLIC_BOKOUI_URL_VUE: ${{ env.BASE }}/vue
+          NEXT_PUBLIC_BOKOUI_URL_EXPO: ${{ env.BASE }}/expo
+        run: |
+          npm install $NPM
+          npm install --no-save $NPM "$RUNNER_TEMP"/bokoui-*.tgz
+          npm run build
+          cp -r out ../../site/react
+      - name: Vue (Nuxt)
+        working-directory: examples/nuxt-js
+        env:
+          NUXT_APP_BASE_URL: ${{ env.BASE }}/vue/
+          NUXT_PUBLIC_URL_REACT: ${{ env.BASE }}/react
+          NUXT_PUBLIC_URL_VUE: ${{ env.BASE }}/vue
+          NUXT_PUBLIC_URL_EXPO: ${{ env.BASE }}/expo
+        run: |
+          npm install $NPM
+          npm install --no-save $NPM "$RUNNER_TEMP"/bokoui-*.tgz
+          npx nuxt generate
+          cp -r .output/public ../../site/vue
+      - name: Expo (web)
+        working-directory: examples/expo-js
+        env:
+          EXPO_BASE_URL: ${{ env.BASE }}/expo
+          EXPO_PUBLIC_BOKOUI_URL_REACT: ${{ env.BASE }}/react
+          EXPO_PUBLIC_BOKOUI_URL_VUE: ${{ env.BASE }}/vue
+          EXPO_PUBLIC_BOKOUI_URL_EXPO: ${{ env.BASE }}/expo
+        run: |
+          npm install $NPM
+          npm install --no-save $NPM "$RUNNER_TEMP"/bokoui-*.tgz
+          npx expo export --platform web
+          cp -r dist ../../site/expo
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

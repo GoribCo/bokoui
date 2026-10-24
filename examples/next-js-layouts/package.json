@@ -12,9 +12,7 @@
     "check": "npm run lint && npm run typecheck && npm test && npm run build",
     "check:browser": "node test/browser/run.mjs",
     "remove-demo": "node scripts/remove-demo.mjs",
-    "measure:bundles": "node scripts/measure-bundles.mjs",
-    "build:pkg": "npm run build --prefix ../../packages/bokoui",
-    "publish:local": "npm run publish:local --prefix ../../packages/bokoui"
+    "measure:bundles": "node scripts/measure-bundles.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

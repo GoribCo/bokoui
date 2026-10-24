@@ -13,7 +13,10 @@ export const tabListVariants = cva("flex font-ui", {
       pills: "gap-1 rounded-control bg-muted p-1",
     },
     orientation: {
-      horizontal: "flex-row items-center overflow-x-auto",
+      // Scrollable so tabs never wrap on a narrow screen; the scrollbar itself stays hidden (still scrollable
+      // by touch/drag/wheel) since a row of tabs is its own obvious affordance and a track underneath it reads
+      // as a stray leftover scrollbar, not a feature.
+      horizontal: "flex-row items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
       vertical: "flex-col items-stretch",
     },
   },
