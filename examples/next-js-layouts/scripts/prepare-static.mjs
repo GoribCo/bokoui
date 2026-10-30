@@ -1,7 +1,7 @@
 // Turns a checkout into the static GitHub Pages demo (run before `next build` with NEXT_PUBLIC_DEMO=true).
 // Removes what cannot exist without a server: the API route, the proxy, server actions, request-time
 // metadata files. The sample backend itself stays and runs in the browser (see `lib/api/client.ts`).
-import { copyFileSync, rmSync } from "node:fs";
+import { appendFileSync, copyFileSync, rmSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -11,3 +11,10 @@ for (const file of ["src/app/api", "src/proxy.ts", "src/instrumentation.ts", "sr
 }
 copyFileSync(path.join(root, "demo/i18n-actions.ts"), path.join(root, "src/lib/i18n/actions.ts"));
 console.log("prepared for static export");
+
+// The departments tree is finite, so the demo builds every path ahead. Not in the page itself: a route that
+// exports generateStaticParams is prerendered on demand, which fails in a server build that reads headers.
+appendFileSync(
+  path.join(root, "src/app/(dashboard)/departments/[...path]/page.tsx"),
+  `\nimport { departmentPaths } from "@/api/data/menus";\nexport function generateStaticParams() {\n  return departmentPaths().map((path) => ({ path }));\n}\n`,
+);

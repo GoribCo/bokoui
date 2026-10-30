@@ -1,14 +1,8 @@
 import { Text } from "bokoui/react";
 import { StaticPage } from "@/components/layout/static-page";
-import { departmentPaths } from "@/api/data/menus";
 import { buildMetadata } from "@/lib/seo";
 
 const humanize = (segment: string) => segment.replace(/-/g, " ").replace(/^\w/, (c) => c.toUpperCase());
-
-/** Static demo only: the tree is finite, so every path is built ahead. */
-export function generateStaticParams() {
-  return process.env.NEXT_PUBLIC_DEMO === "true" ? departmentPaths().map((path) => ({ path })) : [];
-}
 
 export async function generateMetadata({ params }: PageProps<"/departments/[...path]">) {
   const { path } = await params;
