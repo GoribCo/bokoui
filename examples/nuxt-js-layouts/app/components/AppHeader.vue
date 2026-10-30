@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { Check, ChevronsUpDown, Globe, Menu as MenuIcon, PanelLeft, User } from '@lucide/vue'
+import { Check, ChevronsUpDown, Globe, LogOut, Menu as MenuIcon, PanelLeft, Settings, User } from '@lucide/vue'
 import { Button, Menu, MenuItem, MenuLabel, MenuSeparator, ThemeSwitcher } from 'bokoui/vue'
-import type { Locale, Organization, UserProfile } from '~/utils/types'
+import type { Locale, MenuGroup, Organization, UserProfile } from '~/utils/types'
 
-defineProps<{ organizations: Organization[]; org?: Organization; profile?: UserProfile | null }>()
+defineProps<{ organizations: Organization[]; org?: Organization; profile?: UserProfile | null; groups: MenuGroup[] }>()
 const emit = defineEmits<{ switchOrg: [id: string] }>()
 const t = useT()
 const locale = useLocale()
 const { collapsed, drawerOpen } = useShellState()
+const { signOut } = useAuth()
+const logout = () => {
+  signOut()
+  return navigateTo('/')
+}
 const initials = (name = '') => name.split(' ').map((w) => w[0]).slice(0, 2).join('')
 </script>
 
@@ -29,7 +34,7 @@ const initials = (name = '') => name.split(' ').map((w) => w[0]).slice(0, 2).joi
             <ChevronsUpDown aria-hidden="true" />
           </Button>
         </template>
-        <MenuLabel>{{ t('account.organizations') }}</MenuLabel>
+        <MenuLabel>{{ t('organization.workspaces') }}</MenuLabel>
         <MenuItem v-for="o in organizations" :key="o.id" @select="emit('switchOrg', o.id)">
           <Check :class="o.id === org.id ? 'opacity-100' : 'opacity-0'" aria-hidden="true" />
           <span class="max-w-56 truncate">{{ o.name }}</span>
@@ -43,6 +48,8 @@ const initials = (name = '') => name.split(' ').map((w) => w[0]).slice(0, 2).joi
         </MenuItem>
       </Menu>
 
+      <HeaderSearch :groups="groups" />
+      <NotificationsButton />
       <ThemeSwitcher class="hidden lg:flex" />
 
       <Menu placement="bottom-end" :aria-label="t('account.menu')">
@@ -52,7 +59,9 @@ const initials = (name = '') => name.split(' ').map((w) => w[0]).slice(0, 2).joi
         <MenuLabel>{{ profile?.name }}</MenuLabel>
         <MenuItem @select="navigateTo('/profile')"><User aria-hidden="true" />{{ t('account.profile') }}</MenuItem>
         <MenuSeparator />
-        <MenuItem @select="navigateTo('/organizations')">{{ t('account.organizations') }}</MenuItem>
+        <MenuItem @select="navigateTo('/account')"><Settings aria-hidden="true" />{{ t('account.manage') }}</MenuItem>
+        <MenuItem @select="navigateTo('/organizations')">{{ t('organization.manage') }}</MenuItem>
+        <MenuItem @select="logout"><LogOut aria-hidden="true" />{{ t('account.logout') }}</MenuItem>
       </Menu>
     </div>
   </header>

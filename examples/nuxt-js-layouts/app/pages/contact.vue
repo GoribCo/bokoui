@@ -3,5 +3,5 @@ definePageMeta({ layout: 'public' })
 </script>
 
 <template>
-  <div><PageTitle title="Contact" lead="support@example.com" /></div>
+  <StaticPage title="Contact" description="How to reach the team.">Placeholder contact page.</StaticPage>
 </template>

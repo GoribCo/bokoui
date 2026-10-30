@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import { Card, Text } from 'bokoui/vue'
+import { Avatar, Card, Text } from 'bokoui/vue'
 
+const format = useFormat()
 const { profile } = await useShell()
-const rows = computed(() => [
-  ['Name', profile.value?.name], ['Email', profile.value?.email], ['Phone', profile.value?.phone],
-  ['Job title', profile.value?.jobTitle], ['Joined', profile.value?.joinedAt],
-])
+if (!profile.value) throw createError({ statusCode: 404, statusMessage: 'Not found' })
 </script>
 
 <template>
   <div>
     <PageTitle title="Profile" />
-    <Card>
-      <dl class="grid gap-3 sm:grid-cols-[10rem_1fr]">
-        <template v-for="[k, v] in rows" :key="k"><dt><Text muted as="span">{{ k }}</Text></dt><dd>{{ v }}</dd></template>
-      </dl>
+    <Card class="flex-row items-center gap-4">
+      <Avatar :name="profile!.name" size="lg" />
+      <div class="flex min-w-0 flex-col">
+        <Text class="font-medium">{{ profile!.name }}</Text>
+        <Text muted>{{ profile!.jobTitle }}</Text>
+        <Text muted>{{ profile!.email }}</Text>
+        <Text muted>Member since {{ format.date(profile!.joinedAt) }}</Text>
+      </div>
     </Card>
   </div>
 </template>

@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import { Badge, Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from 'bokoui/vue'
+import { Badge, Button, Card, Heading, Text } from 'bokoui/vue'
 
+const t = useT()
 const { organizations, org, switchOrg } = await useShell()
 </script>
 
 <template>
   <div>
-    <PageTitle title="Organizations" lead="Switch organization to change the roles, and with them the menu and the pages you may open." />
-    <Table aria-label="Organizations" hoverable>
-      <TableHeader>
-        <TableRow><TableHead>Name</TableHead><TableHead>Type</TableHead><TableHead>Roles</TableHead><TableHead><span class="sr-only">Action</span></TableHead></TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow v-for="o in organizations" :key="o.id">
-          <TableCell class="max-w-xs truncate">{{ o.name }}</TableCell>
-          <TableCell>{{ o.type }}</TableCell>
-          <TableCell><span class="flex flex-wrap gap-1"><Badge v-for="r in o.roles" :key="r">{{ r }}</Badge></span></TableCell>
-          <TableCell>
-            <Badge v-if="o.id === org?.id" action="success">Active</Badge>
-            <Button v-else size="sm" variant="outline" @click="switchOrg(o.id)">Switch</Button>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <PageTitle :title="t('organization.manage')" lead="Administration (add, rename, remove) belongs to the host project." />
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <Card v-for="o in organizations" :key="o.id" class="gap-3">
+        <div><Heading as="h2" size="md">{{ o.name }}</Heading><Text muted class="capitalize">{{ o.type }}</Text></div>
+        <div class="flex flex-wrap gap-2"><Badge v-for="r in o.roles" :key="r" color="neutral" class="capitalize">{{ r }}</Badge></div>
+        <div class="flex items-center gap-2">
+          <Badge v-if="o.id === org?.id" action="success">{{ t('organization.current') }}</Badge>
+          <Button v-else size="sm" variant="outline" @click="switchOrg(o.id)">{{ t('organization.switch') }}</Button>
+          <NuxtLink :to="`/${o.type}/${o.slug}`" class="focus-ring rounded-sm text-sm">{{ t('organization.publicProfile') }}</NuxtLink>
+        </div>
+      </Card>
+    </div>
   </div>
 </template>

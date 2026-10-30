@@ -9,6 +9,8 @@ const props = defineProps<{ items: MenuItem[]; depth?: number; open: Set<string>
 const emit = defineEmits<{ toggle: [id: string] }>()
 const t = useT()
 const route = useRoute()
+// Resolved in script (not in the template) so Nuxt registers the component.
+const NuxtLink = resolveComponent('NuxtLink')
 
 const label = (item: MenuItem) => t(item.labelKey, item.label)
 // Children render only while open: the departments tree has hundreds of nodes.
@@ -35,7 +37,7 @@ const indent = (depth = 0) => ({ paddingInlineStart: `${0.75 + depth * 0.875}rem
       </SidebarItem>
       <SidebarItem
         v-else
-        :as="resolveComponent('NuxtLink')"
+        :as="NuxtLink"
         :to="item.href"
         :active="Boolean(item.href && isPathActive(item.href, route.path))"
         :style="indent(depth)"

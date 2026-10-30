@@ -2,6 +2,7 @@
 import { ThemeSwitcher } from 'bokoui/vue'
 
 const t = useT()
+const { signedIn } = useAuth()
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const t = useT()
       <Branding />
       <div class="flex items-center gap-3">
         <ThemeSwitcher class="hidden sm:flex" />
-        <NuxtLink to="/dashboard" class="focus-ring rounded-control text-sm">{{ t('menu.dashboard') }}</NuxtLink>
+        <NuxtLink :to="signedIn ? '/dashboard' : '/sign-in'" class="focus-ring rounded-control text-sm">{{ signedIn ? t('menu.dashboard') : t('home.signIn') }}</NuxtLink>
       </div>
     </header>
     <main id="content" tabindex="-1" class="mx-auto w-full max-w-3xl flex-1 px-4 py-10 sm:px-6"><slot /></main>

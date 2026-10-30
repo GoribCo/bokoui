@@ -46,3 +46,42 @@ export interface UserProfile {
 }
 
 export type Locale = 'en' | 'bn'
+
+export type NotificationKind = 'action' | 'info' | 'success' | 'invitation'
+
+export interface Notification {
+  id: string
+  kind: NotificationKind
+  urgent?: boolean
+  title: string
+  body: string
+  time: string
+  unread: boolean
+  href?: string
+}
+
+export interface SampleRecord {
+  id: number
+  name: string
+  department: string
+  status: 'active' | 'archived'
+  /** ISO date. */
+  updated: string
+}
+
+export type OrganizationDetails =
+  | { type: 'hospital'; beds: number; departments: string[]; emergency: boolean }
+  | { type: 'pharmacy'; licenseNo: string; open24h: boolean; delivery: boolean }
+  | { type: 'company'; industry: string; employees: number; founded: number }
+
+export interface PublicOrganization {
+  id: string
+  slug: string
+  name: string
+  type: OrganizationType
+  description: string
+  city: string
+  phone?: string
+  website?: string
+  details: OrganizationDetails
+}

@@ -7,7 +7,7 @@ const { organizations, org, groups, common, profile, collapsed, switchOrg } = aw
 <template>
   <div class="flex min-h-dvh flex-col">
     <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:start-2 focus:top-2 focus:z-50 focus:rounded-control focus:bg-background focus:px-3 focus:py-2">{{ t('shell.skip') }}</a>
-    <AppHeader :organizations="organizations" :org="org" :profile="profile" @switch-org="switchOrg" />
+    <AppHeader :organizations="organizations" :org="org" :profile="profile" :groups="groups" @switch-org="switchOrg" />
     <div class="flex min-h-0 flex-1">
       <aside
         class="sticky top-14 hidden h-[calc(100dvh-3.5rem)] shrink-0 border-e border-border transition-[width] duration-200 motion-reduce:transition-none md:block"

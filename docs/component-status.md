@@ -59,7 +59,7 @@ Working order: build **React first**, show it in `examples/next-js`, then port t
 | `examples/expo-js` | Expo (web build) | 3001 | `/`, `/forms`, `/display`, `/feedback`, `/overlays`, `/navigation` |
 | `examples/next-js` | React / Next.js | 3002 | `/`, `/playground`, `/forms`, `/display`, `/table`, `/feedback`, `/overlays`, `/tabs`, `/accordion`, `/patterns`, `/navigation` |
 | `examples/nuxt-js` | Vue / Nuxt | 3003 | `/`, `/setup`, `/forms`, `/display`, `/feedback`, `/data`, `/navigation`, `/pickers`, `/overlays`, `/tabs` |
-| `examples/nuxt-js-layouts` | Vue / Nuxt, application shell (reduced port of next-js-layouts: no sign-in/API, query, forms, search) | 3006 | `/dashboard`, `/organizations`, `/profile`, `/examples/table`, `/help`, `/contact`, `/legal/*`, other menu links open a placeholder; not part of the switcher |
+| `examples/nuxt-js-layouts` | Vue / Nuxt, application shell (port of next-js-layouts with cookie sign-in and no API/query layer) | 3006 | every page of next-js-layouts; not part of the switcher |
 | `examples/expo-js-layouts` | Expo (web build), application shell, port of next-js-layouts | 3005 | `/`, `/sign-in`, `/dashboard`, `/examples/*`, `/admin`, public profiles `/[type]/[slug]`; not part of the switcher |
 | `examples/next-js-layouts` | React, application shell (see below) | 3004 | `/`, `/examples/*`, `/admin`, `/sign-in`, public profiles `/hospital/[slug]`, `/pharmacy/[slug]`, `/company/[slug]`; not part of the switcher |
 

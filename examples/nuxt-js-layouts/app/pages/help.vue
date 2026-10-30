@@ -3,5 +3,5 @@ definePageMeta({ layout: 'public' })
 </script>
 
 <template>
-  <div><PageTitle title="Help" lead="Public page: it uses the public layout and needs no organization." /></div>
+  <StaticPage title="Help" description="Where to find answers and support.">Placeholder help page. Replace it with the help center of the host project.</StaticPage>
 </template>
