@@ -5,17 +5,20 @@ import { Platform, Pressable, View } from 'react-native';
 // URLs come from run.sh (fixed ports); the defaults match it, so `npm run dev` alone still works.
 // Metro inlines EXPO_PUBLIC_* at bundle time.
 const platforms = [
-  { id: 'react', label: 'React', url: process.env.EXPO_PUBLIC_BOKOUI_URL_REACT ?? 'http://localhost:3001', paths: 'all' },
+  { id: 'react', label: 'React', url: process.env.EXPO_PUBLIC_BOKOUI_URL_REACT ?? 'http://localhost:3002', paths: 'all' },
   {
     id: 'vue',
     label: 'Vue',
-    url: process.env.EXPO_PUBLIC_BOKOUI_URL_VUE ?? 'http://localhost:3002',
+    url: process.env.EXPO_PUBLIC_BOKOUI_URL_VUE ?? 'http://localhost:3003',
     paths: ['/', '/forms', '/display', '/feedback', '/overlays'],
   },
-  { id: 'expo', label: 'Expo', url: process.env.EXPO_PUBLIC_BOKOUI_URL_EXPO ?? 'http://localhost:3000', paths: 'all' },
+  { id: 'expo', label: 'Expo', url: process.env.EXPO_PUBLIC_BOKOUI_URL_EXPO ?? 'http://localhost:3001', paths: 'all' },
 ] as const;
 
 const CURRENT = 'expo';
+
+/** The application shell for this platform. */
+const layoutsUrl = process.env.EXPO_PUBLIC_BOKOUI_URL_LAYOUTS ?? 'http://localhost:3005';
 
 /**
  * Jump to the same page in the React, Vue and Expo demos; a demo without that page opens on its
@@ -27,6 +30,7 @@ export function PlatformSwitcher() {
   if (Platform.OS !== 'web') return null;
 
   return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start', gap: 8 }}>
     <View
       accessibilityRole="tablist"
       accessibilityLabel="Platform"
@@ -65,6 +69,12 @@ export function PlatformSwitcher() {
           </Pressable>
         );
       })}
+    </View>
+    <Pressable accessibilityRole="link" accessibilityLabel="Open the application shell example" onPress={() => window.location.assign(layoutsUrl)}>
+      <Text variant="small" muted>
+        Layouts
+      </Text>
+    </Pressable>
     </View>
   );
 }

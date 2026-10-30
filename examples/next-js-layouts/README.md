@@ -8,7 +8,7 @@ Specs: [SRS](../../docs/srs/srs-layouts.md) and [task list](../../docs/tasks/tas
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000 (run.sh at the repo root uses 3003)
+npm run dev     # http://localhost:3000 (run.sh at the repo root uses 3004)
 ```
 
 `bokoui` comes from the local Verdaccio registry in `.npmrc` (`http://127.0.0.1:4873/`). Publish the library first if the version in `package.json` is not available (`npm run publish:local`). Open the app and sign in with any email and password.
@@ -218,3 +218,5 @@ The display settings menu and `/examples/styles` (the style gallery) list 20 sty
 ## Tests
 
 All tests are in `test/`, beside `src`: `test/unit/` mirrors `src/` (run with `npm test`, `node:test`) and `test/browser/` holds the browser checks (`npm run check:browser`, builds a throwaway clone and drives Chrome). Unit tests import the code under test with the `@/` alias.
+
+Same shell on other platforms: [nuxt-js-layouts](../nuxt-js-layouts) (Vue, reduced), [expo-js-layouts](../expo-js-layouts) (Expo).

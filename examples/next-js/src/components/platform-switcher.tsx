@@ -12,22 +12,26 @@ interface Platform {
 
 // URLs come from run.sh (fixed ports); the defaults match it, so `npm run dev` alone still works.
 const platforms: Platform[] = [
-  { id: "react", label: "React", url: process.env.NEXT_PUBLIC_BOKOUI_URL_REACT ?? "http://localhost:3001", paths: "all" },
+  { id: "react", label: "React", url: process.env.NEXT_PUBLIC_BOKOUI_URL_REACT ?? "http://localhost:3002", paths: "all" },
   {
     id: "vue",
     label: "Vue",
-    url: process.env.NEXT_PUBLIC_BOKOUI_URL_VUE ?? "http://localhost:3002",
+    url: process.env.NEXT_PUBLIC_BOKOUI_URL_VUE ?? "http://localhost:3003",
     paths: ["/", "/setup", "/forms", "/display", "/feedback", "/overlays", "/tabs"],
   },
-  { id: "expo", label: "Expo", url: process.env.NEXT_PUBLIC_BOKOUI_URL_EXPO ?? "http://localhost:3000", paths: ["/", "/setup"] },
+  { id: "expo", label: "Expo", url: process.env.NEXT_PUBLIC_BOKOUI_URL_EXPO ?? "http://localhost:3001", paths: ["/", "/setup"] },
 ];
 
 const CURRENT = "react";
+
+/** The application shell for this platform. */
+const layoutsUrl = process.env.NEXT_PUBLIC_BOKOUI_URL_LAYOUTS ?? "http://localhost:3004";
 
 /** Jump to the same page in the React, Vue and Expo demos (they run on fixed ports; see run.sh). */
 export function PlatformSwitcher() {
   const pathname = usePathname();
   return (
+    <div className="flex items-center gap-2">
     <nav aria-label="Platform" data-tone="primary" className="inline-flex items-center gap-1 rounded-control border border-border p-0.5">
       {platforms.map((p) => {
         const current = p.id === CURRENT;
@@ -45,5 +49,9 @@ export function PlatformSwitcher() {
         );
       })}
     </nav>
+    <a href={layoutsUrl} title="Open the application shell example (sidebar, header, organizations, roles)" className="focus-ring rounded-control px-2 py-1 text-sm text-muted-foreground hover:text-foreground">
+      Layouts
+    </a>
+    </div>
   );
 }

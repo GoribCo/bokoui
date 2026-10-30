@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
   name: "Bokoui Layout",
   legalName: "Bokoui Layout",
   description: "A generic application shell for large, multi-organization products.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3003",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3004",
   themeColor: { light: "#ffffff", dark: "#0a0a0a" },
   contact: { support: "support@example.com", privacy: "privacy@example.com" },
   defaultStyle: "flat",

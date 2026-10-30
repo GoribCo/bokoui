@@ -6,7 +6,7 @@ The generic application shell (drawer, bottom navigation, sidebar on wide screen
 
 ```bash
 npm install
-npm run dev          # Metro on :3004 (or $PORT); press w for web, i for iOS, a for Android
+npm run dev          # Metro on :3005 (or $PORT); press w for web, i for iOS, a for Android
 npm run lint
 npm run typecheck
 ```
@@ -43,3 +43,5 @@ Tokens are kept in `expo-secure-store` on devices and in AsyncStorage on the web
 - **A menu item:** add it to the organization's menu in `src/api/data/menus.ts` (or your API). `icon` is a name in `components/navigation/menu-icons.ts`; `labelKey` is a key in the catalogs; `requiredRoles` and `requiredPermissions` filter it. The UI shows groups plus one nested level.
 - **An organization type:** one entry in `lib/config/organization-types.ts`, one member of `OrganizationDetails` (`lib/types/organization.ts`, its schema, and a case in `components/organization/public-profile.tsx`). Its public route `/{segment}/{slug}` needs no new file.
 - **A language:** add the code to `lib/i18n/config.ts`, a catalog `lib/i18n/messages/<code>.json` and an entry in `lib/i18n/messages.ts`. The display settings sheet lists it by itself.
+
+Same shell on other platforms: [next-js-layouts](../next-js-layouts) (React), [nuxt-js-layouts](../nuxt-js-layouts) (Vue).

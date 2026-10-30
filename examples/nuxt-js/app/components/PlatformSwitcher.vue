@@ -4,6 +4,7 @@ const { public: urls } = useRuntimeConfig()
 const route = useRoute()
 
 const CURRENT = 'vue'
+const layoutsUrl = urls.urlLayouts as string
 const platforms = computed(() => [
   { id: 'react', label: 'React', url: urls.urlReact as string, paths: 'all' as const },
   { id: 'vue', label: 'Vue', url: urls.urlVue as string, paths: 'all' as const },
@@ -18,6 +19,7 @@ const hasPage = (p: { paths: 'all' | string[] }) => p.paths === 'all' || p.paths
 </script>
 
 <template>
+  <div class="flex items-center gap-2">
   <nav aria-label="Platform" data-tone="primary" class="inline-flex items-center gap-1 rounded-control border border-border p-0.5">
     <a
       v-for="p in platforms"
@@ -30,4 +32,6 @@ const hasPage = (p: { paths: 'all' | string[] }) => p.paths === 'all' || p.paths
       {{ p.label }}
     </a>
   </nav>
+  <a :href="layoutsUrl" title="Open the application shell example (sidebar, header, organizations, roles)" class="focus-ring rounded-control px-2 py-1 text-sm text-muted-foreground hover:text-foreground">Layouts</a>
+  </div>
 </template>

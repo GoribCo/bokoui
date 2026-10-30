@@ -44,6 +44,7 @@ jobs:
           NEXT_PUBLIC_BOKOUI_URL_REACT: ${{ env.BASE }}/react
           NEXT_PUBLIC_BOKOUI_URL_VUE: ${{ env.BASE }}/vue
           NEXT_PUBLIC_BOKOUI_URL_EXPO: ${{ env.BASE }}/expo
+          NEXT_PUBLIC_BOKOUI_URL_LAYOUTS: ${{ env.BASE }}/next-layouts
         run: |
           rm -f package-lock.json
           npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
@@ -57,6 +58,7 @@ jobs:
           NUXT_PUBLIC_URL_REACT: ${{ env.BASE }}/react
           NUXT_PUBLIC_URL_VUE: ${{ env.BASE }}/vue
           NUXT_PUBLIC_URL_EXPO: ${{ env.BASE }}/expo
+          NUXT_PUBLIC_URL_LAYOUTS: ${{ env.BASE }}/vue-layouts
         run: |
           rm -f package-lock.json
           npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
@@ -70,6 +72,7 @@ jobs:
           EXPO_PUBLIC_BOKOUI_URL_REACT: ${{ env.BASE }}/react
           EXPO_PUBLIC_BOKOUI_URL_VUE: ${{ env.BASE }}/vue
           EXPO_PUBLIC_BOKOUI_URL_EXPO: ${{ env.BASE }}/expo
+          EXPO_PUBLIC_BOKOUI_URL_LAYOUTS: ${{ env.BASE }}/expo-layouts
         run: |
           rm -f package-lock.json
           npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
@@ -99,6 +102,17 @@ jobs:
           npm install $NPM
           npx expo export --platform web
           cp -r dist ../../site/expo-layouts
+      - name: Nuxt layouts (static)
+        working-directory: examples/nuxt-js-layouts
+        continue-on-error: true
+        env:
+          NUXT_APP_BASE_URL: ${{ env.BASE }}/vue-layouts/
+        run: |
+          rm -f package-lock.json
+          npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
+          npm install $NPM
+          npx nuxt generate
+          cp -r .output/public ../../site/vue-layouts
       # The demos' component pages are the docs; /<platform>/docs/ points at them.
       - name: Docs entry points
         run: |

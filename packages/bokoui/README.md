@@ -129,6 +129,12 @@ Slots: `Button` has `leftIcon` / `rightIcon`, `Input` has `startAdornment` / `en
 
 ## Setup: React Native / Expo
 
+```bash
+npx expo install bokoui @react-native-async-storage/async-storage expo-blur
+```
+
+Needs Expo SDK 54+. No CSS or Tailwind step. Wrap the app once (with Expo Router, in `app/_layout.tsx`), then use components below it:
+
 ```tsx
 import { ThemeProvider, Button, Input, Heading, Text, Link, useTheme } from "bokoui/expo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -147,7 +153,7 @@ export default function App() {
 
 `storage` is optional (any AsyncStorage-compatible object); without it the choice lasts for the session. `useTheme()` returns `{ style, mode, resolvedMode, tokens, setStyle, setMode }`, where `tokens` are the resolved numbers and colors for the active style, for your own components.
 
-Native limits: components are theme-aware but not pixel-identical to the web (no CSS `color-mix`, box shadows or hover states; pressed state is used instead). Fonts are not applied; pass `style={{ fontFamily }}` or load fonts with `expo-font`. Responsive props are web-only. Verified by bundling for web and iOS and by running the web build in a browser (see `examples/expo-js`); not yet run on a device or simulator.
+Native limits: components are theme-aware but not pixel-identical to the web (no CSS `color-mix`, box shadows or hover states; pressed state is used instead). Fonts are not applied; pass `style={{ fontFamily }}` or load fonts with `expo-font`. Responsive props are web-only. Verified by bundling for web and iOS and by running the web build in a browser (see `examples/expo-js`; its README has the full install and usage guide); not yet run on a device or simulator. Application-shell examples: `examples/next-js-layouts`, `examples/nuxt-js-layouts`, `examples/expo-js-layouts`.
 
 ## Components
 

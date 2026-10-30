@@ -12,7 +12,10 @@ This repo holds two separate projects, each with its own `package.json`, `node_m
 | [examples/next-js](examples/next-js) | Next.js demo using `bokoui/react`. |
 | [examples/nuxt-js](examples/nuxt-js) | Nuxt demo using `bokoui/vue`. |
 | [examples/nuxt-js-layouts](examples/nuxt-js-layouts) | Nuxt application shell (sidebar, drawer, organizations, roles, i18n) using `bokoui/vue`. |
-| [examples/expo-js](examples/expo-js) | Expo demo using `bokoui/expo`. |
+| [examples/expo-js](examples/expo-js) | Expo demo using `bokoui/expo`; its README has the install and usage guide. |
+| [examples/next-js-layouts](examples/next-js-layouts) | Next.js application shell (sidebar, header, footer, mobile navigation, organizations, roles, i18n). |
+| [examples/expo-js-layouts](examples/expo-js-layouts) | The same shell on Expo. |
+| [examples/showcase](examples/showcase) | Plain-HTML landing page that links the hosted demos; `run.sh` serves it on :3000. |
 | [docs](docs) | [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-framework.md), [component status](docs/component-status.md), [component conventions](docs/component-conventions.md), [Tailwind plan](docs/plan-tailwindcss.md). |
 
 ## Quick start
@@ -23,7 +26,7 @@ cd packages/bokoui
 npm install
 npm run build
 
-# 2. Publish to local Verdaccio and run every example (fixed ports: Expo web :3000, Next :3001, Nuxt :3002, the extra next-js-layouts :3003, nuxt-js-layouts :3005)
+# 2. Publish to local Verdaccio and run every example (fixed ports: showcase :3000, Expo web :3001, Next :3002, Nuxt :3003, the extra next-js-layouts :3004, nuxt-js-layouts :3006)
 cd ../..
 ./run.sh
 ```

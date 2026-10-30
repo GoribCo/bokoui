@@ -5,8 +5,9 @@
 #   ./run.sh show    install the last built version into every example and run them all
 #   ./run.sh         both: build, then show
 #
+# examples/showcase (plain HTML) is served on 3000.
 # Ports are fixed so the React / Vue / Expo switcher in each example can link to the others:
-#   expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003, expo-js-layouts 3004, nuxt-js-layouts 3005 (any other example: 3010 and up).
+#   expo-js 3001, next-js 3002, nuxt-js 3003, next-js-layouts 3004, expo-js-layouts 3005, nuxt-js-layouts 3006 (any other example: 3010 and up).
 # Override with BOKOUI_PORT_EXPO / _REACT / _VUE. Ctrl+C stops all examples.
 set -euo pipefail
 
@@ -39,16 +40,18 @@ VERSION="$(node -p "require('$PKG/package.json').version")"
 
 # Install each example (pointing it at the latest published version) and start it.
 PIDS=()
-PORT_EXPO="${BOKOUI_PORT_EXPO:-3000}"
-PORT_REACT="${BOKOUI_PORT_REACT:-3001}"
-PORT_VUE="${BOKOUI_PORT_VUE:-3002}"
-PORT_LAYOUTS=3003
-PORT_EXPO_LAYOUTS=3004
-PORT_VUE_LAYOUTS=3005
+PORT_SHOWCASE=3000
+PORT_EXPO="${BOKOUI_PORT_EXPO:-3001}"
+PORT_REACT="${BOKOUI_PORT_REACT:-3002}"
+PORT_VUE="${BOKOUI_PORT_VUE:-3003}"
+PORT_LAYOUTS=3004
+PORT_EXPO_LAYOUTS=3005
+PORT_VUE_LAYOUTS=3006
 
 # Where each platform's demo lives, for the switcher. Every example reads the variable with its
 # own prefix (NEXT_PUBLIC_, NUXT_PUBLIC_, EXPO_PUBLIC_) and falls back to the same defaults.
 export NEXT_PUBLIC_BOKOUI_URL_REACT="http://localhost:$PORT_REACT" NEXT_PUBLIC_BOKOUI_URL_VUE="http://localhost:$PORT_VUE" NEXT_PUBLIC_BOKOUI_URL_EXPO="http://localhost:$PORT_EXPO"
+export NEXT_PUBLIC_BOKOUI_URL_LAYOUTS="http://localhost:$PORT_LAYOUTS" NUXT_PUBLIC_URL_LAYOUTS="http://localhost:$PORT_VUE_LAYOUTS" EXPO_PUBLIC_BOKOUI_URL_LAYOUTS="http://localhost:$PORT_EXPO_LAYOUTS"
 export NUXT_PUBLIC_URL_REACT="$NEXT_PUBLIC_BOKOUI_URL_REACT" NUXT_PUBLIC_URL_VUE="$NEXT_PUBLIC_BOKOUI_URL_VUE" NUXT_PUBLIC_URL_EXPO="$NEXT_PUBLIC_BOKOUI_URL_EXPO"
 export EXPO_PUBLIC_BOKOUI_URL_REACT="$NEXT_PUBLIC_BOKOUI_URL_REACT" EXPO_PUBLIC_BOKOUI_URL_VUE="$NEXT_PUBLIC_BOKOUI_URL_VUE" EXPO_PUBLIC_BOKOUI_URL_EXPO="$NEXT_PUBLIC_BOKOUI_URL_EXPO"
 
@@ -69,6 +72,10 @@ cleanup() {
   wait 2>/dev/null || true
 }
 trap cleanup INT TERM EXIT
+
+echo "[showcase] will listen on http://localhost:$PORT_SHOWCASE"
+python3 -m http.server "$PORT_SHOWCASE" --directory "$ROOT/examples/showcase" 2>&1 | sed -u "s/^/[showcase] /" &
+PIDS+=($!)
 
 for dir in "$ROOT"/examples/*/; do
   [ -f "$dir/package.json" ] || continue

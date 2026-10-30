@@ -18,3 +18,7 @@ npm run dev     # http://localhost:3000
 - `app/app.vue`: theme script in `<head>` (no flash), `ThemeProvider`, `ThemeSwitcher`.
 - `app/pages/`: showcase pages (`index`, `forms`, `display`, `feedback`, `data`, `navigation`, `pickers`, `overlays`, `tabs`, `setup`); `ToastProvider` wraps the app in `app.vue`.
 - `app/utils/custom-themes.ts`: example app-defined theme.
+
+## Application shell
+
+For a full app layout (sidebar tree, drawer, organizations, roles, en/bn) see [nuxt-js-layouts](../nuxt-js-layouts). The complete version is [next-js-layouts](../next-js-layouts); [expo-js-layouts](../expo-js-layouts) is the Expo one.

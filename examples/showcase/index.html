@@ -65,6 +65,10 @@
       <div class="links"><a class="btn primary" href="next-layouts/">Open demo</a><a class="btn" href="https://github.com/goribco/bokoui/tree/main/examples/next-js-layouts">Source</a></div>
     </section>
     <section class="card">
+      <h3>Nuxt layouts</h3><p>A reduced port of the shell on Vue 3 and Nuxt: sidebar tree, drawer, organisation switching, roles and English/Bangla. Sample data only.</p>
+      <div class="links"><a class="btn primary" href="vue-layouts/">Open demo</a><a class="btn" href="https://github.com/goribco/bokoui/tree/main/examples/nuxt-js-layouts">Source</a></div>
+    </section>
+    <section class="card">
       <h3>Expo layouts</h3><p>The same shell on React Native with expo-router, running as a web build.</p>
       <div class="links"><a class="btn primary" href="expo-layouts/">Open demo</a><a class="btn" href="https://github.com/goribco/bokoui/tree/main/examples/expo-js-layouts">Source</a></div>
     </section>
@@ -76,5 +80,15 @@
     <a href="https://github.com/goribco/bokoui/tree/main/packages/bokoui#readme">README</a>
   </footer>
 </main>
+<script>
+// Served by run.sh the demos live on other ports; the hosted site uses the relative paths.
+if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+  var ports = { react: 3002, vue: 3003, expo: 3001, "next-layouts": 3004, "expo-layouts": 3005, "vue-layouts": 3006 };
+  document.querySelectorAll("a[href]").forEach(function (a) {
+    var m = a.getAttribute("href").match(/^([a-z-]+)\/(.*)$/);
+    if (m && ports[m[1]] && !/docs\/$/.test(m[2])) a.href = location.protocol + "//" + location.hostname + ":" + ports[m[1]] + "/" + m[2];
+  });
+}
+</script>
 </body>
 </html>

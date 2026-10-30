@@ -32,3 +32,7 @@ npm run dev     # http://localhost:3000
 1. Edit `packages/bokoui/src`.
 2. Bump the version (`npm version patch` in `packages/bokoui`) and run `npm run publish:local` here.
 3. Set the new `bokoui` version in this `package.json` and run `npm install`.
+
+## Application shell
+
+For a full app layout (sidebar, header, footer, mobile navigation, organizations, roles, i18n) see [next-js-layouts](../next-js-layouts). The same shell exists for [Vue/Nuxt](../nuxt-js-layouts) and [Expo](../expo-js-layouts).

@@ -6,7 +6,7 @@ The generic application shell of [the Next.js layouts example](../next-js-layout
 
 ```bash
 npm install
-npm run dev     # http://localhost:3005
+npm run dev     # http://localhost:3006
 ```
 
 `bokoui` comes from the registry in `.npmrc` (local Verdaccio). From the repo root, `./run.sh` publishes the library and runs every example.
@@ -23,3 +23,5 @@ npm run dev     # http://localhost:3005
 ## Not ported from the Next.js example
 
 Sign-in and JWT cookies, the API route, TanStack Query, forms with zod, notifications, search and the style-showcase screens. Menu entries without a screen open a placeholder page.
+
+Full versions of this shell: [next-js-layouts](../next-js-layouts) (React) and [expo-js-layouts](../expo-js-layouts) (Expo).

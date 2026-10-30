@@ -54,7 +54,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "dev": "expo start --port ${PORT:-3004}",
+    "dev": "expo start --port ${PORT:-3005}",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit"
   },

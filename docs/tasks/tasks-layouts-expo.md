@@ -70,7 +70,7 @@ Framework-neutral modules are copied from `examples/next-js-layouts/src/lib` wit
 - [x] T0.3 Package setup: name `expo-js-layouts`, `bokoui` version matching the published one, `.npmrc` for the local registry, `app.json` name/slug/scheme, `@/*` alias in `tsconfig.json`, scripts `dev`, `lint`, `typecheck`, `build:pkg`, `publish:local` as in the other examples
 - [x] T0.4 Install dependencies with `npx expo install` where an Expo version exists: `zustand`, `@tanstack/react-query`, `react-hook-form`, `zod`, `@hookform/resolvers`, `i18next`, `react-i18next`, `expo-localization`, `expo-secure-store`, `@expo-google-fonts/noto-sans-bengali`, `@react-native-async-storage/async-storage` (no Jotai, no Redux Toolkit, FR-9.6)
 - [x] T0.5 Create the folder structure: `src/app` (routes only), `src/components/{layout,navigation,organization,account,appearance,auth,examples}`, `src/hooks`, `src/providers`, `src/api`, `src/styles`, `src/lib/{api,services,schemas,types,query,stores,config,i18n,access,authorization,menu,session,auth,monitoring,contract}`
-- [x] T0.6 Short `README.md` (run, scripts, structure) and a port entry: `run.sh` runs this app on port 3004; `CLAUDE.md` repository layout and the examples list name it
+- [x] T0.6 Short `README.md` (run, scripts, structure) and a port entry: `run.sh` runs this app on port 3005; `CLAUDE.md` repository layout and the examples list name it
 
 ## Phase 1: Types, contract and sample API
 - [x] T1.1 Copy `lib/types`, `lib/schemas` and `lib/contract` (endpoints, errors, paging) from the web app, minus the demo-only `records` and `staff` endpoints; keep names and exports identical
