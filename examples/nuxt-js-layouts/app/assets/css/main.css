@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import "bokoui/styles.css";
+
+/* Fonts are loaded by the app (bokoui ships none); themes read these variables. */
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource/noto-sans-bengali/400.css";
+@import "@fontsource/noto-sans-bengali/700.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+
+:root {
+  --font-geist-sans: "Geist Variable";
+  --font-geist-mono: "Geist Mono Variable";
+  --font-roboto: "Roboto";
+}
+
+html:lang(bn) body {
+  font-family: "Noto Sans Bengali", var(--font-geist-sans), sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}

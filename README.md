@@ -11,6 +11,7 @@ This repo holds two separate projects, each with its own `package.json`, `node_m
 | [packages/bokoui](packages/bokoui) | The library, published to npm as `bokoui`. Components, themes and styles live here. |
 | [examples/next-js](examples/next-js) | Next.js demo using `bokoui/react`. |
 | [examples/nuxt-js](examples/nuxt-js) | Nuxt demo using `bokoui/vue`. |
+| [examples/nuxt-js-layouts](examples/nuxt-js-layouts) | Nuxt application shell (sidebar, drawer, organizations, roles, i18n) using `bokoui/vue`. |
 | [examples/expo-js](examples/expo-js) | Expo demo using `bokoui/expo`. |
 | [docs](docs) | [SRS](docs/srs/srs-ui-framework.md), [task list](docs/tasks/tasks-ui-framework.md), [component status](docs/component-status.md), [component conventions](docs/component-conventions.md), [Tailwind plan](docs/plan-tailwindcss.md). |
 
@@ -22,12 +23,12 @@ cd packages/bokoui
 npm install
 npm run build
 
-# 2. Publish to local Verdaccio and run every example (fixed ports: Expo web :3000, Next :3001, Nuxt :3002, the extra next-js-layouts :3003)
+# 2. Publish to local Verdaccio and run every example (fixed ports: Expo web :3000, Next :3001, Nuxt :3002, the extra next-js-layouts :3003, nuxt-js-layouts :3005)
 cd ../..
 ./run.sh
 ```
 
-`run.sh` builds and publishes the library (bumping the patch version if needed), points each example at it, installs, and starts them concurrently. `./run.sh --no-publish` skips the build and publish.
+`run.sh` builds and publishes the library (bumping the patch version if needed), points each example at it, installs, and starts them concurrently. `./run.sh build` only builds and publishes the library; `./run.sh show` only installs the last published version into every example and runs them.
 
 Each demo has a **React / Vue / Expo switcher** in its header that opens the same page in the other demos (or their home when they have no matching page). The ports are fixed for this reason; `run.sh` passes the URLs to each app (`NEXT_PUBLIC_BOKOUI_URL_*`, `NUXT_PUBLIC_URL_*`, `EXPO_PUBLIC_BOKOUI_URL_*`), and the defaults in the code match the ports above, so a single `npm run dev` still works. Change a port with `BOKOUI_PORT_REACT`, `BOKOUI_PORT_VUE` or `BOKOUI_PORT_EXPO`. The switcher hides the Expo link on a native device (a localhost link means nothing there).
 
@@ -35,7 +36,7 @@ The demos install `bokoui` from the registry set in its `.npmrc` (a local Verdac
 
 ## Status
 
-React is the reference platform and is feature-complete for the current scope: about 50 components, 8 styles x light/dark, axe-clean across every page and style. Vue has the core set plus the interactive components; Expo has the primitives. [docs/component-status.md](docs/component-status.md) is the source of truth for what exists per platform and what is left.
+React is the reference platform and is feature-complete for the current scope: about 50 components, 8 styles x light/dark, axe-clean across every page and style. Vue has every React component; Expo has the primitives. [docs/component-status.md](docs/component-status.md) is the source of truth for what exists per platform and what is left.
 
 The Next.js demo (`examples/next-js`) is also the playground: every component has a page with variants, states and a generated API table, and Cmd/Ctrl+K opens a command palette.
 

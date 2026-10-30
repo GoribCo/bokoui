@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Alert, Button, Spinner, actions, colors, sizes } from 'bokoui/vue'
+import { Alert, Button, Progress, Skeleton, SkeletonText, Spinner, actions, colors, sizes, useToast } from 'bokoui/vue'
 
 useHead({ title: 'Feedback · UI Framework (Nuxt)' })
 
 const variants = ['soft', 'outline', 'solid'] as const
 const dismissed = ref(false)
+const { toast } = useToast()
 const cap = (s: string) => s[0]!.toUpperCase() + s.slice(1)
 </script>
 
@@ -52,6 +53,29 @@ const cap = (s: string) => s[0]!.toUpperCase() + s.slice(1)
         <Spinner v-for="color in colors" :key="color" :color="color" />
         <Spinner v-for="action in actions" :key="action" :action="action" :label="`${action} loading`" />
       </div>
+    </DemoSection>
+
+    <DemoSection title="Toast" note="Provider lives in app.vue. Toasts pause while hovered or focused; errors announce assertively.">
+      <div class="flex flex-wrap gap-3">
+        <Button v-for="action in actions" :key="action" :action="action" variant="outline" @click="toast({ title: cap(action), description: 'Toast from useToast().', action })">
+          {{ cap(action) }} toast
+        </Button>
+        <Button variant="ghost" @click="toast({ title: 'Sticky', duration: 0 })">Stays until closed</Button>
+      </div>
+    </DemoSection>
+
+    <DemoSection title="Progress">
+      <Progress :value="40" label="Uploading" show-value />
+      <Progress :value="75" action="success" size="lg" aria-label="Done" />
+      <Progress label="Waiting for the server" />
+    </DemoSection>
+
+    <DemoSection title="Skeleton" note="Decorative; mark the region aria-busy while loading.">
+      <div class="flex items-center gap-4" aria-busy="true">
+        <Skeleton shape="circle" />
+        <SkeletonText :lines="3" class="flex-1" />
+      </div>
+      <Skeleton shape="rect" class="h-24 w-full" />
     </DemoSection>
   </main>
 </template>

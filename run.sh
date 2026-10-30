@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # Build + publish bokoui to local Verdaccio, then run every example concurrently.
 #
-#   ./run.sh              publish (auto-bumping the patch version if already published), then run examples
-#   ./run.sh --no-publish skip build/publish, just install and run examples
+#   ./run.sh build   build + publish the library to Verdaccio (bumps the patch version if already published), then stop
+#   ./run.sh show    install the last built version into every example and run them all
+#   ./run.sh         both: build, then show
 #
 # Ports are fixed so the React / Vue / Expo switcher in each example can link to the others:
-#   expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003, expo-js-layouts 3004 (any other example: 3010 and up).
+#   expo-js 3000, next-js 3001, nuxt-js 3002, next-js-layouts 3003, expo-js-layouts 3004, nuxt-js-layouts 3005 (any other example: 3010 and up).
 # Override with BOKOUI_PORT_EXPO / _REACT / _VUE. Ctrl+C stops all examples.
 set -euo pipefail
 
@@ -14,10 +15,10 @@ PKG="$ROOT/packages/bokoui"
 REGISTRY="$(sed -n 's/^registry=//p' "$PKG/.npmrc")"
 REGISTRY="${REGISTRY%/}"
 
-publish=1
-[ "${1:-}" = "--no-publish" ] && publish=0
+MODE="${1:-all}"
+case "$MODE" in build|show|all) ;; *) echo "Usage: ./run.sh [build|show]" >&2; exit 1 ;; esac
 
-if [ "$publish" = 1 ]; then
+if [ "$MODE" != show ]; then
   cd "$PKG"
   [ -d node_modules ] || npm install
 
@@ -31,8 +32,10 @@ if [ "$publish" = 1 ]; then
 
   # Starts Verdaccio if down, logs in, builds (prepublishOnly), publishes.
   bash scripts/publish-local.sh
-  VERSION="$(node -p "require('./package.json').version")"
 fi
+[ "$MODE" = build ] && exit 0
+
+VERSION="$(node -p "require('$PKG/package.json').version")"
 
 # Install each example (pointing it at the latest published version) and start it.
 PIDS=()
@@ -41,6 +44,7 @@ PORT_REACT="${BOKOUI_PORT_REACT:-3001}"
 PORT_VUE="${BOKOUI_PORT_VUE:-3002}"
 PORT_LAYOUTS=3003
 PORT_EXPO_LAYOUTS=3004
+PORT_VUE_LAYOUTS=3005
 
 # Where each platform's demo lives, for the switcher. Every example reads the variable with its
 # own prefix (NEXT_PUBLIC_, NUXT_PUBLIC_, EXPO_PUBLIC_) and falls back to the same defaults.
@@ -55,6 +59,7 @@ port_for() {
     nuxt-js) echo "$PORT_VUE" ;;
     next-js-layouts) echo "$PORT_LAYOUTS" ;;
     expo-js-layouts) echo "$PORT_EXPO_LAYOUTS" ;;
+    nuxt-js-layouts) echo "$PORT_VUE_LAYOUTS" ;;
     *) echo $((3010 + ${#PIDS[@]})) ;;
   esac
 }
@@ -73,12 +78,8 @@ for dir in "$ROOT"/examples/*/; do
   (
     export PORT="$port"
     cd "$dir"
-    if [ "$publish" = 1 ]; then
-      npm pkg set "dependencies.bokoui=^$VERSION" >/dev/null
-      npm install --no-audit --no-fund
-    else
-      [ -d node_modules ] || npm install --no-audit --no-fund
-    fi
+    npm pkg set "dependencies.bokoui=^$VERSION" >/dev/null
+    npm install --no-audit --no-fund
     # A stale Next.js cache (from an earlier run, a `next build`, or a reinstalled bokoui) can
     # remember "Can't resolve 'bokoui/styles.css'" and keep failing. Start from a clean one.
     rm -rf .next

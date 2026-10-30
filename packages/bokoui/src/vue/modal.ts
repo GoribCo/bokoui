@@ -8,6 +8,7 @@ import {
   modalFooterClass,
   modalHeaderClass,
   modalTitleClass,
+  type ModalPlacement,
   type ModalSize,
 } from "../core";
 import { Icon } from "./icon";
@@ -22,6 +23,8 @@ export const Modal = defineComponent({
   props: {
     modelValue: { type: Boolean, default: false },
     size: String as PropType<ModalSize>,
+    /** Side placements make a drawer (see `Drawer`). */
+    placement: String as PropType<ModalPlacement>,
     title: String,
     description: String,
     /** Close when the backdrop is clicked. */
@@ -66,7 +69,7 @@ export const Modal = defineComponent({
           ref: dialog,
           "aria-labelledby": title ? titleId : undefined,
           "aria-describedby": description ? descriptionId : undefined,
-          class: modalClass({ size: props.size }, attrs.class as string),
+          class: modalClass({ size: props.size, placement: props.placement }, attrs.class as string),
           onClick: (event: MouseEvent) => {
             (attrs.onClick as ((e: MouseEvent) => void) | undefined)?.(event);
             // A click on the dialog element itself (not its content) is a click on the backdrop.
@@ -96,5 +99,15 @@ export const Modal = defineComponent({
         ],
       );
     };
+  },
+});
+
+/** A `Modal` that slides in from a `side`. Same props, slots and `v-model`. */
+export const Drawer = defineComponent({
+  name: "BokoDrawer",
+  inheritAttrs: false,
+  props: { side: { type: String as PropType<Exclude<ModalPlacement, "center">>, default: "right" } },
+  setup(props, { attrs, slots }) {
+    return () => h(Modal, { ...attrs, placement: props.side }, slots);
   },
 });

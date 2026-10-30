@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Copy, Pencil, Trash2 } from '@lucide/vue'
-import { Button, FormField, Input, Menu, MenuItem, MenuLabel, MenuSeparator, Modal, Text, Tooltip } from 'bokoui/vue'
+import { Button, CommandPalette, FormField, Input, Menu, MenuItem, MenuLabel, MenuSeparator, Modal, Popover, Text, Tooltip } from 'bokoui/vue'
 
 useHead({ title: 'Overlays · UI Framework (Nuxt)' })
 
@@ -9,6 +9,17 @@ const open = ref(false)
 const confirm = ref(false)
 const big = ref(false)
 const last = ref('nothing yet')
+const palette = ref(false)
+const groups = [
+  { heading: 'Go to', commands: [
+    { id: 'home', label: 'Home', hint: 'G H', onSelect: () => (last.value = 'Home') },
+    { id: 'forms', label: 'Forms', keywords: 'inputs fields', onSelect: () => (last.value = 'Forms') },
+  ] },
+  { heading: 'Actions', commands: [
+    { id: 'new', label: 'New project', onSelect: () => (last.value = 'New project') },
+    { id: 'off', label: 'Disabled command', disabled: true, onSelect: () => {} },
+  ] },
+]
 </script>
 
 <template>
@@ -91,6 +102,18 @@ const last = ref('nothing yet')
         </Menu>
         <Text variant="small" muted>Last selected: {{ last }}</Text>
       </div>
+    </DemoSection>
+
+    <DemoSection title="Popover" note="Non-modal panel that can hold anything. Escape, outside click or tabbing out closes it.">
+      <Popover aria-label="Share">
+        <template #trigger><Button variant="outline">Share</Button></template>
+        <FormField label="Email" v-slot="{ controlProps }"><Input v-bind="controlProps" type="email" /></FormField>
+      </Popover>
+    </DemoSection>
+
+    <DemoSection title="CommandPalette" note="Press Ctrl/Cmd+K, or use the button.">
+      <Button variant="outline" @click="palette = true">Open palette</Button>
+      <CommandPalette v-model="palette" :groups="groups" hotkey="k" />
     </DemoSection>
   </main>
 </template>

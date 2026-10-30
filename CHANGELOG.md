@@ -12,7 +12,8 @@ All notable changes to `bokoui` are recorded here. The format follows [Keep a Ch
 - **Overlays:** Modal, Drawer, Popover, Tooltip, Menu, CommandPalette, built on native `<dialog>` and the Popover API.
 - **Navigation:** Navbar, Sidebar, Tabs, Accordion, Breadcrumb, Pagination.
 - **Layout primitives:** Stack, Inline, Grid, Container.
-- Vue bindings for Tabs, Modal, Tooltip, Menu and Select (plus the earlier primitives); Expo Modal.
+- Vue bindings for every React component (Accordion, Breadcrumb, Calendar, Combobox, CommandPalette, DatePicker, Drawer, EmptyState, FileUpload, FloatingNav, Navbar, Pagination, Popover, Progress, Rating, Sidebar, Skeleton, Slider, Stepper, Table, Tag, Toast, layout primitives) plus the earlier ones; Expo Modal.
+- `examples/nuxt-js-layouts` and more pages in `examples/nuxt-js` (`/data`, `/navigation`, `/pickers`).
 - `bokoui/props.json`: each React component's props, generated from the types.
 - Framework-neutral logic in `bokoui/core`: keyboard navigation, positioning, calendar dates, page ranges, file helpers.
 - New token `radius-card`.
@@ -23,6 +24,7 @@ All notable changes to `bokoui` are recorded here. The format follows [Keep a Ch
 - Accordion panels are not `role="region"` unless `regions` is set (avoids landmark noise).
 
 ### Fixed
+- React `DatePicker` and `ThemeSwitcher` imported the package barrel from inside the package (import cycle; failed the structure test).
 - Warning tone text failed 4.5:1 contrast on light tinted backgrounds in every style; light-mode warning ink now uses 45% tone.
 - `cn()` did not know the custom `card` radius, so `rounded-none` did not override `rounded-card`; it now knows the custom radius, shadow, font and ease keys.
 - Closed `<dialog>` elements were visible (a base `display` overrode the browser's hidden default).

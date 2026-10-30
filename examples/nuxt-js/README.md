@@ -16,5 +16,5 @@ npm run dev     # http://localhost:3000
 - `nuxt.config.ts`: Tailwind via `@tailwindcss/vite`.
 - `app/assets/css/main.css`: imports Tailwind, `bokoui/styles.css` and the fonts (bokoui ships none).
 - `app/app.vue`: theme script in `<head>` (no flash), `ThemeProvider`, `ThemeSwitcher`.
-- `app/pages/index.vue`: component showcase.
+- `app/pages/`: showcase pages (`index`, `forms`, `display`, `feedback`, `data`, `navigation`, `pickers`, `overlays`, `tabs`, `setup`); `ToastProvider` wraps the app in `app.vue`.
 - `app/utils/custom-themes.ts`: example app-defined theme.

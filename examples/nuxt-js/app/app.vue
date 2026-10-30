@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ThemeProvider, ThemeSwitcher, buildThemeScript } from 'bokoui/vue'
+import { ThemeProvider, ThemeSwitcher, ToastProvider, buildThemeScript } from 'bokoui/vue'
 import { customThemes } from '~/utils/custom-themes'
 
 // Runs while <head> is parsed, so the first paint already has the saved theme.
@@ -12,6 +12,7 @@ useHead({
 
 <template>
   <ThemeProvider :custom-themes="customThemes">
+    <ToastProvider>
     <NuxtRouteAnnouncer />
     <!-- Sticky only from md: on a phone the wrapped header would take a fifth of the screen. -->
     <header class="z-10 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b bg-background/90 px-4 py-3 backdrop-blur sm:px-6 md:sticky md:top-0 md:h-[57px] md:flex-nowrap md:py-0">
@@ -24,5 +25,6 @@ useHead({
         <NuxtPage />
       </div>
     </div>
+    </ToastProvider>
   </ThemeProvider>
 </template>

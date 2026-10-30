@@ -28,28 +28,28 @@ Working order: build **React first**, show it in `examples/next-js`, then port t
 | Modal | yes | yes | untested | yes | Expo uses React Native `Modal` |
 | Tooltip | yes | yes | untested | yes | no hover on touch; Expo: long press, also set as accessibility hint |
 | Menu | yes | yes | untested | yes | Expo: anchored layer in a transparent native `Modal` |
-| Breadcrumb | yes | todo | untested | yes | web-only pattern; `as` takes a router link; Expo: `onPress` instead of `as` |
-| Pagination | yes | todo | untested | yes | |
-| Table | yes | todo | untested | yes | web-only pattern; Expo: fixed column width, scrolls sideways |
-| Sidebar | yes | todo | untested | yes | server-safe (CSS-only collapsed state, no context); wrap items in `Tooltip` when collapsed; Expo: `collapsed` makes an icon rail |
-| Navbar | yes | todo | untested | yes | client entry (mobile menu state); Expo: links collapse under 768px |
-| FloatingNav, FloatingNavItem | yes | todo | yes (web build) | no | floating pill bottom bar of icon buttons, current item filled; React: server-safe, `as` takes a router link or `button`, `fixed` pins it above the safe area; Expo: `bottomInset`, `icon` may be a function of the color; used by `examples/expo-js-layouts` |
-| Progress | yes | todo | untested | yes | server-safe; indeterminate uses `animate-bokoui-indeterminate` (keyframes in `bokoui.css`) |
-| Skeleton, SkeletonText | yes | todo | untested | yes | decorative (`aria-hidden`); mark the region `aria-busy` |
-| Accordion | yes | todo | untested | yes | client entry; height animates via grid rows; closed panels are `inert`; Expo: no height animation |
-| Popover | yes | todo | untested | yes | client entry; non-modal, focus moves in; Expo: anchored layer |
-| Drawer | yes | todo | untested | yes | a `Modal` with `placement`; Expo `Drawer` takes `side` |
-| Toast (`ToastProvider`, `useToast`) | yes | todo | untested | yes | needs a provider; Vue would use provide/inject, Expo an overlay view |
-| Slider | yes | todo | untested | yes | native range input; arrow/Home/End verified in Chrome (jsdom cannot) |
-| Combobox | yes | todo | untested | yes | editable combobox with list autocomplete; Expo: list drawn inline (a Modal would steal keyboard focus) |
-| Calendar, DatePicker | yes | todo | untested | yes | date logic is framework-neutral in `core/calendar.ts`; locale via Intl; Expo: DatePicker opens the Calendar in a `Modal` |
-| Rating | yes | todo | untested | yes | radio group; read-only variant is an image |
-| FileUpload | yes | todo | no | yes | real file input inside a drop zone; validates type, size, count |
-| Tag | yes | todo | untested | yes | handlers need a client component |
-| Stepper | yes | todo | untested | yes | presentational |
-| EmptyState | yes | todo | untested | yes | |
-| CommandPalette | yes | todo | no | yes | built on Modal; Cmd/Ctrl+K hotkey option |
-| Stack, Inline, Grid, Container | yes | todo | untested | yes | layout primitives, see `plan-layouts.md` |
+| Breadcrumb | yes | untested | untested | yes | web-only pattern; `as` takes a router link; Expo: `onPress` instead of `as` |
+| Pagination | yes | untested | untested | yes | |
+| Table | yes | untested | untested | yes | web-only pattern; Expo: fixed column width, scrolls sideways |
+| Sidebar | yes | untested | untested | yes | server-safe (CSS-only collapsed state, no context); wrap items in `Tooltip` when collapsed; Expo: `collapsed` makes an icon rail |
+| Navbar | yes | untested | untested | yes | client entry (mobile menu state); Expo: links collapse under 768px |
+| FloatingNav, FloatingNavItem | yes | untested | yes (web build) | no | floating pill bottom bar of icon buttons, current item filled; React: server-safe, `as` takes a router link or `button`, `fixed` pins it above the safe area; Expo: `bottomInset`, `icon` may be a function of the color; used by `examples/expo-js-layouts` |
+| Progress | yes | untested | untested | yes | server-safe; indeterminate uses `animate-bokoui-indeterminate` (keyframes in `bokoui.css`) |
+| Skeleton, SkeletonText | yes | untested | untested | yes | decorative (`aria-hidden`); mark the region `aria-busy` |
+| Accordion | yes | untested | untested | yes | client entry; height animates via grid rows; closed panels are `inert`; Expo: no height animation |
+| Popover | yes | untested | untested | yes | client entry; non-modal, focus moves in; Expo: anchored layer |
+| Drawer | yes | untested | untested | yes | a `Modal` with `placement`; Expo `Drawer` takes `side` |
+| Toast (`ToastProvider`, `useToast`) | yes | untested | untested | yes | needs a provider; Vue uses provide/inject, Expo an overlay view |
+| Slider | yes | untested | untested | yes | native range input; arrow/Home/End verified in Chrome (jsdom cannot) |
+| Combobox | yes | untested | untested | yes | editable combobox with list autocomplete; Expo: list drawn inline (a Modal would steal keyboard focus) |
+| Calendar, DatePicker | yes | untested | untested | yes | date logic is framework-neutral in `core/calendar.ts`; locale via Intl; Expo: DatePicker opens the Calendar in a `Modal` |
+| Rating | yes | untested | untested | yes | radio group; read-only variant is an image |
+| FileUpload | yes | untested | no | yes | real file input inside a drop zone; validates type, size, count |
+| Tag | yes | untested | untested | yes | handlers need a client component |
+| Stepper | yes | untested | untested | yes | presentational |
+| EmptyState | yes | untested | untested | yes | |
+| CommandPalette | yes | untested | no | yes | built on Modal; Cmd/Ctrl+K hotkey option |
+| Stack, Inline, Grid, Container | yes | untested | untested | yes | layout primitives, see `plan-layouts.md` |
 | Heading, Text, Link | yes | untested | untested | yes | |
 
 ## Demo apps
@@ -58,7 +58,8 @@ Working order: build **React first**, show it in `examples/next-js`, then port t
 | --- | --- | --- | --- |
 | `examples/expo-js` | Expo (web build) | 3000 | `/`, `/forms`, `/display`, `/feedback`, `/overlays`, `/navigation` |
 | `examples/next-js` | React / Next.js | 3001 | `/`, `/playground`, `/forms`, `/display`, `/table`, `/feedback`, `/overlays`, `/tabs`, `/accordion`, `/patterns`, `/navigation` |
-| `examples/nuxt-js` | Vue / Nuxt | 3002 | `/`, `/forms`, `/display`, `/feedback`, `/overlays`, `/tabs` |
+| `examples/nuxt-js` | Vue / Nuxt | 3002 | `/`, `/setup`, `/forms`, `/display`, `/feedback`, `/data`, `/navigation`, `/pickers`, `/overlays`, `/tabs` |
+| `examples/nuxt-js-layouts` | Vue / Nuxt, application shell (reduced port of next-js-layouts: no sign-in/API, query, forms, search) | 3005 | `/dashboard`, `/organizations`, `/profile`, `/examples/table`, `/help`, `/contact`, `/legal/*`, other menu links open a placeholder; not part of the switcher |
 | `examples/expo-js-layouts` | Expo (web build), application shell, port of next-js-layouts | 3004 | `/`, `/sign-in`, `/dashboard`, `/examples/*`, `/admin`, public profiles `/[type]/[slug]`; not part of the switcher |
 | `examples/next-js-layouts` | React, application shell (see below) | 3003 | `/`, `/examples/*`, `/admin`, `/sign-in`, public profiles `/hospital/[slug]`, `/pharmacy/[slug]`, `/company/[slug]`; not part of the switcher |
 
@@ -86,10 +87,9 @@ Left for this example: unit tests (menu filtering, access helpers, stores), brow
 ## What is left
 
 ### Ports (Vue / Expo)
-- [ ] Nuxt pages missing compared with Next: `/playground`, `/table`, `/accordion`, `/patterns`, `/navigation` (need the Vue ports first)
-- [ ] Vue: Breadcrumb, Pagination, Table, Sidebar, Navbar, Progress, Skeleton, Accordion, Popover, Drawer, Toast, Slider, Combobox, Calendar, DatePicker, Rating, FileUpload, Tag, Stepper, EmptyState, CommandPalette, layout primitives
+- [ ] Nuxt pages missing compared with Next: `/playground`, `/patterns` (the other Next pages are covered by `/data`, `/navigation`, `/pickers`, `/feedback`, `/overlays`)
+- [x] Vue: all React components are ported (see the table). Only `test/vue/blocks.test.ts` (server render of each, plus Accordion, Calendar, Combobox, Pagination, Toast) covers them; the browser checks are not done.
 - [ ] Vue and Expo: write tests for everything marked **untested** (Vue Test Utils is installed; Expo needs a test setup)
-- [ ] Nuxt demo pages (and a Nuxt sidebar built from the new Sidebar/Navbar) for Breadcrumb, Pagination, Table, Sidebar, Navbar (after the Vue ports)
 
 ### Verification
 - [x] Automated: every page x 8 styles x 2 modes with axe-core in Chrome (structure, ARIA and real color contrast): 0 violations (160 runs)
