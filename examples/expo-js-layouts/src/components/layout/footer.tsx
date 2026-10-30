@@ -1,6 +1,6 @@
 import { Surface, Text } from "bokoui/expo/ui";
 import { useTheme } from "bokoui/expo";
-import { Pressable, View } from "react-native";
+import { Linking, Pressable, View } from "react-native";
 import { useNavigate } from "@/hooks/use-navigate";
 import type { FooterLink } from "@/lib/types";
 
@@ -37,7 +37,7 @@ export function Footer({ links, copyright, navigationLabel }: FooterProps) {
             key={link.id}
             accessibilityRole="link"
             accessibilityLabel={link.label}
-            onPress={() => navigate(link.href)}
+            onPress={() => (link.external ? void Linking.openURL(link.href) : navigate(link.href))}
             style={{ minHeight: 44, minWidth: 44, alignItems: "center", justifyContent: "center", paddingHorizontal: 8 }}
           >
             <Text variant="small" muted>

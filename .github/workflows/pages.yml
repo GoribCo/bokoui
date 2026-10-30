@@ -84,6 +84,8 @@ jobs:
         env:
           NEXT_PUBLIC_DEMO: "true"
           NEXT_PUBLIC_BASE_PATH: ${{ env.BASE }}/next-layouts
+          NEXT_PUBLIC_BOKOUI_URL_NUXT_LAYOUTS: ${{ env.BASE }}/vue-layouts
+          NEXT_PUBLIC_BOKOUI_URL_EXPO_LAYOUTS: ${{ env.BASE }}/expo-layouts
         run: |
           rm -f package-lock.json
           npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
@@ -96,6 +98,8 @@ jobs:
         continue-on-error: true
         env:
           EXPO_BASE_URL: ${{ env.BASE }}/expo-layouts
+          EXPO_PUBLIC_BOKOUI_URL_NEXT_LAYOUTS: ${{ env.BASE }}/next-layouts
+          EXPO_PUBLIC_BOKOUI_URL_NUXT_LAYOUTS: ${{ env.BASE }}/vue-layouts
         run: |
           rm -f package-lock.json
           npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
@@ -107,6 +111,8 @@ jobs:
         continue-on-error: true
         env:
           NUXT_APP_BASE_URL: ${{ env.BASE }}/vue-layouts/
+          NUXT_PUBLIC_URL_NEXT_LAYOUTS: ${{ env.BASE }}/next-layouts
+          NUXT_PUBLIC_URL_EXPO_LAYOUTS: ${{ env.BASE }}/expo-layouts
         run: |
           rm -f package-lock.json
           npm pkg set dependencies.bokoui="file:$(echo "$RUNNER_TEMP"/bokoui-*.tgz)"
